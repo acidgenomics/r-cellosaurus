@@ -1,0 +1,67 @@
+#' Map cell names to Cellosaurus identifiers
+#'
+#' @export
+#' @note Updated 2020-08-01.
+#'
+#' @param x `character`.
+#'   Cell names (or Cellosaurus identifiers).
+#'
+#' @examples
+#' mapCellsToCellosaurus("22RV1")
+mapCellsToCellosaurus <- function(
+    x,
+    organism = "Homo sapiens",
+    BPPARAM = BiocParallel::bpparam()
+) {
+    assert(
+        isCharacter(x),
+        isString(organism)
+    )
+    out <- bplapply(
+        X = x,
+        FUN = function(x) {
+            url <- paste0(
+                "https://web.expasy.org/cgi-bin/cellosaurus/search?input=",
+                URLencode(x)
+            )
+            response <- GET(url)
+            content <- content(response, as = "text")
+            lines <- strsplit(content, split = "\n")[[1L]]
+            lines <- grep(
+                pattern = paste0(">", organism),
+                x = lines,
+                value = TRUE
+            )
+            lines <- grep(
+                pattern = ">CVCL_",
+                x = lines,
+                value = TRUE
+            )
+            match <- str_match(
+                string  = lines,
+                pattern = paste0(
+                    ">",
+                    "(CVCL_[A-Z0-9]+)",
+                    "</a></td><td>",
+                    "([^<]+)",
+                    "</td>"
+                )
+            )
+            if (!hasRows(match)) return(NA_character_)
+            match <- match[, 2L:3L, drop = FALSE]
+            match <- unique(match)
+            match <- match[order(match[, 1L]), , drop = FALSE]
+            which <- match(
+                x = standardizeCells(x),
+                table = standardizeCells(match[, 2L])
+            )
+            id <- match[which, 1L]
+            if (!isString(id)) return(NA_character_)
+            id
+        },
+        BPPARAM = BPPARAM
+    )
+    out <- unlist(out)
+    names(out) <- x
+    ids
+}
