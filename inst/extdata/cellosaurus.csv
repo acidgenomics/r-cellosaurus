@@ -1,0 +1,360 @@
+cellosaurus_cell_line_name,cellosaurus_id,synonyms,problematic,ncit_disease_id,ncit_disease_name,disease_level_1,disease_level_2,disease_level_3,disease_level_4
+5637,CVCL_0126,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+22Rv1,CVCL_1045,#N/A,FALSE,C4863,Prostate carcinoma,solid tumor,#N/A,#N/A,#N/A
+639V,CVCL_1048,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+647V,CVCL_1049,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+769-P,CVCL_1050,#N/A,FALSE,C9385,Renal cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+786-O,CVCL_1051,#N/A,FALSE,C9385,Renal cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+A-172,CVCL_0131,#N/A,FALSE,C3058,Glioblastoma,solid tumor,#N/A,#N/A,#N/A
+A-204,CVCL_1058,#N/A,FALSE,C8971,Embryonal rhabdomyosarcoma,solid tumor,#N/A,#N/A,#N/A
+A-253,CVCL_1060,#N/A,FALSE,C7991,Salivary gland squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+A-375,CVCL_0132,#N/A,FALSE,C3802,Amelanotic melanoma,solid tumor,#N/A,#N/A,#N/A
+A-388,CVCL_1063,#N/A,FALSE,C4819,Skin squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+A-427,CVCL_1055,#N/A,FALSE,C3512,Lung adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+A-431,CVCL_0037,#N/A,FALSE,C4819,Skin squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+A-498,CVCL_1056,#N/A,FALSE,C9385,Renal cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+A-549,CVCL_0023,#N/A,FALSE,C3512,Lung adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+A-673,CVCL_0080,#N/A,TRUE,#N/A,Ewing sarcoma,#N/A,#N/A,#N/A,#N/A
+A-704,CVCL_1065,#N/A,FALSE,C9385,Renal cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+A101D,CVCL_1057,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+A2058,CVCL_1059,#N/A,FALSE,C3802,Amelanotic melanoma,solid tumor,#N/A,#N/A,#N/A
+ACHN,CVCL_1067,#N/A,FALSE,C6975,Papillary renal cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+AGS,CVCL_0139,#N/A,FALSE,C4004,Gastric adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+AN3-CA,CVCL_0028,#N/A,FALSE,C7359,Endometrial adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+ARH-77,CVCL_1072,#N/A,TRUE,#N/A,B-lymphoblastoid,#N/A,#N/A,#N/A,#N/A
+AsPC-1,CVCL_0152,#N/A,FALSE,C9120,Pancreatic ductal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+AU565,CVCL_1074,#N/A,FALSE,C5214,Breast adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+BC-1,CVCL_1079,#N/A,FALSE,C6915,Primary effusion lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+BCP-1,CVCL_0107,#N/A,FALSE,C6915,Primary effusion lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+BeWo,CVCL_0044,#N/A,FALSE,C4646,Gestational choriocarcinoma,solid tumor,#N/A,#N/A,#N/A
+BFTC-905,CVCL_1083,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+BHT-101,CVCL_1085,#N/A,FALSE,C3878,Thyroid gland anaplastic carcinoma,solid tumor,#N/A,#N/A,#N/A
+BM-1604,CVCL_1968,#N/A,TRUE,#N/A,DU145 derivative,#N/A,#N/A,#N/A,#N/A
+BPH-1,CVCL_1091,#N/A,FALSE,C2897,Benign prostatic hyperplasia,solid tumor,#N/A,#N/A,#N/A
+BT-20,CVCL_0178,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+BT-474,CVCL_0179,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+BT-483,CVCL_2319,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+BT-549,CVCL_1092,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+BV-173,CVCL_0181,#N/A,FALSE,C3174,"Chronic myelogenous leukemia, BCR-ABL1 positive",hematopoietic,leukemia,#N/A,#N/A
+BxPC-3,CVCL_0186,#N/A,FALSE,C9120,Pancreatic ductal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+C-33 A,CVCL_1094,#N/A,FALSE,C4028,"Cervical squamous cell carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+C-4-I,CVCL_2253,#N/A,FALSE,C27676,Human papillomavirus-related cervical squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+C-4-II,CVCL_1095,#N/A,FALSE,C27676,Human papillomavirus-related cervical squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+C32,CVCL_1097,#N/A,FALSE,C3802,Amelanotic melanoma,solid tumor,#N/A,#N/A,#N/A
+C32TG,CVCL_2324,#N/A,FALSE,C3802,Amelanotic melanoma,solid tumor,#N/A,#N/A,#N/A
+Ca Ski,CVCL_1100,#N/A,FALSE,C27676,Human papillomavirus-related cervical squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+CA46,CVCL_1101,#N/A,FALSE,C2912,Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+Caki-1,CVCL_0234,#N/A,FALSE,C4033,Clear cell renal cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+Caki-2,CVCL_0235,#N/A,TRUE,#N/A,Papillary renal cell carcinoma,#N/A,#N/A,#N/A,#N/A
+CAL-27,CVCL_1107,#N/A,FALSE,C4648,Tongue squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+CAL-54,CVCL_1111,#N/A,FALSE,C9385,Renal cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+CAL-62,CVCL_1112,#N/A,FALSE,C3878,Thyroid gland anaplastic carcinoma,solid tumor,#N/A,#N/A,#N/A
+Calu-1,CVCL_0608,#N/A,FALSE,C3493,Lung squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+Calu-6,CVCL_0236,#N/A,FALSE,C3512,Lung adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+CAMA-1,CVCL_1115,#N/A,FALSE,C5214,Breast adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Caov-3,CVCL_0201,#N/A,FALSE,C105555,High grade ovarian serous adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Capan-1,CVCL_0237,#N/A,FALSE,C9120,Pancreatic ductal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Capan-2,CVCL_0026,#N/A,FALSE,C9120,Pancreatic ductal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+CCF-STTG1,CVCL_1118,#N/A,FALSE,C60781,Astrocytoma,solid tumor,#N/A,#N/A,#N/A
+CCRF-CEM,CVCL_0207,#N/A,FALSE,C7953,Childhood T acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+CEM/C1,CVCL_3496,#N/A,FALSE,C7953,Childhood T acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+CFPAC-1,CVCL_1119,#N/A,FALSE,C2975,Cystic fibrosis,solid tumor,#N/A,#N/A,#N/A
+CGTH-W-1,CVCL_1120,#N/A,TRUE,#N/A,SW579 derivative,#N/A,#N/A,#N/A,#N/A
+ChaGo-K-1,CVCL_1121,#N/A,FALSE,C35875,Bronchogenic carcinoma,solid tumor,#N/A,#N/A,#N/A
+CHL-1,CVCL_1122,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+CHP-212,CVCL_1125,#N/A,FALSE,C3270,Neuroblastoma,solid tumor,#N/A,#N/A,#N/A
+CML-T1,CVCL_1126,#N/A,FALSE,C3174,"Chronic myelogenous leukemia, BCR-ABL1 positive",hematopoietic,leukemia,#N/A,#N/A
+COLO 201,CVCL_1987,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+COLO 205,CVCL_0218,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+COLO 320DM,CVCL_0219,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+COLO 320HSR,CVCL_0220,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+COLO 829,CVCL_1137,#N/A,FALSE,C3510,Cutaneous melanoma,solid tumor,#N/A,#N/A,#N/A
+COR-L105,CVCL_1138,#N/A,FALSE,C3512,Lung adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+COR-L23,CVCL_1139,#N/A,FALSE,C4450,Lung large cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+CRO-AP2,CVCL_1147,#N/A,FALSE,C6915,Primary effusion lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+CRO-AP5,CVCL_1148,#N/A,FALSE,C6915,Primary effusion lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+D283 Med,CVCL_1155,#N/A,FALSE,C3222,Medulloblastoma,solid tumor,#N/A,#N/A,#N/A
+D341 Med,CVCL_0018,#N/A,FALSE,C3222,Medulloblastoma,solid tumor,#N/A,#N/A,#N/A
+Daoy,CVCL_1167,#N/A,FALSE,C3222,Medulloblastoma,solid tumor,#N/A,#N/A,#N/A
+Daudi,CVCL_0008,#N/A,FALSE,C27694,EBV-related Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+DB,CVCL_1168,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+DBTRG-05MG,CVCL_1169,#N/A,FALSE,C3058,Glioblastoma,solid tumor,#N/A,#N/A,#N/A
+Detroit 562,CVCL_1171,#N/A,FALSE,C102872,Pharyngeal squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+DG-75,CVCL_0244,#N/A,FALSE,C2912,Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+DK-MG,CVCL_1173,#N/A,FALSE,C3058,Glioblastoma,solid tumor,#N/A,#N/A,#N/A
+DLD-1,CVCL_0248,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+DMS 114,CVCL_1174,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+DMS 273,CVCL_1176,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+DMS 53,CVCL_1177,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+DoHH2,CVCL_1179,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+DoTc2 4510,CVCL_1181,#N/A,FALSE,C9039,Cervical carcinoma,solid tumor,#N/A,#N/A,#N/A
+DU145,CVCL_0105,#N/A,FALSE,C4863,Prostate carcinoma,solid tumor,#N/A,#N/A,#N/A
+DU4475,CVCL_1183,#N/A,FALSE,C4872,Breast carcinoma,solid tumor,#N/A,#N/A,#N/A
+EB1,CVCL_2027,#N/A,FALSE,C27694,EBV-related Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+EB2,CVCL_1186,#N/A,FALSE,C27694,EBV-related Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+EB3,CVCL_1185,#N/A,TRUE,C27694,EBV-related Burkitt lymphoma,#N/A,#N/A,#N/A,#N/A
+EFM-19,CVCL_0253,#N/A,FALSE,C4017,Ductal breast carcinoma,solid tumor,#N/A,#N/A,#N/A
+EM-2,CVCL_1196,#N/A,FALSE,C7320,"Childhood chronic myelogenous leukemia, BCR-ABL1 positive",hematopoietic,leukemia,#N/A,#N/A
+ES-2,CVCL_3509,#N/A,FALSE,C40078,Ovarian clear cell adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+FaDu,CVCL_1218,#N/A,FALSE,C4043,Hypopharyngeal squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+Farage,CVCL_3302,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+G-292 clone A141B1,CVCL_2909,#N/A,FALSE,C9145,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+G-361,CVCL_1220,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+G-401,CVCL_0270,#N/A,TRUE,#N/A,Rhabdoid tumor of the kidney,#N/A,#N/A,#N/A,#N/A
+G-402,CVCL_1221,#N/A,FALSE,C3486,Epithelioid cell type gastrointestinal stromal tumor,solid tumor,#N/A,#N/A,#N/A
+GA-10,CVCL_1222,#N/A,FALSE,C7954,Adult Burkitt leukemia,hematopoietic,leukemia,#N/A,#N/A
+H4,CVCL_1239,#N/A,FALSE,C60781,Astrocytoma,solid tumor,#N/A,#N/A,#N/A
+H9,CVCL_1240,#N/A,FALSE,C9265,Mycosis fungoides and Sezary syndrome,solid tumor,#N/A,#N/A,#N/A
+HCT 116,CVCL_0291,#N/A,FALSE,C4910,Colon carcinoma,solid tumor,#N/A,#N/A,#N/A
+HCT 15,CVCL_0292,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+HCT 8,CVCL_2478,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+HEC-1-A,CVCL_0293,#N/A,FALSE,C7359,Endometrial adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+HEL 92.1.7,CVCL_2481,#N/A,FALSE,C7152,Erythroleukemia,hematopoietic,leukemia,#N/A,#N/A
+HeLa,CVCL_0030,#N/A,FALSE,C27677,Human papillomavirus-related endocervical adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Hep-G2,CVCL_0027,#N/A,TRUE,C3728,Hepatoblastoma,#N/A,#N/A,#N/A,#N/A
+HH,CVCL_1280,#N/A,FALSE,C3467,Primary cutaneous T-cell non-Hodgkin lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+HL-60,CVCL_0002,#N/A,FALSE,C9154,Adult acute myeloid leukemia,hematopoietic,leukemia,#N/A,#N/A
+HLE,CVCL_1281,#N/A,FALSE,C7956,Adult hepatocellular carcinoma,solid tumor,#N/A,#N/A,#N/A
+HLF,CVCL_2947,#N/A,FALSE,C7956,Adult hepatocellular carcinoma,solid tumor,#N/A,#N/A,#N/A
+HMCB,CVCL_3317,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+HOS,CVCL_0312,#N/A,FALSE,C9145,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+HPAC,CVCL_3517,#N/A,FALSE,C8294,Pancreatic adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+HPAF-II,CVCL_0313,#N/A,FALSE,C9120,Pancreatic ductal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 229.T,CVCL_0698,#N/A,FALSE,C3512,Lung adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 281.T,CVCL_0715,#N/A,FALSE,C4872,Breast carcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 294T,CVCL_0331,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+Hs 343.T,CVCL_0726,#N/A,FALSE,C4872,Breast carcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 445,CVCL_0761,#N/A,TRUE,#N/A,B-lymphoblastoid,#N/A,#N/A,#N/A,#N/A
+Hs 578T,CVCL_0332,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+Hs 604.T,CVCL_0816,#N/A,FALSE,C9357,Hodgkin lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+Hs 611.T,CVCL_0823,#N/A,FALSE,C9357,Hodgkin lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+Hs 675.T,CVCL_0836,#N/A,FALSE,C2955,Colorectal carcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 683,CVCL_0844,#N/A,FALSE,C3288,Oligodendroglioma,solid tumor,#N/A,#N/A,#N/A
+Hs 688(A).T,CVCL_0846,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+Hs 695T,CVCL_0851,#N/A,FALSE,C3802,Amelanotic melanoma,solid tumor,#N/A,#N/A,#N/A
+Hs 698.T,CVCL_0855,#N/A,FALSE,C2955,Colorectal carcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 706.T,CVCL_0863,#N/A,FALSE,C4304,Malignancy in giant cell tumor of bone,solid tumor,#N/A,#N/A,#N/A
+Hs 729.T,CVCL_0871,HS729,FALSE,C8971,Embryonal rhabdomyosarcoma,solid tumor,#N/A,#N/A,#N/A
+Hs 739.T,CVCL_0882,#N/A,FALSE,C4872,Breast carcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 742.T,CVCL_0888,#N/A,FALSE,C4872,Breast carcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 746.T,CVCL_0333,#N/A,FALSE,C4004,Gastric adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 766T,CVCL_0334,#N/A,FALSE,C8294,Pancreatic adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Hs 819.T,CVCL_0928,#N/A,FALSE,C2946,Chondrosarcoma,solid tumor,#N/A,#N/A,#N/A
+Hs 821.T,CVCL_0932,#N/A,FALSE,C4304,Malignancy in giant cell tumor of bone,solid tumor,#N/A,#N/A,#N/A
+Hs 822.T,CVCL_0933,#N/A,FALSE,C4817,Ewing sarcoma,solid tumor,#N/A,#N/A,#N/A
+Hs 839.T,CVCL_0941,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+Hs 840.T,CVCL_0942,#N/A,FALSE,C3712,Squamous cell papilloma,solid tumor,#N/A,#N/A,#N/A
+Hs 852.T,CVCL_0950,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+Hs 863.T,CVCL_0959,#N/A,FALSE,C4817,Ewing sarcoma,solid tumor,#N/A,#N/A,#N/A
+Hs 888.Sk,CVCL_0978,#N/A,FALSE,#N/A,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+Hs 895.T,CVCL_0993,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+Hs 934.T,CVCL_1031,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+Hs 936.T(C1),CVCL_1034,HS936TC1,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+HT,CVCL_1290,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+HT-1080,CVCL_0317,#N/A,FALSE,C3043,Fibrosarcoma,solid tumor,#N/A,#N/A,#N/A
+HT-1197,CVCL_1291,#N/A,FALSE,C7899,Recurrent bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+HT-1376,CVCL_1292,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+HT-29,CVCL_0320,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+HT-3,CVCL_1293,#N/A,FALSE,C9039,Cervical carcinoma,solid tumor,#N/A,#N/A,#N/A
+HuCC-T1,CVCL_0324,#N/A,FALSE,C35417,Intrahepatic cholangiocarcinoma,solid tumor,#N/A,#N/A,#N/A
+HuH-6 Clone 5,CVCL_1296,#N/A,FALSE,C3728,Hepatoblastoma,solid tumor,#N/A,#N/A,#N/A
+HuP-T4,CVCL_1300,#N/A,FALSE,C8294,Pancreatic adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+HuT 102,CVCL_3526,#N/A,FALSE,C9265,Mycosis fungoides and Sezary syndrome,solid tumor,#N/A,#N/A,#N/A
+HuTu 80,CVCL_1301,#N/A,FALSE,C7889,Duodenal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+IM-9,CVCL_1305,#N/A,TRUE,#N/A,B-lymphoblastoid,#N/A,#N/A,#N/A,#N/A
+IMR-32,CVCL_0346,#N/A,FALSE,C3270,Neuroblastoma,solid tumor,#N/A,#N/A,#N/A
+J.RT3-T3.5,CVCL_1316,#N/A,FALSE,C7953,Childhood T acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+J82,CVCL_0359,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+JAR,CVCL_0360,#N/A,FALSE,C4646,Gestational choriocarcinoma,solid tumor,#N/A,#N/A,#N/A
+JEG-3,CVCL_0363,#N/A,FALSE,C4646,Gestational choriocarcinoma,solid tumor,#N/A,#N/A,#N/A
+JeKo-1,CVCL_1865,#N/A,FALSE,C4337,Mantle cell lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+Jiyoye,CVCL_1317,#N/A,FALSE,C27694,EBV-related Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+Jurkat,CVCL_0065,#N/A,FALSE,C7953,Childhood T acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+JVM-2,CVCL_1319,#N/A,FALSE,C4337,Mantle cell lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+K-562,CVCL_0004,#N/A,FALSE,C3174,"Chronic myelogenous leukemia, BCR-ABL1 positive",hematopoietic,leukemia,#N/A,#N/A
+KATO III,CVCL_0371,#N/A,FALSE,C5250,Gastric signet ring cell adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+KG-1,CVCL_0374,#N/A,FALSE,C9154,Adult acute myeloid leukemia,hematopoietic,leukemia,#N/A,#N/A
+KHOS-240S,CVCL_2544,#N/A,FALSE,C9145,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+KLE,CVCL_1329,#N/A,FALSE,C7359,Endometrial adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+KPL-1,CVCL_2094,#N/A,TRUE,#N/A,MCF-7 derivative (contaminated),#N/A,#N/A,#N/A,#N/A
+Ku812,CVCL_0379,#N/A,FALSE,C3174,"Chronic myelogenous leukemia, BCR-ABL1 positive",hematopoietic,leukemia,#N/A,#N/A
+L-428,CVCL_1361,#N/A,FALSE,C9357,Hodgkin lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+LNCaP,CVCL_0395,#N/A,FALSE,C4863,Prostate carcinoma,solid tumor,#N/A,#N/A,#N/A
+LS1034,CVCL_1382,#N/A,FALSE,C5543,Cecum adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+LS123,CVCL_1383,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+LS174T,CVCL_1384,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+LS411N,CVCL_1385,#N/A,FALSE,C5543,Cecum adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+LS513,CVCL_1386,#N/A,FALSE,C5543,Cecum adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+M059J,CVCL_0400,#N/A,FALSE,C3058,Glioblastoma,solid tumor,#N/A,#N/A,#N/A
+M2A7,CVCL_3486,A7,FALSE,C3510,Cutaneous melanoma,solid tumor,#N/A,#N/A,#N/A
+Malme-3M,CVCL_1438,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+MC116,CVCL_1399,#N/A,FALSE,C3457,B-cell non-Hodgkin lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+MCF-7,CVCL_0031,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+MDA-MB-175-VII,CVCL_1400,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+MDA-MB-231,CVCL_0062,#N/A,FALSE,C5214,Breast adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+MDA-MB-415,CVCL_0621,#N/A,FALSE,C5214,Breast adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+MDA-MB-436,CVCL_0623,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+MDA-MB-453,CVCL_0418,#N/A,FALSE,C5214,Breast adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+MDA-MB-468,CVCL_0419,#N/A,FALSE,C5214,Breast adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+ME-180,CVCL_1401,#N/A,FALSE,C27676,Human papillomavirus-related cervical squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+MEG-01,CVCL_0425,#N/A,FALSE,C3174,"Chronic myelogenous leukemia, BCR-ABL1 positive",hematopoietic,leukemia,#N/A,#N/A
+MES-SA,CVCL_1404,#N/A,FALSE,C6339,Uterine corpus sarcoma,solid tumor,#N/A,#N/A,#N/A
+MeWo,CVCL_0445,#N/A,FALSE,C3510,Cutaneous melanoma,solid tumor,#N/A,#N/A,#N/A
+MG-63,CVCL_0426,#N/A,FALSE,C9145,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+MHH-PREB-1,CVCL_1413,#N/A,FALSE,C3457,B-cell non-Hodgkin lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+MIA PaCa-2,CVCL_0428,#N/A,FALSE,C9120,Pancreatic ductal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+MJ,CVCL_1414,#N/A,FALSE,C3467,Primary cutaneous T-cell non-Hodgkin lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+MM.1R,CVCL_8794,#N/A,FALSE,C3242,Plasma cell myeloma,hematopoietic,myeloma,#N/A,#N/A
+MOLT-16,CVCL_1424,#N/A,FALSE,C7953,Childhood T acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+MOLT-3,CVCL_0624,#N/A,FALSE,C9142,Adult T acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+MOLT4,CVCL_0013,#N/A,FALSE,C9142,Adult T acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+MS751,CVCL_4996,#N/A,FALSE,C27676,Human papillomavirus-related cervical squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+MT-3,CVCL_2129,#N/A,TRUE,C4349,Colon adenocarcinoma,#N/A,#N/A,#N/A,#N/A
+MV4-11,CVCL_0064,#N/A,FALSE,C9163,Childhood acute monocytic leukemia,hematopoietic,leukemia,#N/A,#N/A
+MX-1,CVCL_4774,#N/A,FALSE,C4872,Breast carcinoma,solid tumor,#N/A,#N/A,#N/A
+NALM-6,CVCL_0092,#N/A,FALSE,C9143,Adult B acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+Namalwa,CVCL_0067,#N/A,FALSE,C27694,EBV-related Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+NCI-H1688,CVCL_1487,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H292,CVCL_0455,#N/A,FALSE,C45544,Lung mucoepidermoid carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H295R,CVCL_0458,#N/A,FALSE,C9325,Adrenal cortex carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H441,CVCL_1561,#N/A,FALSE,C5650,Lung papillary adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H446,CVCL_1562,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H460,CVCL_0459,#N/A,FALSE,C4450,Lung large cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H508,CVCL_1564,#N/A,FALSE,C5543,Cecum adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H510A,CVCL_1565,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H520,CVCL_1566,#N/A,FALSE,C3493,Lung squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H596,CVCL_1571,#N/A,FALSE,C9133,Lung adenosquamous carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H661,CVCL_1577,#N/A,FALSE,C4450,Large cell lung carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H69,CVCL_1579,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H747,CVCL_1587,#N/A,FALSE,C5543,Cecum adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+NCI-H82,CVCL_1591,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+NT2-D1,CVCL_3407,#N/A,FALSE,C3752,Embryonal carcinoma,solid tumor,#N/A,#N/A,#N/A
+NTERA-2,CVCL_0034,NTERA-2 cl.D1,FALSE,C3752,Embryonal carcinoma,solid tumor,#N/A,#N/A,#N/A
+NU-DUL-1,CVCL_1877,#N/A,FALSE,C36081,Diffuse large B-cell lymphoma activated B-cell type,hematopoietic,lymphoma,dlbcl,abc
+OCI-Ly10,CVCL_8795,#N/A,FALSE,C36081,Diffuse large B-cell lymphoma activated B-cell type,hematopoietic,lymphoma,dlbcl,abc
+OCI-Ly19,CVCL_1878,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+OCI-Ly3,CVCL_8800,#N/A,FALSE,C36081,Diffuse large B-cell lymphoma activated B-cell type,hematopoietic,lymphoma,dlbcl,abc
+OE19,CVCL_1622,#N/A,FALSE,C4025,Esophageal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+OE21,CVCL_2661,#N/A,FALSE,C4024,Esophageal squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+OE33,CVCL_0471,#N/A,FALSE,C7027,Barrett adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+OVCAR-3,CVCL_0465,#N/A,FALSE,C105555,High grade ovarian serous adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+P3HR-1,CVCL_2676,#N/A,FALSE,C27694,EBV-related Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+PA-1,CVCL_0479,#N/A,FALSE,C8114,Ovarian mixed germ cell tumor,solid tumor,#N/A,#N/A,#N/A
+PANC-1,CVCL_0480,#N/A,FALSE,C9120,Pancreatic ductal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+PC-3,CVCL_0035,#N/A,FALSE,C4863,Prostate carcinoma,solid tumor,#N/A,#N/A,#N/A
+Pfeiffer,CVCL_3326,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+PFSK-1,CVCL_1642,#N/A,FALSE,C3716,Primitive neuroectodermal tumor,solid tumor,#N/A,#N/A,#N/A
+PSN1,CVCL_1644,#N/A,FALSE,C8294,Pancreatic adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+Raji,CVCL_0511,#N/A,FALSE,C27694,EBV-related Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+Ramos,CVCL_0597,Ramos (RA 1),FALSE,C2912,Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+RD,CVCL_1649,#N/A,FALSE,C8971,Embryonal rhabdomyosarcoma,solid tumor,#N/A,#N/A,#N/A
+RD-ES,CVCL_2169,#N/A,FALSE,C4817,Ewing sarcoma,solid tumor,#N/A,#N/A,#N/A
+REC-1,CVCL_1884,#N/A,FALSE,C4337,Mantle cell lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+Reh,CVCL_1650,#N/A,FALSE,C9140,Childhood B acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+Rh30,CVCL_0041,SJRH30,FALSE,C3749,Alveolar rhabdomyosarcoma,solid tumor,#N/A,#N/A,#N/A
+RKO,CVCL_0504,#N/A,FALSE,C4910,Colon carcinoma,solid tumor,#N/A,#N/A,#N/A
+RKO-AS45-1,CVCL_3786,#N/A,FALSE,C4910,Colon carcinoma,solid tumor,#N/A,#N/A,#N/A
+RKO-E6,CVCL_3787,#N/A,FALSE,C4910,Colon carcinoma,solid tumor,#N/A,#N/A,#N/A
+RL,CVCL_1660,#N/A,FALSE,C8851,Diffuse large B-cell lymphoma,hematopoietic,lymphoma,dlbcl,#N/A
+RL95-2,CVCL_0505,#N/A,FALSE,C114656,Endometrial adenosquamous carcinoma ,solid tumor,#N/A,#N/A,#N/A
+RPMI-6666,CVCL_1665,#N/A,TRUE,#N/A,B-lymphoblastoid,#N/A,#N/A,#N/A,#N/A
+RPMI-7951,CVCL_1666,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+RPMI-8226,CVCL_0014,#N/A,FALSE,C3242,Plasma cell myeloma,hematopoietic,myeloma,#N/A,#N/A
+RS4;11,CVCL_0093,#N/A,FALSE,C9143,Adult B acute lymphoblastic leukemia,hematopoietic,leukemia,#N/A,#N/A
+SaOS-2,CVCL_0548,#N/A,FALSE,C9145,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+SCaBER,CVCL_3599,#N/A,FALSE,C4031,Bladder squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SCC-25,CVCL_1682,#N/A,FALSE,C4648,Tongue squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SCC-4,CVCL_1684,#N/A,FALSE,C4648,Tongue squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SCC-9,CVCL_1685,#N/A,FALSE,C4648,Tongue squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SH-4,CVCL_1692,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+SHP-77,CVCL_1693,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SiHa,CVCL_0032,#N/A,FALSE,C27676,Human papillomavirus-related cervical squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SJSA-1,CVCL_1697,#N/A,FALSE,C9145,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+SK-BR-3,CVCL_0033,#N/A,FALSE,C5214,Breast adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SK-LMS-1,CVCL_0628,#N/A,FALSE,C40318,Vulvar leiomyosarcoma,solid tumor,#N/A,#N/A,#N/A
+SK-MEL-1,CVCL_0068,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+SK-MEL-28,CVCL_0526,#N/A,FALSE,C3510,Cutaneous melanoma,solid tumor,#N/A,#N/A,#N/A
+SK-MEL-3,CVCL_0550,#N/A,FALSE,C3510,Cutaneous melanoma,solid tumor,#N/A,#N/A,#N/A
+SK-MES-1,CVCL_0630,#N/A,FALSE,C3493,Lung squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SK-N-AS,CVCL_1700,#N/A,FALSE,C3270,Neuroblastoma,solid tumor,#N/A,#N/A,#N/A
+SK-N-BE(2)-C,CVCL_0529,BE(2)C,FALSE,C3270,Neuroblastoma,solid tumor,#N/A,#N/A,#N/A
+SK-N-DZ,CVCL_1701,#N/A,FALSE,C3270,Neuroblastoma,solid tumor,#N/A,#N/A,#N/A
+SK-N-FI,CVCL_1702,#N/A,FALSE,C3270,Neuroblastoma,solid tumor,#N/A,#N/A,#N/A
+SK-N-MC-IXC,CVCL_1398,MC-IXC,FALSE,C7542,Askin tumor,solid tumor,#N/A,#N/A,#N/A
+SK-NEP-1,CVCL_0631,#N/A,TRUE,#N/A,Ewing sarcoma,#N/A,#N/A,#N/A,#N/A
+SK-PN-DW,CVCL_1703,#N/A,FALSE,C3716,Primitive neuroectodermal tumor,solid tumor,#N/A,#N/A,#N/A
+SK-UT-1,CVCL_0533,#N/A,FALSE,C6340,Uterine corpus leiomyosarcoma,solid tumor,#N/A,#N/A,#N/A
+SKO-007,CVCL_4974,#N/A,FALSE,C3242,Plasma cell myeloma,hematopoietic,myeloma,#N/A,#N/A
+SKOV3,CVCL_0532,#N/A,FALSE,C7978,Ovarian serous cystadenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SNB-19,CVCL_0535,#N/A,TRUE,#N/A,U-251MG derivative,#N/A,#N/A,#N/A,#N/A
+SNU-1,CVCL_0099,#N/A,FALSE,C4004,Gastric adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SNU-16,CVCL_0076,#N/A,FALSE,C4004,Gastric adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SNU-423,CVCL_0366,#N/A,FALSE,C7956,Adult hepatocellular carcinoma,solid tumor,#N/A,#N/A,#N/A
+SNU-5,CVCL_0078,#N/A,FALSE,C4004,Gastric adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SNU-C2B,CVCL_1710,#N/A,FALSE,C5543,Cecum adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SR,CVCL_1711,#N/A,FALSE,C37193,"Anaplastic large cell lymphoma, ALK-positive",hematopoietic,lymphoma,#N/A,#N/A
+ST486,CVCL_1712,#N/A,FALSE,C2912,Burkitt lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+SU-DHL-1,CVCL_0538,#N/A,FALSE,C37193,"Anaplastic large cell lymphoma, ALK-positive",hematopoietic,lymphoma,#N/A,#N/A
+SU-DHL-10,CVCL_1889,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+SU-DHL-16,CVCL_1890,#N/A,FALSE,C3457,B-cell non-Hodgkin lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+SU-DHL-2,CVCL_9550,#N/A,FALSE,C36081,Diffuse large B-cell lymphoma activated B-cell type,hematopoietic,lymphoma,dlbcl,abc
+SU-DHL-4,CVCL_0539,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+SU-DHL-5,CVCL_1735,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+SU-DHL-6,CVCL_2206,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+SU-DHL-8,CVCL_2207,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+SU.86.86,CVCL_3881,#N/A,FALSE,C8294,Pancreatic adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SUP-T1,CVCL_1714,#N/A,FALSE,C7210,Childhood T lymphoblastic lymphoma,hematopoietic,lymphoma,#N/A,#N/A
+SW1088,CVCL_1715,#N/A,FALSE,C60781,Astrocytoma,solid tumor,#N/A,#N/A,#N/A
+SW116,CVCL_0544,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW1271,CVCL_1716,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SW13,CVCL_0542,#N/A,FALSE,C9325,Adrenal cortex carcinoma,solid tumor,#N/A,#N/A,#N/A
+SW1353,CVCL_0543,#N/A,FALSE,C7155,Primary central chondrosarcoma,solid tumor,#N/A,#N/A,#N/A
+SW1417,CVCL_1717,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW1463,CVCL_1718,#N/A,FALSE,C9383,Rectal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW156,CVCL_1719,#N/A,FALSE,C9385,Renal cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SW1783,CVCL_1722,#N/A,FALSE,C9477,Anaplastic astrocytoma,solid tumor,#N/A,#N/A,#N/A
+SW403,CVCL_0545,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW48,CVCL_1724,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW480,CVCL_0546,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW579,CVCL_3603,#N/A,FALSE,C46008,Thyroid gland squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SW620,CVCL_0547,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW626,CVCL_1725,#N/A,TRUE,C4349,Colon adenocarcinoma,#N/A,#N/A,#N/A,#N/A
+SW684,CVCL_1726,#N/A,FALSE,C3043,Fibrosarcoma,solid tumor,#N/A,#N/A,#N/A
+SW837,CVCL_1729,#N/A,FALSE,C9383,Rectal adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW872,CVCL_1730,#N/A,FALSE,C3194,Liposarcoma,solid tumor,#N/A,#N/A,#N/A
+SW900,CVCL_1731,#N/A,FALSE,C3493,Lung squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SW948,CVCL_0632,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW954,CVCL_1732,#N/A,FALSE,C4052,Vulvar squamous cell carcinoma,solid tumor,#N/A,#N/A,#N/A
+SW962,CVCL_1733,#N/A,FALSE,C4866,Vulvar carcinoma,solid tumor,#N/A,#N/A,#N/A
+SW982,CVCL_1734,#N/A,TRUE,C4279,Biphasic synovial sarcoma,#N/A,#N/A,#N/A,#N/A
+T-47D,CVCL_0553,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
+T1-73,CVCL_3605,#N/A,FALSE,C9145,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+T24,CVCL_0554,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+T84,CVCL_0555,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+T98G,CVCL_0556,#N/A,FALSE,C3058,Glioblastoma,solid tumor,#N/A,#N/A,#N/A
+TCCSUP,CVCL_1738,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+TE 125.T,CVCL_1740,#N/A,FALSE,C3359,Rhabdomyosarcoma,solid tumor,#N/A,#N/A,#N/A
+TE 441.T,CVCL_1754,#N/A,FALSE,C3359,Rhabdomyosarcoma,solid tumor,#N/A,#N/A,#N/A
+TF-1,CVCL_0559,#N/A,FALSE,C7152,Erythroleukemia,hematopoietic,leukemia,#N/A,#N/A
+THP-1,CVCL_0006,#N/A,FALSE,C9163,Childhood acute monocytic leukemia,hematopoietic,leukemia,#N/A,#N/A
+Toledo,CVCL_3611,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+TT,CVCL_1774,#N/A,FALSE,C46099,Hereditary thyroid gland medullary carcinoma,solid tumor,#N/A,#N/A,#N/A
+TUR,CVCL_1775,#N/A,FALSE,C8263,Adult acute monocytic leukemia,hematopoietic,leukemia,#N/A,#N/A
+U-118MG,CVCL_0633,#N/A,TRUE,#N/A,U-138MG derivative,#N/A,#N/A,#N/A,#N/A
+U-138MG,CVCL_0020,#N/A,FALSE,C60781,Astrocytoma,solid tumor,#N/A,#N/A,#N/A
+U-2932,CVCL_1896,#N/A,FALSE,C36081,Diffuse large B-cell lymphoma activated B-cell type,hematopoietic,lymphoma,dlbcl,abc
+U-87MG ATCC,CVCL_0022,U-87MG,TRUE,C3058,Glioblastoma,#N/A,#N/A,#N/A,#N/A
+U-937,CVCL_0007,#N/A,FALSE,C8263,Adult acute monocytic leukemia,hematopoietic,leukemia,#N/A,#N/A
+U266B1,CVCL_0566,#N/A,FALSE,C3242,Plasma cell myeloma,hematopoietic,myeloma,#N/A,#N/A
+U2OS,CVCL_0042,#N/A,FALSE,C9145,Osteosarcoma,solid tumor,#N/A,#N/A,#N/A
+UM-UC-3,CVCL_1783,#N/A,FALSE,C4912,Bladder carcinoma,solid tumor,#N/A,#N/A,#N/A
+VA-ES-BJ,CVCL_1785,#N/A,FALSE,C3714,Epithelioid sarcoma,solid tumor,#N/A,#N/A,#N/A
+VCaP,CVCL_2235,#N/A,FALSE,C4863,Prostate carcinoma,solid tumor,#N/A,#N/A,#N/A
+WI-38,CVCL_0579,#N/A,FALSE,#N/A,Lung fibroblast,solid tumor,#N/A,#N/A,#N/A
+WiDr,CVCL_2760,#N/A,TRUE,#N/A,HT-29 derivative,#N/A,#N/A,#N/A,#N/A
+WM115,CVCL_0040,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+WM266-4,CVCL_2765,#N/A,FALSE,C3224,Melanoma,solid tumor,#N/A,#N/A,#N/A
+WSU-DLCL2,CVCL_1902,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal center B-cell type,hematopoietic,lymphoma,dlbcl,gcb
+Y-79,CVCL_1893,#N/A,FALSE,C7541,Retinoblastoma,solid tumor,#N/A,#N/A,#N/A
+YAPC,CVCL_1794,#N/A,FALSE,C3850,Pancreatic carcinoma,solid tumor,#N/A,#N/A,#N/A
+ZR-75-1,CVCL_0588,#N/A,FALSE,C4194,"Invasive ductal carcinoma, not otherwise specified",solid tumor,#N/A,#N/A,#N/A
