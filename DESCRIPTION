@@ -23,6 +23,7 @@ Imports:
     httr,
     stringr,
     syntactic,
+    tibble,
     utils
 Suggests:
     testthat
