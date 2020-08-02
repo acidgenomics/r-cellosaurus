@@ -17,11 +17,18 @@ Depends:
     R (>= 4.0),
     basejump (>= 0.12.9)
 Imports:
-    goalie (>= 0.4.6)
+    BiocParallel,
+    cli,
+    goalie (>= 0.4.6),
+    httr,
+    stringr,
+    syntactic,
+    utils
 Suggests:
     testthat
 Remotes:
     acidgenomics/basejump,
-    acidgenomics/goalie
+    acidgenomics/goalie,
+    acidgenomics/syntactic,
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

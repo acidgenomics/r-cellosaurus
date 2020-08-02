@@ -20,5 +20,6 @@ standardizeCells <- function(x) {
         prefix = FALSE,
         smart = FALSE
     )
+    x <- toupper(x)
     x
 }
