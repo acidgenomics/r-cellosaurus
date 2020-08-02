@@ -22,7 +22,7 @@ mapCellsToCellosaurus <- function(
         FUN = function(x) {
             url <- paste0(
                 "https://web.expasy.org/cgi-bin/cellosaurus/search?input=",
-                URLencode(x)
+                URLencode(paste0("\"", x, "\""))
             )
             response <- GET(url)
             content <- content(response, as = "text")
@@ -63,5 +63,14 @@ mapCellsToCellosaurus <- function(
     )
     out <- unlist(out)
     names(out) <- x
+    if (any(is.na(out))) {
+        fail <- names(out[is.na(out)])
+        cli_alert_warning(sprintf(
+            fmt = "Failed to match %d %s: %s.",
+            length(fail),
+            ngettext(n = length(fail), msg1 = "cell", msg2 = "cells"),
+            toString(fail, width = 200L)
+        ))
+    }
     out
 }

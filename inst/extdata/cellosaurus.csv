@@ -305,7 +305,7 @@ SU-DHL-8,CVCL_2207,#N/A,FALSE,C36080,Diffuse large B-cell lymphoma germinal cent
 SU.86.86,CVCL_3881,#N/A,FALSE,C8294,Pancreatic adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
 SUP-T1,CVCL_1714,#N/A,FALSE,C7210,Childhood T lymphoblastic lymphoma,hematopoietic,lymphoma,#N/A,#N/A
 SW1088,CVCL_1715,#N/A,FALSE,C60781,Astrocytoma,solid tumor,#N/A,#N/A,#N/A
-SW116,CVCL_0544,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
+SW1116,CVCL_0544,#N/A,FALSE,C4349,Colon adenocarcinoma,solid tumor,#N/A,#N/A,#N/A
 SW1271,CVCL_1716,#N/A,FALSE,C4917,Lung small cell carcinoma,solid tumor,#N/A,#N/A,#N/A
 SW13,CVCL_0542,#N/A,FALSE,C9325,Adrenal cortex carcinoma,solid tumor,#N/A,#N/A,#N/A
 SW1353,CVCL_0543,#N/A,FALSE,C7155,Primary central chondrosarcoma,solid tumor,#N/A,#N/A,#N/A
