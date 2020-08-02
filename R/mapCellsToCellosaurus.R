@@ -63,5 +63,5 @@ mapCellsToCellosaurus <- function(
     )
     out <- unlist(out)
     names(out) <- x
-    ids
+    out
 }
