@@ -19,6 +19,7 @@ Depends:
 Imports:
     BiocParallel,
     cli,
+    dplyr,
     goalie (>= 0.4.6),
     httr,
     stringr,
