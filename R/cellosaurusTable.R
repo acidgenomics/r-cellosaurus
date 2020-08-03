@@ -33,12 +33,18 @@ cellosaurusTable <- function(
                 pattern = "^<pre>ID[[:space:]]+(.+)$"
             )
             assert(isString(cellLineName))
+            ## Is the cell line problematic?
+            isProblematic <- any(str_detect(
+                string = lines,
+                pattern = "^CC[[:space:]]+Problematic cell line.*$"
+            ))
             ## Disease: NCIt.
+            ## Note that we're censoring problematic cell lines here.
             match <- .str_subset_and_match(
                 string = lines,
                 pattern = "^DI[[:space:]]+NCIt; (C[0-9]+); (.+)$"
             )
-            if (hasRows(match)) {
+            if (hasRows(match) && !isTRUE(isProblematic)) {
                 ncitDiseaseID <- match[1L, 2L]
                 ncitDiseaseName <- match[1L, 3L]
             } else {
@@ -69,11 +75,12 @@ cellosaurusTable <- function(
             out <- data.frame(
                 cellLineName = cellLineName,
                 cellosaurusID = id,
+                isCancer = isCancer,
+                isProblematic = isProblematic,
                 ncitDiseaseID = ncitDiseaseID,
                 ncitDiseaseName = ncitDiseaseName,
-                patientAgeYears = patientAgeYears,
                 patientSex = patientSex,
-                isCancer = isCancer
+                patientAgeYears = patientAgeYears
             )
             ## Filter entries with "DR" tag.
             dr <- str_match(
