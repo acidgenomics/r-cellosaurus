@@ -6,9 +6,19 @@
 \usage{
 standardizeCells(x)
 }
+\value{
+\code{character}.
+}
 \description{
 Standardize cell identifiers
 }
+\details{
+Strip all non-alphanumeric characters, remove information in
+parentheses/bracket, and convert to uppercase.
+}
 \note{
 Updated 2020-08-02.
+}
+\examples{
+standardizeCells(c("22Rv1", "Jurkat", "Ramos (RA-1)"))
 }
