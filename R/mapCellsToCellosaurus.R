@@ -6,8 +6,12 @@
 #' @param x `character`.
 #'   Cell names (or Cellosaurus identifiers).
 #'
+#' @return Named `character`.
+#'   User input in the names and Cellosaurus IDs in the values.
+#'
 #' @examples
-#' mapCellsToCellosaurus("22RV1")
+#' cells <- c("22RV1", "JURKAT")
+#' mapCellsToCellosaurus(cells)
 mapCellsToCellosaurus <- function(
     x,
     organism = "Homo sapiens",
