@@ -3,7 +3,8 @@
 #' @importFrom cli cli_alert_warning
 #' @importFrom data.table rbindlist
 #' @importFrom dplyr arrange_all group_by summarize ungroup
-#' @importFrom goalie allAreMatchingFixed assert hasRows isCharacter isString
+#' @importFrom goalie allAreMatchingFixed assert hasLength hasRows isCharacter
+#'   isString
 #' @importFrom httr GET content
 #' @importFrom methods as
 #' @importFrom pipette import
