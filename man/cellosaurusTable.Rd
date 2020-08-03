@@ -10,12 +10,17 @@ cellosaurusTable(x, BPPARAM = BiocParallel::bpparam())
 \item{x}{\code{character}.
 Cellosaurus identifiers (e.g. \verb{CVCL_*}.)}
 }
+\value{
+\code{DataFrame}.
+}
 \description{
 Cellosaurus metadata table
 }
 \note{
-Updated 2020-08-02.
+Updated 2020-08-03.
 }
 \examples{
-cellosaurusTable("CVCL_1045")
+ids <- c("CVCL_0126", "CVCL_1045")
+tbl <- cellosaurusTable(ids)
+print(tbl)
 }
