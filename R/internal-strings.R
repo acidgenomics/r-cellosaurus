@@ -9,7 +9,7 @@
     if (hasRows(match)) {
         out <- match[1L, 2L]
     } else {
-        out <- NULL
+        out <- NA
     }
     out
 }

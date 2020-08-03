@@ -1,13 +1,17 @@
 #' Cellosaurus metadata table
 #'
 #' @export
-#' @note Updated 2020-08-02.
+#' @note Updated 2020-08-03.
 #'
 #' @param x `character`.
 #'   Cellosaurus identifiers (e.g. `CVCL_*`.)
 #'
+#' @return `DataFrame`.
+#'
 #' @examples
-#' cellosaurusTable("CVCL_1045")
+#' ids <- c("CVCL_0126", "CVCL_1045")
+#' tbl <- cellosaurusTable(ids)
+#' print(tbl)
 cellosaurusTable <- function(
     x,
     BPPARAM = BiocParallel::bpparam()
@@ -38,8 +42,8 @@ cellosaurusTable <- function(
                 ncitDiseaseID <- match[1L, 2L]
                 ncitDiseaseName <- match[1L, 3L]
             } else {
-                ncitDiseaseID <- NULL
-                ncitDiseaseName <- NULL
+                ncitDiseaseID <- NA
+                ncitDiseaseName <- NA
             }
             ## Organism.
             organism <- .str_subset_and_match_single(
@@ -61,8 +65,8 @@ cellosaurusTable <- function(
                 string = lines,
                 pattern = "^CA[[:space:]]+Cancer cell line$"
             ))
-            ## Prepare tibble.
-            out <- tibble(
+            ## Prepare data frame.
+            out <- data.frame(
                 cellLineName = cellLineName,
                 cellosaurusID = id,
                 ncitDiseaseID = ncitDiseaseID,
@@ -85,7 +89,6 @@ cellosaurusTable <- function(
                 "Cell_Model_Passport",
                 "Cosmic-CLP",
                 "DepMap",
-                "IGRhCellID",
                 "LINCS_HMS",
                 "LINCS_LDP",
                 ## Ontologies:
@@ -113,6 +116,8 @@ cellosaurusTable <- function(
         },
         BPPARAM = BPPARAM
     )
-
-
+    data <- data.table::rbindlist(list, fill = TRUE)
+    data <- as(data, "DataFrame")
+    rownames(data) <- data[["cellosaurusID"]]
+    data
 }
