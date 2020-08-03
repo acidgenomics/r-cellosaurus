@@ -111,7 +111,7 @@ cellosaurusTable <- function(
             dr <- t(dr)
             rownames(dr) <- NULL
             out <- cbind(out, dr)
-            out <- camelCase(out)
+            colnames(out) <- camelCase(colnames(out))
             out
         },
         BPPARAM = BPPARAM
