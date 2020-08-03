@@ -14,6 +14,10 @@ mapCellsToCellosaurus(
 \item{x}{\code{character}.
 Cell names (or Cellosaurus identifiers).}
 }
+\value{
+Named \code{character}.
+User input in the names and Cellosaurus IDs in the values.
+}
 \description{
 Map cell names to Cellosaurus identifiers
 }
@@ -21,5 +25,6 @@ Map cell names to Cellosaurus identifiers
 Updated 2020-08-01.
 }
 \examples{
-mapCellsToCellosaurus("22RV1")
+cells <- c("22RV1", "JURKAT")
+mapCellsToCellosaurus(cells)
 }
