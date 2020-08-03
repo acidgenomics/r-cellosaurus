@@ -6,6 +6,7 @@
 #' @importFrom goalie allAreMatchingFixed assert hasRows isCharacter isString
 #' @importFrom httr GET content
 #' @importFrom methods as
+#' @importFrom pipette import
 #' @importFrom rlang !! sym
 #' @importFrom stats complete.cases
 #' @importFrom stringr str_detect str_match str_replace str_replace_all

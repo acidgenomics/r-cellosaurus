@@ -24,6 +24,7 @@ Imports:
     goalie (>= 0.4.6),
     httr,
     methods,
+    pipette,
     rlang,
     stringr,
     syntactic,
@@ -33,6 +34,7 @@ Suggests:
     testthat
 Remotes:
     acidgenomics/goalie,
-    acidgenomics/syntactic,
+    acidgenomics/pipette,
+    acidgenomics/syntactic
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
