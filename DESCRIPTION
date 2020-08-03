@@ -14,14 +14,17 @@ URL: https://github.com/acidgenomics/cellosaurus/
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    R (>= 4.0),
-    basejump (>= 0.12.9)
+    R (>= 4.0)
 Imports:
     BiocParallel,
+    S4Vectors,
     cli,
+    data.table,
     dplyr,
     goalie (>= 0.4.6),
     httr,
+    methods,
+    rlang,
     stringr,
     syntactic,
     tibble,
@@ -29,7 +32,6 @@ Imports:
 Suggests:
     testthat
 Remotes:
-    acidgenomics/basejump,
     acidgenomics/goalie,
     acidgenomics/syntactic,
 Roxygen: list(markdown = TRUE)
