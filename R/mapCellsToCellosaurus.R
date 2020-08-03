@@ -1,7 +1,7 @@
 #' Map cell names to Cellosaurus identifiers
 #'
 #' @export
-#' @note Updated 2020-08-01.
+#' @note Updated 2020-08-03.
 #'
 #' @param x `character`.
 #'   Cell names (or Cellosaurus identifiers).
@@ -21,6 +21,17 @@ mapCellsToCellosaurus <- function(
         isCharacter(x),
         isString(organism)
     )
+    ## Remap input to aliases, if necessary.
+    aliases <- import(
+        file = system.file("extdata", "aliases.csv", package = "cellosaurus"),
+        quiet = TRUE
+    )
+    ## Get the index position of cell names that need to be remapped.
+    remap <- which(cells %in% aliases[["input"]])
+    if (hasLength(remap)) {
+        actual <- match(x = cells[remap], table = aliases[["input"]])
+        cells[remap] <- aliases[["actual"]][actual]
+    }
     out <- bplapply(
         X = x,
         FUN = function(x) {
