@@ -21,19 +21,20 @@ mapCellsToCellosaurus <- function(
         isCharacter(x),
         isString(organism)
     )
-    ## Remap input to aliases, if necessary.
+    ## Reassigning here, so we can modify with aliases, if necessary.
+    cells <- x
     aliases <- import(
         file = system.file("extdata", "aliases.csv", package = "cellosaurus"),
         quiet = TRUE
     )
     ## Get the index position of cell names that need to be remapped.
-    remap <- which(x %in% aliases[["input"]])
+    remap <- which(cells %in% aliases[["input"]])
     if (hasLength(remap)) {
-        actual <- match(x = x[remap], table = aliases[["input"]])
-        x[remap] <- aliases[["actual"]][actual]
+        actual <- match(x = cells[remap], table = aliases[["input"]])
+        cells[remap] <- aliases[["actual"]][actual]
     }
     out <- bplapply(
-        X = x,
+        X = cells,
         FUN = function(x) {
             url <- paste0(
                 "https://web.expasy.org/cgi-bin/cellosaurus/search?input=",
