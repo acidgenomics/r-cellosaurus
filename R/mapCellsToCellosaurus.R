@@ -27,10 +27,10 @@ mapCellsToCellosaurus <- function(
         quiet = TRUE
     )
     ## Get the index position of cell names that need to be remapped.
-    remap <- which(cells %in% aliases[["input"]])
+    remap <- which(x %in% aliases[["input"]])
     if (hasLength(remap)) {
-        actual <- match(x = cells[remap], table = aliases[["input"]])
-        cells[remap] <- aliases[["actual"]][actual]
+        actual <- match(x = x[remap], table = aliases[["input"]])
+        x[remap] <- aliases[["actual"]][actual]
     }
     out <- bplapply(
         X = x,
