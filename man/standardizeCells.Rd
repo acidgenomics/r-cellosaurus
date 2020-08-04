@@ -6,6 +6,10 @@
 \usage{
 standardizeCells(x)
 }
+\arguments{
+\item{x}{\code{character}.
+Cell line names.}
+}
 \value{
 \code{character}.
 }
