@@ -7,6 +7,9 @@
 #' Strip all non-alphanumeric characters, remove information in
 #' parentheses/bracket, and convert to uppercase.
 #'
+#' @param x `character`.
+#'   Cell line names.
+#'
 #' @return `character`.
 #'
 #' @examples

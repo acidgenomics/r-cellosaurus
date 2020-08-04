@@ -9,6 +9,15 @@ cellosaurusTable(x, BPPARAM = BiocParallel::bpparam())
 \arguments{
 \item{x}{\code{character}.
 Cellosaurus identifiers (e.g. \verb{CVCL_*}.)}
+
+\item{BPPARAM}{\code{bpparamClass}.
+BiocParallel parameter to specify the desired processor configuration.\cr
+We recommend using one of the following:
+\itemize{
+\item \link[BiocParallel:register]{bpparam}.
+\item \link[BiocParallel:SerialParam-class]{SerialParam}.
+\item \link[BiocParallel:MulticoreParam-class]{MulticoreParam}.
+}}
 }
 \value{
 \code{DataFrame}.
