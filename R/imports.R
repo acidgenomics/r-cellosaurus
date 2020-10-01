@@ -3,10 +3,10 @@
 #' @importFrom cli cli_alert_warning
 #' @importFrom data.table rbindlist
 #' @importFrom dplyr arrange_all group_by summarize ungroup
-#' @importFrom goalie allAreMatchingFixed assert hasLength hasRows isCharacter
-#'   isString
+#' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
+#'   isCharacter isString isSubset validate
 #' @importFrom httr GET content
-#' @importFrom methods as
+#' @importFrom methods as new setClass setValidity
 #' @importFrom pipette import
 #' @importFrom rlang !! sym
 #' @importFrom stats complete.cases
