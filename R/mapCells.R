@@ -10,7 +10,7 @@
 #'   User input in the names and Cellosaurus IDs in the values.
 #'
 #' @examples
-#' cells <- c("22RV1", "JURKAT")
+#' cells <- c("22RV1", "HS729", "JURKAT")
 #' mapCells(cells)
 mapCells <- function(
     x,
@@ -72,7 +72,7 @@ mapCells <- function(
                 table = standardizeCells(match[, 2L])
             )
             id <- match[which, 1L]
-            if (!isString(id)) return(NA_character_)
+            if (!isString(id)) return(NA_character_)  # nocov
             id
         },
         BPPARAM = BPPARAM

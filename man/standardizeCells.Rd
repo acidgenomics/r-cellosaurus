@@ -24,5 +24,6 @@ parentheses/bracket, and convert to uppercase.
 Updated 2020-08-02.
 }
 \examples{
+cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
 standardizeCells(c("22Rv1", "Jurkat", "Ramos (RA-1)"))
 }
