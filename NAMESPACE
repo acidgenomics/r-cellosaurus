@@ -2,7 +2,7 @@
 
 export(CellosaurusTable)
 export(cellosaurusTable)
-export(mapCellsToCellosaurus)
+export(mapCells)
 export(standardizeCells)
 exportClasses(CellosaurusTable)
 importFrom(BiocParallel,bplapply)
