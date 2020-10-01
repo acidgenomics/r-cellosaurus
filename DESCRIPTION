@@ -1,6 +1,6 @@
 Package: cellosaurus
 Title: Cellosaurus
-Description: Cellosaurus toolkit.
+Description: Cellosaurus identifier mapping toolkit.
 Version: 0.0.1
 Date: 2020-10-01
 Authors@R: c(
