@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Map cell names to Cellosaurus identifiers — mapCells • cellosaurus</title>
+<title>Map input to cell identifiers — mapCells • cellosaurus</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Map cell names to Cellosaurus identifiers — mapCells" />
-<meta property="og:description" content="Map cell names to Cellosaurus identifiers" />
+<meta property="og:title" content="Map input to cell identifiers — mapCells" />
+<meta property="og:description" content="Map input to cell identifiers" />
 
 
 
@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cellosaurus</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -119,39 +119,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Map cell names to Cellosaurus identifiers</h1>
-    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/cellosaurus/blob/master/R/mapCells.R'><code>R/mapCells.R</code></a></small>
+    <h1>Map input to cell identifiers</h1>
+    <small class="dont-index">Source: <a href='https://github.com/acidgenomics/cellosaurus/blob/master/R/mapCells-methods.R'><code>R/mapCells-methods.R</code></a></small>
     <div class="hidden name"><code>mapCells.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Map cell names to Cellosaurus identifiers</p>
+    <p>Map input to cell identifiers</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mapCells</span><span class='op'>(</span><span class='va'>x</span>, organism <span class='op'>=</span> <span class='st'>"Homo sapiens"</span>, BPPARAM <span class='op'>=</span> <span class='fu'>BiocParallel</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/BiocParallel/man/register.html'>bpparam</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mapCells</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for character</span>
+<span class='fu'>mapCells</span><span class='op'>(</span><span class='va'>object</span>, organism <span class='op'>=</span> <span class='st'>"Homo sapiens"</span>, BPPARAM <span class='op'>=</span> <span class='fu'>BiocParallel</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/BiocParallel/man/register.html'>bpparam</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
+      <th>object</th>
       <td><p><code>character</code>.
 Cell names (or Cellosaurus identifiers).</p></td>
     </tr>
     <tr>
-      <th>organism</th>
-      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>.
-Full Latin organism name (e.g. <code>"Homo sapiens"</code>).</p></td>
-    </tr>
-    <tr>
-      <th>BPPARAM</th>
-      <td><p><code>bpparamClass</code>.
-BiocParallel parameter to specify the desired processor configuration.<br />
-We recommend using one of the following:</p><ul>
-<li><p><a href='https://rdrr.io/pkg/BiocParallel/man/register.html'>bpparam</a>.</p></li>
-<li><p><a href='https://rdrr.io/pkg/BiocParallel/man/SerialParam-class.html'>SerialParam</a>.</p></li>
-<li><p><a href='https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html'>MulticoreParam</a>.</p></li>
-</ul></td>
+      <th>...</th>
+      <td><p>Additional arguments.</p></td>
     </tr>
     </table>
 
