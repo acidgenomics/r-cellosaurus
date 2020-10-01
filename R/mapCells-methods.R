@@ -2,6 +2,7 @@
 #' @inherit acidgenerics::mapCells description title
 #' @note Updated 2020-10-01.
 #'
+#' @inherit acidroxygen::params
 #' @param object `character`.
 #'   Cell names (or Cellosaurus identifiers).
 #' @param ... Additional arguments.
