@@ -3,6 +3,7 @@
 #' @export
 #' @note Updated 2020-10-01.
 #'
+#' @inheritParams acidroxygen::params
 #' @param x `character`.
 #'   Cell names (or Cellosaurus identifiers).
 #'
