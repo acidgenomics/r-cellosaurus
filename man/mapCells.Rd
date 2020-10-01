@@ -9,6 +9,18 @@ mapCells(x, organism = "Homo sapiens", BPPARAM = BiocParallel::bpparam())
 \arguments{
 \item{x}{\code{character}.
 Cell names (or Cellosaurus identifiers).}
+
+\item{organism}{\code{character(1)}.
+Full Latin organism name (e.g. \code{"Homo sapiens"}).}
+
+\item{BPPARAM}{\code{bpparamClass}.
+BiocParallel parameter to specify the desired processor configuration.\cr
+We recommend using one of the following:
+\itemize{
+\item \link[BiocParallel:register]{bpparam}.
+\item \link[BiocParallel:SerialParam-class]{SerialParam}.
+\item \link[BiocParallel:MulticoreParam-class]{MulticoreParam}.
+}}
 }
 \value{
 Named \code{character}.
