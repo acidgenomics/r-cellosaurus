@@ -18,21 +18,23 @@ Depends:
 Imports:
     BiocParallel,
     S4Vectors,
+    acidgenerics (>= 0.3.13),
     cli,
     data.table,
     dplyr,
     goalie (>= 0.4.8),
     httr,
     methods,
-    pipette,
+    pipette (>= 0.4.14),
     rlang,
     stringr,
-    syntactic,
+    syntactic (>= 0.4.2),
     tibble,
     utils
 Suggests:
     testthat
 Remotes:
+    acidgenomics/acidgenerics,
     acidgenomics/goalie,
     acidgenomics/pipette,
     acidgenomics/syntactic

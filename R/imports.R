@@ -6,7 +6,7 @@
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
 #'   isCharacter isString isSubset validate
 #' @importFrom httr GET content
-#' @importFrom methods as new setClass setValidity
+#' @importFrom methods as new setClass setMethod setValidity
 #' @importFrom pipette import
 #' @importFrom rlang !! sym
 #' @importFrom stats complete.cases
