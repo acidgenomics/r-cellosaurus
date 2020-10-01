@@ -21,6 +21,6 @@ Map cell names to Cellosaurus identifiers
 Updated 2020-10-01.
 }
 \examples{
-cells <- c("22RV1", "JURKAT")
+cells <- c("22RV1", "HS729", "JURKAT")
 mapCells(cells)
 }

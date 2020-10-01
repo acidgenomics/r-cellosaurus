@@ -50,8 +50,10 @@ CellosaurusTable <-  # nolint
                     ncitDiseaseID <- match[1L, 2L]
                     ncitDiseaseName <- match[1L, 3L]
                 } else {
+                    ## nocov start
                     ncitDiseaseID <- NA
                     ncitDiseaseName <- NA
+                    ## nocov end
                 }
                 ## Organism.
                 organism <- .strSubsetAndMatchSingle(
