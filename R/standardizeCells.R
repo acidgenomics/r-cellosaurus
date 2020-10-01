@@ -13,6 +13,7 @@
 #' @return `character`.
 #'
 #' @examples
+#' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
 #' standardizeCells(c("22Rv1", "Jurkat", "Ramos (RA-1)"))
 standardizeCells <- function(x) {
     assert(isCharacter(x))

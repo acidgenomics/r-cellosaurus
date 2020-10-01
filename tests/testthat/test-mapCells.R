@@ -9,3 +9,9 @@ test_that("Cell name", {
     )
     expect_identical(object, expected)
 })
+
+test_that("Match failure", {
+    object <- mapCells(c("XXXXXX", "YYYYYY"))
+    expected <- c("XXXXXX" = NA_character_, "YYYYYY" = NA_character_)
+    expect_identical(object, expected)
+})
