@@ -18,3 +18,8 @@ cellosaurusTable <- function(...) {
     .Deprecated("CellosaurusTable")
     CellosaurusTable(...)
 }
+
+
+
+## nolint end
+## nocov end

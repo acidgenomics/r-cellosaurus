@@ -1,7 +1,7 @@
 #' Map cell names to Cellosaurus identifiers
 #'
 #' @export
-#' @note Updated 2020-08-03.
+#' @note Updated 2020-10-01.
 #'
 #' @param x `character`.
 #'   Cell names (or Cellosaurus identifiers).
@@ -11,11 +11,11 @@
 #'
 #' @examples
 #' cells <- c("22RV1", "JURKAT")
-#' mapCellsToCellosaurus(cells)
-mapCellsToCellosaurus <- function(
+#' mapCells(cells)
+mapCells <- function(
     x,
     organism = "Homo sapiens",
-    BPPARAM = BiocParallel::bpparam()
+    BPPARAM = BiocParallel::bpparam()  # nolint
 ) {
     assert(
         isCharacter(x),
