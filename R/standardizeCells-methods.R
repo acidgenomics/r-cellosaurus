@@ -1,5 +1,5 @@
 #' @name standardizeCells
-#' @inherit acidgenerics::standardizeCells return title
+#' @inherit AcidGenerics::standardizeCells return title
 #' @note Updated 2020-10-01.
 #'
 #' @description
@@ -19,7 +19,7 @@ NULL
 
 #' @rdname standardizeCells
 #' @name standardizeCells
-#' @importFrom acidgenerics standardizeCells
+#' @importFrom AcidGenerics standardizeCells
 #' @usage standardizeCells(object, ...)
 #' @export
 NULL

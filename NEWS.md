@@ -1,3 +1,13 @@
+## Cellosaurus 0.0.3 (2020-10-08)
+
+### Major changes
+
+- Renamed package from cellosaurus to Cellosaurus.
+
+### Minor changes
+
+- Updated dependency package version requirements.
+
 ## cellosaurus 0.0.2 (2020-10-01)
 
 ### Minor changes

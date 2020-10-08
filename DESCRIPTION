@@ -1,8 +1,8 @@
-Package: cellosaurus
+Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.0.2
-Date: 2020-10-01
+Version: 0.0.3
+Date: 2020-10-08
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -14,29 +14,23 @@ URL: https://github.com/acidgenomics/cellosaurus/
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    R (>= 4.0)
+    R (>= 4.0),
+    basejump (>= 0.13.1)
 Imports:
+    AcidGenerics (>= 0.4.0),
     BiocParallel,
     S4Vectors,
-    acidgenerics (>= 0.3.13),
     cli,
     data.table,
     dplyr,
-    goalie (>= 0.4.8),
+    goalie (>= 0.4.9),
     httr,
     methods,
-    pipette (>= 0.4.14),
     rlang,
     stringr,
-    syntactic (>= 0.4.2),
     tibble,
     utils
 Suggests:
     testthat
-Remotes:
-    acidgenomics/acidgenerics,
-    acidgenomics/goalie,
-    acidgenomics/pipette,
-    acidgenomics/syntactic
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
