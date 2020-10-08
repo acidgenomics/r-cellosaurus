@@ -1,6 +1,6 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2020-10-01.
+#' @note Updated 2020-10-08.
 #'
 #' @inherit AcidRoxygen::params
 #' @param object `character`.
@@ -26,7 +26,7 @@ NULL
 
 
 
-## Updated 2020-10-01.
+## Updated 2020-10-08.
 `mapCells,character` <-  # nolint
     function(
         object,
@@ -42,7 +42,7 @@ NULL
         aliases <- import(
             file = system.file(
                 "extdata", "aliases.csv",
-                package = "cellosaurus"
+                package = packageName()
             ),
             quiet = TRUE
         )
