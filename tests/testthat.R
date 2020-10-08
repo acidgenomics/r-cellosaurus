@@ -1,3 +1,3 @@
 library(testthat)
-library(cellosaurus)
-test_check("cellosaurus")
+library(Cellosaurus)
+test_check("Cellosaurus")
