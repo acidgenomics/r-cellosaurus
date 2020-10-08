@@ -1,8 +1,8 @@
 #' @name mapCells
-#' @inherit acidgenerics::mapCells description title
+#' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2020-10-01.
 #'
-#' @inherit acidroxygen::params
+#' @inherit AcidRoxygen::params
 #' @param object `character`.
 #'   Cell names (or Cellosaurus identifiers).
 #' @param ... Additional arguments.
@@ -19,7 +19,7 @@ NULL
 
 #' @rdname mapCells
 #' @name mapCells
-#' @importFrom acidgenerics mapCells
+#' @importFrom AcidGenerics mapCells
 #' @usage mapCells(object, ...)
 #' @export
 NULL
