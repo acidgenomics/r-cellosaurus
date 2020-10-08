@@ -3,7 +3,7 @@
 #' @export
 #' @note Updated 2020-10-01.
 #'
-#' @inheritParams acidroxygen::params
+#' @inheritParams AcidRoxygen::params
 #' @param x `character`.
 #'   Cellosaurus identifiers (e.g. `CVCL_*`.)
 #'
