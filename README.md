@@ -1,8 +1,5 @@
 # Cellosaurus
 
-[![Repo status: active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Travis CI build status](https://travis-ci.com/acidgenomics/cellosaurus.svg?branch=master)](https://travis-ci.com/acidgenomics/cellosaurus)
-
 [Cellosaurus][] identifier mapping toolkit.
 
 ## Installation
