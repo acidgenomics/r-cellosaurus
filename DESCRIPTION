@@ -10,7 +10,10 @@ Authors@R: c(
         role = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-2403-2221")
     ))
-URL: https://github.com/acidgenomics/cellosaurus/
+URL:
+    https://r.acidgenomics.com/packages/cellosaurus/,
+    https://github.com/acidgenomics/r-cellosaurus/
+BugReports: https://github.com/acidgenomics/r-cellosaurus/issues/
 License: GPL-3
 Encoding: UTF-8
 Depends:
