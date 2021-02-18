@@ -127,7 +127,8 @@ CellosaurusTable <-  # nolint
             },
             BPPARAM = BPPARAM
         )
-        data <- data.table::rbindlist(list, fill = TRUE)
+        ## FIXME Can we switch to `unlistToDataFrame` here?
+        data <- rbindlist(list, fill = TRUE)
         data <- as(data, "DataFrame")
         rownames(data) <- data[["cellosaurusId"]]
         new("CellosaurusTable", data)

@@ -21,7 +21,6 @@ Imports:
     AcidGenerics (>= 0.5.14),
     BiocParallel,
     basejump (>= 0.14.9),
-    data.table,
     dplyr,
     goalie (>= 0.4.14),
     httr,

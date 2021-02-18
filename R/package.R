@@ -9,7 +9,7 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom basejump alertWarning camelCase complete.cases head import
-#'   snakeCase
+#'   rbindlist snakeCase
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
 #'   isCharacter isString isSubset validate
 #' @importFrom httr GET content
@@ -22,7 +22,6 @@
 
 ## FIXME Can we rethink this?
 #' @importFrom BiocParallel bplapply
-#' @importFrom data.table rbindlist
 #' @importFrom dplyr arrange_all group_by summarize ungroup
 #' @importFrom rlang !! sym
 #' @importFrom tibble column_to_rownames tibble
