@@ -47,11 +47,11 @@ CellosaurusTable <-  # nolint
                     pattern = "^DI[[:space:]]+NCIt; (C[0-9]+); (.+)$"
                 )
                 if (hasRows(match) && !isTRUE(isProblematic)) {
-                    ncitDiseaseID <- match[1L, 2L]
+                    ncitDiseaseId <- match[1L, 2L]
                     ncitDiseaseName <- match[1L, 3L]
                 } else {
                     ## nocov start
-                    ncitDiseaseID <- NA
+                    ncitDiseaseId <- NA
                     ncitDiseaseName <- NA
                     ## nocov end
                 }
@@ -77,14 +77,14 @@ CellosaurusTable <-  # nolint
                 ))
                 ## Prepare data frame.
                 out <- data.frame(
-                    cellLineName = cellLineName,
-                    cellosaurusID = id,
-                    isCancer = isCancer,
-                    isProblematic = isProblematic,
-                    ncitDiseaseID = ncitDiseaseID,
-                    ncitDiseaseName = ncitDiseaseName,
-                    patientSex = patientSex,
-                    patientAgeYears = patientAgeYears
+                    "cellLineName" = cellLineName,
+                    "cellosaurusId" = id,
+                    "isCancer" = isCancer,
+                    "isProblematic" = isProblematic,
+                    "ncitDiseaseId" = ncitDiseaseId,
+                    "ncitDiseaseName" = ncitDiseaseName,
+                    "patientSex" = patientSex,
+                    "patientAgeYears" = patientAgeYears
                 )
                 ## Filter entries with "DR" tag.
                 dr <- str_match(
@@ -122,13 +122,13 @@ CellosaurusTable <-  # nolint
                 dr <- t(dr)
                 rownames(dr) <- NULL
                 out <- cbind(out, dr)
-                colnames(out) <- camelCase(colnames(out))
+                colnames(out) <- camelCase(colnames(out), strict = TRUE)
                 out
             },
             BPPARAM = BPPARAM
         )
         data <- data.table::rbindlist(list, fill = TRUE)
         data <- as(data, "DataFrame")
-        rownames(data) <- data[["cellosaurusID"]]
+        rownames(data) <- data[["cellosaurusId"]]
         new("CellosaurusTable", data)
     }
