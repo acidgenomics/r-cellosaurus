@@ -17,15 +17,6 @@ NULL
 
 
 
-#' @rdname standardizeCells
-#' @name standardizeCells
-#' @importFrom AcidGenerics standardizeCells
-#' @usage standardizeCells(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-10-01.
 `standardizeCells,character` <-  # nolint
     function(object) {

@@ -4,6 +4,8 @@
 #'
 #' @keywords internal
 #'
+#' @importClassesFrom basejump DataFrame
+#'
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom basejump alertWarning camelCase complete.cases head import
@@ -20,7 +22,6 @@
 
 ## FIXME Can we rethink this?
 #' @importFrom BiocParallel bplapply
-#' @importFrom cli cli_alert_warning
 #' @importFrom data.table rbindlist
 #' @importFrom dplyr arrange_all group_by summarize ungroup
 #' @importFrom rlang !! sym
