@@ -24,6 +24,6 @@
 #' @importFrom BiocParallel bplapply
 #' @importFrom dplyr arrange_all group_by summarize ungroup
 #' @importFrom rlang !! sym
-#' @importFrom tibble column_to_rownames tibble
+#' @importFrom tibble column_to_rownames
 #' @importFrom utils URLencode
 NULL

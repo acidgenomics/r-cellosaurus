@@ -118,6 +118,7 @@ CellosaurusTable <-  # nolint
                 )
                 dr <- ungroup(dr)
                 dr <- as.data.frame(dr)
+                ## FIXME RETHINK THIS.
                 dr <- column_to_rownames(dr, "key")
                 dr <- t(dr)
                 rownames(dr) <- NULL
