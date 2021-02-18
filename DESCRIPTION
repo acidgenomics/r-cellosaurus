@@ -20,9 +20,7 @@ Depends: R (>= 4.0)
 Imports:
     AcidGenerics (>= 0.5.14),
     BiocParallel,
-    S4Vectors,
     basejump (>= 0.14.9),
-    cli,
     data.table,
     dplyr,
     goalie (>= 0.4.14),

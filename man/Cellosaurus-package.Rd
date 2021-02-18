@@ -11,7 +11,9 @@ Cellosaurus identifier mapping toolkit.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/acidgenomics/cellosaurus/}
+  \item \url{https://r.acidgenomics.com/packages/cellosaurus/}
+  \item \url{https://github.com/acidgenomics/r-cellosaurus/}
+  \item Report bugs at \url{https://github.com/acidgenomics/r-cellosaurus/issues/}
 }
 
 }
