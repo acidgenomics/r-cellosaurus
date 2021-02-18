@@ -6,7 +6,8 @@
 #'
 #' @importMethodsFrom basejump coerce
 #'
-#' @importFrom basejump camelCase complete.cases head import snakeCase
+#' @importFrom basejump alertWarning camelCase complete.cases head import
+#'   snakeCase
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
 #'   isCharacter isString isSubset validate
 #' @importFrom httr GET content
@@ -18,7 +19,7 @@
 
 
 ## FIXME Can we rethink this?
-#' @importFrom BiocParallel bplapply bpparam
+#' @importFrom BiocParallel bplapply
 #' @importFrom cli cli_alert_warning
 #' @importFrom data.table rbindlist
 #' @importFrom dplyr arrange_all group_by summarize ungroup

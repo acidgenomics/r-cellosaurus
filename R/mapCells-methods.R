@@ -1,6 +1,6 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2020-10-08.
+#' @note Updated 2021-02-18.
 #'
 #' @inherit AcidRoxygen::params
 #' @param object `character`.
@@ -17,21 +17,11 @@ NULL
 
 
 
-#' @rdname mapCells
-#' @name mapCells
-#' @importFrom AcidGenerics mapCells
-#' @usage mapCells(object, ...)
-#' @export
-NULL
-
-
-
 ## Updated 2020-10-08.
 `mapCells,character` <-  # nolint
     function(
         object,
-        organism = "Homo sapiens",
-        BPPARAM = BiocParallel::bpparam()  # nolint
+        organism = "Homo sapiens"
     ) {
         assert(
             isCharacter(object),
@@ -52,6 +42,7 @@ NULL
             actual <- match(x = cells[remap], table = aliases[["input"]])
             cells[remap] <- aliases[["actual"]][actual]
         }
+        ## FIXME MAKE THIS OPTIONAL.
         out <- bplapply(
             X = cells,
             FUN = function(x) {
@@ -93,14 +84,13 @@ NULL
                 id <- match[which, 1L]
                 if (!isString(id)) return(NA_character_)  # nocov
                 id
-            },
-            BPPARAM = BPPARAM
+            }
         )
         out <- unlist(out)
         names(out) <- object
         if (any(is.na(out))) {
             fail <- names(out[is.na(out)])
-            cli_alert_warning(sprintf(
+            alertWarning(sprintf(
                 fmt = "Failed to match %d %s: %s.",
                 length(fail),
                 ngettext(n = length(fail), msg1 = "cell", msg2 = "cells"),
