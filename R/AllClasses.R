@@ -14,11 +14,11 @@ setValidity(
         validate(
             hasRownames(object),
             isSubset(
-                x = c("cellLineName", "cellosaurusID"),
+                x = c("cellLineName", "cellosaurusId"),
                 y = colnames(object)
             ),
             allAreMatchingFixed(
-                x = object[["cellosaurusID"]],
+                x = object[["cellosaurusId"]],
                 pattern = "CVCL_"
             )
         )
