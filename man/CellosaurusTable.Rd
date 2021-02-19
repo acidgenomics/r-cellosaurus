@@ -4,20 +4,11 @@
 \alias{CellosaurusTable}
 \title{Cellosaurus table of cell identifier mappings}
 \usage{
-CellosaurusTable(x, BPPARAM = BiocParallel::bpparam())
+CellosaurusTable(x)
 }
 \arguments{
 \item{x}{\code{character}.
 Cellosaurus identifiers (e.g. \verb{CVCL_*}.)}
-
-\item{BPPARAM}{\code{bpparamClass}.
-BiocParallel parameter to specify the desired processor configuration.\cr
-We recommend using one of the following:
-\itemize{
-\item \link[BiocParallel:register]{bpparam}.
-\item \link[BiocParallel:SerialParam-class]{SerialParam}.
-\item \link[BiocParallel:MulticoreParam-class]{MulticoreParam}.
-}}
 }
 \value{
 \code{DataFrame}.
@@ -26,7 +17,7 @@ We recommend using one of the following:
 Cellosaurus table of cell identifier mappings
 }
 \note{
-Updated 2020-10-01.
+Updated 2021-02-19.
 }
 \examples{
 ids <- c("CVCL_0126", "CVCL_1045")
