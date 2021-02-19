@@ -1,9 +1,8 @@
 #' Cellosaurus table of cell identifier mappings
 #'
 #' @export
-#' @note Updated 2020-10-01.
+#' @note Updated 2021-02-19.
 #'
-#' @inheritParams AcidRoxygen::params
 #' @param x `character`.
 #'   Cellosaurus identifiers (e.g. `CVCL_*`.)
 #'
@@ -14,18 +13,20 @@
 #' object <- CellosaurusTable(ids)
 #' print(object)
 CellosaurusTable <-  # nolint
-    function(
-        x,
-        BPPARAM = BiocParallel::bpparam()  # nolint
-    ) {
+    function(x) {
         assert(
             isCharacter(x),
             allAreMatchingFixed(x, "CVCL_")
         )
-        list <- bplapply(
+        list <- lapply(
             X = x,
             FUN = function(id) {
-                url <- paste0("https://web.expasy.org/cellosaurus/", id, ".txt")
+                url <- pasteURL(
+                    "web.expasy.org",
+                    "cellosaurus",
+                    paste0(id, ".txt"),
+                    protocol = "https"
+                )
                 response <- GET(url)
                 content <- content(response, as = "text")
                 lines <- strsplit(content, split = "\n")[[1L]]
@@ -75,17 +76,6 @@ CellosaurusTable <-  # nolint
                     string = lines,
                     pattern = "^CA[[:space:]]+Cancer cell line$"
                 ))
-                ## Prepare data frame.
-                out <- data.frame(
-                    "cellLineName" = cellLineName,
-                    "cellosaurusId" = id,
-                    "isCancer" = isCancer,
-                    "isProblematic" = isProblematic,
-                    "ncitDiseaseId" = ncitDiseaseId,
-                    "ncitDiseaseName" = ncitDiseaseName,
-                    "patientSex" = patientSex,
-                    "patientAgeYears" = patientAgeYears
-                )
                 ## Filter entries with "DR" tag.
                 dr <- str_match(
                     string = lines,
@@ -93,8 +83,7 @@ CellosaurusTable <-  # nolint
                 )
                 dr <- dr[complete.cases(dr), c(2L, 3L), drop = FALSE]
                 colnames(dr) <- c("key", "value")
-                dr <- as.data.frame(dr)
-                keep <- dr[[1L]] %in% c(
+                keep <- dr[, 1L] %in% c(
                     ## Cell line databases / resource.
                     "CCLE",
                     "Cell_Model_Passport",
@@ -109,27 +98,45 @@ CellosaurusTable <-  # nolint
                     "MCCL"
                 )
                 dr <- dr[keep, , drop = FALSE]
-                dr <- arrange_all(dr)
-                dr <- group_by(dr, !!sym("key"))
-                dr <- summarize(
-                    dr,
-                    value = toString(!!sym("value")),
-                    .groups = "keep"
+                dr <- dr[order(dr[, "key"], dr[, "value"]), , drop = FALSE]
+                dr <- aggregate(
+                    formula = formula("value~key"),
+                    data = dr,
+                    FUN = list
                 )
-                dr <- ungroup(dr)
-                dr <- as.data.frame(dr)
-                ## FIXME RETHINK THIS.
-                dr <- column_to_rownames(dr, "key")
-                dr <- t(dr)
-                rownames(dr) <- NULL
-                out <- cbind(out, dr)
-                colnames(out) <- camelCase(colnames(out), strict = TRUE)
+                assert(is.data.frame(dr))
+                dr2 <- dr[["value"]]
+                names(dr2) <- dr[["key"]]
+                out <- list(
+                    "cellLineName" = cellLineName,
+                    "cellosaurusId" = id,
+                    "isCancer" = isCancer,
+                    "isProblematic" = isProblematic,
+                    "ncitDiseaseId" = ncitDiseaseId,
+                    "ncitDiseaseName" = ncitDiseaseName,
+                    "patientSex" = patientSex,
+                    "patientAgeYears" = patientAgeYears
+                )
+                out <- append(x = out, values = dr2)
+                names(out) <- camelCase(names(out), strict = TRUE)
                 out
-            },
-            BPPARAM = BPPARAM
+            }
         )
+        names(list) <- x
+        ## Alternatively, `rbindlist(l = list, fill = TRUE)` is a useful
+        ## approach to consider, but it doesn't return 1:1 on the rows.
+
+        ## FIXME Need to rework `as.DataFrame()` to handle this??
+
+        ## FIXME THIS IS CREATING DUPLICATE LINES ARGH....
+        ## FIXME THIS FUNCTION IS MESSED UP AND NEEDS A REWORK IN PIPETTE...
+        ## FIXME rbindlist is also doing this too, what's up with that.
+        ## FIXME ITS BECAUSE CLO HAS DUPLICATES HERE...NEED TO USE I() HERE...
+        xxx <- unlistToDataFrame(list)
+        ## FIXME CREATE DATA FRAME AT LAST STEP...
         ## FIXME Can we switch to `unlistToDataFrame` here?
-        data <- rbindlist(list, fill = TRUE)
+
+
         data <- as(data, "DataFrame")
         rownames(data) <- data[["cellosaurusId"]]
         new("CellosaurusTable", data)

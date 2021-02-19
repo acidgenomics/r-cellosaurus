@@ -8,8 +8,8 @@
 #'
 #' @importMethodsFrom basejump coerce
 #'
-#' @importFrom basejump alertWarning camelCase complete.cases head import
-#'   rbindlist snakeCase
+#' @importFrom basejump DataFrame aggregate alertWarning append camelCase
+#'   complete.cases head import pasteURL rbindlist snakeCase unlistToDataFrame
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
 #'   isCharacter isString isSubset validate
 #' @importFrom httr GET content
