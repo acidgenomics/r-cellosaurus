@@ -1,8 +1,12 @@
-## Cellosaurus 0.0.4 (2021-02-21)
+## Cellosaurus 0.1.0 (2021-02-21)
 
 ### Minor changes
 
 - Reworked NAMESPACE, following basejump v0.14 release series update.
+- Simplified the number of dependencies, and removed need for internal dplyr
+  code, instead using new `rbindToDataFrame` approach.
+- Removed internal dependency on BiocParallel, so as to not query the
+  Cellosaurus server too frequently.
 
 ## Cellosaurus 0.0.3 (2020-10-08)
 
