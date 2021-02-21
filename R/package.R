@@ -9,7 +9,7 @@
 #' @importMethodsFrom basejump coerce
 #'
 #' @importFrom basejump DataFrame aggregate alertWarning append camelCase
-#'   complete.cases head import pasteURL rbindToDataFrame snakeCase
+#'   complete.cases head import packageName pasteURL rbindToDataFrame snakeCase
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
 #'   isCharacter isFlag isInt isOrganism isString isSubset validate
 #' @importFrom httr GET content
@@ -20,5 +20,6 @@
 
 
 
+## FIXME Reexport this in basejump.
 #' @importFrom utils URLencode
 NULL

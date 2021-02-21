@@ -1,6 +1,6 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2021-02-18.
+#' @note Updated 2021-02-21.
 #'
 #' @inherit AcidRoxygen::params
 #' @param object `character`.
@@ -17,7 +17,7 @@ NULL
 
 
 
-## Updated 2020-10-08.
+## Updated 2021-02-21.
 `mapCells,character` <-  # nolint
     function(
         object,
@@ -42,8 +42,7 @@ NULL
             actual <- match(x = cells[remap], table = aliases[["input"]])
             cells[remap] <- aliases[["actual"]][actual]
         }
-        ## FIXME MAKE THIS OPTIONAL.
-        out <- bplapply(
+        out <- lapply(
             X = cells,
             FUN = function(x) {
                 url <- paste0(
