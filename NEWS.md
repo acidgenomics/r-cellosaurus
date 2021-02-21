@@ -1,3 +1,9 @@
+## Cellosaurus 0.0.4 (2021-02-21)
+
+### Minor changes
+
+- Reworked NAMESPACE, following basejump v0.14 release series update.
+
 ## Cellosaurus 0.0.3 (2020-10-08)
 
 ### Major changes
