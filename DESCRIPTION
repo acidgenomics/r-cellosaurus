@@ -9,6 +9,10 @@ Authors@R: c(
         email = "mike@steinbaugh.com",
         role = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-2403-2221")
+    ),
+    person(
+        given = "Acid Genomics",
+        role = c("cph", "fnd")
     ))
 URL:
     https://r.acidgenomics.com/packages/cellosaurus/,
