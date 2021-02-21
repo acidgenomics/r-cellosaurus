@@ -19,5 +19,19 @@ install.packages(
 )
 ```
 
+### [Docker][] method
+
+```sh
+image="acidgenomics/r-cellosaurus"
+workdir="/mnt/work"
+docker pull "$image"
+docker run -it \
+    --volume="${PWD}:${workdir}" \
+    --workdir="$workdir" \
+    "$image" \
+    R
+```
+
 [cellosaurus]: https://web.expasy.org/cellosaurus/
+[docker]: https://www.docker.com/
 [r]: https://www.r-project.org/
