@@ -8,7 +8,7 @@ CellosaurusTable(x)
 }
 \arguments{
 \item{x}{\code{character}.
-Cellosaurus identifiers (e.g. \verb{CVCL_*}.)}
+Cellosaurus cell line identifiers (e.g. \verb{CVCL_*}.)}
 }
 \value{
 \code{DataFrame}.
@@ -17,10 +17,10 @@ Cellosaurus identifiers (e.g. \verb{CVCL_*}.)}
 Cellosaurus table of cell identifier mappings
 }
 \note{
-Updated 2021-02-19.
+Updated 2021-02-21.
 }
 \examples{
-ids <- c("CVCL_0126", "CVCL_1045")
-object <- CellosaurusTable(ids)
+cells <- c("CVCL_0126", "CVCL_1045")
+object <- CellosaurusTable(cells)
 print(object)
 }

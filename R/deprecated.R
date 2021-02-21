@@ -15,8 +15,7 @@ NULL
 #' @rdname deprecated
 #' @export
 cellosaurusTable <- function(...) {
-    .Deprecated("CellosaurusTable")
-    CellosaurusTable(...)
+    .Defunct("CellosaurusTable")
 }
 
 

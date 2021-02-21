@@ -4,13 +4,13 @@
 #' @note Updated 2021-02-21.
 #'
 #' @param x `character`.
-#'   Cellosaurus identifiers (e.g. `CVCL_*`.)
+#'   Cellosaurus cell line identifiers (e.g. `CVCL_*`.)
 #'
 #' @return `DataFrame`.
 #'
 #' @examples
-#' ids <- c("CVCL_0126", "CVCL_1045")
-#' object <- CellosaurusTable(ids)
+#' cells <- c("CVCL_0126", "CVCL_1045")
+#' object <- CellosaurusTable(cells)
 #' print(object)
 CellosaurusTable <-  # nolint
     function(x) {
