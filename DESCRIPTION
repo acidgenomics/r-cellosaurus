@@ -1,8 +1,8 @@
 Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.1.0
-Date: 2021-02-21
+Version: 0.1.1
+Date: 2021-03-12
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -22,12 +22,11 @@ License: AGPL-3
 Encoding: UTF-8
 Depends: R (>= 4.0)
 Imports:
-    AcidGenerics (>= 0.5.15),
-    basejump (>= 0.14.10),
-    goalie (>= 0.4.14),
+    AcidGenerics (>= 0.5.17),
+    basejump (>= 0.14.17),
+    goalie (>= 0.5.1),
     httr (>= 1.4),
-    methods,
-    stringr (>= 1.4)
+    methods
 Suggests:
     testthat
 Roxygen: list(markdown = TRUE)
