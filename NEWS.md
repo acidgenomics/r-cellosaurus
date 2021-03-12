@@ -1,3 +1,9 @@
+## Cellosaurus 0.1.1 (2021-03-12)
+
+### Minor changes
+
+- Updated basejump dependencies and removed unnecessary stringr import.
+
 ## Cellosaurus 0.1.0 (2021-02-21)
 
 ### Minor changes
