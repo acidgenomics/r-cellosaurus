@@ -1,3 +1,7 @@
+## FIXME Allow user to return DepMap, other identifier formats...
+
+
+
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2021-02-21.
