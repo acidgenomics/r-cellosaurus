@@ -1,7 +1,7 @@
 #' Cellosaurus table of cell identifier mappings
 #'
 #' @export
-#' @note Updated 2021-02-21.
+#' @note Updated 2021-07-30.
 #'
 #' @param x `character`.
 #'   Cellosaurus cell line identifiers (e.g. `CVCL_*`.)
@@ -18,6 +18,7 @@ CellosaurusTable <-  # nolint
             isCharacter(x),
             allAreMatchingFixed(x, "CVCL_")
         )
+        x <- unname(x)
         list <- lapply(
             X = x,
             FUN = function(id) {
@@ -61,11 +62,15 @@ CellosaurusTable <-  # nolint
                     isString(out[["cellLineName"]]),
                     isFlag(out[["isCancer"]]),
                     isFlag(out[["isProblematic"]]),
-                    isOrganism(out[["organism"]]),
-                    isInt(out[["patientAgeYears"]]) ||
-                        is.na(out[["patientAgeYears"]]),
-                    isSubset(out[["patientSex"]], c("Female", "Male"))
+                    isOrganism(out[["organism"]])
                 )
+                if (identical(out[["organism"]], "Homo sapiens")) {
+                    assert(
+                        isInt(out[["patientAgeYears"]]) ||
+                            is.na(out[["patientAgeYears"]]),
+                        isSubset(out[["patientSex"]], c("Female", "Male"))
+                    )
+                }
                 ## Disease: NCIt.
                 ## Note that we're censoring problematic cell lines here.
                 match <- .strSubsetAndMatch(
@@ -87,22 +92,8 @@ CellosaurusTable <-  # nolint
                     pattern = "^DR[[:space:]]+(.+); (.+)$"
                 )
                 dr <- dr[complete.cases(dr), c(2L, 3L), drop = FALSE]
+                assert(hasRows(dr))
                 colnames(dr) <- c("key", "value")
-                keep <- dr[, 1L] %in% c(
-                    ## Cell line databases / resource.
-                    "CCLE",
-                    "Cell_Model_Passport",
-                    "Cosmic-CLP",
-                    "DepMap",
-                    "LINCS_HMS",
-                    "LINCS_LDP",
-                    ## Ontologies:
-                    "BTO",
-                    "CLO",
-                    "EFO",
-                    "MCCL"
-                )
-                dr <- dr[keep, , drop = FALSE]
                 dr <- dr[order(dr[, "key"], dr[, "value"]), , drop = FALSE]
                 dr <- aggregate(
                     formula = formula("value~key"),
