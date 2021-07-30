@@ -1,3 +1,10 @@
+## Cellosaurus 0.1.2 (UNRELEASED)
+
+### Major changes
+
+- `CellosaurusTable`: Added support for return of more identifier columns.
+  Improved support for handling of non-human (e.g. mouse) cell lines.
+
 ## Cellosaurus 0.1.1 (2021-03-12)
 
 ### Minor changes
