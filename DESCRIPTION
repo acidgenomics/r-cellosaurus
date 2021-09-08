@@ -22,9 +22,9 @@ License: AGPL-3
 Encoding: UTF-8
 Depends: R (>= 4.0)
 Imports:
-    AcidGenerics (>= 0.5.18),
-    basejump (>= 0.14.19),
-    goalie (>= 0.5.2),
+    AcidGenerics (>= 0.5.19.9000),
+    basejump (>= 0.14.22),
+    goalie (>= 0.5.4),
     httr (>= 1.4.2),
     methods
 Suggests:
