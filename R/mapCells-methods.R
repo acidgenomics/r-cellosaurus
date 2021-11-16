@@ -76,7 +76,9 @@ NULL
                         "</td>"
                     )
                 )
-                if (!hasRows(match)) return(NA_character_)
+                if (!hasRows(match)) {
+                    return(NA_character_)
+                }
                 match <- match[, 2L:3L, drop = FALSE]
                 match <- unique(match)
                 match <- match[order(match[, 1L]), , drop = FALSE]
@@ -85,7 +87,9 @@ NULL
                     table = standardizeCells(match[, 2L])
                 )
                 id <- match[which, 1L]
-                if (!isString(id)) return(NA_character_)  # nocov
+                if (!isString(id)) {
+                    return(NA_character_)  # nocov
+                }
                 id
             }
         )
@@ -109,6 +113,6 @@ NULL
 #' @export
 setMethod(
     f = "mapCells",
-    signature = signature("character"),
+    signature = signature(object = "character"),
     definition = `mapCells,character`
 )
