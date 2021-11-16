@@ -47,6 +47,6 @@ NULL
 #' @export
 setMethod(
     f = "standardizeCells",
-    signature = signature("character"),
+    signature = signature(object = "character"),
     definition = `standardizeCells,character`
 )
