@@ -23,9 +23,10 @@ Strip all non-alphanumeric characters, remove information in
 parentheses/brackets, and convert to uppercase.
 }
 \note{
-Updated 2020-10-01.
+Updated 2022-02-22.
 }
 \examples{
 cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
-standardizeCells(c("22Rv1", "Jurkat", "Ramos (RA-1)"))
+cells <- standardizeCells(cells)
+print(cells)
 }
