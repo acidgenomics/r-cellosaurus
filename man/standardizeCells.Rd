@@ -23,7 +23,7 @@ Strip all non-alphanumeric characters, remove information in
 parentheses/brackets, and convert to uppercase.
 }
 \note{
-Updated 2022-02-22.
+Updated 2022-03-07.
 }
 \examples{
 cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")

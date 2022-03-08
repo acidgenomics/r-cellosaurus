@@ -8,13 +8,19 @@ NULL
 ## S4 generics and methods =====================================================
 
 #' @importFrom AcidGenerics camelCase rbindToDataFrame snakeCase
-#' @importFrom S4Vectors aggregate append complete.cases formula head
+#' @importFrom S4Vectors aggregate append complete.cases head
 #' @importFrom methods coerce
 #' @importFrom pipette import
 #'
 #' @importMethodsFrom AcidPlyr rbindToDataFrame
 #' @importMethodsFrom pipette coerce
 #' @importMethodsFrom syntactic camelCase snakeCase
+NULL
+
+
+
+## S3 generics =================================================================
+#' @importFrom stats formula
 NULL
 
 
