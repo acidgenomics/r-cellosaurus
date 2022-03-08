@@ -1,16 +1,7 @@
-## FIXME NOTE that current stable version doesn't unname input.
-## FIXME Confirm that this works...
-## > cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
-## > cells <- standardizeCells(cells)
-## > cells <- mapCells(cells, organism = "Homo sapiens")
-## > tbl <- CellosaurusTable(cells)
-
-
-
 #' Cellosaurus table of cell identifier mappings
 #'
 #' @export
-#' @note Updated 2021-07-30.
+#' @note Updated 2022-03-07.
 #'
 #' @param x `character`.
 #'   Cellosaurus cell line identifiers (e.g. `CVCL_*`.)
@@ -18,7 +9,9 @@
 #' @return `DataFrame`.
 #'
 #' @examples
-#' cells <- c("CVCL_0126", "CVCL_1045")
+#' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+#' cells <- mapCells(cells, organism = "Homo sapiens")
+#' print(cells)
 #' object <- CellosaurusTable(cells)
 #' print(object)
 CellosaurusTable <-  # nolint

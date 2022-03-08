@@ -17,10 +17,12 @@ Cellosaurus cell line identifiers (e.g. \verb{CVCL_*}.)}
 Cellosaurus table of cell identifier mappings
 }
 \note{
-Updated 2021-07-30.
+Updated 2022-03-07.
 }
 \examples{
-cells <- c("CVCL_0126", "CVCL_1045")
+cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+cells <- mapCells(cells, organism = "Homo sapiens")
+print(cells)
 object <- CellosaurusTable(cells)
 print(object)
 }

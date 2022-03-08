@@ -30,6 +30,7 @@ Imports:
     goalie (>= 0.6.0),
     httr,
     methods,
+    stats,
     utils
 Suggests:
     testthat
