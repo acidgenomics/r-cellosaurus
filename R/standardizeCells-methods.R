@@ -1,6 +1,6 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2022-02-22.
+#' @note Updated 2022-03-07.
 #'
 #' @description
 #' Strip all non-alphanumeric characters, remove information in

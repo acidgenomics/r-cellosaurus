@@ -1,10 +1,6 @@
-## FIXME Allow user to return DepMap, other identifier formats...
-
-
-
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2021-02-21.
+#' @note Updated 2022-03-07.
 #'
 #' @inherit AcidRoxygen::params
 #' @param object `character`.
@@ -15,8 +11,9 @@
 #'   User input in the names and Cellosaurus IDs in the values.
 #'
 #' @examples
-#' cells <- c("22RV1", "HS729", "JURKAT")
-#' mapCells(cells)
+#' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+#' cells <- mapCells(cells)
+#' print(cells)
 NULL
 
 
@@ -32,7 +29,7 @@ NULL
             isString(organism)
         )
         ## Reassigning here, so we can modify with aliases, if necessary.
-        cells <- object
+        cells <- standardizeCells(object)
         aliases <- import(
             file = system.file(
                 "extdata", "aliases.csv",
