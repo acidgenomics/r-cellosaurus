@@ -1,6 +1,6 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2020-10-01.
+#' @note Updated 2022-02-22.
 #'
 #' @description
 #' Strip all non-alphanumeric characters, remove information in
@@ -12,7 +12,8 @@
 #'
 #' @examples
 #' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
-#' standardizeCells(c("22Rv1", "Jurkat", "Ramos (RA-1)"))
+#' cells <- standardizeCells(cells)
+#' print(cells)
 NULL
 
 

@@ -1,3 +1,12 @@
+## FIXME NOTE that current stable version doesn't unname input.
+## FIXME Confirm that this works...
+## > cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+## > cells <- standardizeCells(cells)
+## > cells <- mapCells(cells, organism = "Homo sapiens")
+## > tbl <- CellosaurusTable(cells)
+
+
+
 #' Cellosaurus table of cell identifier mappings
 #'
 #' @export
