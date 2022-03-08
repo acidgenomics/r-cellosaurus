@@ -1,7 +1,8 @@
-## Cellosaurus 0.1.2 (UNRELEASED)
+## Cellosaurus 0.2.0 (UNRELEASED)
 
 ### Major changes
 
+- Split out basejump dependencies.
 - `CellosaurusTable`: Added support for return of more identifier columns.
   Improved support for handling of non-human (e.g. mouse) cell lines.
 
