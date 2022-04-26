@@ -1,10 +1,13 @@
-## Cellosaurus 0.2.0 (UNRELEASED)
+## Cellosaurus 0.2.0 (2022-04-26)
 
 ### Major changes
 
 - Split out basejump dependencies.
 - `CellosaurusTable`: Added support for return of more identifier columns.
   Improved support for handling of non-human (e.g. mouse) cell lines.
+- Updated `CellosaurusTable` to use R 4.2-specific `formula` call.
+- S4 class inherits from `DFrame` now, due to a breaking change introduced
+  with Bioconductor 3.15, where `DataFrame` no longer works.
 
 ## Cellosaurus 0.1.1 (2021-03-12)
 

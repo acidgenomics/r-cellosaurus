@@ -1,12 +1,12 @@
 #' Cellosaurus table of cell identifier mappings
 #'
-#' @note Updated 2020-10-01.
+#' @note Updated 2022-04-26.
 #' @export
 #'
 #' @return `CellosaurusTable`.
 setClass(
     Class = "CellosaurusTable",
-    contains = "DataFrame"
+    contains = "DFrame"
 )
 setValidity(
     Class = "CellosaurusTable",

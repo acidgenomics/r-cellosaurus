@@ -98,7 +98,7 @@ CellosaurusTable <-  # nolint
                 colnames(dr) <- c("key", "value")
                 dr <- dr[order(dr[, "key"], dr[, "value"]), , drop = FALSE]
                 dr <- aggregate(
-                    formula = formula("value~key"),
+                    x = formula("value~key"),
                     data = dr,
                     FUN = list
                 )
