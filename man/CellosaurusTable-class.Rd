@@ -11,5 +11,5 @@
 Cellosaurus table of cell identifier mappings
 }
 \note{
-Updated 2020-10-01.
+Updated 2022-04-26.
 }
