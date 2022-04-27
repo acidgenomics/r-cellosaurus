@@ -4,7 +4,7 @@
 #' @note Updated 2022-03-07.
 #'
 #' @param x `character`.
-#'   Cellosaurus cell line identifiers (e.g. `CVCL_*`.)
+#' Cellosaurus cell line identifiers (e.g. `CVCL_*`.)
 #'
 #' @return `DataFrame`.
 #'
@@ -14,7 +14,7 @@
 #' print(cells)
 #' object <- CellosaurusTable(cells)
 #' print(object)
-CellosaurusTable <-  # nolint
+CellosaurusTable <- # nolint
     function(x) {
         assert(
             isCharacter(x),
