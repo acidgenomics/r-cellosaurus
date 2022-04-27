@@ -7,7 +7,7 @@
 #' parentheses/brackets, and convert to uppercase.
 #'
 #' @param object `character`.
-#'   Cell line names.
+#' Cell line names.
 #' @param ... Additional arguments.
 #'
 #' @examples
@@ -19,7 +19,7 @@ NULL
 
 
 ## Updated 2020-10-01.
-`standardizeCells,character` <-  # nolint
+`standardizeCells,character` <- # nolint
     function(object) {
         assert(isCharacter(object))
         object <- tolower(object)

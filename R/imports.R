@@ -31,10 +31,10 @@ NULL
 #' @importFrom AcidCLI alertWarning
 #' @importFrom S4Vectors DataFrame
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
-#'   isCharacter isFlag isInt isOrganism isString isSubset validate
+#' isCharacter isFlag isInt isOrganism isString isSubset validate
 #' @importFrom httr GET content
 #' @importFrom methods as is new setClass setMethod setValidity
 #' @importFrom stringr str_detect str_match str_replace str_replace_all
-#'   str_split str_subset
+#' str_split str_subset
 #' @importFrom utils URLencode packageName
 NULL
