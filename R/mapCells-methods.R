@@ -1,14 +1,15 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2022-03-07.
+#' @note Updated 2022-04-27.
 #'
 #' @inherit AcidRoxygen::params
-#' @param object `character`.
-#'   Cell names (or Cellosaurus identifiers).
 #' @param ... Additional arguments.
 #'
+#' @param object `character`.
+#' Cell names (or Cellosaurus identifiers).
+#'
 #' @return Named `character`.
-#'   User input in the names and Cellosaurus IDs in the values.
+#' User input in the names and Cellosaurus IDs in the values.
 #'
 #' @examples
 #' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
@@ -19,11 +20,9 @@ NULL
 
 
 ## Updated 2021-02-21.
-`mapCells,character` <-  # nolint
-    function(
-        object,
-        organism = "Homo sapiens"
-    ) {
+`mapCells,character` <- # nolint
+    function(object,
+             organism = "Homo sapiens") {
         assert(
             isCharacter(object),
             isString(organism)
@@ -64,7 +63,7 @@ NULL
                     value = TRUE
                 )
                 match <- str_match(
-                    string  = lines,
+                    string = lines,
                     pattern = paste0(
                         ">",
                         "(CVCL_[A-Z0-9]+)",
@@ -85,7 +84,7 @@ NULL
                 )
                 id <- match[which, 1L]
                 if (!isString(id)) {
-                    return(NA_character_)  # nocov
+                    return(NA_character_) # nocov
                 }
                 id
             }
