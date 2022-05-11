@@ -3,6 +3,7 @@
 export(CellosaurusTable)
 export(cellosaurusTable)
 export(mapCells)
+export(mappings)
 export(standardizeCells)
 exportClasses(CellosaurusTable)
 exportMethods(mapCells)
