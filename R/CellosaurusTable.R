@@ -1,7 +1,11 @@
+## FIXME Rework this to use our OBO data, instead of scraping
+## the website.
+
+
 #' Cellosaurus table of cell identifier mappings
 #'
 #' @export
-#' @note Updated 2022-03-07.
+#' @note Updated 2022-05-11.
 #'
 #' @param x `character`.
 #' Cellosaurus cell line identifiers (e.g. `CVCL_*`.)

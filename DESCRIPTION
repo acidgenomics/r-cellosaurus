@@ -31,6 +31,7 @@ Imports:
     goalie,
     httr,
     methods,
+    ontologyIndex,
     pipette,
     stats,
     stringr,
