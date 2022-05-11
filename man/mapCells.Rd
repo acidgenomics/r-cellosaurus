@@ -26,7 +26,7 @@ User input in the names and Cellosaurus IDs in the values.
 Map input to cell identifiers
 }
 \note{
-Updated 2022-03-07.
+Updated 2022-04-27.
 }
 \examples{
 cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
