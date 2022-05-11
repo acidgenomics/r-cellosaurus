@@ -1,3 +1,9 @@
+# Cellosaurus 0.2.1 (2022-05-11)
+
+## Minor changes
+
+- Bug fix for breaking change in pipette namespace.
+
 # Cellosaurus 0.2.0 (2022-04-28)
 
 ## Major changes
