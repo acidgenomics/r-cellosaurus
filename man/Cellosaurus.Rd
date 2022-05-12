@@ -2,27 +2,28 @@
 % Please edit documentation in R/AllGenerators.R
 \name{Cellosaurus}
 \alias{Cellosaurus}
-\title{Cellosaurus table of cell identifier mappings}
+\title{Cellosaurus table}
 \usage{
 Cellosaurus()
-}
-\arguments{
-\item{x}{\code{character}.
-Cellosaurus cell line identifiers (e.g. \verb{CVCL_*}.)}
 }
 \value{
 \code{Cellosaurus}.
 }
 \description{
-Cellosaurus table of cell identifier mappings
+Cellosaurus table
 }
 \note{
 Updated 2022-05-12.
 }
 \examples{
-cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
-cells <- mapCells(cells, organism = "Homo sapiens")
-print(cells)
-object <- CellosaurusTable(cells)
-print(object)
+## This is CPU intensive.
+## > object <- Cellosaurus()
+## > print(object)
+}
+\seealso{
+\itemize{
+\item ftp://ftp.expasy.org/databases/cellosaurus
+\item https://github.com/calipho-sib/cellosaurus
+\item ontologyIndex package
+}
 }
