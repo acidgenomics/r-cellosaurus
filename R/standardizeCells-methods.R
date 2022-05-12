@@ -1,13 +1,14 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2022-03-07.
+#' @note Updated 2022-05-12.
 #'
-#' @description
+#' @details
 #' Strip all non-alphanumeric characters, remove information in
 #' parentheses/brackets, and convert to uppercase.
 #'
 #' @param object `character`.
 #' Cell line names.
+#'
 #' @param ... Additional arguments.
 #'
 #' @examples

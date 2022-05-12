@@ -8,7 +8,9 @@ NULL
 ## S4 generics and methods =====================================================
 
 #' @importFrom AcidGenerics camelCase rbindToDataFrame snakeCase
-#' @importFrom S4Vectors aggregate append complete.cases head
+#' @importFrom BiocGenerics grep grepl
+#' @importFrom S4Vectors aggregate append complete.cases head metadata
+#' metadata<-
 #' @importFrom pipette import
 #'
 #' @importMethodsFrom AcidPlyr rbindToDataFrame
@@ -33,7 +35,13 @@ NULL
 #' isCharacter isFlag isInt isOrganism isString isSubset validate
 #' @importFrom httr GET content
 #' @importFrom methods as is new setClass setMethod setValidity
+#' @importFrom ontologyIndex get_ontology
+#' @importFrom utils URLencode packageName
+NULL
+
+
+## FIXME Rework these using stringi.
+
 #' @importFrom stringr str_detect str_match str_replace str_replace_all
 #' str_split str_subset
-#' @importFrom utils URLencode packageName
 NULL
