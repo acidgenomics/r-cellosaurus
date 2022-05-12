@@ -1,15 +1,15 @@
 #' Cellosaurus table of cell identifier mappings
 #'
-#' @note Updated 2022-04-26.
+#' @note Updated 2022-05-12.
 #' @export
 #'
-#' @return `CellosaurusTable`.
+#' @return `Cellosaurus`.
 setClass(
-    Class = "CellosaurusTable",
+    Class = "Cellosaurus",
     contains = "DFrame"
 )
 setValidity(
-    Class = "CellosaurusTable",
+    Class = "Cellosaurus",
     method = function(object) {
         validate(
             hasRownames(object),

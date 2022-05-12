@@ -1,3 +1,7 @@
+## FIXME Keep this variant but consider renaming...
+
+
+
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2022-04-27.

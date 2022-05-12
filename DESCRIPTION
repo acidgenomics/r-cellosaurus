@@ -2,7 +2,7 @@ Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
 Version: 0.3.0.9000
-Date: 2022-05-11
+Date: 2022-05-12
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -26,7 +26,6 @@ Imports:
     AcidCLI,
     AcidGenerics,
     AcidPlyr,
-    BiocSet,
     S4Vectors,
     goalie,
     httr,

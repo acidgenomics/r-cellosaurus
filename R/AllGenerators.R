@@ -1,16 +1,19 @@
 ## FIXME Rework this to use our OBO data, instead of scraping
 ## the website.
+## FIXME Rework this using ontologyIndex approach instead.
+
+
 
 
 #' Cellosaurus table of cell identifier mappings
 #'
 #' @export
-#' @note Updated 2022-05-11.
+#' @note Updated 2022-05-12.
 #'
 #' @param x `character`.
 #' Cellosaurus cell line identifiers (e.g. `CVCL_*`.)
 #'
-#' @return `DataFrame`.
+#' @return `Cellosaurus`.
 #'
 #' @examples
 #' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
@@ -18,8 +21,8 @@
 #' print(cells)
 #' object <- CellosaurusTable(cells)
 #' print(object)
-CellosaurusTable <- # nolint
-    function(x) {
+Cellosaurus <- # nolint
+    function() {
         assert(
             isCharacter(x),
             allAreMatchingFixed(x, "CVCL_")

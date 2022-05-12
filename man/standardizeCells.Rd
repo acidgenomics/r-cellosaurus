@@ -19,11 +19,14 @@ Cell line names.}
 \code{character}.
 }
 \description{
+Standardize cell line names
+}
+\details{
 Strip all non-alphanumeric characters, remove information in
 parentheses/brackets, and convert to uppercase.
 }
 \note{
-Updated 2022-03-07.
+Updated 2022-05-12.
 }
 \examples{
 cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
