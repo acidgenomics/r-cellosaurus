@@ -26,17 +26,18 @@ Imports:
     AcidCLI,
     AcidGenerics,
     AcidPlyr,
+    IRanges,
     S4Vectors,
     goalie,
     httr,
     methods,
-    ontologyIndex,
     pipette,
     stats,
-    stringr,
+    stringi,
     syntactic,
     utils
 Suggests:
+    ontologyIndex,
     testthat
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2.9000
