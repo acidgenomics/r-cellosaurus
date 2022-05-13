@@ -36,6 +36,7 @@ NULL
 #' @importFrom S4Vectors DataFrame
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
 #' isCharacter isFlag isInt isOrganism isString isSubset validate
+#' validateClasses
 #' @importFrom httr GET content
 #' @importFrom methods as is new setClass setMethod setValidity
 #' @importFrom pipette cacheURL

@@ -144,6 +144,7 @@ NULL
         x = map[["ncitDiseaseId"]]
     )
     out <- leftJoin(x = object, y = map, by = "ncitDiseaseId")
+    out[["ncitDiseaseId"]] <- Rle(out[["ncitDiseaseId"]])
     out
 }
 
@@ -394,5 +395,5 @@ Cellosaurus <- # nolint
         object <- .addNcitDiseaseId(object)
         object <- .addNcitDiseaseName(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
-        new("CellosaurusTable", object)
+        new("Cellosaurus", object)
     }
