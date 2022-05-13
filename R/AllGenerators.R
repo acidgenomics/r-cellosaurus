@@ -15,9 +15,8 @@
 #' - ontologyIndex package
 #'
 #' @examples
-#' ## This is CPU intensive.
-#' ## > object <- Cellosaurus()
-#' ## > print(object)
+#' object <- Cellosaurus()
+#' print(object)
 NULL
 
 
