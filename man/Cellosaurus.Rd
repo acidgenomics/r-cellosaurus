@@ -16,9 +16,8 @@ Cellosaurus table
 Updated 2022-05-13.
 }
 \examples{
-## This is CPU intensive.
-## > object <- Cellosaurus()
-## > print(object)
+object <- Cellosaurus()
+print(object)
 }
 \seealso{
 \itemize{
