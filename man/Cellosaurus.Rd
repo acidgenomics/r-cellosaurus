@@ -13,7 +13,7 @@ Cellosaurus()
 Cellosaurus table
 }
 \note{
-Updated 2022-05-12.
+Updated 2022-05-13.
 }
 \examples{
 ## This is CPU intensive.
