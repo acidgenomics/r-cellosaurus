@@ -1,4 +1,5 @@
-## FIXME Consider renaming "id" to "cellosaurusId".
+## FIXME Need to be able to match NCBI taxonomy identifiers using API.
+## FIXME Need to be able to match NCIt identifiers using API.
 
 
 
@@ -112,43 +113,120 @@ Cellosaurus <- # nolint
                 split = "; ",
                 fixed = TRUE
             ))
+        ## Extract DepMap identifiers.
+        depMapId <- grep(
+            pattern = "^DepMap:",
+            x = df[["xref"]],
+            value = TRUE
+        )
+        depMapId <- gsub(
+            pattern = "^DepMap:",
+            replacement = "",
+            x = depMapId
+        )
+        depMapId <- vapply(
+            X = depMapId,
+            FUN = function(x) {
+                if (identical(x, character())) {
+                    return(NA_character_)
+                }
+                x[[1L]]
+            },
+            FUN.VALUE = character(1L),
+            USE.NAMES = FALSE
+        )
+        df[["depMapId"]] <- depMapId
+        ## Label any problematic cell lines.
+        df[["isProblematic"]] <- any(grepl(
+            pattern = "Problematic cell line",
+            x = df[["comment"]],
+            fixed = TRUE
+        ))
+        ## Extract Sanger Cell Model Passports identifiers.
+        sangerId <- grep(
+            pattern = "^Cell_Model_Passport:",
+            x = df[["xref"]],
+            value = TRUE
+        )
+        sangerId <- gsub(
+            pattern = "^Cell_Model_Passport:",
+            replacement = "",
+            x = cmpId
+        )
+        sangerId <- vapply(
+            X = cmpId,
+            FUN = function(x) {
+                if (identical(x, character())) {
+                    return(NA_character_)
+                }
+                x[[1L]]
+            },
+            FUN.VALUE = character(1L),
+            USE.NAMES = FALSE
+        )
+        df[["sangerId"]] <- sangerId
+        ## Indicate which cell lines are cancer.
+        df[["isCancer"]] <- any(df[["subset"]] == "Cancer_cell_line")
+        ## Extract taxonomy identifiers, for organism matching.
+        ## e.g. "NCBI_TaxID:10090"
+        taxId <- grep(
+            pattern = "^NCBI_TaxID:",
+            x = df[["xref"]],
+            value = TRUE
+        )
+        taxId <- gsub(
+            pattern = "^NCBI_TaxID:",
+            replacement = "",
+            x = taxId
+        )
+        taxId <- vapply(
+            X = taxId,
+            FUN = function(x) {
+                if (identical(x, character())) {
+                    return(NA_character_)
+                }
+                x[[1L]]
+            },
+            FUN.VALUE = character(1L)
+        )
+        taxId <- as.factor(taxId)
+        df[["taxId"]] <- taxId
+        ## https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi
+        ## Genbank common name is also included here in parentheses.
+        df[["organism"]] <- as.factor(vapply(
+            X = df[["taxId"]],
+            FUN = function(x) {
+                switch(
+                    EXPR = x,
+                    "7227" = "Drosophila melanogaster (fruit fly)",
+                    "9031" = "Gallus gallus (chicken)",
+                    "9483" = "Callithrix jacchus (white-tufted-ear marmoset)",
+                    "9534" = "Chlorocebus aethiops (grivet)",
+                    "9544" = "Macaca mulatta (Rhesus monkey)",
+                    "9598" = "Pan troglodytes (chimpanzee)",
+                    "9606" = "Homo sapiens (human)",
+                    "9615" = "Canis lupus familiaris (dog)",
+                    "9796" = "Equus caballus (horse)",
+                    "9823" = "Sus scrofa (pig)",
+                    "9913" = "Bos taurus (cattle)",
+                    "9925" = "Capra hircus (goat)",
+                    "9940" = "Ovis aries (sheep)",
+                    "9986" = "Oryctolagus cuniculus (rabbit)",
+                    "10029" = "Cricetulus griseus (Chinese hamster)",
+                    "10036" = "Mesocricetus auratus (golden hamster)",
+                    "10090" = "Mus musculus (house mouse)",
+                    "10116" = "Rattus norvegicus (Norway rat)",
+                    NA_character_
+                )
+            },
+            FUN.VALUE = character(1L),
+            USE.NAMES = FALSE
+        ))
 
-        # FIXME Add these additional columns:
-        #
-        # "isCancer" = any(str_detect(
-        #     string = lines,
-        #     pattern = "^CA[[:space:]]+Cancer cell line$"
-        # )),
-        # "isProblematic" = any(str_detect(
-        #     string = lines,
-        #     pattern = "^CC[[:space:]]+Problematic cell line.*$"
-        # )),
-        # "organism" = .strSubsetAndMatchSingle(
-        #     string = lines,
-        #     pattern = "^OX.+! (.+)$"
-        # ),
-        # "patientAgeYears" = as.integer(.strSubsetAndMatchSingle(
-        #     string = lines,
-        #     pattern = "^AG[[:space:]]+([0-9]+)Y$"
-        # )),
-        # "patientSex" = .strSubsetAndMatchSingle(
-        #     string = lines,
-        #     pattern = "^SX[[:space:]]+(.+)$"
-        # )
-        # assert(
-        #     isString(out[["cellLineName"]]),
-        #     isFlag(out[["isCancer"]]),
-        #     isFlag(out[["isProblematic"]]),
-        #     isOrganism(out[["organism"]])
-        # )
-        # if (identical(out[["organism"]], "Homo sapiens")) {
-        #     assert(
-        #         isInt(out[["patientAgeYears"]]) ||
-        #             is.na(out[["patientAgeYears"]]),
-        #         isSubset(out[["patientSex"]], c("Female", "Male"))
-        #     )
-        # }
+
+
         # ## Disease: NCIt.
+        # FIXME e.g. "NCIt:C7152"
         # ## Note that we're censoring problematic cell lines here.
         # match <- .strSubsetAndMatch(
         #     string = lines,
@@ -177,6 +255,7 @@ Cellosaurus <- # nolint
         #     data = dr,
         #     FUN = list
         # )
+
 
         metadata(df)[["dataVersion"]] <- dataVersion
         df <- df[, sort(colnames(df)), drop = FALSE]
