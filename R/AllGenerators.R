@@ -143,7 +143,7 @@ NULL
         x = map[["ncitDiseaseId"]]
     )
     out <- leftJoin(x = object, y = map, by = "ncitDiseaseId")
-    out[["ncitDiseaseId"]] <- Rle(out[["ncitDiseaseId"]])
+    out[["ncitDiseaseName"]] <- Rle(out[["ncitDiseaseName"]])
     out
 }
 
