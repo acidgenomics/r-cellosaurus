@@ -11,16 +11,19 @@ setClass(
 setValidity(
     Class = "Cellosaurus",
     method = function(object) {
-        validate(
+        ok <- validate(
             hasRownames(object),
             allAreMatchingFixed(
                 x = rownames(object),
                 pattern = "CVCL_"
             )
         )
-        validateClasses(
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
+        ok <- validateClasses(
             object = object,
-            expected = c(
+            expected = list(
                 "ancestors" = "character",
                 "comment" = "CompressedCharacterList",
                 "creationDate" = "character",
@@ -45,5 +48,9 @@ setValidity(
             ),
             subset = FALSE
         )
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
+        TRUE
     }
 )
