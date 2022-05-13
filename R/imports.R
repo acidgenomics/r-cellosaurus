@@ -9,7 +9,8 @@ NULL
 
 #' @importFrom AcidGenerics camelCase rbindToDataFrame removeNA sanitizeNA
 #' snakeCase
-#' @importFrom BiocGenerics as.data.frame grep grepl
+#' @importFrom BiocGenerics as.data.frame grep grepl unlist
+#' @importFrom IRanges gsub
 #' @importFrom S4Vectors aggregate append complete.cases head metadata
 #' metadata<-
 #' @importFrom pipette import
