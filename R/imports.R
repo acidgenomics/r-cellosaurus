@@ -7,15 +7,15 @@ NULL
 
 ## S4 generics and methods =====================================================
 
-#' @importFrom AcidGenerics camelCase rbindToDataFrame removeNA sanitizeNA
-#' snakeCase
+#' @importFrom AcidGenerics camelCase leftJoin rbindToDataFrame removeNA
+#' sanitizeNA snakeCase
 #' @importFrom BiocGenerics as.data.frame grep grepl unlist
 #' @importFrom IRanges gsub
-#' @importFrom S4Vectors aggregate append complete.cases head metadata
+#' @importFrom S4Vectors Rle aggregate append complete.cases head metadata
 #' metadata<-
 #' @importFrom pipette import
 #'
-#' @importMethodsFrom AcidPlyr rbindToDataFrame
+#' @importMethodsFrom AcidPlyr leftJoin
 #' @importMethodsFrom pipette import removeNA sanitizeNA
 #' @importMethodsFrom syntactic camelCase snakeCase
 NULL
