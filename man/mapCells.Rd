@@ -2,19 +2,19 @@
 % Please edit documentation in R/AllGenerics.R, R/mapCells-methods.R
 \name{mapCells}
 \alias{mapCells}
-\alias{mapCells,character-method}
+\alias{mapCells,Cellosaurus-method}
 \title{Map input to cell identifiers}
 \usage{
 mapCells(object, ...)
 
-\S4method{mapCells}{character}(object, organism = "Homo sapiens")
+\S4method{mapCells}{Cellosaurus}(object, cells, keyType = c("cellosaurusId", "depMapId", "sangerId"))
 }
 \arguments{
 \item{object}{\code{character}.
 Cell names (or Cellosaurus identifiers).}
 
-\item{organism}{\code{character(1)}.
-Full Latin organism name (e.g. \code{"Homo sapiens"}).}
+\item{cells}{\code{character}.
+Cell identifiers.}
 
 \item{...}{Additional arguments.}
 }
@@ -26,10 +26,17 @@ User input in the names and Cellosaurus IDs in the values.
 Map input to cell identifiers
 }
 \note{
-Updated 2022-04-27.
+Updated 2022-06-02.
 }
 \examples{
+## Cellosaurus ====
+object <- Cellosaurus()
 cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
-cells <- mapCells(cells)
+cells <- mapCells(object = object, cells = cells)
 print(cells)
+}
+\seealso{
+\itemize{
+\item \href{https://stackoverflow.com/questions/11002391/}{Matching values in list}.
+}
 }

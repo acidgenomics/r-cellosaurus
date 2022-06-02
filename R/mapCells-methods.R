@@ -1,11 +1,6 @@
-## FIXME Keep this variant but consider renaming...
-## FIXME Rework this to not query the webserver...
-
-
-
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2022-04-27.
+#' @note Updated 2022-06-02.
 #'
 #' @inherit AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -16,95 +11,94 @@
 #' @return Named `character`.
 #' User input in the names and Cellosaurus IDs in the values.
 #'
+#' @seealso
+#' - [Matching values in list](https://stackoverflow.com/questions/11002391/).
+#'
 #' @examples
+#' ## Cellosaurus ====
+#' object <- Cellosaurus()
 #' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
-#' cells <- mapCells(cells)
+#' cells <- mapCells(object = object, cells = cells)
 #' print(cells)
 NULL
 
 
 
-## Updated 2021-02-21.
-`mapCells,character` <- # nolint
+## Dynamically handle common aliases that are difficult to map.
+## > aliases <- import(
+## >     file = system.file(
+## >         "extdata", "aliases.csv",
+## >         package = .pkgName
+## >     ),
+## >     quiet = TRUE
+## > )
+## > remap <- which(cells %in% aliases[["input"]])
+## > if (hasLength(remap)) {
+## >     actual <- match(x = cells[remap], table = aliases[["input"]])
+## >     cells[remap] <- aliases[["actual"]][actual]
+## > }
+
+
+
+## Updated 2022-06-02.
+`mapCells,Cellosaurus` <- # nolint
     function(object,
-             organism = "Homo sapiens") {
+             cells,
+             keyType = c(
+                 "cellosaurusId",
+                 "depMapId",
+                 "sangerId"
+            )) {
         assert(
-            isCharacter(object),
-            isString(organism)
+            validObject(object),
+            isCharacter(cells),
+            hasNoDuplicates(cells)
         )
-        ## Reassigning here, so we can modify with aliases, if necessary.
-        cells <- standardizeCells(object)
-        aliases <- import(
-            file = system.file(
-                "extdata", "aliases.csv",
-                package = packageName()
-            ),
-            quiet = TRUE
+        keyType <- match.arg(keyType)
+        idCol <- switch(
+            EXPR = keyType,
+            "cellosaurusId" = "id",
+            keyType
         )
-        ## Get the index position of cell names that need to be remapped.
-        remap <- which(cells %in% aliases[["input"]])
-        if (hasLength(remap)) {
-            actual <- match(x = cells[remap], table = aliases[["input"]])
-            cells[remap] <- aliases[["actual"]][actual]
+        if (all(cells %in% object[[idCol]])) {
+            return(cells)
         }
-        out <- lapply(
-            X = cells,
-            FUN = function(x) {
-                url <- paste0(
-                    "https://web.expasy.org/cgi-bin/cellosaurus/search?input=",
-                    URLencode(paste0("\"", x, "\""))
-                )
-                response <- GET(url)
-                content <- content(response, as = "text")
-                lines <- strsplit(content, split = "\n")[[1L]]
-                lines <- grep(
-                    pattern = paste0(">", organism),
-                    x = lines,
-                    value = TRUE
-                )
-                lines <- grep(
-                    pattern = ">CVCL_",
-                    x = lines,
-                    value = TRUE
-                )
-                match <- str_match(
-                    string = lines,
-                    pattern = paste0(
-                        ">",
-                        "(CVCL_[A-Z0-9]+)",
-                        "</a></td><td>",
-                        "([^<]+)",
-                        "</td>"
-                    )
-                )
-                if (!hasRows(match)) {
-                    return(NA_character_)
-                }
-                match <- match[, 2L:3L, drop = FALSE]
-                match <- unique(match)
-                match <- match[order(match[, 1L]), , drop = FALSE]
-                which <- match(
-                    x = standardizeCells(x),
-                    table = standardizeCells(match[, 2L])
-                )
-                id <- match[which, 1L]
-                if (!isString(id)) {
-                    return(NA_character_) # nocov
-                }
-                id
-            }
+        cells <- standardizeCells(cells)
+        assert(hasNoDuplicates(cells))
+        matchCols <- c(
+            "id",
+            "name",
+            "depMapId",
+            "sangerId",
+            "synonym"
         )
-        out <- unlist(out)
-        names(out) <- object
-        if (any(is.na(out))) {
-            fail <- names(out[is.na(out)])
-            alertWarning(sprintf(
-                fmt = "Failed to match %d %s: %s.",
+        pool <- apply(
+            X = as(object, "DataFrame")[, matchCols],
+            MARGIN = 1L,
+            FUN = unlist,
+            recursive = TRUE,
+            use.names = FALSE,
+            simplify = FALSE
+        )
+        g <- rep(
+            x = seq_along(pool),
+            times = vapply(
+                X = pool,
+                FUN = length,
+                FUN.VALUE = integer(1L)
+            )
+        )
+        idx <- g[match(x = cells, table = unlist(pool))]
+        if (anyNA(idx)) {
+            fail <- cells[is.na(idx)]
+            abort(sprintf(
+                fmt = "Failed to map %d %s: %s.",
                 length(fail),
                 ngettext(n = length(fail), msg1 = "cell", msg2 = "cells"),
                 toString(fail, width = 200L)
             ))
         }
+        out <- object[[idCol]][idx]
         out
     }
 
@@ -114,6 +108,6 @@ NULL
 #' @export
 setMethod(
     f = "mapCells",
-    signature = signature(object = "character"),
-    definition = `mapCells,character`
+    signature = signature(object = "Cellosaurus"),
+    definition = `mapCells,Cellosaurus`
 )
