@@ -32,12 +32,12 @@ NULL
 ## Standard functions ==========================================================
 
 #' @importFrom AcidBase pasteURL showHeader showSlotInfo
-#' @importFrom AcidCLI alertWarning
+#' @importFrom AcidCLI abort
 #' @importFrom IRanges CharacterList
 #' @importFrom S4Vectors DataFrame
-#' @importFrom goalie allAreMatchingFixed assert hasLength hasRownames hasRows
-#' isCharacter isFlag isInt isOrganism isString isSubset validate
-#' validateClasses
+#' @importFrom goalie allAreMatchingFixed assert hasLength hasNoDuplicates
+#' hasRownames hasRows isCharacter isFlag isInt isOrganism isString isSubset
+#' validate validateClasses
 #' @importFrom httr GET content
 #' @importFrom methods as is new setClass setMethod setValidity
 #' @importFrom pipette cacheURL
