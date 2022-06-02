@@ -13,6 +13,7 @@ NULL
 #' @importFrom IRanges gsub
 #' @importFrom S4Vectors Rle aggregate append complete.cases head metadata
 #' metadata<-
+#' @importFrom methods show
 #' @importFrom pipette import
 #'
 #' @importMethodsFrom AcidPlyr leftJoin
@@ -30,7 +31,7 @@ NULL
 
 ## Standard functions ==========================================================
 
-#' @importFrom AcidBase pasteURL
+#' @importFrom AcidBase pasteURL showHeader showSlotInfo
 #' @importFrom AcidCLI alertWarning
 #' @importFrom IRanges CharacterList
 #' @importFrom S4Vectors DataFrame

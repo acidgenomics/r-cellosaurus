@@ -2,7 +2,7 @@ Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
 Version: 0.3.0.9000
-Date: 2022-05-12
+Date: 2022-06-02
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -40,5 +40,5 @@ Suggests:
     ontologyIndex,
     testthat
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2.9000
+RoxygenNote: 7.2.0
 Additional_repositories: https://r.acidgenomics.com
