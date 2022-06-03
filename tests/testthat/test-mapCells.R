@@ -2,6 +2,7 @@ object <- Cellosaurus()
 
 test_that("Cell name", {
     cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+    cells <- standardizeCells(cells)
     cells <- mapCells(object = object, cells = cells)
     expected <- c(
         "22RV1" = "CVCL_1045",
@@ -11,8 +12,23 @@ test_that("Cell name", {
     expect_identical(cells, expected)
 })
 
+test_that("Mixed identifier input", {
+    cells <- c("CVCL_0065", "ACH-000425", "SIDM00499")
+    cells <- mapCells(object = object, cells = cells)
+    expected <- c(
+        "CVCL_0065" = "CVCL_0065",
+        "ACH-000425" = "CVCL_1780",
+        "SIDM00499" = "CVCL_1045"
+    )
+    expect_identical(cells, expected)
+})
+
 test_that("Match failure", {
-    object <- mapCells(c("XXXXXX", "YYYYYY"))
-    expected <- c("XXXXXX" = NA_character_, "YYYYYY" = NA_character_)
-    expect_identical(object, expected)
+    expect_error(
+        object = mapCells(
+            object = object,
+            cells = c("CVCL_1045", "XXX")
+        ),
+        regexp = "XXX"
+    )
 })

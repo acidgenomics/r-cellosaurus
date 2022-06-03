@@ -18,6 +18,7 @@
 #' ## Cellosaurus ====
 #' object <- Cellosaurus()
 #' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+#' cells <- standardizeCells(cells)
 #' cells <- mapCells(object = object, cells = cells)
 #' print(cells)
 NULL
@@ -63,8 +64,6 @@ NULL
         if (all(cells %in% object[[idCol]])) {
             return(cells)
         }
-        cells <- standardizeCells(cells)
-        assert(hasNoDuplicates(cells))
         matchCols <- c(
             "id",
             "name",
