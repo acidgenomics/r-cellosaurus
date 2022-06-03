@@ -1,4 +1,4 @@
-# Cellosaurus 0.3.0 (UNRELEASED)
+# Cellosaurus 0.3.0 (2022-06-03)
 
 This is a major update, with breaking changes.
 
@@ -7,8 +7,13 @@ This is a major update, with breaking changes.
 - `Cellosaurus`: Now defining this class instead of `CellosaurusTable`.
   Data is retrieved using ontologyIndex from Cellosaurus FTP server instead
   of querying the website directly.
+
+## Major changes
+
 - `mapCells`: Now supports return of multiple identifier key types, including
   Cellosaurus (default), DepMap, and Sanger (for Cell Model Passports).
+- Now using taxizedb internally for NCBI taxonomy identifier matching to full
+  Latin organism name (species; e.g. "Homo sapiens").
 
 # Cellosaurus 0.2.1 (2022-05-11)
 
