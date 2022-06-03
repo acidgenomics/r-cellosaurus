@@ -16,6 +16,9 @@ Cell names (or Cellosaurus identifiers).}
 \item{cells}{\code{character}.
 Cell identifiers.}
 
+\item{keyType}{\code{character(1)}.
+Identifier format to return.}
+
 \item{...}{Additional arguments.}
 }
 \value{
