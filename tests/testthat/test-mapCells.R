@@ -1,4 +1,4 @@
-object <- Cellosaurus()
+object <- cello
 
 test_that("Cell name", {
     cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
