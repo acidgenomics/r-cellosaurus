@@ -32,6 +32,7 @@ Updated 2022-06-02.
 ## Cellosaurus ====
 object <- Cellosaurus()
 cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+cells <- standardizeCells(cells)
 cells <- mapCells(object = object, cells = cells)
 print(cells)
 }
