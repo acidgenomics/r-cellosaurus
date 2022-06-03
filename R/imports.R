@@ -7,24 +7,16 @@ NULL
 
 ## S4 generics and methods =====================================================
 
-#' @importFrom AcidGenerics camelCase leftJoin rbindToDataFrame removeNA
-#' sanitizeNA snakeCase
+#' @importFrom AcidGenerics camelCase leftJoin removeNA sanitizeNA snakeCase
 #' @importFrom BiocGenerics as.data.frame grep grepl unlist
 #' @importFrom IRanges gsub
-#' @importFrom S4Vectors Rle aggregate append complete.cases head metadata
-#' metadata<-
+#' @importFrom S4Vectors Rle metadata metadata<-
 #' @importFrom methods show
 #' @importFrom pipette import
 #'
 #' @importMethodsFrom AcidPlyr leftJoin
 #' @importMethodsFrom pipette import removeNA sanitizeNA
 #' @importMethodsFrom syntactic camelCase snakeCase
-NULL
-
-
-
-## S3 generics =================================================================
-#' @importFrom stats formula
 NULL
 
 
@@ -36,17 +28,9 @@ NULL
 #' @importFrom IRanges CharacterList
 #' @importFrom S4Vectors DataFrame
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasNoDuplicates
-#' hasRownames hasRows isCharacter isFlag isInt isOrganism isString isSubset
-#' validate validateClasses
-#' @importFrom httr GET content
+#' hasRownames isCharacter isFlag isString validate validateClasses
 #' @importFrom methods as is new setClass setMethod setValidity
 #' @importFrom pipette cacheURL
-#' @importFrom utils URLencode packageName
-NULL
-
-
-
-## FIXME Rework these using stringi.
-#' @importFrom stringr str_detect str_match str_replace str_replace_all
-#' str_split str_subset
+#' @importFrom stringi stri_replace_all_regex stri_replace_first_regex
+#' @importFrom utils packageName
 NULL
