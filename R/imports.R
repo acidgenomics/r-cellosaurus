@@ -24,7 +24,7 @@ NULL
 ## Standard functions ==========================================================
 
 #' @importFrom AcidBase pasteURL showHeader showSlotInfo
-#' @importFrom AcidCLI abort
+#' @importFrom AcidCLI abort alert
 #' @importFrom IRanges CharacterList
 #' @importFrom S4Vectors DataFrame
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasNoDuplicates
@@ -32,5 +32,6 @@ NULL
 #' @importFrom methods as is new setClass setMethod setValidity validObject
 #' @importFrom pipette cacheURL
 #' @importFrom stringi stri_replace_all_regex stri_replace_first_regex
+#' @importFrom taxizedb db_download_ncbi taxid2name
 #' @importFrom utils packageName
 NULL

@@ -34,6 +34,7 @@ Imports:
     pipette,
     stringi,
     syntactic,
+    taxizedb,
     utils
 Suggests:
     ontologyIndex,

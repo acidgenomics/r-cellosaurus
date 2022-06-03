@@ -145,53 +145,29 @@ NULL
 
 
 
-## FIXME Rework this to look up taxonomy IDs from NCBI instead of manual input.
-
-#' Add `organism` column, using NCBI taxonomy
+#' Add `organism` column, using NCBI taxonomy identifiers as input
 #'
-#' Genbank common name is also included here in parentheses.
-#'
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-06-03.
 #' @noRd
 #'
 #' @seealso
 #' - https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi
+#' - https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump_readme.txt
 .addOrganism <- function(object) {
     assert(
         is(object, "DataFrame"),
         is(object[["ncbiTaxonomyId"]], "Rle")
     )
-    value <- vapply(
-        X = as.character(object[["ncbiTaxonomyId"]]),
-        FUN = function(x) {
-            switch(
-                EXPR = x,
-                "7227" = "Drosophila melanogaster (fruit fly)",
-                "9031" = "Gallus gallus (chicken)",
-                "9483" = "Callithrix jacchus (white-tufted-ear marmoset)",
-                "9534" = "Chlorocebus aethiops (grivet)",
-                "9544" = "Macaca mulatta (Rhesus monkey)",
-                "9598" = "Pan troglodytes (chimpanzee)",
-                "9606" = "Homo sapiens (human)",
-                "9615" = "Canis lupus familiaris (dog)",
-                "9796" = "Equus caballus (horse)",
-                "9823" = "Sus scrofa (pig)",
-                "9913" = "Bos taurus (cattle)",
-                "9925" = "Capra hircus (goat)",
-                "9940" = "Ovis aries (sheep)",
-                "9986" = "Oryctolagus cuniculus (rabbit)",
-                "10029" = "Cricetulus griseus (Chinese hamster)",
-                "10036" = "Mesocricetus auratus (golden hamster)",
-                "10090" = "Mus musculus (house mouse)",
-                "10116" = "Rattus norvegicus (Norway rat)",
-                NA_character_
-            )
-        },
-        FUN.VALUE = character(1L),
-        USE.NAMES = FALSE
-    )
-    value <- Rle(value)
-    object[["organism"]] <- value
+    alert("Mapping NCBI taxonomy identifiers to organism name.")
+    db_download_ncbi(verbose = FALSE, overwrite = FALSE)
+    suppressWarnings({
+        org <- taxid2name(
+            x = as.character(object[["ncbiTaxonomyId"]]),
+            db = "ncbi"
+        )
+    })
+    org <- Rle(org)
+    object[["organism"]] <- org
     object
 }
 
