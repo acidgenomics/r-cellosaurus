@@ -18,9 +18,11 @@
 #' - [Matching values in list](https://stackoverflow.com/questions/11002391/).
 #'
 #' @examples
+#' data(cello)
+#'
 #' ## Cellosaurus ====
-#' object <- Cellosaurus()
-#' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+#' object <- cello
+#' cells <- head(cello[["name"]])
 #' cells <- standardizeCells(cells)
 #' cells <- mapCells(object = object, cells = cells)
 #' print(cells)
@@ -44,7 +46,7 @@ NULL
 
 
 
-## Updated 2022-06-02.
+## Updated 2022-06-03.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
@@ -67,15 +69,22 @@ NULL
         if (all(cells %in% object[[idCol]])) {
             return(cells)
         }
+        df <- as(object, "DataFrame")
+        assert(hasNoDuplicates(df[["name"]]))
+        df[["name2"]] <- standardizeCells(df[["name"]])
+        assert(hasNoDuplicates(df[["name2"]]))
         matchCols <- c(
             "id",
             "name",
+            "name2",
             "depMapId",
             "sangerId",
             "synonym"
         )
+        assert(isSubset(matchCols, colnames(df)))
+        df <- df[, matchCols]
         pool <- apply(
-            X = as(object, "DataFrame")[, matchCols],
+            X = df,
             MARGIN = 1L,
             FUN = unlist,
             recursive = TRUE,
