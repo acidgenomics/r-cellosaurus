@@ -1,3 +1,15 @@
+# Cellosaurus 0.3.0 (UNRELEASED)
+
+This is a major update, with breaking changes.
+
+## New S4 classes
+
+- `Cellosaurus`: Now defining this class instead of `CellosaurusTable`.
+  Data is retrieved using ontologyIndex from Cellosaurus FTP server instead
+  of querying the website directly.
+- `mapCells`: Now supports return of multiple identifier key types, including
+  Cellosaurus (default), DepMap, and Sanger (for Cell Model Passports).
+
 # Cellosaurus 0.2.1 (2022-05-11)
 
 ## Minor changes
