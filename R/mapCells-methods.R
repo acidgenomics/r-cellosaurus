@@ -49,7 +49,7 @@ NULL
                  "cellosaurusId",
                  "depMapId",
                  "sangerId"
-            )) {
+             )) {
         assert(
             validObject(object),
             isCharacter(cells),
