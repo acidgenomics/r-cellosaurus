@@ -99,6 +99,7 @@ NULL
             ))
         }
         out <- object[[idCol]][idx]
+        names(out) <- cells
         out
     }
 
