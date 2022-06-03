@@ -2,8 +2,6 @@
 % Please edit documentation in R/package.R
 \docType{package}
 \name{Cellosaurus-package}
-\alias{Cellosaurus}
-\alias{Cellosaurus-package}
 \title{Cellosaurus}
 \description{
 Cellosaurus identifier mapping toolkit.
