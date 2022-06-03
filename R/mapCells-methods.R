@@ -8,6 +8,9 @@
 #' @param object `character`.
 #' Cell names (or Cellosaurus identifiers).
 #'
+#' @param keyType `character(1)`.
+#' Identifier format to return.
+#'
 #' @return Named `character`.
 #' User input in the names and Cellosaurus IDs in the values.
 #'
