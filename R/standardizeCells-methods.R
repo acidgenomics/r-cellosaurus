@@ -1,6 +1,6 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2022-05-12.
+#' @note Updated 2022-06-03.
 #'
 #' @details
 #' Strip all non-alphanumeric characters, remove information in
@@ -12,25 +12,25 @@
 #' @param ... Additional arguments.
 #'
 #' @examples
-#' cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
-#' cells <- standardizeCells(cells)
-#' print(cells)
+#' object <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+#' object <- standardizeCells(object)
+#' print(object)
 NULL
 
 
 
-## Updated 2020-10-01.
+## Updated 2022-06-03.
 `standardizeCells,character` <- # nolint
     function(object) {
         assert(isCharacter(object))
         object <- tolower(object)
-        object <- str_replace(
-            string = object,
+        object <- stri_replace_first_regex(
+            str = object,
             pattern = "\\s[\\[\\(].+$",
             replacement = ""
         )
-        object <- str_replace_all(
-            string = object,
+        object <- stri_replace_all_regex(
+            str = object,
             pattern = "[^[:alnum:]]+",
             replacement = ""
         )
