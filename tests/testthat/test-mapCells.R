@@ -1,14 +1,14 @@
-context("mapCells")
+object <- Cellosaurus()
 
 test_that("Cell name", {
-    cells <- c("22RV1", "HS729", "JURKAT")
-    object <- mapCells(object = cells)
+    cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+    cells <- mapCells(object = object, cells = cells)
     expected <- c(
         "22RV1" = "CVCL_1045",
-        "HS729" = "CVCL_0871",
-        "JURKAT" = "CVCL_0065"
+        "JURKAT" = "CVCL_0065",
+        "RAMOS" = "CVCL_0597"
     )
-    expect_identical(object, expected)
+    expect_identical(cells, expected)
 })
 
 test_that("Match failure", {
