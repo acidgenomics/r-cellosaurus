@@ -32,9 +32,11 @@ Map input to cell identifiers
 Updated 2022-06-02.
 }
 \examples{
+data(cello)
+
 ## Cellosaurus ====
-object <- Cellosaurus()
-cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+object <- cello
+cells <- head(cello[["name"]])
 cells <- standardizeCells(cells)
 cells <- mapCells(object = object, cells = cells)
 print(cells)
