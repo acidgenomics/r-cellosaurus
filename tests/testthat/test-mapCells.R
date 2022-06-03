@@ -1,31 +1,34 @@
 object <- cello
 
 test_that("Cell name", {
-    cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
+    cells <- head(object[["name"]], n = 3L)
     cells <- standardizeCells(cells)
     cells <- mapCells(object = object, cells = cells)
     expected <- c(
-        "22RV1" = "CVCL_1045",
-        "JURKAT" = "CVCL_0065",
-        "RAMOS" = "CVCL_0597"
+        "HEL" = "CVCL_0001",
+        "HL60" = "CVCL_0002",
+        "HMC1" = "CVCL_0003"
     )
     expect_identical(cells, expected)
 })
 
 test_that("Mixed identifier input", {
-    cells <- c("CVCL_0065", "ACH-000425", "SIDM00499")
+    cells <- c(
+        object[["id"]][[1L]],
+        object[["depMapId"]][[2L]],
+        object[["sangerId"]][[4L]]
+    )
     cells <- mapCells(object = object, cells = cells)
     expected <- c(
-        "CVCL_0065" = "CVCL_0065",
-        "ACH-000425" = "CVCL_1780",
-        "SIDM00499" = "CVCL_1045"
+        "CVCL_0001" = "CVCL_0001",
+        "ACH-000002" = "CVCL_0002",
+        "SIDM00791" = "CVCL_0004"
     )
     expect_identical(cells, expected)
 })
 
 test_that("keyType return", {
-    cells <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
-    cells <- standardizeCells(cells)
+    cells <- head(object[["name"]], n = 2L)
     expect_identical(
         object = mapCells(
             object = object,
@@ -33,9 +36,8 @@ test_that("keyType return", {
             keyType = "depMapId"
         ),
         expected = c(
-            "22RV1" = "ACH-000956",
-            "JURKAT" = "ACH-000995",
-            "RAMOS" = "ACH-001636"
+            "HEL" = "ACH-000004",
+            "HL-60" = "ACH-000002"
         )
     )
     expect_identical(
@@ -45,9 +47,8 @@ test_that("keyType return", {
             keyType = "sangerId"
         ),
         expected = c(
-            "22RV1" = "SIDM00499",
-            "JURKAT" = "SIDM01016",
-            "RAMOS" = "SIDM01094"
+            "HEL" = "SIDM00594",
+            "HL-60" = "SIDM00829"
         )
     )
 })
@@ -56,8 +57,16 @@ test_that("Match failure", {
     expect_error(
         object = mapCells(
             object = object,
-            cells = c("CVCL_1045", "XXX")
+            cells = c("CVCL_0001", "XXX")
         ),
         regexp = "XXX"
+    )
+    expect_error(
+        object = mapCells(
+            object = object,
+            cells = "CVCL_0003",
+            keyType = "depMapId"
+        ),
+        regexp = "CVCL_0003"
     )
 })
