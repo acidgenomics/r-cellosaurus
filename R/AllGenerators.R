@@ -1,7 +1,3 @@
-## FIXME Need to be able to match NCBI taxonomy identifiers using API.
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
