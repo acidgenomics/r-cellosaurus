@@ -356,14 +356,14 @@ NULL
             pattern = " RELATED []",
             replacement = "",
             x = object[["synonym"]],
-            fixed = TRUE,
+            fixed = TRUE
         )
     object[["synonym"]] <-
         gsub(
             pattern = "\"",
             replacement = "",
             x = object[["synonym"]],
-            fixed = TRUE,
+            fixed = TRUE
         )
     object <- .splitCol(object, colName = "synonym")
     object
