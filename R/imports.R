@@ -29,7 +29,7 @@ NULL
 #' @importFrom S4Vectors DataFrame
 #' @importFrom goalie allAreMatchingFixed assert hasLength hasNoDuplicates
 #' hasRownames isCharacter isFlag isString validate validateClasses
-#' @importFrom methods as is new setClass setMethod setValidity
+#' @importFrom methods as is new setClass setMethod setValidity validObject
 #' @importFrom pipette cacheURL
 #' @importFrom stringi stri_replace_all_regex stri_replace_first_regex
 #' @importFrom utils packageName
