@@ -23,7 +23,7 @@ install.packages(
 ### [Docker][] method
 
 ```sh
-image='acidgenomics/r-packages:cellosaurus
+image='acidgenomics/r-packages:cellosaurus'
 workdir='/mnt/work'
 docker pull "$image"
 docker run -it \
