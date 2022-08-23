@@ -26,22 +26,28 @@ NULL
              ...) {
         validObject(object)
         df <- as(object, "DataFrame")
-        drop <- c(
-            "ancestors",
-            "comment",
-            "creationDate",
-            "obsolete",
-            "subset",
-            "xref"
+        cols <- setdiff(
+            x = colnames(df),
+            y = c(
+                "ancestors",
+                "comment",
+                "creationDate",
+                "obsolete",
+                "subset",
+                "xref"
+            )
         )
-        keep <- !colnames(df) %in% drop
-        df <- df[, keep]
-        export(
-            object = df,
-            con = con,
-            format = format,
-            ...
-        )
+        df <- df[, cols]
+        args <- list()
+        args[["object"]] <- df
+        if (!missing(con)) {
+            args[["con"]] <- con
+        }
+        if (!missing(format)) {
+            args[["format"]] <- format
+        }
+        args <- append(x = args, values = list(...))
+        do.call(what = export, args = args)
     }
 
 
@@ -52,20 +58,8 @@ setMethod(
     f = "export",
     signature = signature(
         object = "Cellosaurus",
-        con = "character",
-        format = "character"
-    ),
-    definition = `export,Cellosaurus`
-)
-
-#' @rdname export
-#' @export
-setMethod(
-    f = "export",
-    signature = signature(
-        object = "Cellosaurus",
-        con = "character",
-        format = "missingOrNULL"
+        con = "ANY",
+        format = "ANY"
     ),
     definition = `export,Cellosaurus`
 )

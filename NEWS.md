@@ -1,3 +1,15 @@
+# Cellosaurus 0.3.1 (2022-08-23)
+
+## Minor changes
+
+- `Cellosaurus` class now returns with `sex` metadata column.
+- Factor columns are now automatically handled using `factorize` internally,
+  and all applicable vectors are converted to `Rle` for improved memory
+  efficiency.
+- `export`: Added initial experimental method support for export of
+  Cellosaurus metadata, that dynamically drops columns that aren't useful
+  in CSV format.
+
 # Cellosaurus 0.3.0 (2022-06-03)
 
 This is a major update, with breaking changes.
