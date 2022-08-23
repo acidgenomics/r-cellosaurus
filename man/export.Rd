@@ -2,29 +2,12 @@
 % Please edit documentation in R/AllGenerics.R, R/export-methods.R
 \name{export}
 \alias{export}
-\alias{export,Cellosaurus,character,character-method}
-\alias{export,Cellosaurus,character,missingOrNULL-method}
+\alias{export,Cellosaurus,ANY,ANY-method}
 \title{Export}
 \usage{
 export(object, con, format, ...)
 
-\S4method{export}{Cellosaurus,character,character}(
-  object,
-  con,
-  format,
-  overwrite = getOption(x = "acid.overwrite", default = TRUE),
-  engine = getOption(x = "acid.export.engine", default = "base"),
-  quiet = getOption(x = "acid.quiet", default = FALSE)
-)
-
-\S4method{export}{Cellosaurus,character,missingOrNULL}(
-  object,
-  con,
-  format,
-  overwrite = getOption(x = "acid.overwrite", default = TRUE),
-  engine = getOption(x = "acid.export.engine", default = "base"),
-  quiet = getOption(x = "acid.quiet", default = FALSE)
-)
+\S4method{export}{Cellosaurus,ANY,ANY}(object, con, format, ...)
 }
 \arguments{
 \item{object}{Object.
@@ -38,23 +21,7 @@ Alternatively, can leave unset and use \code{ext} and \code{dir} arguments inste
 \item{format}{\code{character(1)}, \code{missing}, or \code{NULL}.
 Output file format extension.}
 
-\item{overwrite}{\code{logical(1)}.
-Overwrite existing file on disk.}
-
-\item{engine}{\code{character(1)}.
-Engine (package) to use for export.
-
-Currently supported:
-\itemize{
-\item base
-\item data.table
-\item readr
-}}
-
-\item{quiet}{\code{logical(1)}.
-Perform command quietly, suppressing messages.}
-
-\item{...}{Additional arguments.}
+\item{...}{Passthrough arguments to \code{DataFrame} method.}
 }
 \value{
 Invisible \code{character}.
@@ -112,7 +79,7 @@ for exporting \code{DataFrame}, \code{data.frame}, and \code{matrix} class objec
 data(cello)
 
 ## Cellosaurus ====
-object <- RangedSummarizedExperiment
+object <- cello
 con <- AcidBase::tempdir2()
 x <- export(object = object, con = con)
 print(x)
