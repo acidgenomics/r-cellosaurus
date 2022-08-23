@@ -1,6 +1,6 @@
 #' Cellosaurus table of cell identifier mappings
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-08-23.
 #' @export
 #'
 #' @return `Cellosaurus`.
@@ -24,29 +24,35 @@ setValidity(
         ok <- validateClasses(
             object = object,
             expected = list(
-                "ancestors" = "character",
+                "ancestors" = "Rle",
                 "comment" = "CompressedCharacterList",
-                "creationDate" = "character",
-                "depMapId" = "character",
-                "derivedFrom" = "character",
-                "id" = "character",
-                "isCancer" = "logical",
-                "isProblematic" = "logical",
-                "isSymmetric" = "character",
-                "isTransitive" = "character",
-                "name" = "character",
+                "creationDate" = "Rle",
+                "depMapId" = "Rle",
+                "derivedFrom" = "Rle",
+                "id" = "Rle",
+                "isCancer" = "Rle",
+                "isProblematic" = "Rle",
+                "name" = "Rle",
                 "ncbiTaxonomyId" = "Rle",
                 "ncitDiseaseId" = "Rle",
                 "ncitDiseaseName" = "Rle",
-                "obsolete" = "logical",
+                "obsolete" = "Rle",
                 "organism" = "Rle",
                 "originateFromSameIndividualAs" = "CompressedCharacterList",
-                "sangerId" = "character",
+                "sangerId" = "Rle",
+                "sex" = "Rle",
                 "subset" = "CompressedCharacterList",
                 "synonym" = "CompressedCharacterList",
                 "xref" = "CompressedCharacterList"
             ),
             subset = FALSE
+        )
+        if (!isTRUE(ok)) {
+            return(ok)
+        }
+        ok <- validate(
+            hasNoDuplicates(object[["id"]]),
+            hasNoDuplicates(object[["name"]])
         )
         if (!isTRUE(ok)) {
             return(ok)
