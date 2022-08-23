@@ -1,6 +1,6 @@
 # Cellosaurus
 
-[Cellosaurus][] identifier mapping toolkit.
+Cellosaurus identifier mapping toolkit.
 
 ## Installation
 
@@ -33,6 +33,5 @@ docker run -it \
     R
 ```
 
-[cellosaurus]: https://web.expasy.org/cellosaurus/
 [docker]: https://www.docker.com/
 [r]: https://www.r-project.org/
