@@ -259,6 +259,7 @@ NULL
     dataVersion <- as.numeric_version(dataVersion)
     ## S3 coercion method here is defined in ontologyIndex package.
     df <- as.data.frame(db)
+    df[["ancestors"]] <- NULL
     df <- as(df, "DataFrame")
     colnames(df) <- camelCase(colnames(df))
     keep <- grepl(pattern = "^CVCL_", x = df[["id"]])

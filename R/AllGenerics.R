@@ -1,15 +1,14 @@
-#' @rdname mapCells
+#' @export
+#' @name export
+#' @usage export(object, con, format, ...)
+NULL
+
 #' @name mapCells
-#' @importFrom AcidGenerics mapCells
 #' @usage mapCells(object, ...)
 #' @export
 NULL
 
-
-
-#' @rdname standardizeCells
 #' @name standardizeCells
-#' @importFrom AcidGenerics standardizeCells
 #' @usage standardizeCells(object, ...)
 #' @export
 NULL
