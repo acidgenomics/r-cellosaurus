@@ -80,10 +80,11 @@ data(cello)
 
 ## Cellosaurus ====
 object <- cello
-con <- AcidBase::tempdir2()
+tempdir <- AcidBase::tempdir2()
+con <- file.path(tempdir, "cello.csv")
 x <- export(object = object, con = con)
 print(x)
-AcidBase::unlink2(con)
+AcidBase::unlink2(tempdir)
 }
 \seealso{
 Packages:
