@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-08-23.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -69,7 +69,7 @@ NULL
 
 #' Extract NCBI taxonomy identifiers
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-08-23.
 #' @noRd
 .addNcbiTaxonomyIds <- function(object) {
     colName <- "ncbiTaxonomyId"
@@ -79,7 +79,6 @@ NULL
         keyName = "NCBI_TaxID"
     )
     object[[colName]] <- as.integer(object[[colName]])
-    object[[colName]] <- Rle(object[[colName]])
     object
 }
 
@@ -87,17 +86,14 @@ NULL
 
 #' Extract NCI thesaurus disease identifiers
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-08-23.
 #' @noRd
 .addNcitDiseaseId <- function(object) {
-    colName <- "ncitDiseaseId"
-    object <- .extractXref(
+    .extractXref(
         object = object,
-        colName = colName,
+        colName = "ncitDiseaseId",
         keyName = "NCIt"
     )
-    object[[colName]] <- Rle(object[[colName]])
-    object
 }
 
 
@@ -111,10 +107,6 @@ NULL
 #' - BiocOncoTK package
 #' - https://github.com/NCI-Thesaurus/thesaurus-obo-edition/wiki/Downloads
 .addNcitDiseaseName <- function(object) {
-    assert(
-        is(object, "DataFrame"),
-        is(object[["ncitDiseaseId"]], "Rle")
-    )
     tmpfile <- cacheURL(
         url = pasteURL(
             "purl.obolibrary.org",
@@ -139,7 +131,6 @@ NULL
         x = map[["ncitDiseaseId"]]
     )
     out <- leftJoin(x = object, y = map, by = "ncitDiseaseId")
-    out[["ncitDiseaseName"]] <- Rle(out[["ncitDiseaseName"]])
     out
 }
 
@@ -147,17 +138,13 @@ NULL
 
 #' Add `organism` column, using NCBI taxonomy identifiers as input
 #'
-#' @note Updated 2022-06-03.
+#' @note Updated 2022-08-23.
 #' @noRd
 #'
 #' @seealso
 #' - https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi
 #' - https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump_readme.txt
 .addOrganism <- function(object) {
-    assert(
-        is(object, "DataFrame"),
-        is(object[["ncbiTaxonomyId"]], "Rle")
-    )
     alert("Mapping NCBI taxonomy identifiers to organism name.")
     db_download_ncbi(verbose = FALSE, overwrite = FALSE)
     suppressWarnings({
@@ -166,7 +153,6 @@ NULL
             db = "ncbi"
         )
     })
-    org <- Rle(org)
     object[["organism"]] <- org
     object
 }
@@ -183,6 +169,23 @@ NULL
         colName = "sangerId",
         keyName = "Cell_Model_Passport"
     )
+}
+
+
+
+## Updated 2022-08-23.
+.addSex <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["subset"]], "CharacterList")
+    )
+    sex <- rep(NA_character_, times = nrow(object))
+    femaleIdx <- which(any(object[["subset"]] == "Female"))
+    maleIdx <- which(any(object[["subset"]] == "Male"))
+    sex[femaleIdx] <- "Female"
+    sex[maleIdx] <- "Male"
+    object[["sex"]] <- sex
+    object
 }
 
 
@@ -258,6 +261,8 @@ NULL
     df <- as.data.frame(db)
     df <- as(df, "DataFrame")
     df <- sanitizeNA(df)
+    ## FIXME This isn't taking out the "isTransitive" and "isSymmetric" columns.
+    ## Why not?? Are there values here? Need to address this in pipette...
     df <- removeNA(df)
     colnames(df) <- camelCase(colnames(df))
     keep <- grepl(pattern = "^CVCL_", x = df[["id"]])
@@ -357,6 +362,7 @@ Cellosaurus <- # nolint
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")
         object <- .splitCol(object, colName = "subset")
         object <- .splitCol(object, colName = "xref")
+        object <- .addSex(object)
         object <- .addDepMapIds(object)
         object <- .addSangerIds(object)
         object <- .addNcbiTaxonomyIds(object)
@@ -365,6 +371,8 @@ Cellosaurus <- # nolint
         object <- .addOrganism(object)
         object <- .addNcitDiseaseId(object)
         object <- .addNcitDiseaseName(object)
+        object <- factorize(object)
+        object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
         new("Cellosaurus", object)
     }
