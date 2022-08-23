@@ -24,7 +24,6 @@ setValidity(
         ok <- validateClasses(
             object = object,
             expected = list(
-                "ancestors" = "Rle",
                 "comment" = "CompressedCharacterList",
                 "creationDate" = "Rle",
                 "depMapId" = "Rle",
