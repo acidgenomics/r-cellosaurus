@@ -7,7 +7,8 @@ NULL
 
 ## S4 generics and methods =====================================================
 
-#' @importFrom AcidGenerics camelCase leftJoin removeNA sanitizeNA snakeCase
+#' @importFrom AcidGenerics camelCase encode factorize leftJoin removeNA
+#' sanitizeNA snakeCase
 #' @importFrom BiocGenerics as.data.frame grep grepl unlist
 #' @importFrom IRanges gsub
 #' @importFrom S4Vectors Rle metadata metadata<-
@@ -15,7 +16,7 @@ NULL
 #' @importFrom pipette import
 #'
 #' @importMethodsFrom AcidPlyr leftJoin
-#' @importMethodsFrom pipette import removeNA sanitizeNA
+#' @importMethodsFrom pipette encode factorize import removeNA sanitizeNA
 #' @importMethodsFrom syntactic camelCase snakeCase
 NULL
 
