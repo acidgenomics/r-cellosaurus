@@ -260,14 +260,13 @@ NULL
     ## S3 coercion method here is defined in ontologyIndex package.
     df <- as.data.frame(db)
     df <- as(df, "DataFrame")
-    df <- sanitizeNA(df)
-    ## FIXME This isn't taking out the "isTransitive" and "isSymmetric" columns.
-    ## Why not?? Are there values here? Need to address this in pipette...
-    df <- removeNA(df)
     colnames(df) <- camelCase(colnames(df))
     keep <- grepl(pattern = "^CVCL_", x = df[["id"]])
     df <- df[keep, ]
     df <- df[order(rownames(df)), ]
+    ## These steps need to come after selection of rows with valid identifiers.
+    df <- sanitizeNA(df)
+    df <- removeNA(df)
     metadata(df)[["dataVersion"]] <- dataVersion
     df
 }
