@@ -1,3 +1,10 @@
+# Cellosaurus 0.3.2 (2022-08-24)
+
+## Minor changes
+
+- `export`: Harden inheritance of S4 methods, to ensure that we class on
+  `Cellosaurus`, instead of inheriting the default method for `DataFrame`.
+
 # Cellosaurus 0.3.1 (2022-08-24)
 
 ## Minor changes
