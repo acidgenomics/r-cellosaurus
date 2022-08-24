@@ -109,7 +109,7 @@ NULL
                 toString(fail, width = 200L)
             ))
         }
-        out <- decode(object[[idCol]][idx])
+        out <- as.character(object[[idCol]][idx])
         if (anyNA(out)) {
             fail <- cells[is.na(out)]
             abort(sprintf(
