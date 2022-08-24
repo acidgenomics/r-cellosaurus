@@ -1,4 +1,4 @@
-# Cellosaurus 0.3.1 (2022-08-23)
+# Cellosaurus 0.3.1 (2022-08-24)
 
 ## Minor changes
 
