@@ -59,8 +59,32 @@ setMethod(
     f = "export",
     signature = signature(
         object = "Cellosaurus",
-        con = "ANY",
-        format = "ANY"
+        con = "character",
+        format = "missingOrNULL"
+    ),
+    definition = `export,Cellosaurus`
+)
+
+#' @rdname export
+#' @export
+setMethod(
+    f = "export",
+    signature = signature(
+        object = "Cellosaurus",
+        con = "missingOrNULL",
+        format = "character"
+    ),
+    definition = `export,Cellosaurus`
+)
+
+#' @rdname export
+#' @export
+setMethod(
+    f = "export",
+    signature = signature(
+        object = "Cellosaurus",
+        con = "missingOrNULL",
+        format = "missingOrNULL"
     ),
     definition = `export,Cellosaurus`
 )

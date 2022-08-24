@@ -8,8 +8,6 @@ test_that("export", {
     expect_identical(
         object = colnames(df),
         expected = c(
-            "comment",
-            "creationDate",
             "depMapId",
             "derivedFrom",
             "id",
@@ -19,14 +17,11 @@ test_that("export", {
             "ncbiTaxonomyId",
             "ncitDiseaseId",
             "ncitDiseaseName",
-            "obsolete",
             "organism",
             "originateFromSameIndividualAs",
             "sangerId",
             "sex",
-            "subset",
-            "synonym",
-            "xref"
+            "synonym"
         )
     )
     AcidBase::unlink2(tempdir)
