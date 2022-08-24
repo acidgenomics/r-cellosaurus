@@ -1,6 +1,6 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2022-06-02.
+#' @note Updated 2022-08-24.
 #'
 #' @inherit AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -46,7 +46,7 @@ NULL
 
 
 
-## Updated 2022-06-03.
+## Updated 2022-08-24.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
@@ -109,7 +109,7 @@ NULL
                 toString(fail, width = 200L)
             ))
         }
-        out <- object[[idCol]][idx]
+        out <- decode(object[[idCol]][idx])
         if (anyNA(out)) {
             fail <- cells[is.na(out)]
             abort(sprintf(

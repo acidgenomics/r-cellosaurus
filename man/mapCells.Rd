@@ -29,7 +29,7 @@ User input in the names and Cellosaurus IDs in the values.
 Map input to cell identifiers
 }
 \note{
-Updated 2022-06-02.
+Updated 2022-08-24.
 }
 \examples{
 data(cello)
