@@ -2,10 +2,13 @@
 % Please edit documentation in R/AllGenerics.R, R/standardizeCells-methods.R
 \name{standardizeCells}
 \alias{standardizeCells}
+\alias{standardizeCells,Rle-method}
 \alias{standardizeCells,character-method}
 \title{Standardize cell line names}
 \usage{
 standardizeCells(object, ...)
+
+\S4method{standardizeCells}{Rle}(object)
 
 \S4method{standardizeCells}{character}(object)
 }
