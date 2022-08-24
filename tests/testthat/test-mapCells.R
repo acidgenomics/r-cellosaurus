@@ -14,21 +14,21 @@ test_that("Cell name", {
 
 test_that("Mixed identifier input", {
     cells <- c(
-        object[["id"]][[1L]],
-        object[["depMapId"]][[2L]],
-        object[["sangerId"]][[4L]]
+        as.character(object[["id"]])[[1L]],
+        as.character(object[["depMapId"]])[[1L]],
+        as.character(object[["sangerId"]])[[4L]]
     )
     cells <- mapCells(object = object, cells = cells)
     expected <- c(
         "CVCL_0001" = "CVCL_0001",
-        "ACH-000002" = "CVCL_0002",
+        "ACH-000004" = "CVCL_0001",
         "SIDM00791" = "CVCL_0004"
     )
     expect_identical(cells, expected)
 })
 
 test_that("keyType return", {
-    cells <- head(object[["name"]], n = 2L)
+    cells <- head(as.character(object[["name"]]), n = 2L)
     expect_identical(
         object = mapCells(
             object = object,
