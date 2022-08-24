@@ -1,3 +1,10 @@
+## FIXME Add a cache override option here.
+## FIXME Need to extract patient age.
+## FIXME Can we add a "primaryDisease" column here, similar to DepMap?
+## How is this done? Can we define the mappings?
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
