@@ -19,6 +19,15 @@ NULL
 
 
 
+## Updated 2022-08-24.
+`standardizeCells,Rle` <- # nolint
+    function(object) {
+        object <- decode(object)
+        standardizeCells(object)
+    }
+
+
+
 ## Updated 2022-06-03.
 `standardizeCells,character` <- # nolint
     function(object) {
@@ -44,6 +53,14 @@ NULL
     }
 
 
+
+#' @rdname standardizeCells
+#' @export
+setMethod(
+    f = "standardizeCells",
+    signature = signature(object = "Rle"),
+    definition = `standardizeCells,Rle`
+)
 
 #' @rdname standardizeCells
 #' @export
