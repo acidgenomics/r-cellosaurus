@@ -2,12 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/export-methods.R
 \name{export}
 \alias{export}
-\alias{export,Cellosaurus,ANY,ANY-method}
+\alias{export,Cellosaurus,character,missingOrNULL-method}
+\alias{export,Cellosaurus,missingOrNULL,character-method}
+\alias{export,Cellosaurus,missingOrNULL,missingOrNULL-method}
 \title{Export}
 \usage{
 export(object, con, format, ...)
 
-\S4method{export}{Cellosaurus,ANY,ANY}(object, con, format, ...)
+\S4method{export}{Cellosaurus,character,missingOrNULL}(object, con, format, ...)
+
+\S4method{export}{Cellosaurus,missingOrNULL,character}(object, con, format, ...)
+
+\S4method{export}{Cellosaurus,missingOrNULL,missingOrNULL}(object, con, format, ...)
 }
 \arguments{
 \item{object}{Object.
