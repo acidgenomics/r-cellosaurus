@@ -1,6 +1,6 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2022-06-03.
+#' @note Updated 2022-08-26.
 #'
 #' @details
 #' Strip all non-alphanumeric characters, remove information in
@@ -28,10 +28,13 @@ NULL
 
 
 
-## Updated 2022-06-03.
+## Updated 2022-08-26.
 `standardizeCells,character` <- # nolint
     function(object) {
-        assert(isCharacter(object))
+        assert(
+            isCharacter(object),
+            hasNoDuplicates(object)
+        )
         object <- tolower(object)
         object <- stri_replace_first_regex(
             str = object,
@@ -49,6 +52,7 @@ NULL
             smart = FALSE
         )
         object <- toupper(object)
+        assert(hasNoDuplicates(object))
         object
     }
 
