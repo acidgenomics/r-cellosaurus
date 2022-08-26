@@ -126,7 +126,7 @@ NULL
     ## NOTE May be able to speed this up by setting "minimal" instead of
     ## "everything" in ontologyIndex call, which would need to be added to
     ## pipette in a future update.
-    db <- import(con = tmpfile)
+    db <- import(tmpfile)
     names <- db[["name"]]
     map <- DataFrame(
         "ncitDiseaseId" = names(names),
@@ -251,7 +251,7 @@ NULL
         ),
         pkg = .pkgName
     )
-    db <- import(con = tmpfile)
+    db <- import(tmpfile)
     assert(is(db, "ontology_index"))
     attr <- attr(x = db, which = "version", exact = TRUE)
     dataVersion <- strsplit(
