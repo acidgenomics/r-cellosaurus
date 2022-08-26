@@ -32,7 +32,7 @@ NULL
 
 ## Dynamically handle common aliases that are difficult to map.
 ## > aliases <- import(
-## >     file = system.file(
+## >     con = system.file(
 ## >         "extdata", "aliases.csv",
 ## >         package = .pkgName
 ## >     ),
