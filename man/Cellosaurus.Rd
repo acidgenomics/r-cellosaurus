@@ -4,7 +4,7 @@
 \alias{Cellosaurus}
 \title{Cellosaurus table}
 \usage{
-Cellosaurus(cache = TRUE)
+Cellosaurus(cache = FALSE)
 }
 \arguments{
 \item{cache}{\code{logical(1)}.
