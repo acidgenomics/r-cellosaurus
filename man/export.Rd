@@ -2,18 +2,12 @@
 % Please edit documentation in R/AllGenerics.R, R/export-methods.R
 \name{export}
 \alias{export}
-\alias{export,Cellosaurus,character,missingOrNULL-method}
-\alias{export,Cellosaurus,missingOrNULL,character-method}
-\alias{export,Cellosaurus,missingOrNULL,missingOrNULL-method}
+\alias{export,Cellosaurus,character,missing-method}
 \title{Export}
 \usage{
 export(object, con, format, ...)
 
-\S4method{export}{Cellosaurus,character,missingOrNULL}(object, con, format, ...)
-
-\S4method{export}{Cellosaurus,missingOrNULL,character}(object, con, format, ...)
-
-\S4method{export}{Cellosaurus,missingOrNULL,missingOrNULL}(object, con, format, ...)
+\S4method{export}{Cellosaurus,character,missing}(object, con, format, ...)
 }
 \arguments{
 \item{object}{Object.
@@ -25,7 +19,7 @@ File path.
 Alternatively, can leave unset and use \code{ext} and \code{dir} arguments instead.}
 
 \item{format}{\code{character(1)}, \code{missing}, or \code{NULL}.
-Output file format extension.}
+\emph{Currently not supported.}}
 
 \item{...}{Passthrough arguments to \code{DataFrame} method.}
 }

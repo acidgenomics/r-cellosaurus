@@ -1,6 +1,6 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2022-08-24.
+#' @note Updated 2022-08-26.
 #'
 #' @inherit AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -46,7 +46,7 @@ NULL
 
 
 
-## Updated 2022-08-24.
+## Updated 2022-08-26.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
@@ -71,12 +71,14 @@ NULL
         }
         df <- as(object, "DataFrame")
         assert(hasNoDuplicates(df[["name"]]))
-        df[["name2"]] <- standardizeCells(df[["name"]])
-        assert(hasNoDuplicates(df[["name2"]]))
+        ## FIXME This approach is problematic with ChemPartner input.
+        ## See if we can rethink a way that doesn't call this.
+        ## > df[["name2"]] <- standardizeCells(df[["name"]])
+        ## > assert(hasNoDuplicates(df[["name2"]]))
         matchCols <- c(
             "id",
             "name",
-            "name2",
+            ## > "name2",
             "depMapId",
             "sangerId",
             "synonym"
