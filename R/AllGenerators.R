@@ -120,26 +120,29 @@ NULL
 #' https://github.com/NCI-Thesaurus/thesaurus-obo-edition/releases/
 #' download/v2022-08-19/ncit.obo
 #'
+#' May be able to speed this up by setting "minimal" instead of "everything" in
+#' ontologyIndex call, which would need to be added to pipette in the future.
+#'
 #' @seealso
 #' -https://evs.nci.nih.gov/evs-download/thesaurus-downloads
 #' - https://obofoundry.org/ontology/ncit.html
 #' - https://github.com/NCI-Thesaurus/thesaurus-obo-edition/
 #' - https://www.ebi.ac.uk/ols/ontologies/ncit
 #' - BiocOncoTK package
-.addNcitDiseaseName <- function(object) {
-    tmpfile <- cacheURL(
-        url = pasteURL(
-            "purl.obolibrary.org",
-            "obo",
-            "ncit.obo",
-            protocol = "http"
-        ),
-        pkg = .pkgName
+.addNcitDiseaseName <- function(object, cache) {
+    assert(isFlag(cache))
+    url <- pasteURL(
+        "purl.obolibrary.org",
+        "obo",
+        "ncit.obo",
+        protocol = "http"
     )
-    ## NOTE May be able to speed this up by setting "minimal" instead of
-    ## "everything" in ontologyIndex call, which would need to be added to
-    ## pipette in a future update.
-    db <- import(tmpfile)
+    if (isTRUE(cache)) {
+        con <- cacheURL(url = url, pkg = .pkgName)
+    } else {
+        con <- url
+    }
+    db <- import(con)
     names <- db[["name"]]
     map <- DataFrame(
         "ncitDiseaseId" = names(names),
@@ -249,24 +252,25 @@ NULL
 
 
 
-## FIXME This needs to support cache override.
-
 #' Import Cellosaurus data frame from OBO file
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-09-13.
 #' @noRd
-.importCellosaurus <- function() {
-    tmpfile <- cacheURL(
-        url = pasteURL(
-            "ftp.expasy.org",
-            "databases",
-            "cellosaurus",
-            "cellosaurus.obo",
-            protocol = "ftp"
-        ),
-        pkg = .pkgName
+.importCellosaurus <- function(cache) {
+    assert(isFlag(cache))
+    url <- pasteURL(
+        "ftp.expasy.org",
+        "databases",
+        "cellosaurus",
+        "cellosaurus.obo",
+        protocol = "ftp"
     )
-    db <- import(tmpfile)
+    if (isTRUE(cache)) {
+        con <- cacheURL(url, pkg = .pkgName)
+    } else {
+        con <- url
+    }
+    db <- import(con)
     assert(is(db, "ontology_index"))
     attr <- attr(x = db, which = "version", exact = TRUE)
     dataVersion <- strsplit(
