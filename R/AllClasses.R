@@ -1,6 +1,6 @@
 #' Cellosaurus table of cell identifier mappings
 #'
-#' @note Updated 2022-08-23.
+#' @note Updated 2022-09-13.
 #' @export
 #'
 #' @return `Cellosaurus`.
@@ -28,9 +28,11 @@ setValidity(
                 "creationDate" = "Rle",
                 "depMapId" = "Rle",
                 "derivedFrom" = "Rle",
+                "ethnicity" = "CompressedCharacterList",
                 "id" = "Rle",
                 "isCancer" = "Rle",
                 "isProblematic" = "Rle",
+                "msiStatus" = "Rle",
                 "name" = "Rle",
                 "ncbiTaxonomyId" = "Rle",
                 "ncitDiseaseId" = "Rle",
@@ -38,6 +40,7 @@ setValidity(
                 "obsolete" = "Rle",
                 "organism" = "Rle",
                 "originateFromSameIndividualAs" = "CompressedCharacterList",
+                "samplingSite" = "Rle",
                 "sangerId" = "Rle",
                 "sex" = "Rle",
                 "subset" = "CompressedCharacterList",
