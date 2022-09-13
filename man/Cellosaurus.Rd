@@ -4,7 +4,7 @@
 \alias{Cellosaurus}
 \title{Cellosaurus table}
 \usage{
-Cellosaurus(cache = FALSE)
+Cellosaurus(cache = TRUE)
 }
 \arguments{
 \item{cache}{\code{logical(1)}.
@@ -15,6 +15,10 @@ Cache files using \code{BiocFileCache}.}
 }
 \description{
 Cellosaurus table
+}
+\details{
+Patient age is currently only defined in \code{cellosaurus.txt} file but
+not \code{cellosaurus.obo} available from the FTP server.
 }
 \note{
 Updated 2022-08-23.

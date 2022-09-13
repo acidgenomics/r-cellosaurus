@@ -10,6 +10,10 @@
 #' @name Cellosaurus
 #' @note Updated 2022-08-23.
 #'
+#' @details
+#' Patient age is currently only defined in `cellosaurus.txt` file but
+#' not `cellosaurus.obo` available from the FTP server.
+#'
 #' @param cache `logical(1)`.
 #' Cache files using `BiocFileCache`.
 #'
@@ -27,6 +31,23 @@ NULL
 
 
 
+## FIXME May be able to add microsatellite stability from comment:
+## "Microsatellite instability: Stable (MSS)
+##
+## FIXME May be able to add samplingSite from comment:
+## "Derived from sampling site: Peripheral blood"
+
+
+
+
+
+
+
+
+
+
+
+
 #' Extract DepMap identifiers
 #'
 #' @note Updated 2022-05-13.
@@ -37,6 +58,33 @@ NULL
         colName = "depMapId",
         keyName = "DepMap"
     )
+}
+
+
+
+#' Add `ethnicity` column
+#'
+#' @note Updated 2022-09-13.
+#' @noRd
+.addEthnicity <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["comment"]], "CharacterList")
+    )
+    x <- object[["comment"]]
+    x <- grep(pattern = "^Population:", x = x, value = TRUE)
+    x <- gsub(pattern = "^Population: ", replacement = "", x = x)
+    x <- CharacterList(lapply(
+        X = x,
+        FUN = function(x) {
+            if (identical(x, character())) {
+                return(character())
+            }
+            strsplit(x = x, split = "; ")[[1L]]
+        }
+    ))
+    object[["ethnicity"]] <- x
+    object
 }
 
 
@@ -108,11 +156,9 @@ NULL
 
 
 
-## FIXME This needs to support cache override.
-
 #' Add NCI thesaurus disease names, using OBO ontology file
 #'
-#' @note Updated 2022-08-31.
+#' @note Updated 2022-09-13.
 #' @noRd
 #'
 #' @details
@@ -398,6 +444,7 @@ Cellosaurus <- # nolint
         object <- .addSangerIds(object)
         object <- .addIsCancer(object)
         object <- .addIsProblematic(object)
+        object <- .addEthnicity(object)
         object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
