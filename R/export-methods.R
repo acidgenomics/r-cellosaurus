@@ -19,13 +19,20 @@ NULL
 
 
 
-## Updated 2022-08-23.
+## Updated 2022-09-13.
 `export,Cellosaurus` <- # nolint
     function(object,
              con,
-             format,
+             format, # missing
              ...) {
-        validObject(object)
+        if (missing(format)) {
+            format <- NULL
+        }
+        assert(
+            validObject(object),
+            isString(con),
+            is.null(format)
+        )
         df <- as(object, "DataFrame")
         cols <- setdiff(
             x = colnames(df),
@@ -39,16 +46,7 @@ NULL
             )
         )
         df <- df[, cols]
-        args <- list()
-        args[["object"]] <- df
-        if (!missing(con)) {
-            args[["con"]] <- con
-        }
-        if (!missing(format)) {
-            args[["format"]] <- format
-        }
-        args <- append(x = args, values = list(...))
-        do.call(what = export, args = args)
+        export(object = df, con = con, ...)
     }
 
 
@@ -60,31 +58,7 @@ setMethod(
     signature = signature(
         object = "Cellosaurus",
         con = "character",
-        format = "missingOrNULL"
-    ),
-    definition = `export,Cellosaurus`
-)
-
-#' @rdname export
-#' @export
-setMethod(
-    f = "export",
-    signature = signature(
-        object = "Cellosaurus",
-        con = "missingOrNULL",
-        format = "character"
-    ),
-    definition = `export,Cellosaurus`
-)
-
-#' @rdname export
-#' @export
-setMethod(
-    f = "export",
-    signature = signature(
-        object = "Cellosaurus",
-        con = "missingOrNULL",
-        format = "missingOrNULL"
+        format = "missing"
     ),
     definition = `export,Cellosaurus`
 )
