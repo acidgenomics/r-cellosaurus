@@ -31,23 +31,6 @@ NULL
 
 
 
-## FIXME May be able to add microsatellite stability from comment:
-## "Microsatellite instability: Stable (MSS)
-##
-## FIXME May be able to add samplingSite from comment:
-## "Derived from sampling site: Peripheral blood"
-
-
-
-
-
-
-
-
-
-
-
-
 #' Extract DepMap identifiers
 #'
 #' @note Updated 2022-05-13.
@@ -120,6 +103,34 @@ NULL
             x = object[["comment"]],
             fixed = TRUE
         ))
+    object
+}
+
+
+
+#' Add `msiStatus` column
+#'
+#' @note Updated 2022-09-13.
+#' @noRd
+.addMsiStatus <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["comment"]], "CharacterList")
+    )
+    x <- object[["comment"]]
+    x <- grep(
+        pattern = "^Microsatellite instability: ",
+        x = x,
+        value = TRUE
+    )
+    x <- gsub(
+        pattern = "^Microsatellite instability: ",
+        replacement = "",
+        x = x
+    )
+    x <- as.character(x)
+    assert(identical(length(x), nrow(object)))
+    object[["msiStatus"]] <- x
     object
 }
 
@@ -223,6 +234,34 @@ NULL
         )
     })
     object[["organism"]] <- org
+    object
+}
+
+
+
+#' Add `samplingSite` column
+#'
+#' @note Updated 2022-09-13.
+#' @noRd
+.addSamplingSite <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["comment"]], "CharacterList")
+    )
+    x <- object[["comment"]]
+    x <- grep(
+        pattern = "^Derived from sampling site: ",
+        x = x,
+        value = TRUE
+    )
+    x <- gsub(
+        pattern = "^Derived from sampling site: ",
+        replacement = "",
+        x = x
+    )
+    x <- as.character(x)
+    assert(identical(length(x), nrow(object)))
+    object[["samplingSite"]] <- x
     object
 }
 
@@ -445,6 +484,8 @@ Cellosaurus <- # nolint
         object <- .addIsCancer(object)
         object <- .addIsProblematic(object)
         object <- .addEthnicity(object)
+        object <- .addMsiStatus(object)
+        object <- .addSamplingSite(object)
         object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
