@@ -10,6 +10,9 @@
 #' @name Cellosaurus
 #' @note Updated 2022-08-23.
 #'
+#' @param cache `logical(1)`.
+#' Cache files using `BiocFileCache`.
+#'
 #' @return `Cellosaurus`.
 #'
 #' @seealso
@@ -104,6 +107,8 @@ NULL
 }
 
 
+
+## FIXME This needs to support cache override.
 
 #' Add NCI thesaurus disease names, using OBO ontology file
 #'
@@ -244,6 +249,8 @@ NULL
 
 
 
+## FIXME This needs to support cache override.
+
 #' Import Cellosaurus data frame from OBO file
 #'
 #' @note Updated 2022-05-13.
@@ -370,22 +377,23 @@ NULL
 #' @rdname Cellosaurus
 #' @export
 Cellosaurus <- # nolint
-    function() {
-        object <- .importCellosaurus()
+    function(cache = TRUE) {
+        assert(isFlag(cache))
+        object <- .importCellosaurus(cache = cache)
         object <- .splitComments(object)
         object <- .splitSynonyms(object)
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")
         object <- .splitCol(object, colName = "subset")
         object <- .splitCol(object, colName = "xref")
+        object <- .addNcitDiseaseId(object)
+        object <- .addNcitDiseaseName(object, cache = cache)
+        object <- .addNcbiTaxonomyIds(object)
+        object <- .addOrganism(object)
         object <- .addSex(object)
         object <- .addDepMapIds(object)
         object <- .addSangerIds(object)
-        object <- .addNcbiTaxonomyIds(object)
         object <- .addIsCancer(object)
         object <- .addIsProblematic(object)
-        object <- .addOrganism(object)
-        object <- .addNcitDiseaseId(object)
-        object <- .addNcitDiseaseName(object)
         object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]

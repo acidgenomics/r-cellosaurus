@@ -4,7 +4,11 @@
 \alias{Cellosaurus}
 \title{Cellosaurus table}
 \usage{
-Cellosaurus()
+Cellosaurus(cache = TRUE)
+}
+\arguments{
+\item{cache}{\code{logical(1)}.
+Cache files using \code{BiocFileCache}.}
 }
 \value{
 \code{Cellosaurus}.

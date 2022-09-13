@@ -38,7 +38,7 @@ Imports:
     taxizedb,
     utils
 Suggests:
-    ontologyIndex,
+    ontologyIndex (>= 2.10),
     testthat (>= 3.0.0)
 Additional_repositories: https://r.acidgenomics.com
 Config/testthat/edition: 3
