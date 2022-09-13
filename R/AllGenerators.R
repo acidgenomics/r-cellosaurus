@@ -107,12 +107,20 @@ NULL
 
 #' Add NCI thesaurus disease names, using OBO ontology file
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-08-31.
 #' @noRd
 #'
+#' @details
+#' Alternative versioned release:
+#' https://github.com/NCI-Thesaurus/thesaurus-obo-edition/releases/
+#' download/v2022-08-19/ncit.obo
+#'
 #' @seealso
+#' -https://evs.nci.nih.gov/evs-download/thesaurus-downloads
+#' - https://obofoundry.org/ontology/ncit.html
+#' - https://github.com/NCI-Thesaurus/thesaurus-obo-edition/
+#' - https://www.ebi.ac.uk/ols/ontologies/ncit
 #' - BiocOncoTK package
-#' - https://github.com/NCI-Thesaurus/thesaurus-obo-edition/wiki/Downloads
 .addNcitDiseaseName <- function(object) {
     tmpfile <- cacheURL(
         url = pasteURL(
