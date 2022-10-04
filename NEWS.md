@@ -4,8 +4,9 @@
 
 Minor changes
 
-- Improved standardization of column names, for better consistency with
-  DepMapAnalysis and CellModelPassports packages.
+- Improved standardization of column names (e.g. `depmapId` instead of
+  `depMapId`; `sangerModelId` instead of `sangerId`), for better consistency
+  with DepMapAnalysis and CellModelPassports packages.
 - Added `cache` override option to main `Cellosaurus` generator, which makes
   updating to latest version (e.g. 43), more intuitive than having to delete
   the BiocFileCache directory.
