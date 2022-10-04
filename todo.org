@@ -1,7 +1,5 @@
 #+TITLE: Cellosaurus
 #+STARTUP: content
 * Development
-** TODO File a bug report to ontologyIndex maintainer regarding Cellosaurus database no longer loading
-    ftp://ftp.expasy.org/databases/cellosaurus/cellosaurus.obo
-    This works correctly with 2.7 but is broken with 2.9.
-** TODO Update package to support EggNOG 5 release.
+** TODO Work on adding `primaryDisease` column in a future update.
+    This requires parsing NCIT obo file, which is complicated.
