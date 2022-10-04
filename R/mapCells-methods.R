@@ -52,8 +52,8 @@ NULL
              cells,
              keyType = c(
                  "cellosaurusId",
-                 "depMapId",
-                 "sangerId"
+                 "depmapId",
+                 "sangerModelId"
              )) {
         assert(
             validObject(object),
@@ -74,8 +74,8 @@ NULL
         matchCols <- c(
             "id",
             "name",
-            "depMapId",
-            "sangerId",
+            "depmapId",
+            "sangerModelId",
             "synonym"
         )
         assert(isSubset(matchCols, colnames(df)))

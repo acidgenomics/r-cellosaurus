@@ -16,7 +16,7 @@ test_that("Mixed identifier input", {
     cells <- c(
         as.character(object[["id"]])[[1L]],
         as.character(object[["depMapId"]])[[1L]],
-        as.character(object[["sangerId"]])[[4L]]
+        as.character(object[["sangerModelId"]])[[4L]]
     )
     cells <- mapCells(object = object, cells = cells)
     expected <- c(
@@ -44,7 +44,7 @@ test_that("keyType return", {
         object = mapCells(
             object = object,
             cells = cells,
-            keyType = "sangerId"
+            keyType = "sangerModelId"
         ),
         expected = c(
             "HEL" = "SIDM00594",
