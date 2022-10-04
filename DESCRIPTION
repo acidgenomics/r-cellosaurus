@@ -1,7 +1,7 @@
 Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.3.3.9000
+Version: 0.3.3
 Date: 2022-10-04
 Authors@R: c(
     person(
