@@ -13,9 +13,9 @@
 #' @return `Cellosaurus`.
 #'
 #' @seealso
-#' - ftp://ftp.expasy.org/databases/cellosaurus
-#' - https://github.com/calipho-sib/cellosaurus
-#' - ontologyIndex package
+#' - https://www.cellosaurus.org/
+#' - ftp://ftp.expasy.org/databases/cellosaurus/
+#' - https://github.com/calipho-sib/cellosaurus/
 #'
 #' @examples
 #' object <- Cellosaurus()
