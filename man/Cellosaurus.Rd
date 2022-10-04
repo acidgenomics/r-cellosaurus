@@ -29,8 +29,8 @@ print(object)
 }
 \seealso{
 \itemize{
-\item ftp://ftp.expasy.org/databases/cellosaurus
-\item https://github.com/calipho-sib/cellosaurus
-\item ontologyIndex package
+\item https://www.cellosaurus.org/
+\item ftp://ftp.expasy.org/databases/cellosaurus/
+\item https://github.com/calipho-sib/cellosaurus/
 }
 }

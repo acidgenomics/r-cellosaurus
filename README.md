@@ -33,6 +33,6 @@ docker run -it \
     R
 ```
 
-[cellosaurus]: https://web.expasy.org/cellosaurus/
+[cellosaurus]: https://www.cellosaurus.org/
 [docker]: https://www.docker.com/
 [r]: https://www.r-project.org/
