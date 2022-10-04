@@ -1,5 +1,15 @@
 # Release notes
 
+## Cellosaurus 0.3.3 (2022-10-04)
+
+Minor changes
+
+- Improved standardization of column names, for better consistency with
+  DepMapAnalysis and CellModelPassports packages.
+- Added `cache` override option to main `Cellosaurus` generator, which makes
+  updating to latest version (e.g. 43), more intuitive than having to delete
+  the BiocFileCache directory.
+
 ## Cellosaurus 0.3.2 (2022-08-24)
 
 Minor changes:
