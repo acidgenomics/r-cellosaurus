@@ -66,7 +66,10 @@ NULL
             "cellosaurusId" = "id",
             keyType
         )
-        if (isSubset(cells, object[[idCol]])) {
+        if (isSubset(
+            x = cells,
+            y = as.character(object[[idCol]]))
+        ) {
             return(cells)
         }
         df <- as(object, "DataFrame")
