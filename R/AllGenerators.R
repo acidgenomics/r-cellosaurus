@@ -1,14 +1,7 @@
-## FIXME Add a cache override option here.
-## FIXME Need to extract patient age.
-## FIXME Can we add a "primaryDisease" column here, similar to DepMap?
-## How is this done? Can we define the mappings?
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2022-08-23.
+#' @note Updated 2022-10-04.
 #'
 #' @details
 #' Patient age is currently only defined in `cellosaurus.txt` file but
@@ -33,12 +26,12 @@ NULL
 
 #' Extract DepMap identifiers
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-10-04.
 #' @noRd
 .addDepMapIds <- function(object) {
     .extractXref(
         object = object,
-        colName = "depMapId",
+        colName = "depmapId",
         keyName = "DepMap"
     )
 }
@@ -269,12 +262,12 @@ NULL
 
 #' Extract Sanger Cell Model Passports identifiers
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2022-10-04.
 #' @noRd
 .addSangerIds <- function(object) {
     .extractXref(
         object = object,
-        colName = "sangerId",
+        colName = "sangerModelId",
         keyName = "Cell_Model_Passport"
     )
 }
@@ -474,9 +467,9 @@ Cellosaurus <- # nolint
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")
         object <- .splitCol(object, colName = "subset")
         object <- .splitCol(object, colName = "xref")
+        object <- .addNcbiTaxonomyIds(object)
         object <- .addNcitDiseaseId(object)
         object <- .addNcitDiseaseName(object, cache = cache)
-        object <- .addNcbiTaxonomyIds(object)
         object <- .addOrganism(object)
         object <- .addSex(object)
         object <- .addDepMapIds(object)

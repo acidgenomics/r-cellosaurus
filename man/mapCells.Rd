@@ -7,7 +7,11 @@
 \usage{
 mapCells(object, ...)
 
-\S4method{mapCells}{Cellosaurus}(object, cells, keyType = c("cellosaurusId", "depMapId", "sangerId"))
+\S4method{mapCells}{Cellosaurus}(
+  object,
+  cells,
+  keyType = c("cellosaurusId", "depmapId", "sangerModelId")
+)
 }
 \arguments{
 \item{object}{\code{character}.
@@ -29,7 +33,7 @@ User input in the names and Cellosaurus IDs in the values.
 Map input to cell identifiers
 }
 \note{
-Updated 2022-08-26.
+Updated 2022-10-04.
 }
 \examples{
 data(cello)

@@ -8,7 +8,7 @@ test_that("export", {
     expect_identical(
         object = colnames(df),
         expected = c(
-            "depMapId",
+            "depmapId",
             "derivedFrom",
             "id",
             "isCancer",
@@ -19,7 +19,7 @@ test_that("export", {
             "ncitDiseaseName",
             "organism",
             "originateFromSameIndividualAs",
-            "sangerId",
+            "sangerModelId",
             "sex",
             "synonym"
         )

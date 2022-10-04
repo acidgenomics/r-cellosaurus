@@ -26,7 +26,7 @@ setValidity(
             expected = list(
                 "comment" = "CompressedCharacterList",
                 "creationDate" = "Rle",
-                "depMapId" = "Rle",
+                "depmapId" = "Rle",
                 "derivedFrom" = "Rle",
                 "ethnicity" = "CompressedCharacterList",
                 "id" = "Rle",
@@ -41,7 +41,7 @@ setValidity(
                 "organism" = "Rle",
                 "originateFromSameIndividualAs" = "CompressedCharacterList",
                 "samplingSite" = "Rle",
-                "sangerId" = "Rle",
+                "sangerModelId" = "Rle",
                 "sex" = "Rle",
                 "subset" = "CompressedCharacterList",
                 "synonym" = "CompressedCharacterList",
