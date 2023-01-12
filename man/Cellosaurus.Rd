@@ -21,7 +21,7 @@ Patient age is currently only defined in \code{cellosaurus.txt} file but
 not \code{cellosaurus.obo} available from the FTP server.
 }
 \note{
-Updated 2022-10-04.
+Updated 2023-01-12.
 }
 \examples{
 object <- Cellosaurus()
