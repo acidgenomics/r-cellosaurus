@@ -52,7 +52,10 @@ setValidity(
         if (!isTRUE(ok)) {
             return(ok)
         }
-        ok <- validate(hasNoDuplicates(object[["id"]]))
+        ok <- validate(
+            hasNoDuplicates(object[["id"]]),
+            hasNoDuplicates(object[["name"]])
+        )
         if (!isTRUE(ok)) {
             return(ok)
         }
