@@ -375,15 +375,21 @@ NULL
     df[["ancestors"]] <- NULL
     df <- as(df, "DataFrame")
     colnames(df) <- camelCase(colnames(df))
+    assert(
+        hasRownames(df),
+        isSubset("id", colnames(df))
+    )
     keep <- grepl(pattern = "^CVCL_", x = df[["id"]])
     df <- df[keep, ]
     df <- df[order(rownames(df)), ]
     ## These steps need to come after selection of rows with valid identifiers.
     df <- sanitizeNA(df)
     df <- removeNA(df)
-
-    ## FIXME CVCL_7082 is actually named NA
-
+    ## Fix "CVCL_7082" cell line, which is actually named "NA".
+    if (isSubset("CVCL_7082", rownames(df))) {
+        df["CVCL_7082", "name"] <- "NA"
+    }
+    assert(isCharacter(df[["name"]]))
     metadata(df)[["dataVersion"]] <- dataVersion
     df
 }
