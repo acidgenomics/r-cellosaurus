@@ -1,8 +1,15 @@
 # Release notes
 
-## Cellosaurus 0.3.3 (2022-10-04)
+## Cellosaurus 0.3.3 (2023-01-12)
 
-Minor changes
+Major changes:
+
+- Now pinning `cellosaurus.obo` file internally at `r.acidgenomics.com`
+  server instead of downloading the latest release version from
+  `ftp.expasy.org`. This change was made due to breaking changes introduced in
+  Cellosaurus 44 release that broke the package.
+
+Minor changes:
 
 - Improved standardization of column names (e.g. `depmapId` instead of
   `depMapId`; `sangerModelId` instead of `sangerId`), for better consistency
