@@ -385,6 +385,12 @@ NULL
     ## These steps need to come after selection of rows with valid identifiers.
     df <- sanitizeNA(df)
     df <- removeNA(df)
+    ## Clean up cell lines with description in name (e.g. "CVCL_8607").
+    df[["name"]] <- gsub(
+        pattern = "\\s\\[.+$",
+        x = df[["name"]],
+        replacement = ""
+    )
     ## Fix "CVCL_7082" cell line, which is actually named "NA".
     if (isSubset("CVCL_7082", rownames(df))) {
         df["CVCL_7082", "name"] <- "NA"
