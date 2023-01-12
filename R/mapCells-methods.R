@@ -74,14 +74,20 @@ NULL
         }
         df <- as(object, "DataFrame")
         assert(hasNoDuplicates(df[["name"]]))
-        df[["strippedName"]] <- standardizeCells(df[["name"]])
+        df[["name2"]] <- gsub(
+            pattern = "\\s\\[.+$",
+            replacement = "",
+            x = df[["name"]]
+        )
+        df[["standardName"]] <- standardizeCells(df[["name"]])
         matchCols <- c(
             "id",
             "name",
             "depmapId",
             "sangerModelId",
             "synonym",
-            "strippedName"
+            "name2",
+            "standardName"
         )
         assert(isSubset(matchCols, colnames(df)))
         df <- df[, matchCols]
