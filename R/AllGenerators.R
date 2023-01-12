@@ -381,6 +381,9 @@ NULL
     ## These steps need to come after selection of rows with valid identifiers.
     df <- sanitizeNA(df)
     df <- removeNA(df)
+
+    ## FIXME CVCL_7082 is actually named NA
+
     metadata(df)[["dataVersion"]] <- dataVersion
     df
 }
