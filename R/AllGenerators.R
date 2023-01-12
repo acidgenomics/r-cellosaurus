@@ -1,8 +1,3 @@
-## FIXME CVCL_3449 is named "__Parent_cell_line_of_DLD-1/HCT 8/HCT 15/HRT-18".
-## FIXME CVCL_7082 is actually named NA
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
