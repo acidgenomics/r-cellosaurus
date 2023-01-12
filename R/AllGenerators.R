@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2022-10-04.
+#' @note Updated 2023-01-12.
 #'
 #' @details
 #' Patient age is currently only defined in `cellosaurus.txt` file but
@@ -332,16 +332,20 @@ NULL
 
 #' Import Cellosaurus data frame from OBO file
 #'
-#' @note Updated 2022-09-13.
+#' @note Updated 2023-01-12.
 #' @noRd
+#'
+#' @seealso
+#' - https://github.com/calipho-sib/cellosaurus/
+#' - https://ftp.expasy.org/databases/cellosaurus/
 .importCellosaurus <- function(cache) {
     assert(isFlag(cache))
     url <- pasteURL(
-        "ftp.expasy.org",
-        "databases",
+        "r.acidgenomics.com",
+        "extdata",
         "cellosaurus",
-        "cellosaurus.obo",
-        protocol = "ftp"
+        paste0("cellosaurus-", .release, ".obo"),
+        protocol = "https"
     )
     if (isTRUE(cache)) {
         con <- cacheURL(url, pkg = .pkgName)
