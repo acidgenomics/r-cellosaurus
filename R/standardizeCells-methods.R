@@ -47,7 +47,7 @@ NULL
             replacement = ""
         )
         if (any(object == "")) {
-            object[object == ""] <- "unknown"
+            object[object == ""] <- "invalid"
         }
         object <- snakeCase(object = object, prefix = FALSE, smart = FALSE)
         object <- toupper(object)
