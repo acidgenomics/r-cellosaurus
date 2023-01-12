@@ -15,7 +15,7 @@ test_that("Cell name", {
 test_that("Mixed identifier input", {
     cells <- c(
         as.character(object[["id"]])[[1L]],
-        as.character(object[["depMapId"]])[[1L]],
+        as.character(object[["depmapId"]])[[1L]],
         as.character(object[["sangerModelId"]])[[4L]]
     )
     cells <- mapCells(object = object, cells = cells)
@@ -33,7 +33,7 @@ test_that("keyType return", {
         object = mapCells(
             object = object,
             cells = cells,
-            keyType = "depMapId"
+            keyType = "depmapId"
         ),
         expected = c(
             "HEL" = "ACH-000004",
@@ -65,7 +65,7 @@ test_that("Match failure", {
         object = mapCells(
             object = object,
             cells = "CVCL_0003",
-            keyType = "depMapId"
+            keyType = "depmapId"
         ),
         regexp = "CVCL_0003"
     )
