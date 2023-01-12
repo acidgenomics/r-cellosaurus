@@ -6,6 +6,7 @@ Minor changes:
 
 - `Cellosaurus`: Fix for `"CVCL_7082"` line, which is actually named `"NA"`.
 - `standardizeCells`: Fix for handling of all cells in Cellosaurus database.
+- `mapCells`: Added some additional name variant rules for better matching.
 
 ## Cellosaurus 0.3.3 (2023-01-12)
 
