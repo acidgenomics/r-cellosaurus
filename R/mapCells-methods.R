@@ -79,6 +79,13 @@ NULL
             replacement = "",
             x = df[["name"]]
         )
+        ## e.g. "ABC-12" to "Abc-12".
+        df[["name3"]] <- gsub(
+            pattern = "^([A-Z])([A-Z]+)",
+            replacement = "\\1\\L\\2",
+            x = df[["name2"]],
+            perl = TRUE
+        )
         df[["standardName"]] <- standardizeCells(df[["name"]])
         matchCols <- c(
             "id",
@@ -87,6 +94,7 @@ NULL
             "sangerModelId",
             "synonym",
             "name2",
+            "name3",
             "standardName"
         )
         assert(isSubset(matchCols, colnames(df)))
