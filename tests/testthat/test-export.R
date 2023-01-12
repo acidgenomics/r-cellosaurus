@@ -10,15 +10,18 @@ test_that("export", {
         expected = c(
             "depmapId",
             "derivedFrom",
+            "ethnicity",
             "id",
             "isCancer",
             "isProblematic",
+            "msiStatus",
             "name",
             "ncbiTaxonomyId",
             "ncitDiseaseId",
             "ncitDiseaseName",
             "organism",
             "originateFromSameIndividualAs",
+            "samplingSite",
             "sangerModelId",
             "sex",
             "synonym"
