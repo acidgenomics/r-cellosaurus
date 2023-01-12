@@ -1,6 +1,6 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2022-10-04.
+#' @note Updated 2023-01-12.
 #'
 #' @inherit AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -46,7 +46,7 @@ NULL
 
 
 
-## Updated 2022-10-04.
+## Updated 2023-01-12.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
@@ -74,12 +74,14 @@ NULL
         }
         df <- as(object, "DataFrame")
         assert(hasNoDuplicates(df[["name"]]))
+        df[["strippedName"]] <- standardizeCells(df[["name"]])
         matchCols <- c(
             "id",
             "name",
             "depmapId",
             "sangerModelId",
-            "synonym"
+            "synonym",
+            "strippedName"
         )
         assert(isSubset(matchCols, colnames(df)))
         df <- df[, matchCols]
