@@ -1,6 +1,6 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2022-08-26.
+#' @note Updated 2023-01-12.
 #'
 #' @details
 #' Strip all non-alphanumeric characters, remove information in
@@ -28,7 +28,7 @@ NULL
 
 
 
-## Updated 2022-08-26.
+## Updated 2023-01-12.
 `standardizeCells,character` <- # nolint
     function(object) {
         assert(
@@ -46,13 +46,11 @@ NULL
             pattern = "[^[:alnum:]]+",
             replacement = ""
         )
-        object <- snakeCase(
-            object = object,
-            prefix = FALSE,
-            smart = FALSE
-        )
+        if (any(object == "")) {
+            object[object == ""] <- "unknown"
+        }
+        object <- snakeCase(object = object, prefix = FALSE, smart = FALSE)
         object <- toupper(object)
-        assert(hasNoDuplicates(object))
         object
     }
 
