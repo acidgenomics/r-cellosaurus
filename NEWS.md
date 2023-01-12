@@ -1,5 +1,12 @@
 # Release notes
 
+## Cellosaurus 0.3.4 (2023-01-12)
+
+Minor changes:
+
+- `Cellosaurus`: Fix for `"CVCL_7082"` line, which is actually named `"NA"`.
+- `standardizeCells`: Fix for handling of all cells in Cellosaurus database.
+
 ## Cellosaurus 0.3.3 (2023-01-12)
 
 Major changes:
