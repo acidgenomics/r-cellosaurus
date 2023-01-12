@@ -68,8 +68,8 @@ NULL
         )
         if (isSubset(
             x = cells,
-            y = as.character(object[[idCol]]))
-        ) {
+            y = as.character(object[[idCol]])
+        )) {
             return(cells)
         }
         df <- as(object, "DataFrame")
