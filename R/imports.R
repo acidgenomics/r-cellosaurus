@@ -28,8 +28,9 @@ NULL
 #' @importFrom AcidCLI abort alert
 #' @importFrom IRanges CharacterList
 #' @importFrom S4Vectors DataFrame
-#' @importFrom goalie allAreMatchingFixed assert hasLength hasNoDuplicates
-#' hasRownames isCharacter isFlag isString isSubset validate validateClasses
+#' @importFrom goalie allAreMatchingFixed allAreMatchingRegex assert hasLength
+#' hasNoDuplicates hasRownames isCharacter isFlag isString isSubset validate
+#' validateClasses
 #' @importFrom methods as is new setClass setMethod setValidity validObject
 #' @importFrom pipette cacheURL
 #' @importFrom stringi stri_replace_all_regex stri_replace_first_regex
