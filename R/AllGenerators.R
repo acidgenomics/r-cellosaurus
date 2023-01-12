@@ -344,7 +344,7 @@ NULL
         "r.acidgenomics.com",
         "extdata",
         "cellosaurus",
-        paste0("cellosaurus-", .release, ".obo"),
+        paste0("cellosaurus-", .release, ".obo"),  # nolint
         protocol = "https"
     )
     if (isTRUE(cache)) {
