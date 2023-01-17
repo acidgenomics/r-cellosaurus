@@ -2,5 +2,6 @@
 #+STARTUP: content
 * Development
 ** TODO Add coverage to ensure mapCells correctly maps all cells on DepMap.
+** TODO Add coverage to ensure mapCells correctly maps all cells on Sanger CellModelPassports.
 ** TODO Work on adding `primaryDisease` column in a future update.
     This requires parsing NCIT obo file, which is complicated.
