@@ -55,13 +55,23 @@ df <- df[!is.na(df[["RRID"]]), ]
 ## Remove cell lines that map ambiguously.
 censor <- c(
     "SIDM00366", # SBC-2
-    "SIDM00400" # SC-1
-    "SIDM00054" # PL18
-    "SIDM00122" # BT-549
-    "SIDM00199" # CS1
-    "SIDM00408" # MS-1
-    "SIDM00427" # RH-1
-    "SIDM00911" # COLO-699
+    "SIDM00400", # SC-1
+    "SIDM00054", # PL18
+    "SIDM00122", # BT-549
+    "SIDM00199", # CS1
+    "SIDM00408", # MS-1
+    "SIDM00427", # RH-1
+    "SIDM00911", # COLO-699
+    "SIDM01238", # ST
+    "SIDM01334", # RH-3
+    "SIDM01349", # RH-4
+    "SIDM00126", # K2
+    "SIDM01500", # EW-8,
+    "SIDM01512", # CJM
+    "SIDM01335", # SNU-1272
+    "SIDM01497", # F5
+    "SIDM01507", # DL
+    "SIDM01625" # F-36E
 )
 df <- df[setdiff(rownames(df), censor), ]
 map[["cmp"]] <- df

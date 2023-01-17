@@ -94,9 +94,6 @@ test_that("CellModelPassports", {
     object <- celloFull
     df <- map[["cmp"]]
     fail <- map[["cmpFail"]]
-    ## "CVCL_C355" - "CVCL_1658" - EW-8
-    ## "CVCL_1993" - "CVCL_1992" - COLO 699
-    ## "CVCL_2204" - "CVCL_U347" - ST
     ## "CVCL_C356" - "CVCL_L415" - Rh3
     ## "CVCL_C357" - "CVCL_5916" - Rh4
     ## "CVCL_6308" - "CVCL_AT85" - K2
