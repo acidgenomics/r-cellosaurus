@@ -373,6 +373,7 @@ NULL
     }
     assert(isCharacter(df[["name"]]))
     metadata(df)[["dataVersion"]] <- dataVersion
+    metadata(df)[["packageVersion"]] <- .pkgVersion
     df
 }
 
