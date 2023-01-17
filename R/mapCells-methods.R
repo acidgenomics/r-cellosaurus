@@ -113,13 +113,21 @@ NULL
         )
         poolUnlist <- unlist(pool, recursive = FALSE, use.names = FALSE)
         idx <- poolRep[match(x = cells, table = poolUnlist)]
-        ## Fall back to matching input based on standardized cell name.
         if (anyNA(idx)) {
             naIdx <- which(is.na(idx))
-            idx2 <- poolRep[match(
-                x = standardizeCells(cells[naIdx]),
-                table = poolUnlist
-            )]
+            cells2 <- vapply(
+                X = standardizeCells(cells[naIdx]),
+                FUN = function(x) {
+                    switch(
+                        EXPR = x,
+                        "CTV1DM" = "CTV1", # CVCL_1150
+                        "YUHOIN0650" = "YUHOIN", # CVCL_J521
+                        x
+                    )
+                },
+                FUN.VALUE = character(1L)
+            )
+            idx2 <- poolRep[match(x = cells2, table = poolUnlist)]
             idx[naIdx] <- idx2
         }
         if (anyNA(idx)) {
