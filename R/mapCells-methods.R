@@ -1,6 +1,13 @@
+## FIXME Can simplify this using case insensitive matching.
+## FIXME "Hs 343.T" isn't mapping, what the hell.
+## FIXME When we pass in depmapCells, "Hs 343.T" doesn't map, but it
+## does map correctly when passed in as a character blarg....
+
+
+
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2023-01-12.
+#' @note Updated 2023-01-17.
 #'
 #' @inherit AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -46,7 +53,7 @@ NULL
 
 
 
-## Updated 2023-01-12.
+## Updated 2023-01-17.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
@@ -66,45 +73,37 @@ NULL
             "cellosaurusId" = "id",
             keyType
         )
-        if (isSubset(
-            x = cells,
-            y = as.character(object[[idCol]])
-        )) {
+        ## Early return if all input matches the return key type.
+        if (isSubset(x = cells, y = as.character(object[[idCol]]))) {
             return(cells)
         }
         df <- as(object, "DataFrame")
-        assert(hasNoDuplicates(df[["name"]]))
+        cols <- c(
+            "id",
+            "name",
+            "depmapId",
+            "sangerModelId",
+            "synonym"
+        )
+        assert(isSubset(cols, colnames(df)))
+        df <- df[, cols]
         df[["name2"]] <- gsub(
             pattern = "\\s\\[.+$",
             replacement = "",
             x = df[["name"]]
         )
-        ## e.g. "ABC-12" to "Abc-12".
-        df[["name3"]] <- gsub(
-            pattern = "^([A-Z])([A-Z]+)",
-            replacement = "\\1\\L\\2",
-            x = df[["name2"]],
-            perl = TRUE
-        )
         df[["standardName"]] <- standardizeCells(df[["name"]])
-        matchCols <- c(
-            "id",
-            "name",
-            "depmapId",
-            "sangerModelId",
-            "synonym",
-            "name2",
-            "name3",
-            "standardName"
-        )
-        assert(isSubset(matchCols, colnames(df)))
-        df <- df[, matchCols]
+        cols <- append(cols, c("name2", "standardName"))
         pool <- apply(
             X = df,
             MARGIN = 1L,
-            FUN = unlist,
-            recursive = TRUE,
-            use.names = FALSE,
+            FUN = function(x) {
+                x <- unlist(x, recursive = TRUE, use.names = FALSE)
+                x <- na.omit(x)
+                x <- toupper(x)
+                x <- unique(x)
+                x
+            },
             simplify = FALSE
         )
         g <- rep(
@@ -115,7 +114,10 @@ NULL
                 FUN.VALUE = integer(1L)
             )
         )
-        idx <- g[match(x = cells, table = unlist(pool))]
+        idx <- g[match(
+            x = toupper(cells),
+            table = unlist(pool, recursive = FALSE, use.names = FALSE)
+        )]
         if (anyNA(idx)) {
             fail <- cells[is.na(idx)]
             abort(sprintf(
