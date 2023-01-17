@@ -1,6 +1,6 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2023-01-12.
+#' @note Updated 2023-01-17.
 #'
 #' @details
 #' Strip all non-alphanumeric characters, remove information in
@@ -28,7 +28,7 @@ NULL
 
 
 
-## Updated 2023-01-12.
+## Updated 2023-01-17.
 `standardizeCells,character` <- # nolint
     function(object) {
         assert(
@@ -36,6 +36,12 @@ NULL
             hasNoDuplicates(object)
         )
         object <- tolower(object)
+        ## Handle "SUM-52PE, SUM52" to "SUM-52PE" edge case.
+        object <- stri_replace_first_regex(
+            str = object,
+            pattern = ",\\s.+$",
+            replacement = ""
+        )
         object <- stri_replace_first_regex(
             str = object,
             pattern = "\\s[\\[\\(].+$",
