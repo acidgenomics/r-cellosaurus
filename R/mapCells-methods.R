@@ -81,7 +81,7 @@ NULL
         assert(isSubset(cols, colnames(df)))
         df <- df[, cols]
         df[["name2"]] <- gsub(
-            pattern = "\\s\\[.+$",
+            pattern = "[_ ]+\\[.+$",
             replacement = "",
             x = df[["name"]]
         )
