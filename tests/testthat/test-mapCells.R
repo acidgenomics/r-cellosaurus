@@ -105,11 +105,11 @@ test_that("CellModelPassports", {
     fail <- map[["cmpFail"]]
     ## FIXME Need to resolve duplicates: "MS-1" "ML-1".
     df <- df[!duplicated(df[[1L]]), ]
-    ## FIXME Problematic cells:
-    ## KP-N-S19s,
-    ## EoL-1-cell
-    ## Jurkat-Clone-E6-1
-    ## THUR14TKB
+    ## Problematic cells:
+    ## SIDM00016 - CVCL_1340 - KP-N-S19s
+    ## SIDM00277 - CVCL_0258 - EoL-1-cell
+    ## SIDM01244 - CVCL_0367 - Jurkat-Clone-E6-1
+    ## SIDM01433 - CVCL_5953 - THUR14TKB
     expect_identical(
         object = unname(mapCells(object, cells = df[[1L]])),
         expected = df[[2L]]
