@@ -119,8 +119,11 @@ NULL
                 FUN = function(x) {
                     switch(
                         EXPR = x,
-                        "CTV1DM" = "CTV1", # CVCL_1150
-                        "YUHOIN0650" = "YUHOIN", # CVCL_J521
+                        "CTV1DM" = "CVCL_1150", # DepMap
+                        "JURKATCLONEE61" = "CVCL_0367", # CMP
+                        "KPNS19S" = "CVCL_1340", # CMP
+                        "THUR14TKB" = "CVCL_5953", # CMP
+                        "YUHOIN0650" = "CVCL_J521", # DepMap
                         x
                     )
                 },
