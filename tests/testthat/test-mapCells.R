@@ -110,6 +110,9 @@ test_that("CellModelPassports", {
     ## SIDM00277 - CVCL_0258 - EoL-1-cell
     ## SIDM01244 - CVCL_0367 - Jurkat-Clone-E6-1
     ## SIDM01433 - CVCL_5953 - THUR14TKB
+    ## FIXME This is returning false for:
+    ## cells = c("KP-N-S19s", "EoL-1-cell", "Jurkat-Clone-E6-1", "THUR14TKB")
+    ## FIXME but returns TRUE for "KP-N-S19s" alone...something's wrong.
     expect_identical(
         object = unname(mapCells(object, cells = df[[1L]])),
         expected = df[[2L]]
