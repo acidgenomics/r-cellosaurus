@@ -1,3 +1,8 @@
+## FIXME For Sanger this is returning "KP-N-S19s" failing to map, which is strange
+## because inputting it alone works...
+
+
+
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-01-17.
@@ -97,7 +102,6 @@ NULL
             FUN = function(x) {
                 x <- unlist(x, recursive = TRUE, use.names = FALSE)
                 x <- na.omit(x)
-                x <- toupper(x)
                 x <- unique(x)
                 x
             },
@@ -125,7 +129,8 @@ NULL
                         x
                     )
                 },
-                FUN.VALUE = character(1L)
+                FUN.VALUE = character(1L),
+                USE.NAMES = FALSE
             )
             idx2 <- poolRep[match(x = cells2, table = poolUnlist)]
             idx[naIdx] <- idx2
