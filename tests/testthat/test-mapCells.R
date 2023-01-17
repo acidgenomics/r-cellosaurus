@@ -1,6 +1,8 @@
-object <- cello
+celloFull <- readRDS(file.path("cache", "celloFull.rds"))
+map <- readRDS(file.path("cache", "mapCells.rds"))
 
 test_that("Cell name", {
+    object <- cello
     cells <- head(object[["name"]], n = 3L)
     cells <- standardizeCells(cells)
     cells <- mapCells(object = object, cells = cells)
@@ -13,6 +15,7 @@ test_that("Cell name", {
 })
 
 test_that("Mixed identifier input", {
+    object <- cello
     cells <- c(
         as.character(object[["id"]])[[1L]],
         as.character(object[["depmapId"]])[[1L]],
@@ -28,6 +31,7 @@ test_that("Mixed identifier input", {
 })
 
 test_that("keyType return", {
+    object <- cello
     cells <- head(as.character(object[["name"]]), n = 2L)
     expect_identical(
         object = mapCells(
@@ -54,6 +58,7 @@ test_that("keyType return", {
 })
 
 test_that("Match failure", {
+    object <- cello
     expect_error(
         object = mapCells(
             object = object,
@@ -71,25 +76,34 @@ test_that("Match failure", {
     )
 })
 
-celloFull <- readRDS(file.path("cache", "celloFull.rds"))
-map <- readRDS(file.path("cache", "mapCells.rds"))
-
 test_that("DepMap", {
     object <- celloFull
     df <- map[["depmap"]]
     fail <- map[["depmapFail"]]
-    ## FIXME This contains NA, need to rework...
+    ## FIXME This is failing for 10 cell lines.
+    ## TM-87
+    ## Hs 343.T
+    ## PA-1 [PA1]
+    ## SUM-1315MO2
+    ## SUM-52PE, SUM52
+    ## UM-UC7
+    ## UM-UC9
+    ## CTV-1-DM
+    ## PC-3_[JPC-3]
+    ## YUHOIN 06-50
     xxx <- mapCells(object, cells = df[[1L]])
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "12 cells"
     )
-
 })
 
 test_that("CellModelPassports", {
     object <- celloFull
     df <- map[["cmp"]]
     fail <- map[["cmpFail"]]
-
+    expect_error(
+        object = mapCells(object, cells = fail),
+        regexp = "188 cells"
+    )
 })
