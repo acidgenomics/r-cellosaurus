@@ -94,14 +94,6 @@ test_that("CellModelPassports", {
     object <- celloFull
     df <- map[["cmp"]]
     fail <- map[["cmpFail"]]
-    ## "CVCL_C356" - "CVCL_L415" - Rh3
-    ## "CVCL_C357" - "CVCL_5916" - Rh4
-    ## "CVCL_6308" - "CVCL_AT85" - K2
-    ## "CVCL_1658" - "CVCL_V618" - EW-8
-    ## "CVCL_8663" - "CVCL_U797" - CJM
-    ## "CVCL_8788" - "CVCL_5020" - SNU-1272
-    ## "CVCL_B5IQ" - "CVCL_V616" - F5
-    ## "CVCL_9V00" - "CVCL_U760" - DL
     ## "CVCL_7227" - "CVCL_2037" - F-36P
     expect_identical(
         object = unname(mapCells(object, cells = df[[1L]])),
