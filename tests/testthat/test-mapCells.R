@@ -81,8 +81,8 @@ test_that("DepMap", {
     df <- map[["depmap"]]
     fail <- map[["depmapFail"]]
     expect_identical(
-        object = unname(mapCells(object, cells = df[[1L]])),
-        expected = df[[2L]]
+        object = unname(mapCells(object, cells = df[["CellLineName"]])),
+        expected = df[["RRID"]]
     )
     expect_error(
         object = mapCells(object, cells = fail),
@@ -93,11 +93,20 @@ test_that("DepMap", {
 test_that("CellModelPassports", {
     object <- celloFull
     df <- map[["cmp"]]
+    df[["RRID"]] <- gsub(
+        pattern = "CVCL_2717;CVCL_1888",
+        replacement = "CVCL_1888",
+        x = df[["RRID"]]
+    )
+    df[["RRID"]] <- gsub(
+        pattern = "CVCL_X507",
+        replacement = "CVCL_1637",
+        x = df[["RRID"]]
+    )
     fail <- map[["cmpFail"]]
-    ## "CVCL_7227" - "CVCL_2037" - F-36P
     expect_identical(
-        object = unname(mapCells(object, cells = df[[1L]])),
-        expected = df[[2L]]
+        object = unname(mapCells(object, cells = df[["model_name"]])),
+        expected = df[["RRID"]]
     )
     expect_error(
         object = mapCells(object, cells = fail),
