@@ -3,7 +3,10 @@ if (isFALSE(goalie::hasInternet())) {
     return(invisible(NULL))
 }
 dir.create("cache", showWarnings = FALSE)
-files <- "mapCells.rds"
+files <- c(
+    "celloFull.rds",
+    "mapCells.rds"
+)
 invisible(Map(
     f = function(remoteDir, file, envir) {
         destfile <- file.path("cache", file)
