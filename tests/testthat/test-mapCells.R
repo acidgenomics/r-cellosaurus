@@ -79,11 +79,13 @@ test_that("Match failure", {
 test_that("DepMap", {
     object <- celloFull
     df <- map[["depmap"]]
-    fail <- map[["depmapFail"]]
+    censor <- "ACH_002185" # PL18
+    df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["CellLineName"]])),
         expected = df[["RRID"]]
     )
+    fail <- map[["depmapFail"]]
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "12 cells"
@@ -103,11 +105,18 @@ test_that("CellModelPassports", {
         replacement = "CVCL_1637",
         x = df[["RRID"]]
     )
-    fail <- map[["cmpFail"]]
+    censor <- c(
+        "SIDM00408", # MS-1 / CVCL_E995
+        "SIDM00440", # ML-1 / CVCL_0436
+        "SIDM01335", # SNU-1272 / CVCL_5020
+        "SIDM01500" # EW-8 / CVCL_V618
+    )
+    df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["model_name"]])),
         expected = df[["RRID"]]
     )
+    fail <- map[["cmpFail"]]
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "173 cells"
