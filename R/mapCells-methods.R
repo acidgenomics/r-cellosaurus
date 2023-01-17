@@ -123,21 +123,6 @@ NULL
             f = function(cell, cellStd) {
                 switch(
                     EXPR = cellStd,
-                    "RAMOSRA1" = "CVCL_0597",
-                    ## DepMap ====
-                    "CS1" = "CVCL_T023",
-                    "H157" = "CVCL_2458",
-                    "HAP1" = "CVCL_Y019",
-                    "K2" = "CVCL_AT85",
-                    "LY2" = "CVCL_9579",
-                    "ML1" = "CVCL_H525",
-                    "RC2" = "CVCL_L510",
-                    "RH1" = "CVCL_1658",
-                    ## Sanger CellModelPassports ====
-                    "BT549" = "CVCL_1858",
-                    "CJM" = "CVCL_U797",
-                    "COLO699" = "CVCL_1992",
-                    "COLO699N" = "CVCL_1992",
                     "DL" = "CVCL_U760",
                     "F36E" = "CVCL_2037",
                     "F5" = "CVCL_V616",
