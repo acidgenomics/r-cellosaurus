@@ -73,6 +73,12 @@ NULL
         }
         cellsOrig <- cells
         cellsStd <- standardizeCells(cells)
+        overrides <- get(
+            x = "overrides",
+            envir = asNamespace(.pkgName),
+            inherits = FALSE
+        )
+        assert(is.data.frame(overrides))
         ## First create a pool of exact matches annotated in Cellosaurus.
         df <- as(object, "DataFrame")
         cols <- c(
@@ -123,13 +129,6 @@ NULL
             f = function(cell, cellStd) {
                 switch(
                     EXPR = cellStd,
-                    "DL" = "CVCL_U760",
-                    "F36E" = "CVCL_2037",
-                    "F5" = "CVCL_V616",
-                    "JR" = "CVCL_RT33",
-                    "MM1" = "CVCL_5801",
-                    "RH3" = "CVCL_L415",
-                    "RH4" = "CVCL_5916",
                     "SBC2" = "CVCL_W531",
                     "ST" = "CVCL_U347",
                     cell
