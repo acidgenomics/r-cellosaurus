@@ -123,6 +123,7 @@ NULL
             f = function(cell, cellStd) {
                 switch(
                     EXPR = cellStd,
+                    "RAMOSRA1" = "CVCL_0597",
                     ## DepMap ====
                     "CS1" = "CVCL_T023",
                     "H157" = "CVCL_2458",
