@@ -106,11 +106,11 @@ test_that("CellModelPassports", {
         x = df[["RRID"]]
     )
     censor <- c(
-        "SIDM00408", # MS-1 / CVCL_E995
-        "SIDM00440", # ML-1 / CVCL_0436
-        "SIDM00912", # COLO-699N / CVCL_1992s
-        "SIDM01335", # SNU-1272 / CVCL_5020
-        "SIDM01500" # EW-8 / CVCL_V618
+        "SIDM00408", # MS-1; CVCL_E995
+        "SIDM00440", # ML-1; CVCL_0436
+        "SIDM00912", # COLO-699N; CVCL_1992s
+        "SIDM01335", # SNU-1272; CVCL_5020
+        "SIDM01500" # EW-8; CVCL_V618
     )
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
