@@ -30,23 +30,6 @@ NULL
 
 
 
-## FIXME Add this back in for faster matching...see DepMap Sanger overrides.
-## Dynamically handle common aliases that are difficult to map.
-## > aliases <- import(
-## >     con = system.file(
-## >         "extdata", "aliases.csv",
-## >         package = .pkgName
-## >     ),
-## >     quiet = TRUE
-## > )
-## > remap <- which(cells %in% aliases[["input"]])
-## > if (hasLength(remap)) {
-## >     actual <- match(x = cells[remap], table = aliases[["input"]])
-## >     cells[remap] <- aliases[["actual"]][actual]
-## > }
-
-
-
 ## Updated 2023-01-17.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
@@ -121,38 +104,34 @@ NULL
         )
         poolUnlist <- unlist(pool, recursive = FALSE, use.names = FALSE)
         ## Override any ambiguous cell line names with direct RRID mapping.
-        ## Note that DepMap currently takes priority over Sanger
-        ## CellModelPassports mapping conflicts currently.
         cells <- unlist(Map(
             cell = cells,
             cellStd = standardizeCells(cells),
-            f = function(cell, cellStd) {
-                switch(
-                    EXPR = cellStd,
-                    "SBC2" = "CVCL_W531",
-                    "ST" = "CVCL_U347",
+            MoreArgs = list("overrides" = overrides),
+            f = function(cell, cellStd, overrides) {
+                idx <- match(x = cellStd, table = overrides[["input"]])
+                if (!is.na(idx)) {
+                    overrides[idx, "output"]
+                } else {
                     cell
-                )
+                }
             },
             USE.NAMES = FALSE
         ))
         idx <- poolRep[match(x = cells, table = poolUnlist)]
         ## Fall back to matching by standardized cell name.
-        ## FIXME Rework this using internal data frame.
         if (anyNA(idx)) {
             naIdx <- which(is.na(idx))
             cells2 <- vapply(
                 X = standardizeCells(cells[naIdx]),
-                FUN = function(x) {
-                    switch(
-                        EXPR = x,
-                        "CTV1DM" = "CVCL_1150", # DepMap
-                        "JURKATCLONEE61" = "CVCL_0367", # CMP
-                        "KPNS19S" = "CVCL_1340", # CMP
-                        "THUR14TKB" = "CVCL_5953", # CMP
-                        "YUHOIN0650" = "CVCL_J521", # DepMap
-                        x
-                    )
+                overrides = overrides,
+                FUN = function(cell, overrides) {
+                    idx <- match(x = cell, table = overrides[["input"]])
+                    if (!is.na(idx)) {
+                        overrides[idx, "output"]
+                    } else {
+                        cell
+                    }
                 },
                 FUN.VALUE = character(1L),
                 USE.NAMES = FALSE
