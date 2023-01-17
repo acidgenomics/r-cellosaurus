@@ -4,11 +4,7 @@
 \alias{Cellosaurus}
 \title{Cellosaurus table}
 \usage{
-Cellosaurus(cache = TRUE)
-}
-\arguments{
-\item{cache}{\code{logical(1)}.
-Cache files using \code{BiocFileCache}.}
+Cellosaurus()
 }
 \value{
 \code{Cellosaurus}.
@@ -21,7 +17,7 @@ Patient age is currently only defined in \code{cellosaurus.txt} file but
 not \code{cellosaurus.obo} available from the FTP server.
 }
 \note{
-Updated 2023-01-12.
+Updated 2023-01-17.
 }
 \examples{
 object <- Cellosaurus()
