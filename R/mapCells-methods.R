@@ -127,7 +127,7 @@ NULL
                 fmt = "Failed to map %d %s: %s.",
                 length(fail),
                 ngettext(n = length(fail), msg1 = "cell", msg2 = "cells"),
-                toString(fail, width = 200L)
+                toString(fail, width = 500L)
             ))
         }
         names(out) <- cells
