@@ -11,7 +11,7 @@ NULL
 #' removeNA sanitizeNA snakeCase standardizeCells
 #' @importFrom BiocGenerics %in% as.data.frame grep grepl lapply unlist
 #' @importFrom IRanges gsub
-#' @importFrom S4Vectors Rle decode metadata metadata<-
+#' @importFrom S4Vectors Rle decode metadata metadata<- na.omit
 #' @importFrom methods show
 #' @importFrom pipette export import
 #'

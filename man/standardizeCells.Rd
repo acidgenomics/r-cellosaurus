@@ -29,7 +29,7 @@ Strip all non-alphanumeric characters, remove information in
 parentheses/brackets, and convert to uppercase.
 }
 \note{
-Updated 2023-01-12.
+Updated 2023-01-17.
 }
 \examples{
 object <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
