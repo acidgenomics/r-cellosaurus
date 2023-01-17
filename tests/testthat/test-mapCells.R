@@ -80,19 +80,26 @@ test_that("DepMap", {
     object <- celloFull
     df <- map[["depmap"]]
     fail <- map[["depmapFail"]]
-    ## FIXME This is failing for 10 cell lines.
-    ## TM-87
-    ## Hs 343.T  FIXME This is matching but returning as an error in our list...
-    ## Need to rethink the matching algorithm argh...
-    ## PA-1 [PA1]
-    ## SUM-1315MO2
-    ## SUM-52PE, SUM52
-    ## UM-UC7
-    ## UM-UC9
-    ## CTV-1-DM
-    ## PC-3_[JPC-3]
-    ## YUHOIN 06-50
-    xxx <- mapCells(object, cells = df[[1L]])
+    ## Currently problematic matching:
+    ##        ML-1        H157         RC2         CS1          K2        PL18
+    ## "CVCL_0436" "CVCL_0463" "CVCL_C784" "CVCL_H245" "CVCL_6308" "CVCL_1637"
+    ##         LY2        HAP1
+    ## "CVCL_8799" "CVCL_5G07"
+    ##
+    ## Need to resolve these:
+    ## "CVCL_0436" - "CVCL_H525" - ML-1
+    ## "CVCL_0463" - "CVCL_2458" - NCI-H157
+    ## "CVCL_C784" - "CVCL_L510" - RC-2
+    ## "CVCL_H245" - "CVCL_T023" - RPMI-3460/CS1
+    ## "CVCL_6308" - "CVCL_AT85" - CS-1
+    ## "CVCL_1637" - "CVCL_X507" - Panc 05.04
+    ## "CVCL_8799" - "CVCL_9579" - OCI-Ly2
+    ## "CVCL_5G07" - "CVCL_Y019" - HAP-1
+    CVCL_H525	ML-1 [Human thyroid carcinoma]	Homo sapiens (Human)
+    expect_identical(
+        object = unname(mapCells(object, cells = df[[1L]])),
+        expected = df[[2L]]
+    )
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "12 cells"
