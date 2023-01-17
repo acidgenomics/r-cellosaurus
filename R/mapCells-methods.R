@@ -1,10 +1,3 @@
-## FIXME Can simplify this using case insensitive matching.
-## FIXME "Hs 343.T" isn't mapping, what the hell.
-## FIXME When we pass in depmapCells, "Hs 343.T" doesn't map, but it
-## does map correctly when passed in as a character blarg....
-
-
-
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-01-17.
