@@ -1,8 +1,3 @@
-## FIXME For Sanger this is returning "KP-N-S19s" failing to map, which is strange
-## because inputting it alone works...
-
-
-
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-01-17.
