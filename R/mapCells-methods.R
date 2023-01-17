@@ -1,9 +1,3 @@
-## FIXME Need to figure out how to handle seocndary accession remapping.
-## e.g. CVCL_2717 to CVCL_1888
-## e.g. CVCL_X507 to CVCL_1637
-
-
-
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-01-17.
@@ -144,6 +138,7 @@ NULL
                     "COLO699" = "CVCL_1992",
                     "COLO699N" = "CVCL_1992",
                     "DL" = "CVCL_U760",
+                    # > "EW8" = "CVCL_V618", # use CVCL_1658
                     "F36E" = "CVCL_2037",
                     "F5" = "CVCL_V616",
                     "JR" = "CVCL_RT33",
@@ -153,6 +148,7 @@ NULL
                     "RH3" = "CVCL_L415",
                     "RH4" = "CVCL_5916",
                     "SBC2" = "CVCL_W531",
+                    ## > "SNU1272" = "CVCL_5020", # use CVCL_8788
                     "ST" = "CVCL_U347",
                     cell
                 )
