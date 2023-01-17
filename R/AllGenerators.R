@@ -1,14 +1,11 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-01-12.
+#' @note Updated 2023-01-17.
 #'
 #' @details
 #' Patient age is currently only defined in `cellosaurus.txt` file but
 #' not `cellosaurus.obo` available from the FTP server.
-#'
-#' @param cache `logical(1)`.
-#' Cache files using `BiocFileCache`.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -162,7 +159,7 @@ NULL
 
 #' Add NCI thesaurus disease names, using OBO ontology file
 #'
-#' @note Updated 2022-09-13.
+#' @note Updated 2023-01-17.
 #' @noRd
 #'
 #' @details
@@ -179,19 +176,14 @@ NULL
 #' - https://github.com/NCI-Thesaurus/thesaurus-obo-edition/
 #' - https://www.ebi.ac.uk/ols/ontologies/ncit
 #' - BiocOncoTK package
-.addNcitDiseaseName <- function(object, cache) {
-    assert(isFlag(cache))
+.addNcitDiseaseName <- function(object) {
     url <- pasteURL(
         "purl.obolibrary.org",
         "obo",
         "ncit.obo",
         protocol = "http"
     )
-    if (isTRUE(cache)) {
-        con <- cacheURL(url = url, pkg = .pkgName)
-    } else {
-        con <- url
-    }
+    con <- cacheURL(url = url, pkg = .pkgName)
     db <- import(con)
     names <- db[["name"]]
     map <- DataFrame(
@@ -332,14 +324,13 @@ NULL
 
 #' Import Cellosaurus data frame from OBO file
 #'
-#' @note Updated 2023-01-12.
+#' @note Updated 2023-01-17.
 #' @noRd
 #'
 #' @seealso
 #' - https://github.com/calipho-sib/cellosaurus/
 #' - https://ftp.expasy.org/databases/cellosaurus/
-.importCellosaurus <- function(cache) {
-    assert(isFlag(cache))
+.importCellosaurus <- function() {
     url <- pasteURL(
         "r.acidgenomics.com",
         "extdata",
@@ -347,11 +338,7 @@ NULL
         paste0("cellosaurus-", .release, ".obo"), # nolint
         protocol = "https"
     )
-    if (isTRUE(cache)) {
-        con <- cacheURL(url, pkg = .pkgName)
-    } else {
-        con <- url
-    }
+    con <- cacheURL(url, pkg = .pkgName)
     db <- import(con)
     assert(is(db, "ontology_index"))
     attr <- attr(x = db, which = "version", exact = TRUE)
@@ -472,9 +459,8 @@ NULL
 #' @rdname Cellosaurus
 #' @export
 Cellosaurus <- # nolint
-    function(cache = TRUE) {
-        assert(isFlag(cache))
-        object <- .importCellosaurus(cache = cache)
+    function() {
+        object <- .importCellosaurus()
         object <- .splitComments(object)
         object <- .splitSynonyms(object)
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")
@@ -482,7 +468,7 @@ Cellosaurus <- # nolint
         object <- .splitCol(object, colName = "xref")
         object <- .addNcbiTaxonomyIds(object)
         object <- .addNcitDiseaseId(object)
-        object <- .addNcitDiseaseName(object, cache = cache)
+        object <- .addNcitDiseaseName(object)
         object <- .addOrganism(object)
         object <- .addSex(object)
         object <- .addDepMapIds(object)
