@@ -82,7 +82,8 @@ test_that("DepMap", {
     fail <- map[["depmapFail"]]
     ## FIXME This is failing for 10 cell lines.
     ## TM-87
-    ## Hs 343.T
+    ## Hs 343.T  FIXME This is matching but returning as an error in our list...
+    ## Need to rethink the matching algorithm argh...
     ## PA-1 [PA1]
     ## SUM-1315MO2
     ## SUM-52PE, SUM52
