@@ -105,14 +105,25 @@ test_that("CellModelPassports", {
     fail <- map[["cmpFail"]]
     ## FIXME Need to resolve duplicates: "MS-1" "ML-1".
     df <- df[!duplicated(df[[1L]]), ]
-    ## Problematic cells:
-    ## SIDM00016 - CVCL_1340 - KP-N-S19s
-    ## SIDM00277 - CVCL_0258 - EoL-1-cell
-    ## SIDM01244 - CVCL_0367 - Jurkat-Clone-E6-1
-    ## SIDM01433 - CVCL_5953 - THUR14TKB
-    ## FIXME This is returning false for:
-    ## cells = c("KP-N-S19s", "EoL-1-cell", "Jurkat-Clone-E6-1", "THUR14TKB")
-    ## FIXME but returns TRUE for "KP-N-S19s" alone...something's wrong.
+    ## FIXME Hitting problematic lines here.
+    ## "CVCL_1677" - "CVCL_W531" - SBC-2
+    ## "CVCL_1888" - "CVCL_2717;CVCL_1888" - Sc-1
+    ## "CVCL_1637" - "CVCL_X507" - Panc 05.04
+    ## "CVCL_1092" - "CVCL_1858" - BT-B
+    ## "CVCL_H245" - "CVCL_T023" - CS-1
+    ## "CVCL_1429" - "CVCL_E995" - MS-1
+    ## "CVCL_C355" - "CVCL_1658" - EW-8
+    ## "CVCL_1993" - "CVCL_1992" - COLO 699
+    ## "CVCL_2204" - "CVCL_U347" - ST
+    ## "CVCL_C356" - "CVCL_L415" - Rh3
+    ## "CVCL_C357" - "CVCL_5916" - Rh4
+    ## "CVCL_6308" - "CVCL_AT85" - K2
+    ## "CVCL_1658" - "CVCL_V618" - EW-8
+    ## "CVCL_8663" - "CVCL_U797" - CJM
+    ## "CVCL_8788" - "CVCL_5020" - SNU-1272
+    ## "CVCL_B5IQ" - "CVCL_V616" - F5
+    ## "CVCL_9V00" - "CVCL_U760" - DL
+    ## "CVCL_7227" - "CVCL_2037" - F-36P
     expect_identical(
         object = unname(mapCells(object, cells = df[[1L]])),
         expected = df[[2L]]
