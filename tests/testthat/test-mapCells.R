@@ -1,17 +1,3 @@
-## FIXME Ensure we have coverage for all internal overrides.
-## A7
-## BE2C
-## DOTC24510
-## G292CLONEA141B1
-## HS729
-## HS936TC1
-## MCIXC
-## NTERA2CLD1
-## OCUG1
-## RAMOSRA1 (FIXME)
-## SJRH30
-## U87MG
-
 celloFull <- readRDS(file.path("cache", "celloFull.rds"))
 map <- readRDS(file.path("cache", "mapCells.rds"))
 
@@ -119,10 +105,10 @@ test_that("CellModelPassports", {
         replacement = "CVCL_1637",
         x = df[["RRID"]]
     )
-    ## FIXME Censor the COLO line mismatches here.
     censor <- c(
         "SIDM00408", # MS-1 / CVCL_E995
         "SIDM00440", # ML-1 / CVCL_0436
+        "SIDM00912", # COLO-699N / CVCL_1992s
         "SIDM01335", # SNU-1272 / CVCL_5020
         "SIDM01500" # EW-8 / CVCL_V618
     )
@@ -135,5 +121,42 @@ test_that("CellModelPassports", {
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "173 cells"
+    )
+})
+
+test_that("Tricky cell lines", {
+    object <- celloFull
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = c(
+                "A7",
+                "BE2C",
+                "DOTC24510",
+                "G292CLONEA141B1",
+                "HS729",
+                "HS936TC1",
+                "MCIXC",
+                "NTERA2CLD1",
+                "OCUG1",
+                "RAMOSRA1",
+                "SJRH30",
+                "U87MG"
+            )
+        ),
+        expected = c(
+            "A7" = "CVCL_3486",
+            "BE2C" = "CVCL_0529",
+            "DOTC24510" = "CVCL_1181",
+            "G292CLONEA141B1" = "CVCL_2909",
+            "HS729" = "CVCL_0871",
+            "HS936TC1" = "CVCL_1034",
+            "MCIXC" = "CVCL_1398",
+            "NTERA2CLD1" = "CVCL_3407",
+            "OCUG1" = "CVCL_3083",
+            "RAMOSRA1" = "CVCL_0597",
+            "SJRH30" = "CVCL_0041",
+            "U87MG" = "CVCL_0022"
+        )
     )
 })
