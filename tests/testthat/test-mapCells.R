@@ -80,15 +80,6 @@ test_that("DepMap", {
     object <- celloFull
     df <- map[["depmap"]]
     fail <- map[["depmapFail"]]
-    ## Ambiguous cell lines that are problematic to map by name alone:
-    ## "CVCL_0436" - "CVCL_H525" - ML-1
-    ## "CVCL_0463" - "CVCL_2458" - H157
-    ## "CVCL_C784" - "CVCL_L510" - RC2
-    ## "CVCL_H245" - "CVCL_T023" - CS1
-    ## "CVCL_6308" - "CVCL_AT85" - K2
-    ## "CVCL_1637" - "CVCL_X507" - PL18
-    ## "CVCL_8799" - "CVCL_9579" - LY2
-    ## "CVCL_5G07" - "CVCL_Y019" - HAP1
     expect_identical(
         object = unname(mapCells(object, cells = df[[1L]])),
         expected = df[[2L]]
@@ -103,15 +94,6 @@ test_that("CellModelPassports", {
     object <- celloFull
     df <- map[["cmp"]]
     fail <- map[["cmpFail"]]
-    ## FIXME Need to resolve duplicates: "MS-1" "ML-1".
-    df <- df[!duplicated(df[[1L]]), ]
-    ## FIXME Hitting problematic lines here.
-    ## "CVCL_1677" - "CVCL_W531" - SBC-2
-    ## "CVCL_1888" - "CVCL_2717;CVCL_1888" - Sc-1
-    ## "CVCL_1637" - "CVCL_X507" - Panc 05.04
-    ## "CVCL_1092" - "CVCL_1858" - BT-B
-    ## "CVCL_H245" - "CVCL_T023" - CS-1
-    ## "CVCL_1429" - "CVCL_E995" - MS-1
     ## "CVCL_C355" - "CVCL_1658" - EW-8
     ## "CVCL_1993" - "CVCL_1992" - COLO 699
     ## "CVCL_2204" - "CVCL_U347" - ST
@@ -130,6 +112,6 @@ test_that("CellModelPassports", {
     )
     expect_error(
         object = mapCells(object, cells = fail),
-        regexp = "188 cells"
+        regexp = "173 cells"
     )
 })
