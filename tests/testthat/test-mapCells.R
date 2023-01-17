@@ -80,21 +80,15 @@ test_that("DepMap", {
     object <- celloFull
     df <- map[["depmap"]]
     fail <- map[["depmapFail"]]
-    ## Currently problematic matching:
-    ##        ML-1        H157         RC2         CS1          K2        PL18
-    ## "CVCL_0436" "CVCL_0463" "CVCL_C784" "CVCL_H245" "CVCL_6308" "CVCL_1637"
-    ##         LY2        HAP1
-    ## "CVCL_8799" "CVCL_5G07"
-    ##
-    ## Need to resolve these:
+    ## Ambiguous cell lines that are problematic to map by name alone:
     ## "CVCL_0436" - "CVCL_H525" - ML-1
-    ## "CVCL_0463" - "CVCL_2458" - NCI-H157
-    ## "CVCL_C784" - "CVCL_L510" - RC-2
-    ## "CVCL_H245" - "CVCL_T023" - RPMI-3460/CS1
-    ## "CVCL_6308" - "CVCL_AT85" - CS-1
-    ## "CVCL_1637" - "CVCL_X507" - Panc 05.04
-    ## "CVCL_8799" - "CVCL_9579" - OCI-Ly2
-    ## "CVCL_5G07" - "CVCL_Y019" - HAP-1
+    ## "CVCL_0463" - "CVCL_2458" - H157
+    ## "CVCL_C784" - "CVCL_L510" - RC2
+    ## "CVCL_H245" - "CVCL_T023" - CS1
+    ## "CVCL_6308" - "CVCL_AT85" - K2
+    ## "CVCL_1637" - "CVCL_X507" - PL18
+    ## "CVCL_8799" - "CVCL_9579" - LY2
+    ## "CVCL_5G07" - "CVCL_Y019" - HAP1
     CVCL_H525	ML-1 [Human thyroid carcinoma]	Homo sapiens (Human)
     expect_identical(
         object = unname(mapCells(object, cells = df[[1L]])),
