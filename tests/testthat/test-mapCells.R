@@ -1,3 +1,17 @@
+## FIXME Ensure we have coverage for all internal overrides.
+## A7
+## BE2C
+## DOTC24510
+## G292CLONEA141B1
+## HS729
+## HS936TC1
+## MCIXC
+## NTERA2CLD1
+## OCUG1
+## RAMOSRA1 (FIXME)
+## SJRH30
+## U87MG
+
 celloFull <- readRDS(file.path("cache", "celloFull.rds"))
 map <- readRDS(file.path("cache", "mapCells.rds"))
 
