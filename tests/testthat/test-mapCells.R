@@ -119,6 +119,7 @@ test_that("CellModelPassports", {
         replacement = "CVCL_1637",
         x = df[["RRID"]]
     )
+    ## FIXME Censor the COLO line mismatches here.
     censor <- c(
         "SIDM00408", # MS-1 / CVCL_E995
         "SIDM00440", # ML-1 / CVCL_0436
