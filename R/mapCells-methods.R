@@ -55,7 +55,6 @@ NULL
             return(cells)
         }
         cellsOrig <- cells
-        cellsStd <- standardizeCells(cells)
         overrides <- get(
             x = "overrides",
             envir = asNamespace(.pkgName),

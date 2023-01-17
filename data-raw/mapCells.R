@@ -1,8 +1,10 @@
+## nolint start
 suppressPackageStartupMessages({
     library(AcidBase)
     library(syntactic)
     library(pipette)
 })
+## nolint end
 map <- list()
 ## DepMap ======================================================================
 ## 22Q4 release "Model.csv"
