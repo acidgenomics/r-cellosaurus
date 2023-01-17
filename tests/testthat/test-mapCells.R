@@ -70,3 +70,26 @@ test_that("Match failure", {
         regexp = "CVCL_0003"
     )
 })
+
+celloFull <- readRDS(file.path("cache", "celloFull.rds"))
+map <- readRDS(file.path("cache", "mapCells.rds"))
+
+test_that("DepMap", {
+    object <- celloFull
+    df <- map[["depmap"]]
+    fail <- map[["depmapFail"]]
+    ## FIXME This contains NA, need to rework...
+    xxx <- mapCells(object, cells = df[[1L]])
+    expect_error(
+        object = mapCells(object, cells = fail),
+        regexp = "12 cells"
+    )
+
+})
+
+test_that("CellModelPassports", {
+    object <- celloFull
+    df <- map[["cmp"]]
+    fail <- map[["cmpFail"]]
+
+})
