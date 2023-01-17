@@ -16,8 +16,9 @@ df <- import(
 )
 nameCol <- "CellLineName"
 rridCol <- "RRID"
+df <- df[!is.na(df[[nameCol]]), c(nameCol, rridCol)]
 ok <- !is.na(df[[rridCol]])
-map[["depmap"]] <- df[ok, c(nameCol, rridCol)]
+map[["depmap"]] <- df[ok, ]
 map[["depmapFail"]] <- df[!ok, nameCol]
 ## Sanger CellModelPassports ===================================================
 df <- import(
@@ -33,7 +34,8 @@ df <- import(
 )
 nameCol <- "model_name"
 rridCol <- "RRID"
+df <- df[!is.na(df[[nameCol]]), c(nameCol, rridCol)]
 ok <- !is.na(df[[rridCol]])
-map[["cmp"]] <- df[ok, c(nameCol, rridCol)]
+map[["cmp"]] <- df[ok, ]
 map[["cmpFail"]] <- df[!ok, nameCol]
 saveRDS(map, "mapCells.rds")
