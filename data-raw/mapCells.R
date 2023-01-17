@@ -21,11 +21,6 @@ df <- df[!is.na(df[["CellLineName"]]), ]
 df <- df[!duplicated(df[["CellLineName"]]), ]
 map[["depmapFail"]] <- df[is.na(df[["RRID"]]), "CellLineName"]
 df <- df[!is.na(df[["RRID"]]), ]
-## Remove cell lines that map incorrectly to Cellosaurus.
-censor <- c(
-    "ACH_002185" # PL18
-)
-df <- df[setdiff(rownames(df), censor), ]
 map[["depmap"]] <- df
 ## Sanger CellModelPassports ===================================================
 df <- import(
@@ -45,12 +40,5 @@ df <- df[!is.na(df[["model_name"]]), ]
 df <- df[!duplicated(df[["model_name"]]), ]
 map[["cmpFail"]] <- df[is.na(df[["RRID"]]), "model_name"]
 df <- df[!is.na(df[["RRID"]]), ]
-## Remove cell lines that map ambiguously.
-## FIXME Drop this: "CVCL_1429" - "CVCL_E995"
-censor <- c(
-    "SIDM00054", # PL18
-    "SIDM00400" # SC-1
-)
-df <- df[setdiff(rownames(df), censor), ]
 map[["cmp"]] <- df
 saveRDS(map, "mapCells.rds")
