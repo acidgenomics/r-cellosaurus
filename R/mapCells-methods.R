@@ -1,3 +1,9 @@
+## FIXME Need to figure out how to handle seocndary accession remapping.
+## e.g. CVCL_2717 to CVCL_1888
+## e.g. CVCL_X507 to CVCL_1637
+
+
+
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-01-17.
@@ -30,6 +36,7 @@ NULL
 
 
 
+## FIXME Add this back in for faster matching...see DepMap Sanger overrides.
 ## Dynamically handle common aliases that are difficult to map.
 ## > aliases <- import(
 ## >     con = system.file(
@@ -70,6 +77,8 @@ NULL
         if (isSubset(x = cells, y = as.character(object[[idCol]]))) {
             return(cells)
         }
+        cellsOrig <- cells
+        cellsStd <- standardizeCells(cells)
         ## First create a pool of exact matches annotated in Cellosaurus.
         df <- as(object, "DataFrame")
         cols <- c(
@@ -111,7 +120,48 @@ NULL
             )
         )
         poolUnlist <- unlist(pool, recursive = FALSE, use.names = FALSE)
+        ## Override any ambiguous cell line names with direct RRID mapping.
+        ## Note that DepMap currently takes priority over Sanger
+        ## CellModelPassports mapping conflicts currently.
+        cells <- unlist(Map(
+            cell = cells,
+            cellStd = standardizeCells(cells),
+            f = function(cell, cellStd) {
+                switch(
+                    EXPR = cellStd,
+                    ## DepMap ====
+                    "CS1" = "CVCL_T023",
+                    "H157" = "CVCL_2458",
+                    "HAP1" = "CVCL_Y019",
+                    "K2" = "CVCL_AT85",
+                    "LY2" = "CVCL_9579",
+                    "ML1" = "CVCL_H525",
+                    "RC2" = "CVCL_L510",
+                    "RH1" = "CVCL_1658",
+                    ## Sanger CellModelPassports ====
+                    "BT549" = "CVCL_1858",
+                    "CJM" = "CVCL_U797",
+                    "COLO699" = "CVCL_1992",
+                    "COLO699N" = "CVCL_1992",
+                    "DL" = "CVCL_U760",
+                    "F36E" = "CVCL_2037",
+                    "F5" = "CVCL_V616",
+                    "JR" = "CVCL_RT33",
+                    # > "ML1" = "CVCL_0436", # (conflicts with DepMap).
+                    "MM1" = "CVCL_5801",
+                    # > "MS1" = "CVCL_E995", # (conflicts with DepMap)
+                    "RH3" = "CVCL_L415",
+                    "RH4" = "CVCL_5916",
+                    "SBC2" = "CVCL_W531",
+                    "ST" = "CVCL_U347",
+                    cell
+                )
+            },
+            USE.NAMES = FALSE
+        ))
         idx <- poolRep[match(x = cells, table = poolUnlist)]
+        ## Fall back to matching by standardized cell name.
+        ## FIXME Rework this using internal data frame.
         if (anyNA(idx)) {
             naIdx <- which(is.na(idx))
             cells2 <- vapply(
@@ -133,6 +183,7 @@ NULL
             idx2 <- poolRep[match(x = cells2, table = poolUnlist)]
             idx[naIdx] <- idx2
         }
+        cells <- cellsOrig
         if (anyNA(idx)) {
             fail <- cells[is.na(idx)]
             abort(sprintf(
