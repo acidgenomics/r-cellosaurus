@@ -89,7 +89,6 @@ test_that("DepMap", {
     ## "CVCL_1637" - "CVCL_X507" - PL18
     ## "CVCL_8799" - "CVCL_9579" - LY2
     ## "CVCL_5G07" - "CVCL_Y019" - HAP1
-    CVCL_H525	ML-1 [Human thyroid carcinoma]	Homo sapiens (Human)
     expect_identical(
         object = unname(mapCells(object, cells = df[[1L]])),
         expected = df[[2L]]
@@ -104,6 +103,17 @@ test_that("CellModelPassports", {
     object <- celloFull
     df <- map[["cmp"]]
     fail <- map[["cmpFail"]]
+    ## FIXME Need to resolve duplicates: "MS-1" "ML-1".
+    df <- df[!duplicated(df[[1L]]), ]
+    ## FIXME Problematic cells:
+    ## KP-N-S19s,
+    ## EoL-1-cell
+    ## Jurkat-Clone-E6-1
+    ## THUR14TKB
+    expect_identical(
+        object = unname(mapCells(object, cells = df[[1L]])),
+        expected = df[[2L]]
+    )
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "188 cells"
