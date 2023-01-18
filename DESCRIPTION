@@ -1,7 +1,7 @@
 Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.4.1
+Version: 0.4.2.9000
 Date: 2023-01-18
 Authors@R: c(
     person(
@@ -30,6 +30,7 @@ Imports:
     BiocGenerics (>= 0.44.0),
     IRanges (>= 2.32.0),
     S4Vectors (>= 0.36.0),
+    data.table (>= 1.14.6),
     goalie (>= 0.6.7),
     methods,
     pipette (>= 0.10.1),

@@ -322,15 +322,17 @@ NULL
 
 
 
+## FIXME Should we drop "subset" column, which isn't that helpful?
+
 #' Import Cellosaurus data frame from OBO file
 #'
-#' @note Updated 2023-01-17.
+#' @note Updated 2023-01-18.
 #' @noRd
 #'
 #' @seealso
 #' - https://github.com/calipho-sib/cellosaurus/
 #' - https://ftp.expasy.org/databases/cellosaurus/
-.importCellosaurus <- function() {
+.importCelloFromObo <- function() {
     url <- pasteURL(
         "r.acidgenomics.com",
         "extdata",
@@ -379,9 +381,122 @@ NULL
 
 
 
+#' Import Cellosaurus data frame from TXT file
+#'
+#' @note Updated 2023-01-18.
+#' @noRd
+#'
+#' @seealso
+#' - https://github.com/calipho-sib/cellosaurus/
+#' - https://ftp.expasy.org/databases/cellosaurus/
+NULL
+
+## ---------  ---------------------------     ----------------------
+## Line code  Content                         Occurrence in an entry
+## ---------  ---------------------------     ----------------------
+## ID         Identifier (cell line name)     Once; starts an entry
+## AC         Accession (CVCL_xxxx)           Once
+## AS         Secondary accession number(s)   Optional; once
+## SY         Synonyms                        Optional; once
+## DR         Cross-references                Optional; once or more
+## RX         References identifiers          Optional: once or more
+## WW         Web pages                       Optional; once or more
+## CC         Comments                        Optional; once or more
+## ST         STR profile data                Optional; twice or more
+## DI         Diseases                        Optional; once or more
+## OX         Species of origin               Once or more
+## HI         Hierarchy                       Optional; once or more
+## OI         Originate from same individual  Optional; once or more
+## SX         Sex of cell                     Optional; once
+## AG         Age of donor at sampling        Optional; once
+## CA         Category                        Once
+## DT         Date (entry history)            Once
+## //         Terminator                      Once; ends an entry
+
+.importCelloFromTxt <- function() {
+    url <- pasteURL(
+        "r.acidgenomics.com",
+        "extdata",
+        "cellosaurus",
+        paste0("cellosaurus-", .release, ".txt"), # nolint
+        protocol = "https"
+    )
+    con <- cacheURL(url, pkg = .pkgName)
+    lines <- import(con, format = "lines", engine = "data.table")
+    keep <- grepl(
+        pattern = paste0(
+            "^((",
+            paste(
+                c(
+                    "AC",
+                    "AG",
+                    "AS",
+                    "CA",
+                    "DT",
+                    "ID"
+                ),
+                collapse = "|"
+            ),
+            ").+|//)$"
+        ),
+        x = lines
+    )
+    lines <- lines[keep]
+    x <- Map(
+        i = grep(pattern = "^ID\\s+", x = lines, value = FALSE),
+        j = grep(pattern = "^//$", x = lines, value = FALSE),
+        MoreArgs = list("lines" = lines),
+        f = function(lines, i, j) {
+            lines[i:(j-1L)]
+        }
+    )
+    x <- lapply(
+        X = x,
+        FUN = stri_split_fixed,
+        pattern = "   ",
+        n = 2L,
+        simplify = TRUE
+    )
+    x <- lapply(
+        X = x,
+        FUN = function(x) {
+            ac <- x[which(x[, 1L] == "AC"), 2L]
+            ag <- x[which(x[, 1L] == "AG"), 2L]
+            as <- x[which(x[, 1L] == "AS"), 2L]
+            ca <- x[which(x[, 1L] == "CA"), 2L]
+            dt <- x[which(x[, 1L] == "DT"), 2L]
+            if (identical(ag, character())) {
+                ag <- NA_character_
+            }
+            if (identical(as, character())) {
+                as <- NA_character_
+            }
+            if (identical(ca, character())) {
+                ca <- NA_character_
+            }
+            list(
+                "id" = ac,
+                "age" = ag,
+                "category" = ca,
+                "secondaryAccession" = as,
+                "timestamp" = dt
+            )
+        }
+    )
+    ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
+    x <- rbindlist(l = y, use.names = TRUE, fill = FALSE)
+    x <- as(x, "DataFrame")
+    rownames(x) <- x[["id"]]
+    x <- .splitCol(x, "timestamp")
+    x
+}
+
+
+
+
 #' Split a column into a character list
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2023-01-18.
 #' @noRd
 .splitCol <- function(object, colName, split = "; ") {
     assert(
@@ -394,7 +509,7 @@ NULL
             x = object[[colName]],
             split = split,
             fixed = TRUE
-        ))
+        )[[1L]])
     object
 }
 
@@ -461,7 +576,7 @@ NULL
 #' @export
 Cellosaurus <- # nolint
     function() {
-        object <- .importCellosaurus()
+        object <- .importCelloFromObo()
         object <- .splitComments(object)
         object <- .splitSynonyms(object)
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")
