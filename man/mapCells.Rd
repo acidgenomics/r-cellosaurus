@@ -10,7 +10,7 @@ mapCells(object, ...)
 \S4method{mapCells}{Cellosaurus}(
   object,
   cells,
-  keyType = c("cellosaurusId", "depmapId", "sangerModelId")
+  keyType = c("cellosaurusId", "depmapId", "sangerModelId", "name")
 )
 }
 \arguments{

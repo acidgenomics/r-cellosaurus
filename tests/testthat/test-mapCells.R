@@ -76,16 +76,35 @@ test_that("Match failure", {
     )
 })
 
-test_that("DepMap", {
+test_that("DepMap 22Q2", {
     object <- celloFull
-    df <- map[["depmap"]]
+    df <- map[["depmap_22q2"]]
+    expect_identical(
+        object = unname(mapCells(object, cells = df[["cell_line_name"]])),
+        expected = df[["RRID"]]
+    )
+    ## FIXME Mapping errors:
+    ## "CVCL_2970" - "CVCL_U757" - ACH-001099 - KD
+    ## "CVCL_1658" - "CVCL_V618" - ACH-000499 - EW8
+    ## "CVCL_1429" - "CVCL_E995" - ACH-001131 - MS-1
+    ## "CVCL_1637" - "CVCL_X507" - ACH-002185 - PL18
+    fail <- map[["depmap_22q2_fail"]]
+    expect_error(
+        object = mapCells(object, cells = fail),
+        regexp = "19 cells"
+    )
+})
+
+test_that("DepMap 22Q4", {
+    object <- celloFull
+    df <- map[["depmap_22q4"]]
     censor <- "ACH_002185" # PL18
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["CellLineName"]])),
         expected = df[["RRID"]]
     )
-    fail <- map[["depmapFail"]]
+    fail <- map[["depmap_22q4_fail"]]
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "12 cells"
@@ -117,7 +136,7 @@ test_that("CellModelPassports", {
         object = unname(mapCells(object, cells = df[["model_name"]])),
         expected = df[["RRID"]]
     )
-    fail <- map[["cmpFail"]]
+    fail <- map[["cmp_fail"]]
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "173 cells"
@@ -141,7 +160,11 @@ test_that("Tricky cell lines", {
                 "OCUG1",
                 "RAMOSRA1",
                 "SJRH30",
-                "U87MG"
+                "U87MG",
+                "CHL-1-DM",
+                "D384",
+                "NCI-H157-DM",
+                "OCILY-13"
             )
         ),
         expected = c(
@@ -156,7 +179,11 @@ test_that("Tricky cell lines", {
             "OCUG1" = "CVCL_3083",
             "RAMOSRA1" = "CVCL_0597",
             "SJRH30" = "CVCL_0041",
-            "U87MG" = "CVCL_0022"
+            "U87MG" = "CVCL_0022",
+            "CHL-1-DM", "CVCL_1122",
+            "D384", "CVCL_1157",
+            "NCI-H157-DM", "CVCL_0463",
+            "OCILY-13", "CVCL_8797"
         )
     )
 })
