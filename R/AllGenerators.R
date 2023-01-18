@@ -437,12 +437,6 @@ NULL
         "AC", "AG", "AS", "CA", "CC", "DI", "DR", "DT", "HI", "ID", "OI", "OX",
         "RX", "ST", "SX", "SY", "WW"
     )
-    ## Optionally, reduce the number of relevant lines.
-    ## > keep <- grepl(
-    ## >     pattern = paste0("^((", paste(keys, collapse = "|"), ").+|//)$"),
-    ## >     x = lines
-    ## > )
-    ## > lines <- lines[keep]
     x <- Map(
         i = grep(pattern = "^ID\\s+", x = lines, value = FALSE),
         j = grep(pattern = "^//$", x = lines, value = FALSE),
@@ -485,24 +479,24 @@ NULL
     ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
     df <- rbindlist(l = x, use.names = TRUE, fill = FALSE)
     df <- as(df, "DataFrame")
-    colnames(df)[colnames(df) == "AC"] <- "id"
-    colnames(df)[colnames(df) == "AG"] <- "age"
-    colnames(df)[colnames(df) == "AS"] <- "FIXME"
-    colnames(df)[colnames(df) == "CA"] <- "FIXME"
-    colnames(df)[colnames(df) == "CC"] <- "FIXME"
-    colnames(df)[colnames(df) == "DI"] <- "FIXME"
-    colnames(df)[colnames(df) == "DR"] <- "FIXME"
-    colnames(df)[colnames(df) == "DT"] <- "FIXME"
-    colnames(df)[colnames(df) == "HI"] <- "FIXME"
-    colnames(df)[colnames(df) == "ID"] <- "FIXME"
-    colnames(df)[colnames(df) == "OI"] <- "FIXME"
-    colnames(df)[colnames(df) == "OX"] <- "FIXME"
-    colnames(df)[colnames(df) == "RX"] <- "FIXME"
-    colnames(df)[colnames(df) == "ST"] <- "FIXME"
-    colnames(df)[colnames(df) == "SX"] <- "FIXME"
-    colnames(df)[colnames(df) == "SY"] <- "FIXME"
-    colnames(df)[colnames(df) == "WW"] <- "FIXME"
-    rownames(df) <- df[["id"]]
+    colnames(df)[colnames(df) == "AC"] <- "accession"
+    colnames(df)[colnames(df) == "AG"] <- "ageAtSampling"
+    colnames(df)[colnames(df) == "AS"] <- "secondaryAccession"
+    colnames(df)[colnames(df) == "CA"] <- "category"
+    colnames(df)[colnames(df) == "CC"] <- "comments"
+    colnames(df)[colnames(df) == "DI"] <- "diseases"
+    colnames(df)[colnames(df) == "DR"] <- "crossReferences"
+    colnames(df)[colnames(df) == "DT"] <- "date"
+    colnames(df)[colnames(df) == "HI"] <- "hierarchy"
+    colnames(df)[colnames(df) == "ID"] <- "cellLineName"
+    colnames(df)[colnames(df) == "OI"] <- "originateFromSameIndividual"
+    colnames(df)[colnames(df) == "OX"] <- "speciesOfOrigin"
+    colnames(df)[colnames(df) == "RX"] <- "referencesIdentifiers"
+    colnames(df)[colnames(df) == "ST"] <- "strProfileData"
+    colnames(df)[colnames(df) == "SX"] <- "sexOfCell"
+    colnames(df)[colnames(df) == "SY"] <- "synonyms"
+    colnames(df)[colnames(df) == "WW"] <- "webPages"
+    rownames(df) <- df[["accession"]]
     df <- .splitCol(df, "timestamp")
     metadata(df)[["dataVersion"]] <- dataVersion
     metadata(df)[["packageVersion"]] <- .pkgVersion
