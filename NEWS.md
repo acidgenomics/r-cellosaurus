@@ -1,5 +1,15 @@
 # Release notes
 
+## Cellosaurus 0.4.1 (2023-01-18)
+
+Minor changes:
+
+- Added cell name mapping code coverage against DepMap 22Q2, which differs
+  significantly from DepMap 22Q4.
+- `mapCells`: Now supports return of cell line name.
+- Removed BT-549 cell line mapping override. Sanger CMP is currently incorrect.
+- Added some additional identifier aliases to support DepMap 22Q2 coverage.
+
 ## Cellosaurus 0.4.0 (2023-01-18)
 
 Major changes:
