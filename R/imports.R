@@ -9,7 +9,7 @@ NULL
 
 #' @importFrom AcidGenerics camelCase encode factorize leftJoin mapCells
 #' removeNA sanitizeNA snakeCase standardizeCells
-#' @importFrom BiocGenerics %in% as.data.frame grep grepl lapply unlist
+#' @importFrom BiocGenerics Map %in% as.data.frame grep grepl lapply unlist
 #' @importFrom IRanges gsub
 #' @importFrom S4Vectors Rle decode metadata metadata<- na.omit
 #' @importFrom methods show
@@ -28,12 +28,14 @@ NULL
 #' @importFrom AcidCLI abort alert
 #' @importFrom IRanges CharacterList
 #' @importFrom S4Vectors DataFrame
+#' @importFrom data.table rbindlist
 #' @importFrom goalie allAreMatchingFixed allAreMatchingRegex assert hasLength
 #' hasNoDuplicates hasRownames isCharacter isFlag isString isSubset validate
 #' validateClasses
 #' @importFrom methods as is new setClass setMethod setValidity validObject
 #' @importFrom pipette cacheURL
 #' @importFrom stringi stri_replace_all_regex stri_replace_first_regex
+#' stri_split_fixed
 #' @importFrom taxizedb db_download_ncbi taxid2name
 #' @importFrom utils packageName packageVersion
 NULL
