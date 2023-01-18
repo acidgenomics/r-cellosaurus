@@ -1,5 +1,22 @@
 # Release notes
 
+## Cellosaurus 0.4.0 (2023-01-18)
+
+Major changes:
+
+- `mapCells`: Reworked internal matching engine, and added support for manual
+  overrides using `overrides` object defined in `sysdata.rda`. The original
+  mappings are defined in `overrides.csv` (see `data-raw`). Mappings are now
+  covered against all cell lines defined in DepMap (22Q4) and Sanger
+  CellModelPassports.
+
+Minor changes:
+
+- `Cellosaurus`: removed option to override caching manually with `cache`.
+- `sanitizeCells`: Added an additional handling rule for edge case.
+- `Cellosaurus` object now gets saved with `packageVersion` in `metadata`.
+- Resaved example `cello` object.
+
 ## Cellosaurus 0.3.4 (2023-01-12)
 
 Minor changes:
