@@ -20,6 +20,18 @@ install.packages(
 )
 ```
 
+### [Conda][] method
+
+Configure [Conda][] to use the [Bioconda][] channels.
+
+```sh
+# Don't install recipe into base environment.
+name='r-cellosaurus'
+conda create --name="$name" "$name"
+conda activate "$name"
+R
+```
+
 ### [Docker][] method
 
 ```sh
@@ -33,6 +45,8 @@ docker run -it \
     R
 ```
 
+[bioconda]: https://bioconda.github.io/
+[conda]: https://conda.io/
 [cellosaurus]: https://www.cellosaurus.org/
 [docker]: https://www.docker.com/
 [r]: https://www.r-project.org/
