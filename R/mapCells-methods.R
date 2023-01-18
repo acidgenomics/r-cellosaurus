@@ -30,19 +30,19 @@ NULL
 
 
 
-## Updated 2023-01-17.
+## Updated 2023-01-18.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
              keyType = c(
                  "cellosaurusId",
                  "depmapId",
-                 "sangerModelId"
+                 "sangerModelId",
+                 "name"
              )) {
         assert(
             validObject(object),
-            isCharacter(cells),
-            hasNoDuplicates(cells)
+            isCharacter(cells)
         )
         keyType <- match.arg(keyType)
         idCol <- switch(
