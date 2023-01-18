@@ -433,21 +433,16 @@ NULL
         fixed = TRUE
     )[[1L]][[2L]]
     dataVersion <- as.numeric_version(dataVersion)
-    keep <- grepl(
-        pattern = paste0(
-            "^((",
-            paste(
-                c(
-                    "AC", "AG", "AS", "CA", "CC", "DI", "DR", "DT", "HI", "ID",
-                    "OI", "OX", "RX", "ST", "SX", "SY", "WW"
-                ),
-                collapse = "|"
-            ),
-            ").+|//)$"
-        ),
-        x = lines
+    keys <- c(
+        "AC", "AG", "AS", "CA", "CC", "DI", "DR", "DT", "HI", "ID", "OI", "OX",
+        "RX", "ST", "SX", "SY", "WW"
     )
-    lines <- lines[keep]
+    ## Optionally, reduce the number of relevant lines.
+    ## > keep <- grepl(
+    ## >     pattern = paste0("^((", paste(keys, collapse = "|"), ").+|//)$"),
+    ## >     x = lines
+    ## > )
+    ## > lines <- lines[keep]
     x <- Map(
         i = grep(pattern = "^ID\\s+", x = lines, value = FALSE),
         j = grep(pattern = "^//$", x = lines, value = FALSE),
@@ -469,37 +464,44 @@ NULL
             split(x[, 2L], f = x[, 1L])
         }
     )
-    ## FIXME repKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
+    optionalKeys <- c("AG", "AS", "SX", "SY")
+    nestedKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
     x <- lapply(
         X = x,
-        FUN = function(x) {
-            ## FIXME How to collapse duplicate entries into a list?
-            ac <- x[which(x[, 1L] == "AC"), 2L]
-            ag <- x[which(x[, 1L] == "AG"), 2L]
-            as <- x[which(x[, 1L] == "AS"), 2L]
-            ca <- x[which(x[, 1L] == "CA"), 2L]
-            dt <- x[which(x[, 1L] == "DT"), 2L]
-            if (identical(ag, character())) {
-                ag <- NA_character_
+        optionalKeys = optionalKeys,
+        nestedKeys = nestedKeys,
+        FUN = function(x, optionalKeys, nestedKeys) {
+            for (key in optionalKeys) {
+                if (is.null(x[[key]])) {
+                    x[[key]] <- NA_character_
+                }
             }
-            if (identical(as, character())) {
-                as <- NA_character_
+            for (key in nestedKeys) {
+                x[[key]] <- list(x[[key]])
             }
-            if (identical(ca, character())) {
-                ca <- NA_character_
-            }
-            list(
-                "id" = ac,
-                "age" = ag,
-                "category" = ca,
-                "secondaryAccession" = as,
-                "timestamp" = dt
-            )
+            x
         }
     )
     ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
-    df <- rbindlist(l = y, use.names = TRUE, fill = FALSE)
+    df <- rbindlist(l = x, use.names = TRUE, fill = FALSE)
     df <- as(df, "DataFrame")
+    colnames(df)[colnames(df) == "AC"] <- "id"
+    colnames(df)[colnames(df) == "AG"] <- "age"
+    colnames(df)[colnames(df) == "AS"] <- "FIXME"
+    colnames(df)[colnames(df) == "CA"] <- "FIXME"
+    colnames(df)[colnames(df) == "CC"] <- "FIXME"
+    colnames(df)[colnames(df) == "DI"] <- "FIXME"
+    colnames(df)[colnames(df) == "DR"] <- "FIXME"
+    colnames(df)[colnames(df) == "DT"] <- "FIXME"
+    colnames(df)[colnames(df) == "HI"] <- "FIXME"
+    colnames(df)[colnames(df) == "ID"] <- "FIXME"
+    colnames(df)[colnames(df) == "OI"] <- "FIXME"
+    colnames(df)[colnames(df) == "OX"] <- "FIXME"
+    colnames(df)[colnames(df) == "RX"] <- "FIXME"
+    colnames(df)[colnames(df) == "ST"] <- "FIXME"
+    colnames(df)[colnames(df) == "SX"] <- "FIXME"
+    colnames(df)[colnames(df) == "SY"] <- "FIXME"
+    colnames(df)[colnames(df) == "WW"] <- "FIXME"
     rownames(df) <- df[["id"]]
     df <- .splitCol(df, "timestamp")
     metadata(df)[["dataVersion"]] <- dataVersion
