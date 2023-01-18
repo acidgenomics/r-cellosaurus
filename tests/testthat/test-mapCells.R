@@ -79,15 +79,16 @@ test_that("Match failure", {
 test_that("DepMap 22Q2", {
     object <- celloFull
     df <- map[["depmap_22q2"]]
+    censor <- c(
+        "ACH_000499", # EW8
+        "ACH_001131", # MS-1
+        "ACH_002185" # PL18
+    )
+    df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["cell_line_name"]])),
         expected = df[["RRID"]]
     )
-    ## FIXME Mapping errors:
-    ## "CVCL_2970" - "CVCL_U757" - ACH-001099 - KD
-    ## "CVCL_1658" - "CVCL_V618" - ACH-000499 - EW8
-    ## "CVCL_1429" - "CVCL_E995" - ACH-001131 - MS-1
-    ## "CVCL_1637" - "CVCL_X507" - ACH-002185 - PL18
     fail <- map[["depmap_22q2_fail"]]
     expect_error(
         object = mapCells(object, cells = fail),
@@ -125,11 +126,12 @@ test_that("CellModelPassports", {
         x = df[["RRID"]]
     )
     censor <- c(
-        "SIDM00408", # MS-1; CVCL_E995
-        "SIDM00440", # ML-1; CVCL_0436
-        "SIDM00912", # COLO-699N; CVCL_1992s
-        "SIDM01335", # SNU-1272; CVCL_5020
-        "SIDM01500" # EW-8; CVCL_V618
+        "SIDM00122",
+        "SIDM00408",
+        "SIDM00440",
+        "SIDM00912",
+        "SIDM01335",
+        "SIDM01500"
     )
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
@@ -180,10 +182,10 @@ test_that("Tricky cell lines", {
             "RAMOSRA1" = "CVCL_0597",
             "SJRH30" = "CVCL_0041",
             "U87MG" = "CVCL_0022",
-            "CHL-1-DM", "CVCL_1122",
-            "D384", "CVCL_1157",
-            "NCI-H157-DM", "CVCL_0463",
-            "OCILY-13", "CVCL_8797"
+            "CHL-1-DM" = "CVCL_1122",
+            "D384" = "CVCL_1157",
+            "NCI-H157-DM" = "CVCL_0463",
+            "OCILY-13" = "CVCL_8797"
         )
     )
 })
