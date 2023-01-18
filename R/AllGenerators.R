@@ -423,17 +423,23 @@ NULL
     )
     con <- cacheURL(url, pkg = .pkgName)
     lines <- import(con, format = "lines", engine = "data.table")
+    dataVersion <- strsplit(
+        x = grep(
+            pattern = "^ Version:",
+            x = lines[1L:10L],
+            value = TRUE
+        ),
+        split = ": ",
+        fixed = TRUE
+    )[[1L]][[2L]]
+    dataVersion <- as.numeric_version(dataVersion)
     keep <- grepl(
         pattern = paste0(
             "^((",
             paste(
                 c(
-                    "AC",
-                    "AG",
-                    "AS",
-                    "CA",
-                    "DT",
-                    "ID"
+                    "AC", "AG", "AS", "CA", "CC", "DI", "DR", "DT", "HI", "ID",
+                    "OI", "OX", "RX", "ST", "SX", "SY", "WW"
                 ),
                 collapse = "|"
             ),
@@ -460,6 +466,14 @@ NULL
     x <- lapply(
         X = x,
         FUN = function(x) {
+            split(x[, 2L], f = x[, 1L])
+        }
+    )
+    ## FIXME repKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
+    x <- lapply(
+        X = x,
+        FUN = function(x) {
+            ## FIXME How to collapse duplicate entries into a list?
             ac <- x[which(x[, 1L] == "AC"), 2L]
             ag <- x[which(x[, 1L] == "AG"), 2L]
             as <- x[which(x[, 1L] == "AS"), 2L]
@@ -484,11 +498,13 @@ NULL
         }
     )
     ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
-    x <- rbindlist(l = y, use.names = TRUE, fill = FALSE)
-    x <- as(x, "DataFrame")
-    rownames(x) <- x[["id"]]
-    x <- .splitCol(x, "timestamp")
-    x
+    df <- rbindlist(l = y, use.names = TRUE, fill = FALSE)
+    df <- as(df, "DataFrame")
+    rownames(df) <- df[["id"]]
+    df <- .splitCol(df, "timestamp")
+    metadata(df)[["dataVersion"]] <- dataVersion
+    metadata(df)[["packageVersion"]] <- .pkgVersion
+    df
 }
 
 
