@@ -294,25 +294,6 @@ NULL
 
 ## FIXME Need to rework this.
 
-## Updated 2022-08-23.
-.addSex <- function(object) {
-    assert(
-        is(object, "DataFrame"),
-        is(object[["subset"]], "CharacterList")
-    )
-    sex <- rep(NA_character_, times = nrow(object))
-    femaleIdx <- which(any(object[["subset"]] == "Female"))
-    maleIdx <- which(any(object[["subset"]] == "Male"))
-    sex[femaleIdx] <- "Female"
-    sex[maleIdx] <- "Male"
-    object[["sex"]] <- sex
-    object
-}
-
-
-
-## FIXME Need to rework this.
-
 #' Extract a key-value pair from xref metadata
 #'
 #' @note Updated 2022-05-13.
@@ -529,13 +510,15 @@ Cellosaurus <- # nolint
         object <- .importCelloFromTxt()
         assert(allAreMatchingRegex(x = rownames(object), pattern = "^CVCL_"))
         object <- object[order(rownames(object)), ]
+        ## Fix for "CVCL_7082" cell line, which is actually named "NA".
+        if (isSubset("CVCL_7082", rownames(object))) {
+            object["CVCL_7082", "cellLineName"] <- "NA"
+        }
+        assert(isCharacter(object[["cellLineName"]]))
         object <- .splitCol(object, colName = "date", split = "; ")
         object <- .splitCol(object, colName = "synonyms", split = "; ")
-        ## Fix "CVCL_7082" cell line, which is actually named "NA".
-        if (isSubset("CVCL_7082", rownames(df))) {
-            df["CVCL_7082", "name"] <- "NA"
-        }
-        assert(isCharacter(df[["name"]]))
+
+        ## FIXME Current state of progress.
         object <- .splitSynonyms(object)
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")
         object <- .splitCol(object, colName = "subset")
@@ -544,7 +527,6 @@ Cellosaurus <- # nolint
         object <- .addNcitDiseaseId(object)
         object <- .addNcitDiseaseName(object)
         object <- .addOrganism(object)
-        object <- .addSex(object)
         object <- .addDepMapIds(object)
         object <- .addSangerIds(object)
         object <- .addIsCancer(object)
