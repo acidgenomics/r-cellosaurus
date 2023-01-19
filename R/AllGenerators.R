@@ -413,6 +413,8 @@ NULL
 ## DT         Date (entry history)            Once
 ## //         Terminator                      Once; ends an entry
 
+
+
 .importCelloFromTxt <- function() {
     url <- pasteURL(
         "r.acidgenomics.com",
@@ -423,6 +425,7 @@ NULL
     )
     con <- cacheURL(url, pkg = .pkgName)
     lines <- import(con, format = "lines", engine = "data.table")
+    ## Extract the Cellosaurus data version (release) from the top of the file.
     dataVersion <- strsplit(
         x = grep(
             pattern = "^ Version:",
@@ -433,49 +436,46 @@ NULL
         fixed = TRUE
     )[[1L]][[2L]]
     dataVersion <- as.numeric_version(dataVersion)
-    keys <- c(
-        "AC", "AG", "AS", "CA", "CC", "DI", "DR", "DT", "HI", "ID", "OI", "OX",
-        "RX", "ST", "SX", "SY", "WW"
-    )
+    alert("Mapping lines into list of entries.")
     x <- Map(
+        f = function(lines, i, j) {
+            lines[i:(j-1L)]
+        },
         i = grep(pattern = "^ID\\s+", x = lines, value = FALSE),
         j = grep(pattern = "^//$", x = lines, value = FALSE),
         MoreArgs = list("lines" = lines),
-        f = function(lines, i, j) {
-            lines[i:(j-1L)]
-        }
+        USE.NAMES = FALSE
     )
-    x <- lapply(
-        X = x,
-        FUN = stri_split_fixed,
-        pattern = "   ",
-        n = 2L,
-        simplify = TRUE
-    )
-    x <- lapply(
-        X = x,
-        FUN = function(x) {
-            split(x[, 2L], f = x[, 1L])
-        }
-    )
-    optionalKeys <- c("AG", "AS", "SX", "SY")
+    alert("Processing entries.")
     nestedKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
-    x <- lapply(
-        X = x,
-        optionalKeys = optionalKeys,
-        nestedKeys = nestedKeys,
-        FUN = function(x, optionalKeys, nestedKeys) {
-            for (key in optionalKeys) {
-                if (is.null(x[[key]])) {
-                    x[[key]] <- NA_character_
-                }
+    optionalKeys <- c("AG", "AS", "SX", "SY")
+    .processEntry <- function(x, nestedKeys, optionalKeys) {
+        x <- stri_split_fixed(
+            str = x,
+            pattern = "   ",
+            n = 2L,
+            simplify = TRUE
+        )
+        x <- split(x[, 2L], f = x[, 1L])
+        for (key in optionalKeys) {
+            if (is.null(x[[key]])) {
+                x[[key]] <- NA_character_
             }
-            for (key in nestedKeys) {
-                x[[key]] <- list(x[[key]])
-            }
-            x
         }
+        for (key in nestedKeys) {
+            x[[key]] <- list(x[[key]])
+        }
+        x
+    }
+    ## FIXME Can we speed this up running with multi-core? Future?
+    future::plan(strategy = future::multisession)
+    x <- future.apply::future_lapply(
+        X = x,
+        FUN = .processEntry,
+        nestedKeys = nestedKeys,
+        optionalKeys = optionalKeys
     )
+    alert("Converting entries list to data frame.")
     ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
     df <- rbindlist(l = x, use.names = TRUE, fill = FALSE)
     df <- as(df, "DataFrame")
@@ -497,7 +497,8 @@ NULL
     colnames(df)[colnames(df) == "SY"] <- "synonyms"
     colnames(df)[colnames(df) == "WW"] <- "webPages"
     rownames(df) <- df[["accession"]]
-    df <- .splitCol(df, "timestamp")
+    df <- .splitCol(df, colName = "date", split = "; ")
+    df <- .splitCol(df, colName = "synonyms", split = "; ")
     metadata(df)[["dataVersion"]] <- dataVersion
     metadata(df)[["packageVersion"]] <- .pkgVersion
     df
@@ -505,10 +506,9 @@ NULL
 
 
 
-
 #' Split a column into a character list
 #'
-#' @note Updated 2023-01-18.
+#' @note Updated 2023-01-19.
 #' @noRd
 .splitCol <- function(object, colName, split = "; ") {
     assert(
@@ -521,7 +521,7 @@ NULL
             x = object[[colName]],
             split = split,
             fixed = TRUE
-        )[[1L]])
+        ))
     object
 }
 
