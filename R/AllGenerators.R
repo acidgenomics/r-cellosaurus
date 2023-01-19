@@ -25,6 +25,8 @@ NULL
 
 
 
+## FIXME Need to rework this.
+
 #' Extract DepMap identifiers
 #'
 #' @note Updated 2022-10-04.
@@ -38,6 +40,8 @@ NULL
 }
 
 
+
+## FIXME Need to rework this.
 
 #' Add `ethnicity` column
 #'
@@ -66,6 +70,8 @@ NULL
 
 
 
+## FIXME Need to rework this.
+
 #' Add `isCancer` column
 #'
 #' @note Updated 2022-05-13.
@@ -81,6 +87,8 @@ NULL
 }
 
 
+
+## FIXME Need to rework this.
 
 #' Add `isProblematic` column
 #'
@@ -101,6 +109,8 @@ NULL
 }
 
 
+
+## FIXME Need to rework this.
 
 #' Add `msiStatus` column
 #'
@@ -130,6 +140,8 @@ NULL
 
 
 
+## FIXME Need to rework this.
+
 #' Extract NCBI taxonomy identifiers
 #'
 #' @note Updated 2022-08-23.
@@ -147,6 +159,8 @@ NULL
 
 
 
+## FIXME Need to rework this.
+
 #' Extract NCI thesaurus disease identifiers
 #'
 #' @note Updated 2022-08-23.
@@ -160,6 +174,8 @@ NULL
 }
 
 
+
+## FIXME Need to rework this.
 
 #' Add NCI thesaurus disease names, using OBO ontology file
 #'
@@ -205,6 +221,8 @@ NULL
 
 
 
+## FIXME Need to rework this.
+
 #' Add `organism` column, using NCBI taxonomy identifiers as input
 #'
 #' @note Updated 2022-08-23.
@@ -227,6 +245,8 @@ NULL
 }
 
 
+
+## FIXME Need to rework this.
 
 #' Add `samplingSite` column
 #'
@@ -256,6 +276,8 @@ NULL
 
 
 
+## FIXME Need to rework this.
+
 #' Extract Sanger Cell Model Passports identifiers
 #'
 #' @note Updated 2022-10-04.
@@ -269,6 +291,8 @@ NULL
 }
 
 
+
+## FIXME Need to rework this.
 
 ## Updated 2022-08-23.
 .addSex <- function(object) {
@@ -286,6 +310,8 @@ NULL
 }
 
 
+
+## FIXME Need to rework this.
 
 #' Extract a key-value pair from xref metadata
 #'
@@ -326,16 +352,6 @@ NULL
 
 
 
-#' Import Cellosaurus data frame from TXT file
-#'
-#' @note Updated 2023-01-19.
-#' @noRd
-#'
-#' @seealso
-#' - https://github.com/calipho-sib/cellosaurus/
-#' - https://ftp.expasy.org/databases/cellosaurus/
-NULL
-
 ## ---------  ---------------------------     ----------------------
 ## Line code  Content                         Occurrence in an entry
 ## ---------  ---------------------------     ----------------------
@@ -358,6 +374,16 @@ NULL
 ## DT         Date (entry history)            Once
 ## //         Terminator                      Once; ends an entry
 
+
+
+#' Import Cellosaurus data frame from TXT file
+#'
+#' @note Updated 2023-01-19.
+#' @noRd
+#'
+#' @seealso
+#' - https://github.com/calipho-sib/cellosaurus/
+#' - https://ftp.expasy.org/databases/cellosaurus/
 .importCelloFromTxt <- function() {
     url <- pasteURL(
         "r.acidgenomics.com",
@@ -466,40 +492,11 @@ NULL
 
 
 
-#' Split comments by sentence
-#'
-#' @note Updated 2022-05-13.
-#' @noRd
-.splitComments <- function(object) {
-    assert(is(object, "DataFrame"))
-    object[["comment"]] <- gsub(
-        pattern = "^\"",
-        replacement = "",
-        x = object[["comment"]]
-    )
-    object[["comment"]] <- gsub(
-        pattern = "\"$",
-        replacement = "",
-        x = object[["comment"]]
-    )
-    object <- .splitCol(
-        object = object,
-        colName = "comment",
-        split = ". "
-    )
-    object[["comment"]] <- gsub(
-        pattern = "\\.$",
-        replacement = "",
-        x = object[["comment"]]
-    )
-    object
-}
-
-
+## FIXME Need to rework this.
 
 #' Split synonyms column
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2023-01-19.
 #' @noRd
 .splitSynonyms <- function(object) {
     assert(is(object, "DataFrame"))
@@ -539,7 +536,6 @@ Cellosaurus <- # nolint
             df["CVCL_7082", "name"] <- "NA"
         }
         assert(isCharacter(df[["name"]]))
-        object <- .splitComments(object)
         object <- .splitSynonyms(object)
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")
         object <- .splitCol(object, colName = "subset")
