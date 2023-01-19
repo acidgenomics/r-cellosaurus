@@ -1,3 +1,7 @@
+## FIXME Rework extractXref to use crossReferences instead.
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -322,53 +326,6 @@ NULL
 
 
 
-#' Import Cellosaurus data frame from OBO file
-#'
-#' @note Updated 2023-01-19.
-#' @noRd
-#'
-#' @seealso
-#' - https://github.com/calipho-sib/cellosaurus/
-#' - https://ftp.expasy.org/databases/cellosaurus/
-.importCelloFromObo <- function() {
-    url <- pasteURL(
-        "r.acidgenomics.com",
-        "extdata",
-        "cellosaurus",
-        paste0("cellosaurus-", .release, ".obo"), # nolint
-        protocol = "https"
-    )
-    con <- cacheURL(url, pkg = .pkgName)
-    db <- import(con)
-    assert(is(db, "ontology_index"))
-    attr <- attr(x = db, which = "version", exact = TRUE)
-    dataVersion <- strsplit(
-        x = grep(
-            pattern = "^data-version:",
-            x = attr,
-            value = TRUE
-        ),
-        split = ": ",
-        fixed = TRUE
-    )[[1L]][[2L]]
-    dataVersion <- as.numeric_version(dataVersion)
-    ## S3 coercion method here is defined in ontologyIndex package.
-    df <- as.data.frame(db)
-    df[["ancestors"]] <- NULL
-    df <- as(df, "DataFrame")
-    colnames(df) <- camelCase(colnames(df))
-    assert(
-        hasRownames(df),
-        isSubset("id", colnames(df))
-    )
-    keep <- grepl(pattern = "^CVCL_", x = df[["id"]])
-    df <- df[keep, ]
-    metadata(df)[["dataVersion"]] <- dataVersion
-    df
-}
-
-
-
 #' Import Cellosaurus data frame from TXT file
 #'
 #' @note Updated 2023-01-19.
@@ -432,7 +389,7 @@ NULL
         MoreArgs = list("lines" = lines),
         USE.NAMES = FALSE
     )
-    alert("Processing entries.")
+    alert("Processing entries (CPU intensive).")
     nestedKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
     optionalKeys <- c("AG", "AS", "SX", "SY")
     .processEntry <- function(x, nestedKeys, optionalKeys) {
@@ -482,8 +439,6 @@ NULL
     colnames(df)[colnames(df) == "SY"] <- "synonyms"
     colnames(df)[colnames(df) == "WW"] <- "webPages"
     rownames(df) <- df[["accession"]]
-    df <- .splitCol(df, colName = "date", split = "; ")
-    df <- .splitCol(df, colName = "synonyms", split = "; ")
     metadata(df)[["dataVersion"]] <- dataVersion
     df
 }
@@ -574,24 +529,16 @@ NULL
 #' @export
 Cellosaurus <- # nolint
     function() {
-        ## > object <- .importCelloFromObo()
         object <- .importCelloFromTxt()
-
-
-        assert(allAreMatchingRegex(x = rownames(df), pattern = "^CVCL_"))
-
-
-
-        df <- df[order(rownames(df)), ]
-        ## These steps need to come after selection of rows with valid identifiers.
-        df <- sanitizeNA(df)
-        df <- removeNA(df)
+        assert(allAreMatchingRegex(x = rownames(object), pattern = "^CVCL_"))
+        object <- object[order(rownames(object)), ]
+        object <- .splitCol(object, colName = "date", split = "; ")
+        object <- .splitCol(object, colName = "synonyms", split = "; ")
         ## Fix "CVCL_7082" cell line, which is actually named "NA".
         if (isSubset("CVCL_7082", rownames(df))) {
             df["CVCL_7082", "name"] <- "NA"
         }
         assert(isCharacter(df[["name"]]))
-        metadata(df)[["packageVersion"]] <- .pkgVersion
         object <- .splitComments(object)
         object <- .splitSynonyms(object)
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")
@@ -612,5 +559,6 @@ Cellosaurus <- # nolint
         object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
+        metadata(object)[["packageVersion"]] <- .pkgVersion
         new("Cellosaurus", object)
     }
