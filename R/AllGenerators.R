@@ -473,34 +473,6 @@ NULL
 
 
 
-## FIXME Need to rework this.
-
-#' Split synonyms column
-#'
-#' @note Updated 2023-01-19.
-#' @noRd
-.splitSynonyms <- function(object) {
-    assert(is(object, "DataFrame"))
-    object[["synonym"]] <-
-        gsub(
-            pattern = " RELATED []",
-            replacement = "",
-            x = object[["synonym"]],
-            fixed = TRUE
-        )
-    object[["synonym"]] <-
-        gsub(
-            pattern = "\"",
-            replacement = "",
-            x = object[["synonym"]],
-            fixed = TRUE
-        )
-    object <- .splitCol(object, colName = "synonym")
-    object
-}
-
-
-
 ## Updated 2023-01-19.
 
 #' @rdname Cellosaurus
@@ -519,10 +491,6 @@ Cellosaurus <- # nolint
         object <- .splitCol(object, colName = "synonyms", split = "; ")
 
         ## FIXME Current state of progress.
-        object <- .splitSynonyms(object)
-        object <- .splitCol(object, colName = "originateFromSameIndividualAs")
-        object <- .splitCol(object, colName = "subset")
-        object <- .splitCol(object, colName = "xref")
         object <- .addNcbiTaxonomyIds(object)
         object <- .addNcitDiseaseId(object)
         object <- .addNcitDiseaseName(object)
