@@ -31,6 +31,8 @@ Imports:
     IRanges (>= 2.32.0),
     S4Vectors (>= 0.36.0),
     data.table (>= 1.14.6),
+    future (>= 1.30.0),
+    future.apply (>= 1.10.0),
     goalie (>= 0.6.7),
     methods,
     pipette (>= 0.10.1),

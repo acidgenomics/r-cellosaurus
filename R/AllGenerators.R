@@ -322,11 +322,9 @@ NULL
 
 
 
-## FIXME Should we drop "subset" column, which isn't that helpful?
-
 #' Import Cellosaurus data frame from OBO file
 #'
-#' @note Updated 2023-01-18.
+#' @note Updated 2023-01-19.
 #' @noRd
 #'
 #' @seealso
@@ -365,17 +363,7 @@ NULL
     )
     keep <- grepl(pattern = "^CVCL_", x = df[["id"]])
     df <- df[keep, ]
-    df <- df[order(rownames(df)), ]
-    ## These steps need to come after selection of rows with valid identifiers.
-    df <- sanitizeNA(df)
-    df <- removeNA(df)
-    ## Fix "CVCL_7082" cell line, which is actually named "NA".
-    if (isSubset("CVCL_7082", rownames(df))) {
-        df["CVCL_7082", "name"] <- "NA"
-    }
-    assert(isCharacter(df[["name"]]))
     metadata(df)[["dataVersion"]] <- dataVersion
-    metadata(df)[["packageVersion"]] <- .pkgVersion
     df
 }
 
@@ -383,7 +371,7 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-01-18.
+#' @note Updated 2023-01-19.
 #' @noRd
 #'
 #' @seealso
@@ -412,8 +400,6 @@ NULL
 ## CA         Category                        Once
 ## DT         Date (entry history)            Once
 ## //         Terminator                      Once; ends an entry
-
-
 
 .importCelloFromTxt <- function() {
     url <- pasteURL(
@@ -467,9 +453,8 @@ NULL
         }
         x
     }
-    ## FIXME Can we speed this up running with multi-core? Future?
-    future::plan(strategy = future::multisession)
-    x <- future.apply::future_lapply(
+    plan(strategy = multisession)
+    x <- future_lapply(
         X = x,
         FUN = .processEntry,
         nestedKeys = nestedKeys,
@@ -500,7 +485,6 @@ NULL
     df <- .splitCol(df, colName = "date", split = "; ")
     df <- .splitCol(df, colName = "synonyms", split = "; ")
     metadata(df)[["dataVersion"]] <- dataVersion
-    metadata(df)[["packageVersion"]] <- .pkgVersion
     df
 }
 
@@ -584,11 +568,30 @@ NULL
 
 
 
+## Updated 2023-01-19.
+
 #' @rdname Cellosaurus
 #' @export
 Cellosaurus <- # nolint
     function() {
-        object <- .importCelloFromObo()
+        ## > object <- .importCelloFromObo()
+        object <- .importCelloFromTxt()
+
+
+        assert(allAreMatchingRegex(x = rownames(df), pattern = "^CVCL_"))
+
+
+
+        df <- df[order(rownames(df)), ]
+        ## These steps need to come after selection of rows with valid identifiers.
+        df <- sanitizeNA(df)
+        df <- removeNA(df)
+        ## Fix "CVCL_7082" cell line, which is actually named "NA".
+        if (isSubset("CVCL_7082", rownames(df))) {
+            df["CVCL_7082", "name"] <- "NA"
+        }
+        assert(isCharacter(df[["name"]]))
+        metadata(df)[["packageVersion"]] <- .pkgVersion
         object <- .splitComments(object)
         object <- .splitSynonyms(object)
         object <- .splitCol(object, colName = "originateFromSameIndividualAs")

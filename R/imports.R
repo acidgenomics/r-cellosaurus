@@ -29,6 +29,8 @@ NULL
 #' @importFrom IRanges CharacterList
 #' @importFrom S4Vectors DataFrame
 #' @importFrom data.table rbindlist
+#' @importFrom future multisession plan
+#' @importFrom future.apply future_lapply
 #' @importFrom goalie allAreMatchingFixed allAreMatchingRegex assert hasLength
 #' hasNoDuplicates hasRownames isCharacter isFlag isString isSubset validate
 #' validateClasses
