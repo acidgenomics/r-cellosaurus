@@ -1,3 +1,7 @@
+## FIXME Don't require future, only use it when installed.
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -313,6 +317,32 @@ NULL
 
 
 
+#' Sanitize the hierarchy column
+#'
+#' @details
+#' Some entries have multiple elements, such as "CVCL_0464".
+#'
+#' @note Updated 2023-01-20.
+#' @noRd
+.sanitizeHierarchy <- function(object) {
+    lst <- CharacterList(lapply(
+        X = object[["hierarchy"]],
+        FUN = function(x) {
+            spl <- stri_split_fixed(
+                str = x,
+                pattern = " ! ",
+                n = 2L,
+                simplify = TRUE
+            )
+            spl[, 1L]
+        }
+    ))
+    object[["hierarchy"]] <- lst
+    object
+}
+
+
+
 ## ---------  ---------------------------     ----------------------
 ## Line code  Content                         Occurrence in an entry
 ## ---------  ---------------------------     ----------------------
@@ -397,6 +427,8 @@ NULL
         }
         x
     }
+    ## FIXME Do this conditionally with future but inform the user when
+    ## we're doing it.
     plan(strategy = multisession)
     x <- future_lapply(
         X = x,
@@ -467,6 +499,7 @@ Cellosaurus <- # nolint
         object <- .splitCol(object, colName = "synonyms", split = "; ")
         object <- .addTaxonomy(object)
         object <- .addNcitDisease(object)
+        object <- .sanitizeHierarchy(object)
 
         ## FIXME Current state of progress.
         object <- .addDepMapIds(object)
