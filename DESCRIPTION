@@ -38,7 +38,6 @@ Imports:
     pipette (>= 0.10.1),
     stringi (>= 1.7.12),
     syntactic (>= 0.6.3),
-    taxizedb (>= 0.3.0),
     utils
 Suggests:
     ontologyIndex (>= 2.10),

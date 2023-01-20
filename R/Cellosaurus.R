@@ -136,13 +136,33 @@ NULL
 
 
 
-## FIXME Need to rework this.
-
 #' Extract NCBI taxonomy identifiers
 #'
 #' @note Updated 2022-08-23.
 #' @noRd
-.addNcbiTaxonomyIds <- function(object) {
+.addNcbiTaxonomyId <- function(object) {
+    cols <- lapply(
+        X = object[["speciesOfOrigin"]],
+        FUN = function(x) {
+            spl <- stri_split_fixed(
+                str = x,
+                pattern = "; ! ",
+                n = 2L,
+                simplify = TRUE
+            )
+            list(
+                "ncbiTaxonomyId" = sub(
+                    pattern = "NCBI_TaxID=",
+                    replacement = "",
+                    x = spl[, 1L]
+                ),
+                "organism" = spl[, 2L]
+            )
+        }
+    )
+
+
+
     colName <- "ncbiTaxonomyId"
     object <- .extractXref(
         object = object,
@@ -218,6 +238,7 @@ NULL
 
 
 ## FIXME Need to rework this.
+## FIXME Can speed this up, using internally stored values.
 
 #' Add `organism` column, using NCBI taxonomy identifiers as input
 #'
@@ -482,8 +503,9 @@ Cellosaurus <- # nolint
         object <- .splitCol(object, colName = "date", split = "; ")
         object <- .splitCol(object, colName = "synonyms", split = "; ")
 
+
         ## FIXME Current state of progress.
-        object <- .addNcbiTaxonomyIds(object)
+        object <- .addNcbiTaxonomyId(object)
         object <- .addNcitDiseaseId(object)
         object <- .addNcitDiseaseName(object)
         object <- .addOrganism(object)
@@ -494,6 +516,9 @@ Cellosaurus <- # nolint
         object <- .addEthnicity(object)
         object <- .addMsiStatus(object)
         object <- .addSamplingSite(object)
+
+        ## FIXME Remove speciesOfOrigin column.
+
         object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
