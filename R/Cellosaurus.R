@@ -1,7 +1,3 @@
-## FIXME Rework extractXref to use crossReferences instead.
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -136,101 +132,59 @@ NULL
 
 
 
-#' Extract NCBI taxonomy identifiers
+#' Extract NCI thesaurus disease identifiers
 #'
-#' @note Updated 2022-08-23.
+#' @details
+#' Some cell lines rarely map to multiple identifiers, such as "CVCL_0028".
+#'
+#' @note Updated 2023-01-20.
 #' @noRd
-.addNcbiTaxonomyId <- function(object) {
-    alert("Adding NCBI taxonomy identifier and organism metadata.")
+.addNcitDisease <- function(object) {
+    alert("Adding NCIt disease metadata.")
     spl <- lapply(
-        X = object[["speciesOfOrigin"]],
-        FUN = stri_split_fixed,
-        pattern = "; ! ",
-        n = 2L,
-        simplify = TRUE
+        X = object[["diseases"]],
+        FUN = function(x) {
+            lgl <- grepl(
+                pattern = "NCIt",
+                x = x,
+                ignore.case = FALSE,
+                fixed = TRUE
+            )
+            if (!any(lgl)) {
+                return(NULL)
+            }
+            x <- x[lgl]
+            x <- sub(
+                pattern = "NCIt; ",
+                replacement = "",
+                x = x,
+                ignore.case = FALSE,
+                fixed = TRUE
+            )
+            x <- stri_split_fixed(
+                str = x,
+                pattern = "; ",
+                n = 2L,
+                simplify = TRUE
+            )
+            x
+        }
     )
-    taxId <- IntegerList(lapply(
+    id <- CharacterList(lapply(
         X = spl,
         FUN = function(x) {
-            sub(
-                pattern = "NCBI_TaxID=",
-                replacement = "",
-                x = x[, 1L]
-            )
+            x[, 1L]
         }
     ))
-    organism <- CharacterList(lapply(
+    name <- CharacterList(lapply(
         X = spl,
         FUN = function(x) {
             x[, 2L]
         }
     ))
-    object[["ncbiTaxonomyId"]] <- taxId
-    object[["organism"]] <- organism
-    object[["speciesOfOrigin"]] <- NULL
+    object[["ncitDiseaseId"]] <- id
+    object[["ncitDiseaseName"]] <- name
     object
-}
-
-
-
-## FIXME Need to rework this.
-
-#' Extract NCI thesaurus disease identifiers
-#'
-#' @note Updated 2022-08-23.
-#' @noRd
-.addNcitDiseaseId <- function(object) {
-    .extractXref(
-        object = object,
-        colName = "ncitDiseaseId",
-        keyName = "NCIt"
-    )
-}
-
-
-
-## FIXME Need to rework this.
-
-#' Add NCI thesaurus disease names, using OBO ontology file
-#'
-#' @note Updated 2023-01-17.
-#' @noRd
-#'
-#' @details
-#' Alternative versioned release:
-#' https://github.com/NCI-Thesaurus/thesaurus-obo-edition/releases/
-#' download/v2022-08-19/ncit.obo
-#'
-#' May be able to speed this up by setting "minimal" instead of "everything" in
-#' ontologyIndex call, which would need to be added to pipette in the future.
-#'
-#' @seealso
-#' -https://evs.nci.nih.gov/evs-download/thesaurus-downloads
-#' - https://obofoundry.org/ontology/ncit.html
-#' - https://github.com/NCI-Thesaurus/thesaurus-obo-edition/
-#' - https://www.ebi.ac.uk/ols/ontologies/ncit
-#' - BiocOncoTK package
-.addNcitDiseaseName <- function(object) {
-    url <- pasteURL(
-        "purl.obolibrary.org",
-        "obo",
-        "ncit.obo",
-        protocol = "http"
-    )
-    con <- cacheURL(url = url, pkg = .pkgName)
-    db <- import(con)
-    names <- db[["name"]]
-    map <- DataFrame(
-        "ncitDiseaseId" = names(names),
-        "ncitDiseaseName" = unname(names)
-    )
-    map[["ncitDiseaseId"]] <- gsub(
-        pattern = "^NCIT:",
-        replacement = "",
-        x = map[["ncitDiseaseId"]]
-    )
-    out <- leftJoin(x = object, y = map, by = "ncitDiseaseId")
-    out
 }
 
 
@@ -277,6 +231,43 @@ NULL
         colName = "sangerModelId",
         keyName = "Cell_Model_Passport"
     )
+}
+
+
+
+#' Extract and add NCBI taxonomy identifiers, organism
+#'
+#' @note Updated 2023-01-20.
+#' @noRd
+.addTaxonomy <- function(object) {
+    alert("Adding NCBI taxonomy identifier and organism metadata.")
+    spl <- lapply(
+        X = object[["speciesOfOrigin"]],
+        FUN = stri_split_fixed,
+        pattern = "; ! ",
+        n = 2L,
+        simplify = TRUE
+    )
+    taxId <- IntegerList(lapply(
+        X = spl,
+        FUN = function(x) {
+            sub(
+                pattern = "NCBI_TaxID=",
+                replacement = "",
+                x = x[, 1L]
+            )
+        }
+    ))
+    organism <- CharacterList(lapply(
+        X = spl,
+        FUN = function(x) {
+            x[, 2L]
+        }
+    ))
+    object[["ncbiTaxonomyId"]] <- taxId
+    object[["organism"]] <- organism
+    object[["speciesOfOrigin"]] <- NULL
+    object
 }
 
 
@@ -359,7 +350,7 @@ NULL
         "r.acidgenomics.com",
         "extdata",
         "cellosaurus",
-        paste0("cellosaurus-", .release, ".txt"), # nolint
+        paste0("cellosaurus-", .release, ".txt"),
         protocol = "https"
     )
     con <- cacheURL(url, pkg = .pkgName)
@@ -474,14 +465,10 @@ Cellosaurus <- # nolint
         assert(isCharacter(object[["cellLineName"]]))
         object <- .splitCol(object, colName = "date", split = "; ")
         object <- .splitCol(object, colName = "synonyms", split = "; ")
-        object <- .addNcbiTaxonomyId(object)
-
+        object <- .addTaxonomy(object)
+        object <- .addNcitDisease(object)
 
         ## FIXME Current state of progress.
-
-        object <- .addNcitDiseaseId(object)
-        object <- .addNcitDiseaseName(object)
-        object <- .addOrganism(object)
         object <- .addDepMapIds(object)
         object <- .addSangerIds(object)
         object <- .addIsCancer(object)
