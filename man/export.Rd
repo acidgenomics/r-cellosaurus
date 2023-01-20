@@ -31,7 +31,7 @@ File path(s).
 Export
 }
 \note{
-Updated 2022-08-23.
+Updated 2023-01-19.
 }
 \section{Output file format extension}{
 
