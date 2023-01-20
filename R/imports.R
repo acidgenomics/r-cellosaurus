@@ -26,7 +26,7 @@ NULL
 
 #' @importFrom AcidBase pasteURL showHeader showSlotInfo
 #' @importFrom AcidCLI abort alert
-#' @importFrom IRanges CharacterList
+#' @importFrom IRanges CharacterList IntegerList
 #' @importFrom S4Vectors DataFrame
 #' @importFrom data.table rbindlist
 #' @importFrom future multisession plan

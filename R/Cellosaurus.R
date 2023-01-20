@@ -141,35 +141,33 @@ NULL
 #' @note Updated 2022-08-23.
 #' @noRd
 .addNcbiTaxonomyId <- function(object) {
-    cols <- lapply(
+    alert("Adding NCBI taxonomy identifier and organism metadata.")
+    spl <- lapply(
         X = object[["speciesOfOrigin"]],
+        FUN = stri_split_fixed,
+        pattern = "; ! ",
+        n = 2L,
+        simplify = TRUE
+    )
+    taxId <- IntegerList(lapply(
+        X = spl,
         FUN = function(x) {
-            spl <- stri_split_fixed(
-                str = x,
-                pattern = "; ! ",
-                n = 2L,
-                simplify = TRUE
-            )
-            list(
-                "ncbiTaxonomyId" = sub(
-                    pattern = "NCBI_TaxID=",
-                    replacement = "",
-                    x = spl[, 1L]
-                ),
-                "organism" = spl[, 2L]
+            sub(
+                pattern = "NCBI_TaxID=",
+                replacement = "",
+                x = x[, 1L]
             )
         }
-    )
-
-
-
-    colName <- "ncbiTaxonomyId"
-    object <- .extractXref(
-        object = object,
-        colName = colName,
-        keyName = "NCBI_TaxID"
-    )
-    object[[colName]] <- as.integer(object[[colName]])
+    ))
+    organism <- CharacterList(lapply(
+        X = spl,
+        FUN = function(x) {
+            x[, 2L]
+        }
+    ))
+    object[["ncbiTaxonomyId"]] <- taxId
+    object[["organism"]] <- organism
+    object[["speciesOfOrigin"]] <- NULL
     object
 }
 
@@ -233,32 +231,6 @@ NULL
     )
     out <- leftJoin(x = object, y = map, by = "ncitDiseaseId")
     out
-}
-
-
-
-## FIXME Need to rework this.
-## FIXME Can speed this up, using internally stored values.
-
-#' Add `organism` column, using NCBI taxonomy identifiers as input
-#'
-#' @note Updated 2022-08-23.
-#' @noRd
-#'
-#' @seealso
-#' - https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi
-#' - https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump_readme.txt
-.addOrganism <- function(object) {
-    alert("Mapping NCBI taxonomy identifiers to organism name.")
-    db_download_ncbi(verbose = FALSE, overwrite = FALSE)
-    suppressWarnings({
-        org <- taxid2name(
-            x = as.character(object[["ncbiTaxonomyId"]]),
-            db = "ncbi"
-        )
-    })
-    object[["organism"]] <- org
-    object
 }
 
 
@@ -502,10 +474,11 @@ Cellosaurus <- # nolint
         assert(isCharacter(object[["cellLineName"]]))
         object <- .splitCol(object, colName = "date", split = "; ")
         object <- .splitCol(object, colName = "synonyms", split = "; ")
+        object <- .addNcbiTaxonomyId(object)
 
 
         ## FIXME Current state of progress.
-        object <- .addNcbiTaxonomyId(object)
+
         object <- .addNcitDiseaseId(object)
         object <- .addNcitDiseaseName(object)
         object <- .addOrganism(object)
@@ -516,8 +489,6 @@ Cellosaurus <- # nolint
         object <- .addEthnicity(object)
         object <- .addMsiStatus(object)
         object <- .addSamplingSite(object)
-
-        ## FIXME Remove speciesOfOrigin column.
 
         object <- factorize(object)
         object <- encode(object)
