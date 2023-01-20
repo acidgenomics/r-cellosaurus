@@ -5,11 +5,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-01-17.
-#'
-#' @details
-#' Patient age is currently only defined in `cellosaurus.txt` file but
-#' not `cellosaurus.obo` available from the FTP server.
+#' @note Updated 2023-01-20.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -359,13 +355,13 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-01-19.
+#' @note Updated 2023-01-20.
 #' @noRd
 #'
 #' @seealso
 #' - https://github.com/calipho-sib/cellosaurus/
 #' - https://ftp.expasy.org/databases/cellosaurus/
-.importCelloFromTxt <- function() {
+.importCelloTxt <- function() {
     url <- pasteURL(
         "r.acidgenomics.com",
         "extdata",
@@ -473,19 +469,15 @@ NULL
 
 
 
-## Updated 2023-01-19.
+## Updated 2023-01-20.
 
 #' @rdname Cellosaurus
 #' @export
 Cellosaurus <- # nolint
     function() {
-        object <- .importCelloFromTxt()
+        object <- .importCelloTxt()
         assert(allAreMatchingRegex(x = rownames(object), pattern = "^CVCL_"))
         object <- object[order(rownames(object)), ]
-        ## Fix for "CVCL_7082" cell line, which is actually named "NA".
-        if (isSubset("CVCL_7082", rownames(object))) {
-            object["CVCL_7082", "cellLineName"] <- "NA"
-        }
         assert(isCharacter(object[["cellLineName"]]))
         object <- .splitCol(object, colName = "date", split = "; ")
         object <- .splitCol(object, colName = "synonyms", split = "; ")
