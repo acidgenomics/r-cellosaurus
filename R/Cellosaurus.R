@@ -21,15 +21,17 @@ NULL
 
 
 
-## FIXME Need to extract this from "crossReferences" metadata.
-
-#' Extract DepMap identifiers
+#' Add `depmapId` column
 #'
-#' @note Updated 2022-10-04.
+#' @details
+#' Note that some cell lines, such as "CVCL_0041", map to multiple DepMap
+#' identifiers, which is confusing.
+#'
+#' @note Updated 2023-01-23.
 #' @noRd
-.addDepMapIds <- function(object) {
-    .extractXref(
-        object = object,
+.addDepmapId <- function(object) {
+    .extractCrossRef(
+        object,
         colName = "depmapId",
         keyName = "DepMap"
     )
@@ -141,9 +143,13 @@ NULL
 #' @details
 #' Some cell lines rarely map to multiple identifiers, such as "CVCL_0028".
 #'
-#' @note Updated 2023-01-20.
+#' @note Updated 2023-01-23.
 #' @noRd
 .addNcitDisease <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is.list(object[["diseases"]])
+    )
     alert("Adding NCIt disease metadata.")
     spl <- lapply(
         X = object[["diseases"]],
@@ -223,14 +229,12 @@ NULL
 
 
 
-## FIXME Need to extract this from "crossReferences" metadata.
-
-#' Extract Sanger Cell Model Passports identifiers
+#' Add `sangerModelId` column
 #'
-#' @note Updated 2022-10-04.
+#' @note Updated 2023-01-23.
 #' @noRd
-.addSangerIds <- function(object) {
-    .extractXref(
+.addSangerModelId <- function(object) {
+    .extractCrossRef(
         object = object,
         colName = "sangerModelId",
         keyName = "Cell_Model_Passport"
@@ -239,11 +243,15 @@ NULL
 
 
 
-#' Extract and add NCBI taxonomy identifiers, organism
+#' Add `ncbiTaxonomyId` and `organism` columns
 #'
-#' @note Updated 2023-01-20.
+#' @note Updated 2023-01-23.
 #' @noRd
 .addTaxonomy <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is.list(object[["speciesOfOrigin"]])
+    )
     alert("Adding NCBI taxonomy identifier and organism metadata.")
     spl <- lapply(
         X = object[["speciesOfOrigin"]],
@@ -276,27 +284,47 @@ NULL
 
 
 
-#' Sanitize the hierarchy column
+#' Extract and assign identifier column from `crossReferences`
 #'
 #' @details
-#' Some entries have multiple elements, such as "CVCL_0464".
+#' Note that this intentionally picks only the first matching identifier.
 #'
-#' @note Updated 2023-01-20.
+#' @note Updated 2023-01-23.
 #' @noRd
-.sanitizeHierarchy <- function(object) {
-    lst <- CharacterList(lapply(
-        X = object[["hierarchy"]],
-        FUN = function(x) {
-            spl <- stri_split_fixed(
-                str = x,
-                pattern = " ! ",
-                n = 2L,
-                simplify = TRUE
+.extractCrossRef <- function(object, colName, keyName, sep = "; ") {
+    assert(
+        is(object, "DataFrame"),
+        isString(colName),
+        isString(keyName),
+        isString(sep)
+    )
+    alert(sprintf("Adding {.var %s} column.", colName))
+    x <- vapply(
+        X = object[["crossReferences"]],
+        keyName = keyName,
+        sep = sep,
+        FUN = function(x, keyName, sep) {
+            ids <- grep(
+                pattern = paste0("^", keyName, sep),
+                x = x,
+                ignore.case = FALSE,
+                value = TRUE
             )
-            spl[, 1L]
-        }
-    ))
-    object[["hierarchy"]] <- lst
+            if (identical(ids, character())) {
+                return(NA_character_)
+            }
+            ## Return only the first match.
+            ids[[1L]]
+        },
+        FUN.VALUE = character(1L)
+    )
+    ## This `sub` approach handles NA better than using `stri_split_fixed`.
+    x <- sub(
+        pattern = paste0("^", keyName, sep),
+        replacement = "",
+        x = x
+    )
+    object[[colName]] <- x
     object
 }
 
@@ -334,7 +362,7 @@ NULL
 #' @seealso
 #' - https://github.com/calipho-sib/cellosaurus/
 #' - https://ftp.expasy.org/databases/cellosaurus/
-.importCelloTxt <- function() {
+.importCelloFromTxt <- function() {
     url <- pasteURL(
         "r.acidgenomics.com",
         "extdata",
@@ -435,9 +463,35 @@ NULL
 
 
 
+#' Sanitize the hierarchy column
+#'
+#' @details
+#' Some entries have multiple elements, such as "CVCL_0464".
+#'
+#' @note Updated 2023-01-20.
+#' @noRd
+.sanitizeHierarchy <- function(object) {
+    lst <- CharacterList(lapply(
+        X = object[["hierarchy"]],
+        FUN = function(x) {
+            spl <- stri_split_fixed(
+                str = x,
+                pattern = " ! ",
+                n = 2L,
+                simplify = TRUE
+            )
+            spl[, 1L]
+        }
+    ))
+    object[["hierarchy"]] <- lst
+    object
+}
+
+
+
 #' Split a column into a character list
 #'
-#' @note Updated 2023-01-19.
+#' @note Updated 2023-01-23.
 #' @noRd
 .splitCol <- function(object, colName, split = "; ") {
     assert(
@@ -462,10 +516,12 @@ NULL
 #' @export
 Cellosaurus <- # nolint
     function() {
-        df <- .importCelloTxt()
-        assert(allAreMatchingRegex(x = rownames(df), pattern = "^CVCL_"))
+        df <- .importCelloFromTxt()
+        assert(
+            allAreMatchingRegex(x = rownames(df), pattern = "^CVCL_"),
+            isCharacter(df[["cellLineName"]])
+        )
         df <- df[order(rownames(df)), ]
-        assert(isCharacter(df[["cellLineName"]]))
         df <- .splitCol(df, colName = "date", split = "; ")
         df <- .splitCol(df, colName = "synonyms", split = "; ")
         df <- .addTaxonomy(df)
@@ -473,8 +529,8 @@ Cellosaurus <- # nolint
         df <- .sanitizeHierarchy(df)
 
         ## FIXME Current state of progress.
-        df <- .addDepMapIds(df)
-        df <- .addSangerIds(df)
+        df <- .addDepmapId(df)
+        df <- .addSangerModelId(df)
         df <- .addIsCancer(df)
         df <- .addIsProblematic(df)
         df <- .addEthnicity(df)
