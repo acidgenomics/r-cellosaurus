@@ -5,7 +5,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-01-20.
+#' @note Updated 2023-01-23.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -21,7 +21,7 @@ NULL
 
 
 
-## FIXME Need to rework this.
+## FIXME Need to extract this from "crossReferences" metadata.
 
 #' Extract DepMap identifiers
 #'
@@ -223,7 +223,7 @@ NULL
 
 
 
-## FIXME Need to rework this.
+## FIXME Need to extract this from "crossReferences" metadata.
 
 #' Extract Sanger Cell Model Passports identifiers
 #'
@@ -271,47 +271,6 @@ NULL
     object[["ncbiTaxonomyId"]] <- taxId
     object[["organism"]] <- organism
     object[["speciesOfOrigin"]] <- NULL
-    object
-}
-
-
-
-## FIXME Need to rework this.
-
-#' Extract a key-value pair from xref metadata
-#'
-#' @note Updated 2022-05-13.
-#' @noRd
-.extractXref <- function(object, colName, keyName) {
-    assert(
-        is(object, "DataFrame"),
-        is(object[["xref"]], "CharacterList"),
-        isString(colName),
-        isString(keyName)
-    )
-    pattern <- paste0("^(", keyName, "):([[:space:]])?")
-    x <- grep(
-        pattern = pattern,
-        x = object[["xref"]],
-        value = TRUE
-    )
-    x <- gsub(
-        pattern = pattern,
-        replacement = "",
-        x = x
-    )
-    x <- vapply(
-        X = x,
-        FUN = function(x) {
-            if (identical(x, character())) {
-                return(NA_character_)
-            }
-            x[[1L]]
-        },
-        FUN.VALUE = character(1L),
-        USE.NAMES = FALSE
-    )
-    object[[colName]] <- x
     object
 }
 
@@ -369,7 +328,7 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-01-20.
+#' @note Updated 2023-01-23.
 #' @noRd
 #'
 #' @seealso
@@ -406,7 +365,6 @@ NULL
         MoreArgs = list("lines" = lines),
         USE.NAMES = FALSE
     )
-    alert("Processing entries (CPU intensive).")
     nestedKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
     optionalKeys <- c("AG", "AS", "SX", "SY")
     .processEntry <- function(x, nestedKeys, optionalKeys) {
@@ -427,10 +385,23 @@ NULL
         }
         x
     }
-    ## FIXME Do this conditionally with future but inform the user when
-    ## we're doing it.
-    plan(strategy = multisession)
-    x <- future_lapply(
+    if (isTRUE(requireNamespace("future.apply", quietly = TRUE))) {
+        alert(sprintf(
+            "Processing entries in parallel with {.pkg %s}.",
+            "future.apply"
+        ))
+        future::plan(strategy = future::multisession)
+        .lapply <- future.apply::future_lapply
+    } else {
+        alert(sprintf(
+            paste(
+                "Processing entries single threaded.",
+                "Install {.pkg %s} to speed up this step."
+            ),
+            "future.apply"
+        ))
+    }
+    x <- .lapply(
         X = x,
         FUN = .processEntry,
         nestedKeys = nestedKeys,
@@ -485,34 +456,34 @@ NULL
 
 
 
-## Updated 2023-01-20.
+## Updated 2023-01-23.
 
 #' @rdname Cellosaurus
 #' @export
 Cellosaurus <- # nolint
     function() {
-        object <- .importCelloTxt()
-        assert(allAreMatchingRegex(x = rownames(object), pattern = "^CVCL_"))
-        object <- object[order(rownames(object)), ]
-        assert(isCharacter(object[["cellLineName"]]))
-        object <- .splitCol(object, colName = "date", split = "; ")
-        object <- .splitCol(object, colName = "synonyms", split = "; ")
-        object <- .addTaxonomy(object)
-        object <- .addNcitDisease(object)
-        object <- .sanitizeHierarchy(object)
+        df <- .importCelloTxt()
+        assert(allAreMatchingRegex(x = rownames(df), pattern = "^CVCL_"))
+        df <- df[order(rownames(df)), ]
+        assert(isCharacter(df[["cellLineName"]]))
+        df <- .splitCol(df, colName = "date", split = "; ")
+        df <- .splitCol(df, colName = "synonyms", split = "; ")
+        df <- .addTaxonomy(df)
+        df <- .addNcitDisease(df)
+        df <- .sanitizeHierarchy(df)
 
         ## FIXME Current state of progress.
-        object <- .addDepMapIds(object)
-        object <- .addSangerIds(object)
-        object <- .addIsCancer(object)
-        object <- .addIsProblematic(object)
-        object <- .addEthnicity(object)
-        object <- .addMsiStatus(object)
-        object <- .addSamplingSite(object)
+        df <- .addDepMapIds(df)
+        df <- .addSangerIds(df)
+        df <- .addIsCancer(df)
+        df <- .addIsProblematic(df)
+        df <- .addEthnicity(df)
+        df <- .addMsiStatus(df)
+        df <- .addSamplingSite(df)
 
-        object <- factorize(object)
-        object <- encode(object)
-        object <- object[, sort(colnames(object)), drop = FALSE]
-        metadata(object)[["packageVersion"]] <- .pkgVersion
-        new("Cellosaurus", object)
+        df <- factorize(df)
+        df <- encode(df)
+        df <- df[, sort(colnames(df)), drop = FALSE]
+        metadata(df)[["packageVersion"]] <- .pkgVersion
+        new("Cellosaurus", df)
     }
