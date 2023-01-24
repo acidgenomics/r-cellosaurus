@@ -1,11 +1,7 @@
-## FIXME Don't require future, only use it when installed.
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-01-23.
+#' @note Updated 2023-01-24.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -68,19 +64,17 @@ NULL
 
 
 
-## FIXME Need to rework this.
-
 #' Add `isCancer` column
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2023-01-24.
 #' @noRd
 .addIsCancer <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is(object[["subset"]], "CharacterList")
+        isCharacter(object[["category"]])
     )
-    object[["isCancer"]] <-
-        any(object[["subset"]] == "Cancer_cell_line")
+    lgl <- object[["category"]] == "Cancer cell line"
+    object[["isCancer"]] <- lgl
     object
 }
 
@@ -143,14 +137,17 @@ NULL
 #' @details
 #' Some cell lines rarely map to multiple identifiers, such as "CVCL_0028".
 #'
-#' @note Updated 2023-01-23.
+#' @note Updated 2023-01-24.
 #' @noRd
 .addNcitDisease <- function(object) {
     assert(
         is(object, "DataFrame"),
         is.list(object[["diseases"]])
     )
-    alert("Adding NCIt disease metadata.")
+    alert(sprintf(
+        "Adding {.var %s} and {.var %s} columns.",
+        "ncitDiseaseId", "ncitDiseaseName"
+    ))
     spl <- lapply(
         X = object[["diseases"]],
         FUN = function(x) {
@@ -245,14 +242,17 @@ NULL
 
 #' Add `ncbiTaxonomyId` and `organism` columns
 #'
-#' @note Updated 2023-01-23.
+#' @note Updated 2023-01-24.
 #' @noRd
 .addTaxonomy <- function(object) {
     assert(
         is(object, "DataFrame"),
         is.list(object[["speciesOfOrigin"]])
     )
-    alert("Adding NCBI taxonomy identifier and organism metadata.")
+    alert(sprintf(
+        "Adding {.var %s} and {.var %s} columns.",
+        "ncbiTaxonomyId", "organism"
+    ))
     spl <- lapply(
         X = object[["speciesOfOrigin"]],
         FUN = stri_split_fixed,
@@ -356,7 +356,7 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-01-23.
+#' @note Updated 2023-01-24.
 #' @noRd
 #'
 #' @seealso
@@ -364,10 +364,10 @@ NULL
 #' - https://ftp.expasy.org/databases/cellosaurus/
 .importCelloFromTxt <- function() {
     url <- pasteURL(
-        "r.acidgenomics.com",
-        "extdata",
+        "ftp.expasy.org",
+        "databases",
         "cellosaurus",
-        paste0("cellosaurus-", .release, ".txt"),
+        "cellosaurus.txt",
         protocol = "https"
     )
     con <- cacheURL(url, pkg = .pkgName)
@@ -510,7 +510,7 @@ NULL
 
 
 
-## Updated 2023-01-23.
+## Updated 2023-01-24.
 
 #' @rdname Cellosaurus
 #' @export
@@ -524,19 +524,18 @@ Cellosaurus <- # nolint
         df <- df[order(rownames(df)), ]
         df <- .splitCol(df, colName = "date", split = "; ")
         df <- .splitCol(df, colName = "synonyms", split = "; ")
-        df <- .addTaxonomy(df)
-        df <- .addNcitDisease(df)
-        df <- .sanitizeHierarchy(df)
-
-        ## FIXME Current state of progress.
         df <- .addDepmapId(df)
         df <- .addSangerModelId(df)
+        df <- .addNcitDisease(df)
+        df <- .addTaxonomy(df)
+        ## FIXME Current state of progress.
         df <- .addIsCancer(df)
         df <- .addIsProblematic(df)
         df <- .addEthnicity(df)
         df <- .addMsiStatus(df)
         df <- .addSamplingSite(df)
-
+        ## FIXME This steps below are OK.
+        df <- .sanitizeHierarchy(df)
         df <- factorize(df)
         df <- encode(df)
         df <- df[, sort(colnames(df)), drop = FALSE]
