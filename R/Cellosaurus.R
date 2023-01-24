@@ -629,29 +629,22 @@ Cellosaurus <- # nolint
         object <- .importCelloFromTxt()
         alert("Processing annotations.")
         object <- .sanitizeAgeAtSampling(object)
-        ## FIXME Need to support this.
-        object <- .sanitizeComments(object)
-        object <- .sanitizeCrossReferences(object)
+        object <- .sanitizeComments(object) # FIXME
+        object <- .sanitizeCrossReferences(object) # FIXME
         object <- .sanitizeDate(object)
-        object <- .sanitizeDiseases(object)
+        object <- .sanitizeDiseases(object) # FIXME
         object <- .sanitizeHierarchy(object)
-        object <- .sanitizeRefIds(object)
+        object <- .sanitizeRefIds(object) # FIXME
         object <- .sanitizeSynonyms(object)
-        ## FIXME Need to rework this.
-        object <- .addDepmapId(object)
-        ## FIXME Need to rework this.
-        object <- .addSangerModelId(object)
-        ## FIXME Need to rework this.
-        object <- .addNcitDisease(object)
-        object <- .addTaxonomy(object)
+        object <- .addDepmapId(object) # FIXME
         object <- .addIsCancer(object)
         object <- .addIsProblematic(object)
-        ## FIXME Need to rework this.
-        object <- .addMsiStatus(object)
-        ## FIXME Need to rework this.
-        object <- .addPopulation(object)
-        ## FIXME Need to rework this.
-        object <- .addSamplingSite(object)
+        object <- .addMsiStatus(object) # FIXME
+        object <- .addNcitDisease(object) # FIXME
+        object <- .addPopulation(object) # FIXME
+        object <- .addSamplingSite(object) # FIXME
+        object <- .addSangerModelId(object) # FIXME
+        object <- .addTaxonomy(object)
         object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
