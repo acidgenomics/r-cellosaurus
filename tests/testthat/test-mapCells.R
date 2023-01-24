@@ -123,8 +123,6 @@ test_that("Tricky cell lines", {
     )
 })
 
-## FIXME Failed to map 3 cells: TM-87, SU-MB-002, PC-3_[JPC-3].
-
 test_that("DepMap 22Q2", {
     object <- celloFull
     df <- map[["depmap_22q2"]]
@@ -145,8 +143,6 @@ test_that("DepMap 22Q2", {
     )
 })
 
-## FIXME Failed to map 2 cells: TM-87, PC-3_[JPC-3].
-
 test_that("DepMap 22Q4", {
     object <- celloFull
     df <- map[["depmap_22q4"]]
@@ -162,9 +158,6 @@ test_that("DepMap 22Q4", {
         regexp = "12 cells"
     )
 })
-
-## FIXME Failed to map 4 cells: PE-CA-PJ34_Clone-C12,
-## PE-CA-PJ41_Clone-D2, PC-3_[JPC-3], NTERA-2-cl-D1.
 
 test_that("CellModelPassports", {
     object <- celloFull
