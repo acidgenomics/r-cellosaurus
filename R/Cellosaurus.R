@@ -186,29 +186,23 @@ NULL
 
 
 
-## FIXME Need to rework this.
-
 #' Add `samplingSite` column
 #'
-#' @note Updated 2022-09-13.
+#' @details
+#' Note that some comments have additional information on the cell type, that
+#' we don't want to include here (e.g. CVCL_0003).
+#'
+#' @note Updated 2023-01-24.
 #' @noRd
 .addSamplingSite <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is(object[["comment"]], "CharacterList")
+        is(object[["comments"]], "CharacterList")
     )
-    x <- object[["comment"]]
-    x <- grep(
-        pattern = "^Derived from sampling site: ",
-        x = x,
-        value = TRUE
-    )
-    x <- gsub(
-        pattern = "^Derived from sampling site: ",
-        replacement = "",
-        x = x
-    )
-    x <- as.character(x)
+    x <- object[["comments"]]
+    x <- grep(pattern = "^Derived from sampling site: ", x = x, value = TRUE)
+    x <- sub(pattern = "\\.\\s.+", replacement = "", x = x)
+    x <- sub(pattern = "^Derived from sampling site: ", replacement = "", x = x)
     assert(identical(length(x), nrow(object)))
     object[["samplingSite"]] <- x
     object
@@ -535,9 +529,8 @@ Cellosaurus <- # nolint
         df <- .addSangerModelId(df)
         df <- .addNcitDisease(df)
         df <- .addTaxonomy(df)
-        df <- .addIsCancer(df)
-        ## FIXME At this step.
         df <- .addEthnicity(df)
+        df <- .addIsCancer(df)
         df <- .addIsProblematic(df)
         df <- .addMsiStatus(df)
         df <- .addSamplingSite(df)
