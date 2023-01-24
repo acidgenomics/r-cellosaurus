@@ -35,20 +35,20 @@ NULL
 
 
 
-## FIXME Need to rework this.
+## FIXME Need to take out the period here.
 
 #' Add `ethnicity` column
 #'
-#' @note Updated 2022-09-13.
+#' @note Updated 2023-01-24.
 #' @noRd
 .addEthnicity <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is(object[["comment"]], "CharacterList")
+        is(object[["comments"]], "CharacterList")
     )
-    x <- object[["comment"]]
+    x <- object[["comments"]]
     x <- grep(pattern = "^Population:", x = x, value = TRUE)
-    x <- gsub(pattern = "^Population: ", replacement = "", x = x)
+    x <- sub(pattern = "^Population: ", replacement = "", x = x)
     x <- CharacterList(lapply(
         X = x,
         FUN = function(x) {
@@ -100,18 +100,16 @@ NULL
 
 
 
-## FIXME Need to rework this.
-
 #' Add `msiStatus` column
 #'
-#' @note Updated 2022-09-13.
+#' @note Updated 2023-01-24.
 #' @noRd
 .addMsiStatus <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is(object[["comment"]], "CharacterList")
+        is(object[["comments"]], "CharacterList")
     )
-    x <- object[["comment"]]
+    x <- object[["comments"]]
     x <- grep(
         pattern = "^Microsatellite instability: ",
         x = x,
@@ -527,6 +525,12 @@ Cellosaurus <- # nolint
         }
         df <- df[order(rownames(df)), ]
         alert("Processing additional metadata.")
+        ## Remove trailing period from comments.
+        df[["comments"]] <- sub(
+            pattern = "\\.$",
+            replacement = "",
+            x = df[["comments"]]
+        )
         df <- .splitCol(df, colName = "date", split = "; ")
         df <- .splitCol(df, colName = "synonyms", split = "; ")
         df <- .addDepmapId(df)
@@ -535,8 +539,8 @@ Cellosaurus <- # nolint
         df <- .addTaxonomy(df)
         df <- .addIsCancer(df)
         ## FIXME At this step.
-        df <- .addIsProblematic(df)
         df <- .addEthnicity(df)
+        df <- .addIsProblematic(df)
         df <- .addMsiStatus(df)
         df <- .addSamplingSite(df)
         df <- .sanitizeHierarchy(df)
