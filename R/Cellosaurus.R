@@ -54,13 +54,15 @@ NULL
 .addIsProblematic <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is(object[["comments"]], "CharacterList")
+        is(object[["comments"]], "SimpleList")
     )
-    lgl <- any(grepl(
-        pattern = "Problematic cell line",
-        x = object[["comments"]],
-        fixed = TRUE
-    ))
+    lgl <- vapply(
+        X = object[["comments"]],
+        FUN = function(x) {
+            "Problematic cell line" %in% names(x)
+        },
+        FUN.VALUE = logical(1L)
+    )
     object[["isProblematic"]] <- lgl
     object
 }
@@ -323,7 +325,7 @@ NULL
         fixed = TRUE
     )[[1L]][[2L]]
     dataVersion <- as.numeric_version(dataVersion)
-    alert("Mapping lines into list of entries.")
+    alert(sprintf("Mapping lines into {.cls %s} of entries.", "list"))
     x <- Map(
         f = function(lines, i, j) {
             lines[i:(j-1L)]
@@ -355,16 +357,14 @@ NULL
     }
     if (isTRUE(requireNamespace("future.apply", quietly = TRUE))) {
         alert(sprintf(
-            "Processing entries in parallel with {.pkg %s}.",
-            "future.apply"
+            "Processing entries with {.pkg %s}::{.fun %s}.",
+            "future.apply", "future_lapply"
         ))
         .lapply <- future.apply::future_lapply
     } else {
-        alert(sprintf(
-            paste(
-                "Processing entries single threaded.",
-                "Install {.pkg %s} to speed up this step."
-            ),
+        alert("Processing entries.")
+        alertInfo(sprintf(
+            "Install {.pkg %s} package to speed up this step.",
             "future.apply"
         ))
     }
@@ -374,7 +374,10 @@ NULL
         nestedKeys = nestedKeys,
         optionalKeys = optionalKeys
     )
-    alert("Converting entries list to data frame.")
+    alert(sprintf(
+        "Coercing entries list to {.cls %s} with {.pkg %s}::{.fun %s}.",
+        "data.frame", "data.table", "rbindlist"
+    ))
     ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
     df <- rbindlist(l = x, use.names = TRUE, fill = FALSE)
     df <- as(df, "DataFrame")

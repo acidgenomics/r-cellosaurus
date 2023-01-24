@@ -1,6 +1,6 @@
 #' Cellosaurus table of cell identifier mappings
 #'
-#' @note Updated 2022-09-13.
+#' @note Updated 2023-01-24.
 #' @export
 #'
 #' @return `Cellosaurus`.
@@ -24,28 +24,33 @@ setValidity(
         ok <- validateClasses(
             object = object,
             expected = list(
-                "comment" = "CompressedCharacterList",
-                "creationDate" = "Rle",
+                "accession" = "Rle",
+                "ageAtSampling" = "Rle",
+                "category" = "Rle",
+                "cellLineName" = "Rle",
+                "comments" = "SimpleList",
+                "crossReferences" = "SimpleList",
+                "date" = "CompressedCharacterList",
                 "depmapId" = "Rle",
-                "derivedFrom" = "Rle",
-                "ethnicity" = "CompressedCharacterList",
-                "id" = "Rle",
+                "diseases" = "SimpleList",
+                "hierarchy" = "CompressedCharacterList",
                 "isCancer" = "Rle",
                 "isProblematic" = "Rle",
-                "msiStatus" = "Rle",
-                "name" = "Rle",
-                "ncbiTaxonomyId" = "Rle",
-                "ncitDiseaseId" = "Rle",
-                "ncitDiseaseName" = "Rle",
-                "obsolete" = "Rle",
-                "organism" = "Rle",
-                "originateFromSameIndividualAs" = "CompressedCharacterList",
-                "samplingSite" = "Rle",
+                "msiStatus" = "CompressedCharacterList",
+                "ncbiTaxonomyId" = "CompressedIntegerList",
+                "ncitDiseaseId" = "CompressedCharacterList",
+                "ncitDiseaseName" = "CompressedCharacterList",
+                "organism" = "CompressedCharacterList",
+                "originateFromSameIndividual" = "CompressedCharacterList",
+                "population" = "CompressedCharacterList",
+                "referencesIdentifiers" = "SimpleList",
+                "samplingSite" = "CompressedCharacterList",
                 "sangerModelId" = "Rle",
-                "sex" = "Rle",
-                "subset" = "CompressedCharacterList",
-                "synonym" = "CompressedCharacterList",
-                "xref" = "CompressedCharacterList"
+                "secondaryAccession" = "Rle",
+                "sexOfCell" = "Rle",
+                "strProfileData" = "CompressedCharacterList",
+                "synonyms" = "CompressedCharacterList",
+                "webPages" = "CompressedCharacterList"
             ),
             subset = FALSE
         )
@@ -53,8 +58,8 @@ setValidity(
             return(ok)
         }
         ok <- validate(
-            hasNoDuplicates(object[["id"]]),
-            hasNoDuplicates(object[["name"]])
+            hasNoDuplicates(object[["accession"]]),
+            hasNoDuplicates(object[["cellLineName"]])
         )
         if (!isTRUE(ok)) {
             return(ok)

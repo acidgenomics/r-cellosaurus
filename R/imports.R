@@ -26,7 +26,7 @@ NULL
 ## Standard functions ==========================================================
 
 #' @importFrom AcidBase pasteURL showHeader showSlotInfo
-#' @importFrom AcidCLI abort alert
+#' @importFrom AcidCLI abort alert alertInfo
 #' @importFrom IRanges CharacterList IntegerList
 #' @importFrom S4Vectors DataFrame SimpleList
 #' @importFrom data.table rbindlist
