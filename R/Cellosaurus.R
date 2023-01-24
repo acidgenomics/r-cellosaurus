@@ -1,3 +1,8 @@
+## FIXME Consider adding "group" metadata column?
+## This is useful for TNBC
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -192,7 +197,7 @@ NULL
 #' Note that some comments have additional information on the cell type, that
 #' we don't want to include here (e.g. CVCL_0003).
 #'
-#' CVCL_C4RX currently has a duplication of colon.
+#' CVCL_C4RX currently has a duplication of colon in the comments.
 #'
 #' @note Updated 2023-01-24.
 #' @noRd
@@ -205,6 +210,7 @@ NULL
     x <- grep(pattern = "^Derived from sampling site: ", x = x, value = TRUE)
     x <- sub(pattern = "\\.\\s.+", replacement = "", x = x)
     x <- sub(pattern = "^Derived from sampling site: ", replacement = "", x = x)
+    x <- as.character(x)
     assert(identical(length(x), nrow(object)))
     object[["samplingSite"]] <- x
     object
@@ -519,13 +525,12 @@ Cellosaurus <- # nolint
         }
         df <- df[order(rownames(df)), ]
         alert("Processing additional metadata.")
-        ## Remove trailing period from comments.
-        ## FIXME Need to remove any duplicated comments (e.g. CVCL_C4RX).
         df[["comments"]] <- sub(
             pattern = "\\.$",
             replacement = "",
             x = df[["comments"]]
         )
+        df[["comments"]] <- unique(df[["comments"]])
         df <- .splitCol(df, colName = "date", split = "; ")
         df <- .splitCol(df, colName = "synonyms", split = "; ")
         df <- .addDepmapId(df)
