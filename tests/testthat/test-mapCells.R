@@ -166,7 +166,8 @@ test_that("Tricky cell lines", {
                 "CHL-1-DM",
                 "D384",
                 "NCI-H157-DM",
-                "OCILY-13"
+                "OCILY-13",
+                "CVCL_7353"
             )
         ),
         expected = c(
@@ -185,7 +186,8 @@ test_that("Tricky cell lines", {
             "CHL-1-DM" = "CVCL_1122",
             "D384" = "CVCL_1157",
             "NCI-H157-DM" = "CVCL_0463",
-            "OCILY-13" = "CVCL_8797"
+            "OCILY-13" = "CVCL_8797",
+            "CVCL_7353" = "CVCL_0014"
         )
     )
 })

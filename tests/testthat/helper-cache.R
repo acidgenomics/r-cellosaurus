@@ -20,7 +20,7 @@ invisible(Map(
     file = files,
     MoreArgs = list(
         "envir" = environment(),
-        "remoteDir" = .testsURL
+        "remoteDir" = .testsUrl
     )
 ))
 rm(files)
