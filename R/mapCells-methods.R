@@ -69,43 +69,54 @@ NULL
         assert(is.data.frame(overrides))
         ## First create a pool of exact matches annotated in Cellosaurus.
         df <- as(object, "DataFrame")
-        cols <- c(
-            "accession",
-            "secondaryAccession",
-            "cellLineName",
-            "depmapId",
-            "sangerModelId",
-            "synonyms"
-        )
-        assert(isSubset(cols, colnames(df)))
-        df <- df[, cols]
         df[["cellLineNameNoBracket"]] <- gsub(
             pattern = "[_ ]+\\[.+$",
             replacement = "",
             x = df[["cellLineName"]]
         )
-        cols <- append(x = cols, values = "cellLineNameNoBracket")
-        pool <- apply(
-            X = df,
-            MARGIN = 1L,
-            FUN = function(x) {
-                x <- unlist(x, recursive = TRUE, use.names = FALSE)
-                x <- na.omit(x)
-                x <- unique(x)
-                x
-            },
-            simplify = FALSE
-        )
-        poolRep <- rep(
-            x = seq_along(pool),
-            times = vapply(
-                X = pool,
-                FUN = length,
-                FUN.VALUE = integer(1L)
+        .pool <- function(df, cols) {
+            assert(isSubset(cols, colnames(df)))
+            df <- df[, cols]
+            pool <- apply(
+                X = df,
+                MARGIN = 1L,
+                FUN = function(x) {
+                    x <- unlist(x, recursive = TRUE, use.names = FALSE)
+                    x <- na.omit(x)
+                    x <- unique(x)
+                    x
+                },
+                simplify = FALSE
             )
+            poolRep <- rep(
+                x = seq_along(pool),
+                times = vapply(
+                    X = pool,
+                    FUN = length,
+                    FUN.VALUE = integer(1L)
+                )
+            )
+            poolUnlist <- unlist(pool, recursive = FALSE, use.names = FALSE)
+            list(
+                "rep" = poolRep,
+                "unlist" = poolUnlist
+            )
+        }
+        ## Don't include standardized cell name here. This can result in
+        ## unwanted mismatches for some cell lines (e.g. ICC2 [CVCL_VV27] vs.
+        ## ICC-2 [CVCL_C6N4]).
+        cols <- c(
+            "accession",
+            "secondaryAccession",
+            "depmapId",
+            "sangerModelId",
+            "cellLineName",
+            "cellLineNameNoBracket",
+            "synonyms"
         )
-        poolUnlist <- unlist(pool, recursive = FALSE, use.names = FALSE)
-        ## Override any ambiguous cell line names with direct RRID mapping.
+        pool <- .pool(df = df, cols = cols)
+        ## Override any ambiguous cell line names with direct Cellosaurus
+        ## accession identifier mapping.
         cells <- unlist(Map(
             cell = cells,
             cellStd = standardizeCells(cells),
@@ -120,13 +131,10 @@ NULL
             },
             USE.NAMES = FALSE
         ))
-        idx <- poolRep[match(x = cells, table = poolUnlist)]
-
-        ## FIXME Need to improve our fall back by matching against standardized
-        ## name...
-
+        idx <- pool[["rep"]][match(x = cells, table = pool[["unlist"]])]
         ## Fall back to matching by standardized cell name.
         if (anyNA(idx)) {
+            df[["standardName"]] <- standardizeCells(df[["cellLineName"]])
             naIdx <- which(is.na(idx))
             cells2 <- vapply(
                 X = standardizeCells(cells[naIdx]),
@@ -142,9 +150,14 @@ NULL
                 FUN.VALUE = character(1L),
                 USE.NAMES = FALSE
             )
-            idx2 <- poolRep[match(x = cells2, table = poolUnlist)]
+            idx2 <- pool[["rep"]][match(x = cells2, table = pool[["unlist"]])]
             idx[naIdx] <- idx2
         }
+
+
+
+
+
         cells <- cellsOrig
         if (anyNA(idx)) {
             fail <- cells[is.na(idx)]
