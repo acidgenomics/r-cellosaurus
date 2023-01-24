@@ -1,6 +1,4 @@
-## FIXME Need to improve splitting of "crossReferences".
-## FIXME Need to improve splitting of "disease"
-## FIXME Need to improve splitting of "referencesIdentifiers"
+## FIXME Need to sanitize comments into a list.
 
 
 
@@ -32,11 +30,7 @@ NULL
 #' @note Updated 2023-01-23.
 #' @noRd
 .addDepmapId <- function(object) {
-    .extractCrossRef(
-        object,
-        colName = "depmapId",
-        keyName = "DepMap"
-    )
+    .extractCrossRef(object = object, colName = "depmapId", keyName = "DepMap")
 }
 
 
@@ -243,6 +237,8 @@ NULL
 
 
 
+## FIXME Need to rework this, now that we're nesting crossReferences in a list.
+
 #' Extract and assign identifier column from `crossReferences`
 #'
 #' @details
@@ -288,7 +284,7 @@ NULL
 
 
 
-## FIXME This may not work for sampling site correctly -- rethink (see above).
+## FIXME Need to rework this, now that we're nesting in a list.
 
 #' Extract a key value pair from comments
 #'
@@ -472,14 +468,62 @@ NULL
 
 
 
+#' Sanitize the `crossReferences` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.sanitizeCrossReferences <- function(object) {
+    .splitNestedCol(
+        object = object,
+        colName = "crossReferences",
+        sep = "; "
+    )
+}
+
+
+
+#' Sanitize the `date` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.sanitizeDate <- function(object) {
+    .splitCol(object = object, colName = "date", split = "; ")
+}
+
+
+
+#' Sanitize the `synonyms` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.sanitizeSynonyms <- function(object) {
+    .splitCol(object = object, colName = "synonyms", split = "; ")
+}
+
+
+
+#' Sanitize the `diseases` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.sanitizeDiseases <- function(object) {
+    .splitNestedCol(object, colName = "diseases", sep = "; ")
+}
+
+
+
 #' Sanitize the `hierarchy` column
 #'
 #' @details
 #' Some entries have multiple elements, such as "CVCL_0464".
 #'
-#' @note Updated 2023-01-20.
+#' @note Updated 2023-01-24.
 #' @noRd
 .sanitizeHierarchy <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["hierarchy"]], "CharacterList")
+    )
     lst <- CharacterList(lapply(
         X = object[["hierarchy"]],
         FUN = function(x) {
@@ -494,6 +538,20 @@ NULL
     ))
     object[["hierarchy"]] <- lst
     object
+}
+
+
+
+#' Sanitize the `referencesIdentifiers` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.sanitizeRefIds <- function(object) {
+    .splitNestedCol(
+        object = object,
+        colName = "referencesIdentifiers",
+        sep = "="
+    )
 }
 
 
@@ -514,6 +572,34 @@ NULL
             split = split,
             fixed = TRUE
         ))
+    object
+}
+
+
+
+#' Split a nested column by key
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.splitNestedCol <- function(object, colName, sep) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["crossReferences"]], "CharacterList")
+    )
+    lst <- SimpleList(lapply(
+        X = object[["crossReferences"]],
+        FUN = function(x) {
+            x <- stri_split_fixed(
+                str = x,
+                pattern = "; ",
+                n = 2L,
+                simplify = TRUE
+            )
+            x <- split(x = x[, 2L], f = x[, 1L])
+            x
+        }
+    ))
+    object[["crossReferences"]] <- lst
     object
 }
 
@@ -547,10 +633,14 @@ Cellosaurus <- # nolint
         }
         object <- object[order(rownames(object)), , drop = FALSE]
         alert("Processing annotations.")
-        object <- .splitCol(object, colName = "date", split = "; ")
-        object <- .splitCol(object, colName = "synonyms", split = "; ")
         object <- .sanitizeAgeAtSampling(object)
+        object <- .sanitizeCrossReferences(object)
+        object <- .sanitizeDate()
+        object <- .sanitizeDiseases(object)
         object <- .sanitizeHierarchy(object)
+        object <- .sanitizeRefIds(object)
+        object <- .sanitizeSynonyms()
+        ## FIXME Need to rework these, after changing our splitting approach.
         object <- .addDepmapId(object)
         object <- .addSangerModelId(object)
         object <- .addNcitDisease(object)

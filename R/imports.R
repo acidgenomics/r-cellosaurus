@@ -28,7 +28,7 @@ NULL
 #' @importFrom AcidBase pasteURL showHeader showSlotInfo
 #' @importFrom AcidCLI abort alert
 #' @importFrom IRanges CharacterList IntegerList
-#' @importFrom S4Vectors DataFrame
+#' @importFrom S4Vectors DataFrame SimpleList
 #' @importFrom data.table rbindlist
 #' @importFrom goalie allAreMatchingFixed allAreMatchingRegex assert hasLength
 #' hasNoDuplicates hasRownames isCharacter isFlag isString isSubset validate
