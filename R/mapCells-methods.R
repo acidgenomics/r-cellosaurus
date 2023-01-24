@@ -1,3 +1,10 @@
+## FIXME We're now failing to map 13 lines here:
+## HA7EBV, NCIBL128, NCIBL1437, Hs-633T, NCIBL1395, NCIBL1770, NCIBL2009,
+## NCIBL2052, NCIBL2087, NCIBL209, NCIBL2122, NCIBL2126,
+## NCIBL2171
+
+
+
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-01-24.
@@ -72,16 +79,12 @@ NULL
         )
         assert(isSubset(cols, colnames(df)))
         df <- df[, cols]
-        df[["nameNoBracket"]] <- gsub(
+        df[["cellLineNameNoBracket"]] <- gsub(
             pattern = "[_ ]+\\[.+$",
             replacement = "",
             x = df[["cellLineName"]]
         )
-        df[["standardName"]] <- standardizeCells(df[["cellLineName"]])
-        cols <- append(
-            x = cols,
-            values = c("nameNoBracket", "standardName")
-        )
+        cols <- append(x = cols, values = "cellLineNameNoBracket")
         pool <- apply(
             X = df,
             MARGIN = 1L,
@@ -118,6 +121,10 @@ NULL
             USE.NAMES = FALSE
         ))
         idx <- poolRep[match(x = cells, table = poolUnlist)]
+
+        ## FIXME Need to improve our fall back by matching against standardized
+        ## name...
+
         ## Fall back to matching by standardized cell name.
         if (anyNA(idx)) {
             naIdx <- which(is.na(idx))

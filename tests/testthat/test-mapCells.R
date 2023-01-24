@@ -3,7 +3,7 @@ map <- readRDS(file.path("cache", "mapCells.rds"))
 
 test_that("Cell name", {
     object <- cello
-    cells <- head(object[["name"]], n = 3L)
+    cells <- head(object[["cellLineName"]], n = 3L)
     cells <- standardizeCells(cells)
     cells <- mapCells(object = object, cells = cells)
     expected <- c(
@@ -17,7 +17,7 @@ test_that("Cell name", {
 test_that("Mixed identifier input", {
     object <- cello
     cells <- c(
-        as.character(object[["id"]])[[1L]],
+        as.character(object[["accession"]])[[1L]],
         as.character(object[["depmapId"]])[[1L]],
         as.character(object[["sangerModelId"]])[[4L]]
     )
@@ -32,7 +32,7 @@ test_that("Mixed identifier input", {
 
 test_that("keyType return", {
     object <- cello
-    cells <- head(as.character(object[["name"]]), n = 2L)
+    cells <- head(as.character(object[["cellLineName"]]), n = 2L)
     expect_identical(
         object = mapCells(
             object = object,
@@ -76,13 +76,18 @@ test_that("Match failure", {
     )
 })
 
+## FIXME We're now failing to map 13 lines here:
+## HA7EBV, NCIBL128, NCIBL1437, Hs-633T, NCIBL1395, NCIBL1770, NCIBL2009,
+## NCIBL2052, NCIBL2087, NCIBL209, NCIBL2122, NCIBL2126,
+## NCIBL2171
+
 test_that("DepMap 22Q2", {
     object <- celloFull
     df <- map[["depmap_22q2"]]
     censor <- c(
-        "ACH_000499", # EW8
-        "ACH_001131", # MS-1
-        "ACH_002185" # PL18
+        "ACH_000499",
+        "ACH_001131",
+        "ACH_002185"
     )
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
@@ -99,7 +104,7 @@ test_that("DepMap 22Q2", {
 test_that("DepMap 22Q4", {
     object <- celloFull
     df <- map[["depmap_22q4"]]
-    censor <- "ACH_002185" # PL18
+    censor <- "ACH_002185"
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["CellLineName"]])),
