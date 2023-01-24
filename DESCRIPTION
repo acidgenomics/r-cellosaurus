@@ -38,7 +38,6 @@ Imports:
     syntactic (>= 0.6.3),
     utils
 Suggests:
-    future (>= 1.30.0),
     future.apply (>= 1.10.0),
     testthat (>= 3.1.6)
 Additional_repositories: https://r.acidgenomics.com

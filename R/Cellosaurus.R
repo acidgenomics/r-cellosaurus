@@ -1,4 +1,7 @@
 ## FIXME Need to sanitize comments into a list.
+## FIXME Strip periods from comments.
+## FIXME Look for comments that contain additional periods, and consider
+## sanitizing / removing.
 
 
 
@@ -407,7 +410,6 @@ NULL
             "Processing entries in parallel with {.pkg %s}.",
             "future.apply"
         ))
-        future::plan(strategy = future::multisession)
         .lapply <- future.apply::future_lapply
     } else {
         alert(sprintf(
@@ -428,6 +430,10 @@ NULL
     ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
     df <- rbindlist(l = x, use.names = TRUE, fill = FALSE)
     df <- as(df, "DataFrame")
+    for (key in nestedKeys) {
+        assert(is.list(df[[key]]))
+        df[[key]] <- CharacterList(df[[key]])
+    }
     colnames(df)[colnames(df) == "AC"] <- "accession"
     colnames(df)[colnames(df) == "AG"] <- "ageAtSampling"
     colnames(df)[colnames(df) == "AS"] <- "secondaryAccession"
@@ -445,8 +451,17 @@ NULL
     colnames(df)[colnames(df) == "SX"] <- "sexOfCell"
     colnames(df)[colnames(df) == "SY"] <- "synonyms"
     colnames(df)[colnames(df) == "WW"] <- "webPages"
+    assert(
+        allAreMatchingRegex(x = df[["accession"]], pattern = "^CVCL_"),
+        isCharacter(df[["cellLineName"]])
+    )
     rownames(df) <- df[["accession"]]
-    metadata(df)[["dataVersion"]] <- dataVersion
+    df <- df[order(rownames(df)), , drop = FALSE]
+    metadata(df) <- list(
+        "dataVersion" = dataVersion,
+        "date" = Sys.Date(),
+        "packageVersion" = .pkgVersion
+    )
     df
 }
 
@@ -612,47 +627,33 @@ NULL
 Cellosaurus <- # nolint
     function() {
         object <- .importCelloFromTxt()
-        assert(
-            allAreMatchingRegex(x = rownames(object), pattern = "^CVCL_"),
-            isCharacter(object[["cellLineName"]])
-        )
-        ## Coerce list columns to CharacterList.
-        for (col in c(
-            "comments",
-            "crossReferences",
-            "diseases",
-            "hierarchy",
-            "originateFromSameIndividual",
-            "referencesIdentifiers",
-            "speciesOfOrigin",
-            "strProfileData",
-            "webPages"
-        )) {
-            assert(is.list(object[[col]]))
-            object[[col]] <- CharacterList(object[[col]])
-        }
-        object <- object[order(rownames(object)), , drop = FALSE]
         alert("Processing annotations.")
         object <- .sanitizeAgeAtSampling(object)
+        ## FIXME Need to support this.
+        object <- .sanitizeComments(object)
         object <- .sanitizeCrossReferences(object)
-        object <- .sanitizeDate()
+        object <- .sanitizeDate(object)
         object <- .sanitizeDiseases(object)
         object <- .sanitizeHierarchy(object)
         object <- .sanitizeRefIds(object)
-        object <- .sanitizeSynonyms()
-        ## FIXME Need to rework these, after changing our splitting approach.
+        object <- .sanitizeSynonyms(object)
+        ## FIXME Need to rework this.
         object <- .addDepmapId(object)
+        ## FIXME Need to rework this.
         object <- .addSangerModelId(object)
+        ## FIXME Need to rework this.
         object <- .addNcitDisease(object)
         object <- .addTaxonomy(object)
         object <- .addIsCancer(object)
         object <- .addIsProblematic(object)
+        ## FIXME Need to rework this.
         object <- .addMsiStatus(object)
+        ## FIXME Need to rework this.
         object <- .addPopulation(object)
+        ## FIXME Need to rework this.
         object <- .addSamplingSite(object)
         object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
-        metadata(object)[["packageVersion"]] <- .pkgVersion
         new("Cellosaurus", object)
     }
