@@ -124,8 +124,7 @@ NULL
             USE.NAMES = FALSE
         ))
         idx <- pool[["rep"]][match(x = cells, table = pool[["unlist"]])]
-        ## Fall back to matching by standardized cell name.
-        ## FIXME This isn't working for TM87, but it should...hmm.
+        ## Fall back to matching against standardized cell name.
         if (anyNA(idx)) {
             naIdx <- which(is.na(idx))
             cells2 <- vapply(
