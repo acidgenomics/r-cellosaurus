@@ -319,6 +319,10 @@ NULL
         fixed = TRUE
     )[[1L]][[2L]]
     dataVersion <- as.numeric_version(dataVersion)
+    alert(sprintf(
+        "Detected Cellosaurus release %s.",
+        as.character(dataVersion)
+    ))
     alert(sprintf("Mapping lines into {.cls %s} of entries.", "list"))
     x <- Map(
         f = function(lines, i, j) {
