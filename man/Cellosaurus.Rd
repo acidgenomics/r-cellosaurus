@@ -13,7 +13,7 @@ Cellosaurus()
 Cellosaurus table
 }
 \note{
-Updated 2023-01-23.
+Updated 2023-01-24.
 }
 \examples{
 object <- Cellosaurus()
