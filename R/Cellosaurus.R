@@ -35,35 +35,6 @@ NULL
 
 
 
-## FIXME Standardize with `.extractFromComments`.
-
-#' Add `ethnicity` column
-#'
-#' @note Updated 2023-01-24.
-#' @noRd
-.addEthnicity <- function(object) {
-    assert(
-        is(object, "DataFrame"),
-        is(object[["comments"]], "CharacterList")
-    )
-    x <- object[["comments"]]
-    x <- grep(pattern = "^Population:", x = x, value = TRUE)
-    x <- sub(pattern = "^Population: (.+)\\.$", replacement = "\\1", x = x)
-    x <- CharacterList(lapply(
-        X = x,
-        FUN = function(x) {
-            if (identical(x, character())) {
-                return(character())
-            }
-            strsplit(x = x, split = "; ")[[1L]]
-        }
-    ))
-    object[["ethnicity"]] <- x
-    object
-}
-
-
-
 #' Add `isCancer` column
 #'
 #' @note Updated 2023-01-24.
@@ -100,32 +71,16 @@ NULL
 
 
 
-## FIXME Standardize with `.extractFromComments`.
-
 #' Add `msiStatus` column
 #'
 #' @note Updated 2023-01-24.
 #' @noRd
 .addMsiStatus <- function(object) {
-    assert(
-        is(object, "DataFrame"),
-        is(object[["comments"]], "CharacterList")
+    .extractComment(
+        object = object,
+        colName = "msiStatus",
+        keyName = "Microsatellite instability"
     )
-    x <- object[["comments"]]
-    x <- grep(
-        pattern = "^Microsatellite instability: ",
-        x = x,
-        value = TRUE
-    )
-    x <- sub(
-        pattern = "^Microsatellite instability: (.+)\\.$",
-        replacement = "\\1",
-        x = x
-    )
-    x <- as.character(x)
-    assert(identical(length(x), nrow(object)))
-    object[["msiStatus"]] <- x
-    object
 }
 
 
@@ -190,34 +145,39 @@ NULL
 
 
 
-## FIXME Standardize with `.extractFromComments`.
+#' Add `population` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.addPopulation <- function(object) {
+    .extractComment(
+        object = object,
+        colName = "population",
+        keyName = "Population"
+    )
+}
+
+
 
 #' Add `samplingSite` column
 #'
 #' @details
 #' Note that some comments have additional information on the cell type, that
-#' we don't want to include here (e.g. CVCL_0003).
+#' we don't want to include here (e.g. CVCL_0003, CVCL_0008).
 #'
 #' CVCL_C4RX currently has a duplication of colon in the comments.
 #'
 #' @note Updated 2023-01-24.
 #' @noRd
 .addSamplingSite <- function(object) {
-    assert(
-        is(object, "DataFrame"),
-        is(object[["comments"]], "CharacterList")
+    object <- .extractComment(
+        object = object,
+        colName = "samplingSite",
+        keyName = "Derived from sampling site"
     )
-    x <- object[["comments"]]
-    x <- grep(pattern = "^Derived from sampling site: ", x = x, value = TRUE)
-    x <- sub(
-        pattern = "^Derived from sampling site: (.+)\\.$",
-        replacement = "\\1",
-        x = x
-    )
-    x <- as.character(x)
-    assert(identical(length(x), nrow(object)))
-    object[["samplingSite"]] <- x
-    object
+    ## FIXME Need to sanitize these:
+    ## [[3]] Peripheral blood. Cell type=Mast cell
+    ## [[8]] Peripheral blood. Cell type=B-cell
 }
 
 
@@ -315,6 +275,41 @@ NULL
         replacement = "",
         x = x
     )
+    object[[colName]] <- x
+    object
+}
+
+
+
+## FIXME This may not work for sampling site correctly -- rethink (see above).
+
+#' Extract a key value pair from comments
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.extractComment <- function(object, colName, keyName) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["comments"]], "CharacterList"),
+        isString(colName),
+        isString(keyName)
+    )
+    x <- object[["comments"]]
+    x <- grep(pattern = paste0("^", keyName, ":"), x = x, value = TRUE)
+    x <- sub(
+        pattern = paste0("^", keyName, ": (.+)\\.$"),
+        replacement = "\\1",
+        x = x
+    )
+    x <- CharacterList(lapply(
+        X = x,
+        FUN = function(x) {
+            if (identical(x, character())) {
+                return(character())
+            }
+            strsplit(x = x, split = "; ")[[1L]]
+        }
+    ))
     object[[colName]] <- x
     object
 }
@@ -454,7 +449,23 @@ NULL
 
 
 
-#' Sanitize the hierarchy column
+#' Sanitize the `ageAtSampling` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.sanitizeAgeAtSampling <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is.character(object[["ageAtSampling"]])
+    )
+    idx <- which(object[["ageAtSampling"]] == "Age unspecified")
+    object[["ageAtSampling"]][idx] <- NA_character_
+    object
+}
+
+
+
+#' Sanitize the `hierarchy` column
 #'
 #' @details
 #' Some entries have multiple elements, such as "CVCL_0464".
@@ -507,10 +518,10 @@ NULL
 #' @export
 Cellosaurus <- # nolint
     function() {
-        df <- .importCelloFromTxt()
+        object <- .importCelloFromTxt()
         assert(
-            allAreMatchingRegex(x = rownames(df), pattern = "^CVCL_"),
-            isCharacter(df[["cellLineName"]])
+            allAreMatchingRegex(x = rownames(object), pattern = "^CVCL_"),
+            isCharacter(object[["cellLineName"]])
         )
         ## Coerce list columns to CharacterList.
         for (col in c(
@@ -524,26 +535,27 @@ Cellosaurus <- # nolint
             "strProfileData",
             "webPages"
         )) {
-            assert(is.list(df[[col]]))
-            df[[col]] <- CharacterList(df[[col]])
+            assert(is.list(object[[col]]))
+            object[[col]] <- CharacterList(object[[col]])
         }
-        df <- df[order(rownames(df)), ]
+        object <- object[order(rownames(object)), , drop = FALSE]
         alert("Processing annotations.")
-        df <- .splitCol(df, colName = "date", split = "; ")
-        df <- .splitCol(df, colName = "synonyms", split = "; ")
-        df <- .sanitizeHierarchy(df)
-        df <- .addDepmapId(df)
-        df <- .addSangerModelId(df)
-        df <- .addNcitDisease(df)
-        df <- .addTaxonomy(df)
-        df <- .addIsCancer(df)
-        df <- .addIsProblematic(df)
-        df <- .addEthnicity(df)
-        df <- .addMsiStatus(df)
-        df <- .addSamplingSite(df)
-        df <- factorize(df)
-        df <- encode(df)
-        df <- df[, sort(colnames(df)), drop = FALSE]
-        metadata(df)[["packageVersion"]] <- .pkgVersion
-        new("Cellosaurus", df)
+        object <- .splitCol(object, colName = "date", split = "; ")
+        object <- .splitCol(object, colName = "synonyms", split = "; ")
+        object <- .sanitizeAgeAtSampling(object)
+        object <- .sanitizeHierarchy(object)
+        object <- .addDepmapId(object)
+        object <- .addSangerModelId(object)
+        object <- .addNcitDisease(object)
+        object <- .addTaxonomy(object)
+        object <- .addIsCancer(object)
+        object <- .addIsProblematic(object)
+        object <- .addMsiStatus(object)
+        object <- .addPopulation(object)
+        object <- .addSamplingSite(object)
+        object <- factorize(object)
+        object <- encode(object)
+        object <- object[, sort(colnames(object)), drop = FALSE]
+        metadata(object)[["packageVersion"]] <- .pkgVersion
+        new("Cellosaurus", object)
     }
