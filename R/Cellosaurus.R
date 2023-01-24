@@ -609,6 +609,7 @@ NULL
 Cellosaurus <- # nolint
     function() {
         object <- .importCelloFromTxt()
+        alert("Sanitizing annotations.")
         object <- .sanitizeAgeAtSampling(object)
         object <- .sanitizeComments(object)
         object <- .sanitizeCrossRefs(object)
@@ -617,6 +618,7 @@ Cellosaurus <- # nolint
         object <- .sanitizeHierarchy(object)
         object <- .sanitizeRefIds(object)
         object <- .sanitizeSynonyms(object)
+        alert("Adding annotations.")
         object <- .addDepmapId(object)
         object <- .addIsCancer(object)
         object <- .addIsProblematic(object)
