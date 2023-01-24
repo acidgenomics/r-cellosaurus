@@ -125,11 +125,8 @@ NULL
         ))
         idx <- pool[["rep"]][match(x = cells, table = pool[["unlist"]])]
         ## Fall back to matching by standardized cell name.
+        ## FIXME This isn't working for TM87, but it should...hmm.
         if (anyNA(idx)) {
-            df2 <- df[, "cellLineName", drop = FALSE]
-            df2[["standardName"]] = standardizeCells(df2[["cellLineName"]])
-            df2[["cellLineName"]] <- NULL
-            pool2 <- .pool(df2)
             naIdx <- which(is.na(idx))
             cells2 <- vapply(
                 X = standardizeCells(cells[naIdx]),
@@ -145,6 +142,11 @@ NULL
                 FUN.VALUE = character(1L),
                 USE.NAMES = FALSE
             )
+            df2 <- DataFrame(
+                "standardName" = standardizeCells(df[["cellLineName"]]),
+                "synonyms" = df[["synonyms"]]
+            )
+            pool2 <- .pool(df2)
             idx2 <- pool2[["rep"]][match(x = cells2, table = pool2[["unlist"]])]
             idx[naIdx] <- idx2
         }
