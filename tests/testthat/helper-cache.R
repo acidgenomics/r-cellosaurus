@@ -20,7 +20,10 @@ invisible(Map(
     file = files,
     MoreArgs = list(
         "envir" = environment(),
-        "remoteDir" = .testsUrl
+        "remoteDir" = paste0(
+            "https://r.acidgenomics.com/testdata/", tolower(.pkgName), "/",
+            "v", .pkgVersion$major, ".", .pkgVersion$minor # nolint
+        )
     )
 ))
 rm(files)
