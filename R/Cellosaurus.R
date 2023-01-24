@@ -1,10 +1,3 @@
-## FIXME Need to sanitize comments into a list.
-## FIXME Strip periods from comments.
-## FIXME Look for comments that contain additional periods, and consider
-## sanitizing / removing.
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -30,7 +23,7 @@ NULL
 #' Note that some cell lines, such as "CVCL_0041", map to multiple DepMap
 #' identifiers, which is confusing.
 #'
-#' @note Updated 2023-01-23.
+#' @note Updated 2023-01-24.
 #' @noRd
 .addDepmapId <- function(object) {
     .extractCrossRef(object = object, colName = "depmapId", keyName = "DepMap")
@@ -98,28 +91,15 @@ NULL
 .addNcitDisease <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is(object[["diseases"]], "CharacterList")
+        is(object[["diseases"]], "SimpleList")
     )
     spl <- lapply(
         X = object[["diseases"]],
         FUN = function(x) {
-            lgl <- grepl(
-                pattern = "NCIt",
-                x = x,
-                ignore.case = FALSE,
-                fixed = TRUE
-            )
-            if (!any(lgl)) {
+            x <- x[["NCIt"]]
+            if (is.null(x)) {
                 return(NULL)
             }
-            x <- x[lgl]
-            x <- sub(
-                pattern = "NCIt; ",
-                replacement = "",
-                x = x,
-                ignore.case = FALSE,
-                fixed = TRUE
-            )
             x <- stri_split_fixed(
                 str = x,
                 pattern = "; ",
@@ -129,18 +109,8 @@ NULL
             x
         }
     )
-    id <- CharacterList(lapply(
-        X = spl,
-        FUN = function(x) {
-            x[, 1L]
-        }
-    ))
-    name <- CharacterList(lapply(
-        X = spl,
-        FUN = function(x) {
-            x[, 2L]
-        }
-    ))
+    id <- CharacterList(lapply(X = spl, FUN = `[`, j = 1L))
+    name <- CharacterList(lapply(X = spl, FUN = `[`, j = 2L))
     object[["ncitDiseaseId"]] <- id
     object[["ncitDiseaseName"]] <- name
     object
@@ -240,34 +210,26 @@ NULL
 
 
 
-## FIXME Need to rework this, now that we're nesting crossReferences in a list.
-
 #' Extract and assign identifier column from `crossReferences`
 #'
 #' @details
 #' Note that this intentionally picks only the first matching identifier.
 #'
-#' @note Updated 2023-01-23.
+#' @note Updated 2023-01-24.
 #' @noRd
-.extractCrossRef <- function(object, colName, keyName, sep = "; ") {
+.extractCrossRef <- function(object, colName, keyName) {
     assert(
         is(object, "DataFrame"),
+        is(object[["crossReferences"]], "SimpleList"),
         isString(colName),
-        isString(keyName),
-        isString(sep)
+        isString(keyName)
     )
     x <- vapply(
         X = object[["crossReferences"]],
         keyName = keyName,
-        sep = sep,
-        FUN = function(x, keyName, sep) {
-            ids <- grep(
-                pattern = paste0("^", keyName, sep),
-                x = x,
-                ignore.case = FALSE,
-                value = TRUE
-            )
-            if (identical(ids, character())) {
+        FUN = function(x, keyName) {
+            ids <- x[[keyName]]
+            if (is.null(ids)) {
                 return(NA_character_)
             }
             ## Return only the first match.
@@ -275,19 +237,11 @@ NULL
         },
         FUN.VALUE = character(1L)
     )
-    ## This `sub` approach handles NA better than using `stri_split_fixed`.
-    x <- sub(
-        pattern = paste0("^", keyName, sep),
-        replacement = "",
-        x = x
-    )
     object[[colName]] <- x
     object
 }
 
 
-
-## FIXME Need to rework this, now that we're nesting in a list.
 
 #' Extract a key value pair from comments
 #'
@@ -296,24 +250,18 @@ NULL
 .extractComment <- function(object, colName, keyName) {
     assert(
         is(object, "DataFrame"),
-        is(object[["comments"]], "CharacterList"),
+        is(object[["comments"]], "SimpleList"),
         isString(colName),
         isString(keyName)
     )
     x <- object[["comments"]]
-    x <- grep(pattern = paste0("^", keyName, ":"), x = x, value = TRUE)
-    x <- sub(
-        pattern = paste0("^", keyName, ": (.+)\\.$"),
-        replacement = "\\1",
-        x = x
-    )
     x <- CharacterList(lapply(
         X = x,
         FUN = function(x) {
-            if (identical(x, character())) {
-                return(character())
+            if (is.null(x[[keyName]])) {
+                return(NULL)
             }
-            strsplit(x = x, split = "; ")[[1L]]
+            x[[keyName]][[1L]]
         }
     ))
     object[[colName]] <- x
@@ -483,11 +431,31 @@ NULL
 
 
 
+#' Sanitize the `comments` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.sanitizeComments <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["comments"]], "CharacterList")
+    )
+    object[["comments"]] <- unique(object[["comments"]])
+    object[["comments"]] <- sub(
+        pattern = "\\.$",
+        replacement = "",
+        x = object[["comments"]]
+    )
+    .splitNestedCol(object, colName = "comments", sep = ": ")
+}
+
+
+
 #' Sanitize the `crossReferences` column
 #'
 #' @note Updated 2023-01-24.
 #' @noRd
-.sanitizeCrossReferences <- function(object) {
+.sanitizeCrossRefs <- function(object) {
     .splitNestedCol(
         object = object,
         colName = "crossReferences",
@@ -503,16 +471,6 @@ NULL
 #' @noRd
 .sanitizeDate <- function(object) {
     .splitCol(object = object, colName = "date", split = "; ")
-}
-
-
-
-#' Sanitize the `synonyms` column
-#'
-#' @note Updated 2023-01-24.
-#' @noRd
-.sanitizeSynonyms <- function(object) {
-    .splitCol(object = object, colName = "synonyms", split = "; ")
 }
 
 
@@ -562,11 +520,30 @@ NULL
 #' @note Updated 2023-01-24.
 #' @noRd
 .sanitizeRefIds <- function(object) {
+    assert(
+        is(object, "DataFrame"),
+        is(object[["referencesIdentifiers"]], "CharacterList")
+    )
+    object[["referencesIdentifiers"]] <- sub(
+        pattern = ";$",
+        replacement = "",
+        x = object[["referencesIdentifiers"]]
+    )
     .splitNestedCol(
         object = object,
         colName = "referencesIdentifiers",
         sep = "="
     )
+}
+
+
+
+#' Sanitize the `synonyms` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.sanitizeSynonyms <- function(object) {
+    .splitCol(object = object, colName = "synonyms", split = "; ")
 }
 
 
@@ -599,14 +576,16 @@ NULL
 .splitNestedCol <- function(object, colName, sep) {
     assert(
         is(object, "DataFrame"),
-        is(object[["crossReferences"]], "CharacterList")
+        is(object[[colName]], "CharacterList"),
+        isString(sep)
     )
     lst <- SimpleList(lapply(
-        X = object[["crossReferences"]],
-        FUN = function(x) {
+        X = object[[colName]],
+        sep = sep,
+        FUN = function(x, sep) {
             x <- stri_split_fixed(
                 str = x,
-                pattern = "; ",
+                pattern = sep,
                 n = 2L,
                 simplify = TRUE
             )
@@ -614,7 +593,7 @@ NULL
             x
         }
     ))
-    object[["crossReferences"]] <- lst
+    object[[colName]] <- lst
     object
 }
 
@@ -627,23 +606,22 @@ NULL
 Cellosaurus <- # nolint
     function() {
         object <- .importCelloFromTxt()
-        alert("Processing annotations.")
         object <- .sanitizeAgeAtSampling(object)
-        object <- .sanitizeComments(object) # FIXME
-        object <- .sanitizeCrossReferences(object) # FIXME
+        object <- .sanitizeComments(object)
+        object <- .sanitizeCrossRefs(object)
         object <- .sanitizeDate(object)
-        object <- .sanitizeDiseases(object) # FIXME
+        object <- .sanitizeDiseases(object)
         object <- .sanitizeHierarchy(object)
-        object <- .sanitizeRefIds(object) # FIXME
+        object <- .sanitizeRefIds(object)
         object <- .sanitizeSynonyms(object)
-        object <- .addDepmapId(object) # FIXME
+        object <- .addDepmapId(object)
         object <- .addIsCancer(object)
         object <- .addIsProblematic(object)
-        object <- .addMsiStatus(object) # FIXME
-        object <- .addNcitDisease(object) # FIXME
-        object <- .addPopulation(object) # FIXME
-        object <- .addSamplingSite(object) # FIXME
-        object <- .addSangerModelId(object) # FIXME
+        object <- .addMsiStatus(object)
+        object <- .addNcitDisease(object)
+        object <- .addPopulation(object)
+        object <- .addSamplingSite(object)
+        object <- .addSangerModelId(object)
         object <- .addTaxonomy(object)
         object <- factorize(object)
         object <- encode(object)
