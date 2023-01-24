@@ -80,23 +80,21 @@ NULL
 
 
 
-## FIXME Need to rework this.
-
 #' Add `isProblematic` column
 #'
-#' @note Updated 2022-05-13.
+#' @note Updated 2023-01-24.
 #' @noRd
 .addIsProblematic <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is(object[["comment"]], "CharacterList")
+        is(object[["comments"]], "CharacterList")
     )
-    object[["isProblematic"]] <-
-        any(grepl(
-            pattern = "Problematic cell line",
-            x = object[["comment"]],
-            fixed = TRUE
-        ))
+    lgl <- any(grepl(
+        pattern = "Problematic cell line",
+        x = object[["comments"]],
+        fixed = TRUE
+    ))
+    object[["isProblematic"]] <- lgl
     object
 }
 
@@ -142,12 +140,8 @@ NULL
 .addNcitDisease <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is.list(object[["diseases"]])
+        is(object[["diseases"]], "CharacterList")
     )
-    alert(sprintf(
-        "Adding {.var %s} and {.var %s} columns.",
-        "ncitDiseaseId", "ncitDiseaseName"
-    ))
     spl <- lapply(
         X = object[["diseases"]],
         FUN = function(x) {
@@ -247,12 +241,8 @@ NULL
 .addTaxonomy <- function(object) {
     assert(
         is(object, "DataFrame"),
-        is.list(object[["speciesOfOrigin"]])
+        is(object[["speciesOfOrigin"]], "CharacterList")
     )
-    alert(sprintf(
-        "Adding {.var %s} and {.var %s} columns.",
-        "ncbiTaxonomyId", "organism"
-    ))
     spl <- lapply(
         X = object[["speciesOfOrigin"]],
         FUN = stri_split_fixed,
@@ -298,7 +288,6 @@ NULL
         isString(keyName),
         isString(sep)
     )
-    alert(sprintf("Adding {.var %s} column.", colName))
     x <- vapply(
         X = object[["crossReferences"]],
         keyName = keyName,
@@ -521,20 +510,35 @@ Cellosaurus <- # nolint
             allAreMatchingRegex(x = rownames(df), pattern = "^CVCL_"),
             isCharacter(df[["cellLineName"]])
         )
+        ## Coerce list columns to CharacterList.
+        for (col in c(
+            "comments",
+            "crossReferences",
+            "diseases",
+            "hierarchy",
+            "originateFromSameIndividual",
+            "referencesIdentifiers",
+            "speciesOfOrigin",
+            "strProfileData",
+            "webPages"
+        )) {
+            assert(is.list(df[[col]]))
+            df[[col]] <- CharacterList(df[[col]])
+        }
         df <- df[order(rownames(df)), ]
+        alert("Processing additional metadata.")
         df <- .splitCol(df, colName = "date", split = "; ")
         df <- .splitCol(df, colName = "synonyms", split = "; ")
         df <- .addDepmapId(df)
         df <- .addSangerModelId(df)
         df <- .addNcitDisease(df)
         df <- .addTaxonomy(df)
-        ## FIXME Current state of progress.
         df <- .addIsCancer(df)
+        ## FIXME At this step.
         df <- .addIsProblematic(df)
         df <- .addEthnicity(df)
         df <- .addMsiStatus(df)
         df <- .addSamplingSite(df)
-        ## FIXME This steps below are OK.
         df <- .sanitizeHierarchy(df)
         df <- factorize(df)
         df <- encode(df)
