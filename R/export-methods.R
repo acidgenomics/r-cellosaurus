@@ -1,10 +1,6 @@
-## FIXME Don't export crossReferences, webPages
-
-
-
 #' @name export
 #' @inherit pipette::export
-#' @note Updated 2023-01-19.
+#' @note Updated 2023-01-24.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Passthrough arguments to `DataFrame` method.
@@ -23,7 +19,7 @@ NULL
 
 
 
-## Updated 2022-09-13.
+## Updated 2023-01-24.
 `export,Cellosaurus` <- # nolint
     function(object,
              con,
@@ -38,17 +34,19 @@ NULL
             is.null(format)
         )
         df <- as(object, "DataFrame")
-        cols <- setdiff(
-            x = colnames(df),
-            y = c(
-                "ancestors",
-                "comment",
-                "creationDate",
-                "obsolete",
-                "subset",
-                "xref"
-            )
+        dropCols <- c(
+            "comments",
+            "crossReferences",
+            "date",
+            "diseases",
+            "hierarchy",
+            "originateFromSameIndividual",
+            "referencesIdentifiers",
+            "strProfileData",
+            "webPages"
         )
+        assert(isSubset(dropCols, colnames(df)))
+        cols <- setdiff(x = colnames(df), y = dropCols)
         df <- df[, cols]
         export(object = df, con = con, ...)
     }
