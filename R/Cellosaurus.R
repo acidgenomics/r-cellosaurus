@@ -192,6 +192,8 @@ NULL
 #' Note that some comments have additional information on the cell type, that
 #' we don't want to include here (e.g. CVCL_0003).
 #'
+#' CVCL_C4RX currently has a duplication of colon.
+#'
 #' @note Updated 2023-01-24.
 #' @noRd
 .addSamplingSite <- function(object) {
@@ -518,6 +520,7 @@ Cellosaurus <- # nolint
         df <- df[order(rownames(df)), ]
         alert("Processing additional metadata.")
         ## Remove trailing period from comments.
+        ## FIXME Need to remove any duplicated comments (e.g. CVCL_C4RX).
         df[["comments"]] <- sub(
             pattern = "\\.$",
             replacement = "",
