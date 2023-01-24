@@ -76,80 +76,6 @@ test_that("Match failure", {
     )
 })
 
-## FIXME We're now failing to map 13 lines here:
-## HA7EBV, NCIBL128, NCIBL1437, Hs-633T, NCIBL1395, NCIBL1770, NCIBL2009,
-## NCIBL2052, NCIBL2087, NCIBL209, NCIBL2122, NCIBL2126,
-## NCIBL2171
-
-test_that("DepMap 22Q2", {
-    object <- celloFull
-    df <- map[["depmap_22q2"]]
-    censor <- c(
-        "ACH_000499",
-        "ACH_001131",
-        "ACH_002185"
-    )
-    df <- df[setdiff(rownames(df), censor), ]
-    expect_identical(
-        object = unname(mapCells(object, cells = df[["cell_line_name"]])),
-        expected = df[["RRID"]]
-    )
-    fail <- map[["depmap_22q2_fail"]]
-    expect_error(
-        object = mapCells(object, cells = fail),
-        regexp = "19 cells"
-    )
-})
-
-test_that("DepMap 22Q4", {
-    object <- celloFull
-    df <- map[["depmap_22q4"]]
-    censor <- "ACH_002185"
-    df <- df[setdiff(rownames(df), censor), ]
-    expect_identical(
-        object = unname(mapCells(object, cells = df[["CellLineName"]])),
-        expected = df[["RRID"]]
-    )
-    fail <- map[["depmap_22q4_fail"]]
-    expect_error(
-        object = mapCells(object, cells = fail),
-        regexp = "12 cells"
-    )
-})
-
-test_that("CellModelPassports", {
-    object <- celloFull
-    df <- map[["cmp"]]
-    df[["RRID"]] <- gsub(
-        pattern = "CVCL_2717;CVCL_1888",
-        replacement = "CVCL_1888",
-        x = df[["RRID"]]
-    )
-    df[["RRID"]] <- gsub(
-        pattern = "CVCL_X507",
-        replacement = "CVCL_1637",
-        x = df[["RRID"]]
-    )
-    censor <- c(
-        "SIDM00122",
-        "SIDM00408",
-        "SIDM00440",
-        "SIDM00912",
-        "SIDM01335",
-        "SIDM01500"
-    )
-    df <- df[setdiff(rownames(df), censor), ]
-    expect_identical(
-        object = unname(mapCells(object, cells = df[["model_name"]])),
-        expected = df[["RRID"]]
-    )
-    fail <- map[["cmp_fail"]]
-    expect_error(
-        object = mapCells(object, cells = fail),
-        regexp = "173 cells"
-    )
-})
-
 test_that("Tricky cell lines", {
     object <- celloFull
     expect_identical(
@@ -194,5 +120,81 @@ test_that("Tricky cell lines", {
             "OCILY-13" = "CVCL_8797",
             "CVCL_7353" = "CVCL_0014"
         )
+    )
+})
+
+## FIXME Failed to map 3 cells: TM-87, SU-MB-002, PC-3_[JPC-3].
+
+test_that("DepMap 22Q2", {
+    object <- celloFull
+    df <- map[["depmap_22q2"]]
+    censor <- c(
+        "ACH_000499",
+        "ACH_001131",
+        "ACH_002185"
+    )
+    df <- df[setdiff(rownames(df), censor), ]
+    expect_identical(
+        object = unname(mapCells(object, cells = df[["cell_line_name"]])),
+        expected = df[["RRID"]]
+    )
+    fail <- map[["depmap_22q2_fail"]]
+    expect_error(
+        object = mapCells(object, cells = fail),
+        regexp = "19 cells"
+    )
+})
+
+## FIXME Failed to map 2 cells: TM-87, PC-3_[JPC-3].
+
+test_that("DepMap 22Q4", {
+    object <- celloFull
+    df <- map[["depmap_22q4"]]
+    censor <- "ACH_002185"
+    df <- df[setdiff(rownames(df), censor), ]
+    expect_identical(
+        object = unname(mapCells(object, cells = df[["CellLineName"]])),
+        expected = df[["RRID"]]
+    )
+    fail <- map[["depmap_22q4_fail"]]
+    expect_error(
+        object = mapCells(object, cells = fail),
+        regexp = "12 cells"
+    )
+})
+
+## FIXME Failed to map 4 cells: PE-CA-PJ34_Clone-C12,
+## PE-CA-PJ41_Clone-D2, PC-3_[JPC-3], NTERA-2-cl-D1.
+
+test_that("CellModelPassports", {
+    object <- celloFull
+    df <- map[["cmp"]]
+    df[["RRID"]] <- gsub(
+        pattern = "CVCL_2717;CVCL_1888",
+        replacement = "CVCL_1888",
+        x = df[["RRID"]]
+    )
+    df[["RRID"]] <- gsub(
+        pattern = "CVCL_X507",
+        replacement = "CVCL_1637",
+        x = df[["RRID"]]
+    )
+    censor <- c(
+        "SIDM00122",
+        "SIDM00408",
+        "SIDM00440",
+        "SIDM00912",
+        "SIDM01335",
+        "SIDM01500"
+    )
+    df <- df[setdiff(rownames(df), censor), ]
+    expect_identical(
+        object = unname(mapCells(object, cells = df[["model_name"]])),
+        expected = df[["RRID"]]
+    )
+    fail <- map[["cmp_fail"]]
+    expect_error(
+        object = mapCells(object, cells = fail),
+        regexp = "173 cells"
     )
 })

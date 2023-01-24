@@ -1,10 +1,3 @@
-## FIXME We're now failing to map 13 lines here:
-## HA7EBV, NCIBL128, NCIBL1437, Hs-633T, NCIBL1395, NCIBL1770, NCIBL2009,
-## NCIBL2052, NCIBL2087, NCIBL209, NCIBL2122, NCIBL2126,
-## NCIBL2171
-
-
-
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-01-24.
