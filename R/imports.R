@@ -9,7 +9,8 @@ NULL
 
 #' @importFrom AcidGenerics encode factorize leftJoin mapCells snakeCase
 #' standardizeCells
-#' @importFrom BiocGenerics Map %in% as.data.frame grep grepl lapply unlist
+#' @importFrom BiocGenerics Map %in% as.data.frame grep grepl lapply unique
+#' unlist
 #' @importFrom IRanges gsub sub
 #' @importFrom S4Vectors Rle decode metadata metadata<- na.omit
 #' @importFrom methods show
