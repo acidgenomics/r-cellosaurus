@@ -143,17 +143,11 @@ NULL
 #' @note Updated 2023-01-24.
 #' @noRd
 .addSamplingSite <- function(object) {
-    object <- .extractComment(
+    .extractComment(
         object = object,
         colName = "samplingSite",
         keyName = "Derived from sampling site"
     )
-    object[["samplingSite"]] <- sub(
-        pattern = "\\.\\s.+$",
-        replacement = "",
-        x = object[["samplingSite"]]
-    )
-    object
 }
 
 
