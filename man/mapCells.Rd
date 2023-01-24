@@ -10,12 +10,12 @@ mapCells(object, ...)
 \S4method{mapCells}{Cellosaurus}(
   object,
   cells,
-  keyType = c("cellosaurusId", "depmapId", "sangerModelId", "name")
+  keyType = c("cellosaurusId", "depmapId", "sangerModelId", "cellLineName")
 )
 }
 \arguments{
 \item{object}{\code{character}.
-Cell names (or Cellosaurus identifiers).}
+Cell names (or Cellosaurus accession identifiers).}
 
 \item{cells}{\code{character}.
 Cell identifiers.}
@@ -27,21 +27,20 @@ Identifier format to return.}
 }
 \value{
 Named \code{character}.
-User input in the names and Cellosaurus IDs in the values.
+User input in the names and Cellosaurus accession IDs in the values.
 }
 \description{
 Map input to cell identifiers
 }
 \note{
-Updated 2023-01-17.
+Updated 2023-01-24.
 }
 \examples{
 data(cello)
 
 ## Cellosaurus ====
 object <- cello
-cells <- head(cello[["name"]])
-cells <- standardizeCells(cells)
+cells <- standardizeCells(head(cello[["cellLineName"]]))
 cells <- mapCells(object = object, cells = cells)
 print(cells)
 }
