@@ -1,8 +1,3 @@
-## FIXME Consider adding "group" metadata column?
-## This is useful for TNBC
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -40,6 +35,8 @@ NULL
 
 
 
+## FIXME Standardize with `.extractFromComments`.
+
 #' Add `ethnicity` column
 #'
 #' @note Updated 2023-01-24.
@@ -51,7 +48,7 @@ NULL
     )
     x <- object[["comments"]]
     x <- grep(pattern = "^Population:", x = x, value = TRUE)
-    x <- sub(pattern = "^Population: ", replacement = "", x = x)
+    x <- sub(pattern = "^Population: (.+)\\.$", replacement = "\\1", x = x)
     x <- CharacterList(lapply(
         X = x,
         FUN = function(x) {
@@ -103,6 +100,8 @@ NULL
 
 
 
+## FIXME Standardize with `.extractFromComments`.
+
 #' Add `msiStatus` column
 #'
 #' @note Updated 2023-01-24.
@@ -118,9 +117,9 @@ NULL
         x = x,
         value = TRUE
     )
-    x <- gsub(
-        pattern = "^Microsatellite instability: ",
-        replacement = "",
+    x <- sub(
+        pattern = "^Microsatellite instability: (.+)\\.$",
+        replacement = "\\1",
         x = x
     )
     x <- as.character(x)
@@ -191,6 +190,8 @@ NULL
 
 
 
+## FIXME Standardize with `.extractFromComments`.
+
 #' Add `samplingSite` column
 #'
 #' @details
@@ -208,8 +209,11 @@ NULL
     )
     x <- object[["comments"]]
     x <- grep(pattern = "^Derived from sampling site: ", x = x, value = TRUE)
-    x <- sub(pattern = "\\.\\s.+", replacement = "", x = x)
-    x <- sub(pattern = "^Derived from sampling site: ", replacement = "", x = x)
+    x <- sub(
+        pattern = "^Derived from sampling site: (.+)\\.$",
+        replacement = "\\1",
+        x = x
+    )
     x <- as.character(x)
     assert(identical(length(x), nrow(object)))
     object[["samplingSite"]] <- x
@@ -396,7 +400,7 @@ NULL
             }
         }
         for (key in nestedKeys) {
-            x[[key]] <- list(x[[key]])
+            x[[key]] <- list(unique(x[[key]]))
         }
         x
     }
@@ -524,25 +528,19 @@ Cellosaurus <- # nolint
             df[[col]] <- CharacterList(df[[col]])
         }
         df <- df[order(rownames(df)), ]
-        alert("Processing additional metadata.")
-        df[["comments"]] <- sub(
-            pattern = "\\.$",
-            replacement = "",
-            x = df[["comments"]]
-        )
-        df[["comments"]] <- unique(df[["comments"]])
+        alert("Processing annotations.")
         df <- .splitCol(df, colName = "date", split = "; ")
         df <- .splitCol(df, colName = "synonyms", split = "; ")
+        df <- .sanitizeHierarchy(df)
         df <- .addDepmapId(df)
         df <- .addSangerModelId(df)
         df <- .addNcitDisease(df)
         df <- .addTaxonomy(df)
-        df <- .addEthnicity(df)
         df <- .addIsCancer(df)
         df <- .addIsProblematic(df)
+        df <- .addEthnicity(df)
         df <- .addMsiStatus(df)
         df <- .addSamplingSite(df)
-        df <- .sanitizeHierarchy(df)
         df <- factorize(df)
         df <- encode(df)
         df <- df[, sort(colnames(df)), drop = FALSE]
