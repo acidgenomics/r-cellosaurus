@@ -326,7 +326,7 @@ NULL
     alert(sprintf("Mapping lines into {.cls %s} of entries.", "list"))
     x <- Map(
         f = function(lines, i, j) {
-            lines[i:(j-1L)]
+            lines[i:(j - 1L)]
         },
         i = grep(pattern = "^ID\\s+", x = lines, value = FALSE),
         j = grep(pattern = "^//$", x = lines, value = FALSE),
