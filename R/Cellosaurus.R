@@ -35,8 +35,6 @@ NULL
 
 
 
-## FIXME Need to take out the period here.
-
 #' Add `ethnicity` column
 #'
 #' @note Updated 2023-01-24.
