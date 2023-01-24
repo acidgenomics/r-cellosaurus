@@ -1,18 +1,18 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2023-01-17.
+#' @note Updated 2023-01-24.
 #'
 #' @inherit AcidRoxygen::params
 #' @param ... Additional arguments.
 #'
 #' @param object `character`.
-#' Cell names (or Cellosaurus identifiers).
+#' Cell names (or Cellosaurus accession identifiers).
 #'
 #' @param keyType `character(1)`.
 #' Identifier format to return.
 #'
 #' @return Named `character`.
-#' User input in the names and Cellosaurus IDs in the values.
+#' User input in the names and Cellosaurus accession IDs in the values.
 #'
 #' @seealso
 #' - [Matching values in list](https://stackoverflow.com/questions/11002391/).
@@ -22,8 +22,7 @@
 #'
 #' ## Cellosaurus ====
 #' object <- cello
-#' cells <- head(cello[["name"]])
-#' cells <- standardizeCells(cells)
+#' cells <- standardizeCells(head(cello[["cellLineName"]]))
 #' cells <- mapCells(object = object, cells = cells)
 #' print(cells)
 NULL
@@ -38,7 +37,7 @@ NULL
                  "cellosaurusId",
                  "depmapId",
                  "sangerModelId",
-                 "name"
+                 "cellLineName"
              )) {
         assert(
             validObject(object),
@@ -47,7 +46,7 @@ NULL
         keyType <- match.arg(keyType)
         idCol <- switch(
             EXPR = keyType,
-            "cellosaurusId" = "id",
+            "cellosaurusId" = "accession",
             keyType
         )
         ## Early return if all input matches the return key type.
@@ -64,20 +63,21 @@ NULL
         ## First create a pool of exact matches annotated in Cellosaurus.
         df <- as(object, "DataFrame")
         cols <- c(
-            "id",
-            "name",
+            "accession",
+            "secondaryAccession",
+            "cellLineName",
             "depmapId",
             "sangerModelId",
-            "synonym"
+            "synonyms"
         )
         assert(isSubset(cols, colnames(df)))
         df <- df[, cols]
         df[["nameNoBracket"]] <- gsub(
             pattern = "[_ ]+\\[.+$",
             replacement = "",
-            x = df[["name"]]
+            x = df[["cellLineName"]]
         )
-        df[["standardName"]] <- standardizeCells(df[["name"]])
+        df[["standardName"]] <- standardizeCells(df[["cellLineName"]])
         cols <- append(
             x = cols,
             values = c("nameNoBracket", "standardName")
