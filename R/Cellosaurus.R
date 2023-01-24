@@ -165,8 +165,6 @@ NULL
 #' Note that some comments have additional information on the cell type, that
 #' we don't want to include here (e.g. CVCL_0003, CVCL_0008).
 #'
-#' CVCL_C4RX currently has a duplication of colon in the comments.
-#'
 #' @note Updated 2023-01-24.
 #' @noRd
 .addSamplingSite <- function(object) {
@@ -175,9 +173,12 @@ NULL
         colName = "samplingSite",
         keyName = "Derived from sampling site"
     )
-    ## FIXME Need to sanitize these:
-    ## [[3]] Peripheral blood. Cell type=Mast cell
-    ## [[8]] Peripheral blood. Cell type=B-cell
+    object[["samplingSite"]] <- sub(
+        pattern = "\\.\\s.+$",
+        replacement = "",
+        x = object[["samplingSite"]]
+    )
+    object
 }
 
 
