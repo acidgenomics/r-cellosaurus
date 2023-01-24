@@ -1,3 +1,9 @@
+## FIXME Need to improve splitting of "crossReferences".
+## FIXME Need to improve splitting of "disease"
+## FIXME Need to improve splitting of "referencesIdentifiers"
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
