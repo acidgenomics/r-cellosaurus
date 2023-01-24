@@ -8,23 +8,24 @@ test_that("export", {
     expect_identical(
         object = colnames(df),
         expected = c(
+            "accession",
+            "ageAtSampling",
+            "category",
+            "cellLineName",
             "depmapId",
-            "derivedFrom",
-            "ethnicity",
-            "id",
             "isCancer",
             "isProblematic",
             "msiStatus",
-            "name",
             "ncbiTaxonomyId",
             "ncitDiseaseId",
             "ncitDiseaseName",
             "organism",
-            "originateFromSameIndividualAs",
+            "population",
             "samplingSite",
             "sangerModelId",
-            "sex",
-            "synonym"
+            "secondaryAccession",
+            "sexOfCell",
+            "synonyms"
         )
     )
     AcidBase::unlink2(tempdir)
