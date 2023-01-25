@@ -1,5 +1,30 @@
 # Release notes
 
+## Cellosaurus 0.5.0 (2023-01-25)
+
+Major changes:
+
+- `Cellosaurus`: Completely reworked main generator function. Now the package
+  parses the `cellosaurus.txt` file internally instead of the previously used
+  `cellosaurus.obo` file. We ran into OBO parser issues with the current
+  `cellosaurus.obo` file (release 44). Also, only the `cellosaurus.txt` file
+  contains additional useful metadata, including secondary accessions and the
+  patient age at sampling. We have attempted to standardize metadata columns
+  in the returned `Cellosaurus` object to better match the naming conventions
+  currently used on the Cellosaurus website.
+- `export`: Updated method to drop nested list columns (`SimpleList`) from the
+  exported CSV file. Dropped columns currently include: `"comments"`,
+  `"crossReferences"`, `"date"`, `"diseases"`, `"hierarchy"`,
+  `"originateFromSameIndividual"`, `"referencesIdentifiers"`,
+  `"strProfileData"`, `"webPages"`.
+- `mapCells`: Updated mapping engine to also support secondary accession
+  identifiers, which is very useful for redirected previously used identifiers
+  that are still present in DepMap and Sanger CellModelPassports databases. Also
+  reworked approach for handling standardized cell names at the last step, to
+  avoid mapping issues with tricky cell line names, like ICC2 vs. ICC-2. These
+  are non-breaking changes that are tested to map against all supported cell
+  lines on DepMap and Sanger CellModelPassports.
+
 ## Cellosaurus 0.4.1 (2023-01-18)
 
 Minor changes:
