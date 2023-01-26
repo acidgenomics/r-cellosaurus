@@ -11,6 +11,7 @@
 #' @examples
 #' data(cello)
 #' tnbc <- tnbc(cello)
+#' print(tnbc)
 NULL
 
 
@@ -23,7 +24,8 @@ NULL
         FUN = function(x) {
             "Triple negative breast cancer (TNBC) cell line" %in% x[["Group"]]
         },
-        FUN.VALUE = logical(1L)
+        FUN.VALUE = logical(1L),
+        USE.NAMES = FALSE
     )
     out <- rownames(object)[lgl]
     out
