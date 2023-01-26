@@ -3,12 +3,21 @@
 #' @usage export(object, con, format, ...)
 NULL
 
+#' @export
 #' @name mapCells
 #' @usage mapCells(object, ...)
-#' @export
 NULL
 
+#' @export
 #' @name standardizeCells
 #' @usage standardizeCells(object, ...)
-#' @export
 NULL
+
+#' @export
+#' @rdname tnbc
+setGeneric(
+    name = "tnbc",
+    def = function(object, ...) {
+        standardGeneric("tnbc")
+    }
+)
