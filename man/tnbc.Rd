@@ -27,4 +27,5 @@ Updated 2023-01-26.
 \examples{
 data(cello)
 tnbc <- tnbc(cello)
+print(tnbc)
 }
