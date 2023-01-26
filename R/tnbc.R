@@ -16,16 +16,16 @@ NULL
 
 
 `tnbc,Cellosaurus` <- function(object) {
-    assert(is(object, "Cellosaurus"))
-
-    isTnbc <- vapply(
-        X = cello[["comments"]],
+    assert(validObject(object))
+    lgl <- vapply(
+        X = object[["comments"]],
         FUN = function(x) {
             "Triple negative breast cancer (TNBC) cell line" %in% x[["Group"]]
         },
         FUN.VALUE = logical(1L)
     )
-
+    out <- rownames(object)[lgl]
+    out
 }
 
 
