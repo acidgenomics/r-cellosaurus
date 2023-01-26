@@ -15,6 +15,7 @@ NULL
 
 
 
+## Updated 2023-01-26.
 `tnbc,Cellosaurus` <- function(object) {
     assert(validObject(object))
     lgl <- vapply(
