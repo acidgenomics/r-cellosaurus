@@ -83,9 +83,6 @@ NULL
 
 
 
-## FIXME This isn't handling multi mapping correctly, e.g "CVCL_0011"...argh
-
-
 #' Extract NCI thesaurus disease identifiers
 #'
 #' @details
