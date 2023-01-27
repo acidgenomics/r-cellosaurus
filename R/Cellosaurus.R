@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-01-27.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -83,12 +83,15 @@ NULL
 
 
 
+## FIXME This isn't handling multi mapping correctly, e.g "CVCL_0011"...argh
+
+
 #' Extract NCI thesaurus disease identifiers
 #'
 #' @details
 #' Some cell lines rarely map to multiple identifiers, such as "CVCL_0028".
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-01-27.
 #' @noRd
 .addNcitDisease <- function(object) {
     assert(
@@ -111,8 +114,18 @@ NULL
             x
         }
     )
-    id <- CharacterList(lapply(X = spl, FUN = `[`, j = 1L))
-    name <- CharacterList(lapply(X = spl, FUN = `[`, j = 2L))
+    id <- CharacterList(lapply(
+        X = spl,
+        FUN = function(x) {
+            x[, 1L]
+        }
+    ))
+    name <- CharacterList(lapply(
+        X = spl,
+        FUN = function(x) {
+            x[, 2L]
+        }
+    ))
     object[["ncitDiseaseId"]] <- id
     object[["ncitDiseaseName"]] <- name
     object
