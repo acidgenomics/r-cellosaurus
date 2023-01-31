@@ -1,6 +1,13 @@
+## https://github.com/r-lib/devtools/issues/2121#issuecomment-534173065
+
 test_that("Cellosaurus", {
     ## nolint start
-    object <- Cellosaurus()
+    object <- withr::with_collate(
+        new = "C",
+        code = {
+            Cellosaurus()
+        }
+    )
     expect_s4_class(object, "Cellosaurus")
     df <- as.data.frame(object)
     x <- as.list(df["CVCL_0001", , drop = FALSE])
@@ -47,20 +54,20 @@ test_that("Cellosaurus", {
                 "E-MTAB-7721",
                 "E-MTAB-7722"
             ),
+            "BTO" = "BTO:0000565",
             "BioSample" = c(
                 "SAMN03471056",
                 "SAMN03472269",
                 "SAMN10987697"
             ),
-            "BTO" = "BTO:0000565",
             "CCRID" = c("3101HUMTCHu71", "4201HUM-CCTCC00071"),
             "CCTCC" = "GDC0071",
-            "Cell_Model_Passport" = "SIDM00594",
-            "ChEMBL-Cells" = "CHEMBL3308090",
-            "ChEMBL-Targets" = "CHEMBL613888",
             "CLDB" = c("cl0", "cl1585"),
             "CLO" = c("CLO_0003679", "CLO_0023565"),
             "CLS" = "305022",
+            "Cell_Model_Passport" = "SIDM00594",
+            "ChEMBL-Cells" = "CHEMBL3308090",
+            "ChEMBL-Targets" = "CHEMBL613888",
             "Coriell" = "GM06141",
             "Cosmic" = c(
                 "787432", "798663", "850392", "907053", "919128", "924040",
@@ -72,9 +79,9 @@ test_that("Cellosaurus", {
                 "2089667", "2131538", "2306207", "2649243"
             ),
             "Cosmic-CLP" = "907053",
-            "DepMap" = "ACH-000004",
             "DSMZ" = "ACC-11",
             "DSMZCellDive" = "ACC-11",
+            "DepMap" = "ACH-000004",
             "EFO" = "EFO_0006579",
             "EGA" = c(
                 "EGAS00001000610", "EGAS00001000978", "EGAS00001002554"
@@ -87,11 +94,11 @@ test_that("Cellosaurus", {
             "IARC_TP53" = "21368",
             "JCRB" = "JCRB0062",
             "KCB" = "KCB 200808YJ",
-            "LiGeA" = "CCLE_453",
             "LINCS_LDP" = "LCL-1053",
+            "LiGeA" = "CCLE_453",
             "MCCL" = "MCC:0000187",
-            "PharmacoDB" = "HEL_534_2019",
             "PRIDE" = "PXD030304",
+            "PharmacoDB" = "HEL_534_2019",
             "Progenetix" = "CVCL_0001",
             "PubChem_Cell_line" = "CVCL_0001",
             "Wikidata" = "Q54882501"
