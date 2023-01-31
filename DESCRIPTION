@@ -33,7 +33,7 @@ Imports:
     data.table (>= 1.14.6),
     goalie (>= 0.6.7),
     methods,
-    pipette (>= 0.10.1),
+    pipette (>= 0.10.2),
     stringi (>= 1.7.12),
     syntactic (>= 0.6.3),
     utils
