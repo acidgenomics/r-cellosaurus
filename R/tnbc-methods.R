@@ -1,7 +1,7 @@
 #' Triple negative breast cancer (TNBC) cell lines
 #'
 #' @name tnbc
-#' @note Updated 2023-01-26.
+#' @note Updated 2023-01-31.
 #'
 #' @inheritParams AcidRoxygen::params
 #'
@@ -16,20 +16,24 @@ NULL
 
 
 
-## Updated 2023-01-26.
-`tnbc,Cellosaurus` <- function(object) {
-    assert(validObject(object))
-    lgl <- vapply(
-        X = object[["comments"]],
-        FUN = function(x) {
-            "Triple negative breast cancer (TNBC) cell line" %in% x[["Group"]]
-        },
-        FUN.VALUE = logical(1L),
-        USE.NAMES = FALSE
-    )
-    out <- rownames(object)[lgl]
-    out
-}
+## Updated 2023-01-31.
+`tnbc,Cellosaurus` <- # nolint
+    function(object) {
+        assert(validObject(object))
+        lgl <- vapply(
+            X = object[["comments"]],
+            FUN = function(x) {
+                paste(
+                    "Triple negative breast cancer",
+                    "(TNBC) cell line"
+                ) %in% x[["Group"]]
+            },
+            FUN.VALUE = logical(1L),
+            USE.NAMES = FALSE
+        )
+        out <- rownames(object)[lgl]
+        out
+    }
 
 
 
