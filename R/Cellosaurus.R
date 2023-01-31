@@ -363,12 +363,12 @@ NULL
         }
         x
     }
-    if (isTRUE(requireNamespace("future.apply", quietly = TRUE))) {
+    if (isTRUE(requireNamespace("parallel", quietly = TRUE))) {
         alert(sprintf(
             "Processing entries with {.pkg %s}::{.fun %s}.",
-            "future.apply", "future_lapply"
+            "parallel", "mclapply"
         ))
-        .lapply <- future.apply::future_lapply
+        .lapply <- parallel::mclapply
     } else {
         alert("Processing entries.")
         alertInfo(sprintf(
