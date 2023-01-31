@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-01-27.
+#' @note Updated 2023-01-31.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -549,6 +549,16 @@ NULL
 
 
 
+#' Sanitize the `strProfileData` column
+#'
+#' @note Updated 2023-01-31.
+#' @noRd
+.sanitizeStrProfileData <- function(object) {
+    .splitNestedCol(object = object, colName = "strProfileData", sep = ": ")
+}
+
+
+
 #' Sanitize the `synonyms` column
 #'
 #' @note Updated 2023-01-24.
@@ -625,6 +635,7 @@ Cellosaurus <- # nolint
         object <- .sanitizeDiseases(object)
         object <- .sanitizeHierarchy(object)
         object <- .sanitizeRefIds(object)
+        object <- .sanitizeStrProfileData(object)
         object <- .sanitizeSynonyms(object)
         alert("Adding annotations.")
         object <- .addDepmapId(object)
