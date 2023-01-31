@@ -1,3 +1,5 @@
+celloFull <- readRDS(file.path("cache", "celloFull.rds"))
+
 test_that("tnbc", {
     object <- cello
     expect_identical(
@@ -10,4 +12,6 @@ test_that("tnbc", {
         object = tnbc(object),
         expected = rownames(object)[[1L]]
     )
+    object <- celloFull
+    expect_length(tnbc(object), 152L)
 })
