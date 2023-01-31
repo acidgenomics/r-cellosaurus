@@ -1,10 +1,12 @@
 ## nolint start
 suppressPackageStartupMessages({
+    library(devtools)
     library(AcidBase)
     library(syntactic)
     library(pipette)
 })
 ## nolint end
+load_all()
 map <- list()
 ## DepMap 22Q2 =================================================================
 ## Import "sample_info.csv" file.
@@ -63,15 +65,7 @@ map[["cmp_fail"]] <- df[is.na(df[["RRID"]]), "model_name"]
 df <- df[!is.na(df[["RRID"]]), ]
 map[["cmp"]] <- df
 saveRDS(map, "mapCells.rds")
-## FIXME Add this to AcidBase package.
-majMinVer <- numeric_version(paste(
-    strsplit(
-        as.character(packageVersion("Cellosaurus")),
-        split = ".",
-        fixed = TRUE
-    )[[1L]][1L:2L],
-    collapse = "."
-))
+majMinVer <- majorMinorVersion(packageVersion("Cellosaurus"))
 shell(
     command = "aws",
     args = c(
@@ -80,9 +74,9 @@ shell(
         pasteURL(
             "r.acidgenomics.com",
             "testdata",
-            "cellosaurus",
-            paste0("v", majMinVer),
-            "mapCells.rds"
+            tolower(.pkgName),
+            paste0("v", majorMinorVersion(.pkgVersion)),
+            "mapCells.rds",
             protocol = "s3"
         )
     )
