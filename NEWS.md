@@ -1,5 +1,13 @@
 # Release notes
 
+## Cellosaurus 0.5.1 (2023-01-30)
+
+Minor changes:
+
+- `Cellosaurus`: Fixed `ncitDiseaseId` and `ncitDiseaseName` mapping issue with
+  accessions containing multiple matches (e.g. `"CVCL_0011"`, `"CVCL_0028"`).
+- Switched from future.apply to parallel, for optional parallel tasks.
+
 ## Cellosaurus 0.5.0 (2023-01-25)
 
 Major changes:
