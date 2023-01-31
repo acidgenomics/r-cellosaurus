@@ -48,7 +48,7 @@ setValidity(
                 "sangerModelId" = "Rle",
                 "secondaryAccession" = "Rle",
                 "sexOfCell" = "Rle",
-                "strProfileData" = "CompressedCharacterList",
+                "strProfileData" = "SimpleList",
                 "synonyms" = "CompressedCharacterList",
                 "webPages" = "CompressedCharacterList"
             ),
