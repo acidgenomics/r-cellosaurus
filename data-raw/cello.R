@@ -11,15 +11,6 @@ saveRDS(object, "celloFull.rds")
 object <- object[seq_len(10L), ]
 cello <- object
 use_data(cello, overwrite = TRUE)
-## FIXME Add this to AcidBase package.
-majMinVer <- numeric_version(paste(
-    strsplit(
-        as.character(packageVersion("Cellosaurus")),
-        split = ".",
-        fixed = TRUE
-    )[[1L]][1L:2L],
-    collapse = "."
-))
 shell(
     command = "aws",
     args = c(
@@ -28,9 +19,9 @@ shell(
         pasteURL(
             "r.acidgenomics.com",
             "testdata",
-            "cellosaurus",
-            paste0("v", majMinVer),
-            "celloFull.rds"
+            tolower(.pkgName),
+            paste0("v", majorMinorVersion(.pkgVersion)),
+            "celloFull.rds",
             protocol = "s3"
         )
     )
