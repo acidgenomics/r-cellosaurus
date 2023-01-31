@@ -63,3 +63,27 @@ map[["cmp_fail"]] <- df[is.na(df[["RRID"]]), "model_name"]
 df <- df[!is.na(df[["RRID"]]), ]
 map[["cmp"]] <- df
 saveRDS(map, "mapCells.rds")
+## FIXME Add this to AcidBase package.
+majMinVer <- numeric_version(paste(
+    strsplit(
+        as.character(packageVersion("Cellosaurus")),
+        split = ".",
+        fixed = TRUE
+    )[[1L]][1L:2L],
+    collapse = "."
+))
+shell(
+    command = "aws",
+    args = c(
+        "--profile=acidgenomics",
+        "s3", "cp", "mapCells.rds",
+        pasteURL(
+            "r.acidgenomics.com",
+            "testdata",
+            "cellosaurus",
+            paste0("v", majMinVer),
+            "mapCells.rds"
+            protocol = "s3"
+        )
+    )
+)
