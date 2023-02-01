@@ -41,8 +41,7 @@ docker pull "$image"
 docker run -it \
     --volume="${PWD}:${workdir}" \
     --workdir="$workdir" \
-    "$image" \
-    R
+    "$image"
 ```
 
 [bioconda]: https://bioconda.github.io/
