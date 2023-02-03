@@ -387,6 +387,7 @@ NULL
         "data.frame", "data.table", "rbindlist"
     ))
     ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
+    ## FIXME Rework this to use AcidPlyr...
     df <- rbindlist(l = x, use.names = TRUE, fill = FALSE)
     df <- as(df, "DataFrame")
     for (key in nestedKeys) {
