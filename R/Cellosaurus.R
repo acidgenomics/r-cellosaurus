@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-01-31.
+#' @note Updated 2023-02-07.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -302,7 +302,7 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-02-07.
 #' @noRd
 #'
 #' @seealso
@@ -368,15 +368,16 @@ NULL
             "Processing entries with {.pkg %s}::{.fun %s}.",
             "parallel", "mclapply"
         ))
-        .lapply <- parallel::mclapply
+        .mclapply <- parallel::mclapply
     } else {
         alert("Processing entries.")
         alertInfo(sprintf(
             "Install {.pkg %s} package to speed up this step.",
-            "future.apply"
+            "parallel"
         ))
+        .mclapply <- lapply
     }
-    x <- .lapply(
+    x <- .mclapply(
         X = x,
         FUN = .processEntry,
         nestedKeys = nestedKeys,
@@ -384,12 +385,10 @@ NULL
     )
     alert(sprintf(
         "Coercing entries list to {.cls %s} with {.pkg %s}::{.fun %s}.",
-        "data.frame", "data.table", "rbindlist"
+        "DataFrame", "AcidPlyr", "rbindToDataFrame"
     ))
-    ## Alternatively, can use `AcidPlyr::mapToDataFrame` here, but is slower.
-    ## FIXME Rework this to use AcidPlyr...
-    df <- rbindlist(l = x, use.names = TRUE, fill = FALSE)
-    df <- as(df, "DataFrame")
+    ## FIXME This doesn't seem to be using rbindlist as expected...blargh.
+    df <- rbindToDataFrame(x)
     for (key in nestedKeys) {
         assert(is.list(df[[key]]))
         df[[key]] <- CharacterList(df[[key]])
