@@ -22,7 +22,7 @@ Cellosaurus accession identifiers.
 Triple negative breast cancer (TNBC) cell lines
 }
 \note{
-Updated 2023-01-26.
+Updated 2023-01-31.
 }
 \examples{
 data(cello)
