@@ -384,8 +384,8 @@ NULL
         optionalKeys = optionalKeys
     )
     alert(sprintf(
-        "Coercing entries list to {.cls %s} with {.pkg %s}::{.fun %s}.",
-        "DataFrame", "AcidPlyr", "rbindToDataFrame"
+        "Coercing entries {.cls %s} to {.cls %s} with {.pkg %s}::{.fun %s}.",
+        "list", "DataFrame", "AcidPlyr", "rbindToDataFrame"
     ))
     df <- rbindToDataFrame(x)
     for (key in nestedKeys) {
