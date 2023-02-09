@@ -387,9 +387,7 @@ NULL
         "Coercing entries list to {.cls %s} with {.pkg %s}::{.fun %s}.",
         "DataFrame", "AcidPlyr", "rbindToDataFrame"
     ))
-    ## Alternatively, can use `AcidPlyr::rbindToDataFrame` here, but is slower.
-    df <- rbindlist(l = x, use.names = TRUE, fill = FALSE)
-    df <- as(df, "DataFrame")
+    df <- rbindToDataFrame(x)
     for (key in nestedKeys) {
         assert(is.list(df[[key]]))
         df[[key]] <- CharacterList(df[[key]])
