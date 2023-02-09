@@ -1,3 +1,10 @@
+## FIXME We're now seeing NA introduced by coercion...argh.
+## → Adding annotations.
+## Warning in .as(from) : NAs introduced by coercion
+## Calls: Cellosaurus ... IntegerList -> <Anonymous> -> .coerceToList -> <Anonymous>
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
