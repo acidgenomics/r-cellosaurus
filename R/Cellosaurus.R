@@ -1,14 +1,7 @@
-## FIXME We're now seeing NA introduced by coercion...argh.
-## → Adding annotations.
-## Warning in .as(from) : NAs introduced by coercion
-## Calls: Cellosaurus ... IntegerList -> <Anonymous> -> .coerceToList -> <Anonymous>
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-02-07.
+#' @note Updated 2023-02-10.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -309,7 +302,7 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-02-07.
+#' @note Updated 2023-02-10.
 #' @noRd
 #'
 #' @seealso
@@ -350,6 +343,7 @@ NULL
         MoreArgs = list("lines" = lines),
         USE.NAMES = FALSE
     )
+    requiredKeys <- c("AC", "CA", "DT", "ID")
     nestedKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
     optionalKeys <- c("AG", "AS", "SX", "SY")
     .processEntry <- function(x, nestedKeys, optionalKeys) {
@@ -366,7 +360,7 @@ NULL
             }
         }
         for (key in nestedKeys) {
-            x[[key]] <- list(unique(x[[key]]))
+            x[[key]] <- unique(x[[key]])
         }
         x
     }
@@ -395,6 +389,16 @@ NULL
         "list", "DataFrame", "AcidPlyr", "rbindToDataFrame"
     ))
     df <- rbindToDataFrame(x)
+    assert(areSetEqual(
+        x = colnames(df),
+        y = c(requiredKeys, optionalKeys, nestedKeys)
+    ))
+    for (key in requiredKeys) {
+        assert(isCharacter(df[[key]]))
+    }
+    for (key in optionalKeys) {
+        assert(is.character(df[[key]]))
+    }
     for (key in nestedKeys) {
         assert(is.list(df[[key]]))
         df[[key]] <- CharacterList(df[[key]])

@@ -30,9 +30,9 @@ NULL
 #' @importFrom AcidCLI abort alert alertInfo
 #' @importFrom IRanges CharacterList IntegerList
 #' @importFrom S4Vectors DataFrame SimpleList
-#' @importFrom goalie allAreMatchingFixed allAreMatchingRegex assert hasLength
-#' hasNoDuplicates hasRownames isCharacter isFlag isString isSubset validate
-#' validateClasses
+#' @importFrom goalie allAreMatchingFixed allAreMatchingRegex areSetEqual assert
+#' hasLength hasNoDuplicates hasRownames isCharacter isFlag isString isSubset
+#' validate validateClasses
 #' @importFrom methods as is new setClass setMethod setValidity validObject
 #' @importFrom pipette cacheURL
 #' @importFrom stringi stri_replace_all_regex stri_replace_first_regex
