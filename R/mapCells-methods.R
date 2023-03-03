@@ -1,6 +1,6 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-03-03.
 #'
 #' @inherit AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -29,7 +29,7 @@ NULL
 
 
 
-## Updated 2023-01-18.
+## Updated 2023-03-03.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
@@ -53,6 +53,8 @@ NULL
         if (isSubset(x = cells, y = as.character(object[[idCol]]))) {
             return(cells)
         }
+        ## Override any ambiguous cell line names with direct Cellosaurus
+        ## accession identifier mapping.
         cellsOrig <- cells
         overrides <- get(
             x = "overrides",
@@ -60,55 +62,6 @@ NULL
             inherits = FALSE
         )
         assert(is.data.frame(overrides))
-        df <- as(object, "DataFrame")
-        df[["cellLineNameNoBracket"]] <- gsub(
-            pattern = "[_ ]+\\[.+$",
-            replacement = "",
-            x = df[["cellLineName"]]
-        )
-        .pool <- function(df) {
-            pool <- apply(
-                X = df,
-                MARGIN = 1L,
-                FUN = function(x) {
-                    x <- unlist(x, recursive = TRUE, use.names = FALSE)
-                    x <- na.omit(x)
-                    x <- unique(x)
-                    x
-                },
-                simplify = FALSE
-            )
-            rep <- rep(
-                x = seq_along(pool),
-                times = vapply(
-                    X = pool,
-                    FUN = length,
-                    FUN.VALUE = integer(1L)
-                )
-            )
-            unlist <- unlist(pool, recursive = FALSE, use.names = FALSE)
-            list(
-                "rep" = rep,
-                "unlist" = unlist
-            )
-        }
-        ## First create a pool of exact matches annotated in Cellosaurus.
-        pool <- .pool(
-            df = df[
-                ,
-                c(
-                    "accession",
-                    "secondaryAccession",
-                    "depmapId",
-                    "sangerModelId",
-                    "cellLineName",
-                    "cellLineNameNoBracket",
-                    "synonyms"
-                )
-            ]
-        )
-        ## Override any ambiguous cell line names with direct Cellosaurus
-        ## accession identifier mapping.
         cells <- unlist(Map(
             cell = cells,
             cellStd = standardizeCells(cells),
@@ -123,7 +76,27 @@ NULL
             },
             USE.NAMES = FALSE
         ))
-        idx <- pool[["rep"]][match(x = cells, table = pool[["unlist"]])]
+        df <- as(object, "DataFrame")
+        df[["cellLineNameNoBracket"]] <- gsub(
+            pattern = "[_ ]+\\[.+$",
+            replacement = "",
+            x = df[["cellLineName"]]
+        )
+        idx <- matchNested(
+            x = cells,
+            table = df[
+                ,
+                c(
+                    "accession",
+                    "secondaryAccession",
+                    "depmapId",
+                    "sangerModelId",
+                    "cellLineName",
+                    "cellLineNameNoBracket",
+                    "synonyms"
+                )
+            ]
+        )
         ## Fall back to matching against standardized cell name.
         if (anyNA(idx)) {
             naIdx <- which(is.na(idx))
@@ -145,8 +118,7 @@ NULL
                 "standardName" = standardizeCells(df[["cellLineName"]]),
                 "synonyms" = df[["synonyms"]]
             )
-            pool2 <- .pool(df2)
-            idx2 <- pool2[["rep"]][match(x = cells2, table = pool2[["unlist"]])]
+            idx2 <- matchNested(x = cells2, table = df2)
             idx[naIdx] <- idx2
         }
         cells <- cellsOrig
