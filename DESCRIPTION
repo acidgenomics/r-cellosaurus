@@ -1,8 +1,8 @@
 Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.5.2
-Date: 2023-02-10
+Version: 0.5.3.9000
+Date: 2023-03-02
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -23,21 +23,21 @@ Encoding: UTF-8
 LazyData: false
 Depends: R (>= 4.2)
 Imports:
-    AcidBase (>= 0.6.12),
+    AcidBase (>= 0.6.13),
     AcidCLI (>= 0.2.7),
-    AcidGenerics (>= 0.6.6),
+    AcidGenerics (>= 0.6.7),
     AcidPlyr (>= 0.3.6),
     BiocGenerics (>= 0.44.0),
     IRanges (>= 2.32.0),
     S4Vectors (>= 0.36.0),
     goalie (>= 0.6.8),
-    pipette (>= 0.10.3),
+    pipette (>= 0.10.5),
     stringi (>= 1.7.12),
     syntactic (>= 0.6.4),
     methods,
     utils
 Suggests:
-    data.table (>= 1.14.6),
+    data.table (>= 1.14.8),
     testthat (>= 3.1.6),
     withr (>= 2.5.0),
     parallel
