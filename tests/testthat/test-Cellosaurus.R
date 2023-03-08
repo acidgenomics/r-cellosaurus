@@ -1,17 +1,4 @@
-## FIXME Ensure we remove discontinued identifiers correctly.
-## https://www.cellosaurus.org/CVCL_0455
-## DepMap; ACH-000474 - Discontinued
-## DepMap; ACH-001075
-##
-## CC:
-## "Discontinued: DepMap; ACH-000474; true."
-##
-## DR:
-## "DepMap; ACH-000474"
-## "DepMap; ACH-001075"
-
-
-
+## Regarding C locale collation during `R CMD check`:
 ## https://github.com/r-lib/devtools/issues/2121#issuecomment-534173065
 
 test_that("Cellosaurus", {
@@ -217,6 +204,14 @@ test_that("Cellosaurus", {
             "Childhood B acute lymphoblastic leukemia",
             "B lymphoblastic leukemia/lymphoma with t(12;21)(p13.2;q22.1) ETV6-RUNX1"
         )
+    )
+    ## Check discontinued identifier handling.
+    ## CVCL_0455 has 2 DepMap identifiers:
+    ## - ACH-000474 - Discontinued
+    ## - ACH-001075
+    expect_identical(
+        object = df["CVCL_0455", "depmapId"],
+        expected = "ACH-001075"
     )
     ## nolint end
 })
