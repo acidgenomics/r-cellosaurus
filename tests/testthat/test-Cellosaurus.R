@@ -1,3 +1,17 @@
+## FIXME Ensure we remove discontinued identifiers correctly.
+## https://www.cellosaurus.org/CVCL_0455
+## DepMap; ACH-000474 - Discontinued
+## DepMap; ACH-001075
+##
+## CC:
+## "Discontinued: DepMap; ACH-000474; true."
+##
+## DR:
+## "DepMap; ACH-000474"
+## "DepMap; ACH-001075"
+
+
+
 ## https://github.com/r-lib/devtools/issues/2121#issuecomment-534173065
 
 test_that("Cellosaurus", {
