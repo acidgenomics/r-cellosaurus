@@ -302,21 +302,6 @@ NULL
 
 
 
-## FIXME Consider dropping lines that end with "Discontinued".
-## Blargh this is pretty annoying to fix.
-## https://www.cellosaurus.org/CVCL_0455
-## DepMap; ACH-000474 - Discontinued
-## DepMap; ACH-001075
-##
-## CC:
-## "Discontinued: DepMap; ACH-000474; true."
-##
-## DR:
-## "DepMap; ACH-000474"
-## "DepMap; ACH-001075"
-
-
-
 #' Import Cellosaurus data frame from TXT file
 #'
 #' @note Updated 2023-03-08.
