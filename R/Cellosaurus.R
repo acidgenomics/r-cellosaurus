@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-02-10.
+#' @note Updated 2023-03-08.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -219,9 +219,12 @@ NULL
 #' Extract and assign identifier column from `crossReferences`
 #'
 #' @details
-#' Note that this intentionally picks only the first matching identifier.
+#' Note that this intentionally picks only the last matching identifier.
 #'
-#' @note Updated 2023-01-24.
+#' This helps avoid issues with discontinued identifiers, such as CVCL_0455,
+#' which has multiple DepMap identifiers: ACH-000474 - Discontinued; ACH-001075.
+#'
+#' @note Updated 2023-03-08.
 #' @noRd
 .extractCrossRef <- function(object, colName, keyName) {
     assert(
@@ -238,7 +241,6 @@ NULL
             if (is.null(ids)) {
                 return(NA_character_)
             }
-            ## Return only the first match.
             ids[[1L]]
         },
         FUN.VALUE = character(1L)
@@ -300,9 +302,24 @@ NULL
 
 
 
+## FIXME Consider dropping lines that end with "Discontinued".
+## Blargh this is pretty annoying to fix.
+## https://www.cellosaurus.org/CVCL_0455
+## DepMap; ACH-000474 - Discontinued
+## DepMap; ACH-001075
+##
+## CC:
+## "Discontinued: DepMap; ACH-000474; true."
+##
+## DR:
+## "DepMap; ACH-000474"
+## "DepMap; ACH-001075"
+
+
+
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-02-10.
+#' @note Updated 2023-03-08.
 #' @noRd
 #'
 #' @seealso
@@ -346,24 +363,6 @@ NULL
     requiredKeys <- c("AC", "CA", "DT", "ID")
     nestedKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
     optionalKeys <- c("AG", "AS", "SX", "SY")
-    .processEntry <- function(x, nestedKeys, optionalKeys) {
-        x <- stri_split_fixed(
-            str = x,
-            pattern = "   ",
-            n = 2L,
-            simplify = TRUE
-        )
-        x <- split(x[, 2L], f = x[, 1L])
-        for (key in optionalKeys) {
-            if (is.null(x[[key]])) {
-                x[[key]] <- NA_character_
-            }
-        }
-        for (key in nestedKeys) {
-            x[[key]] <- unique(x[[key]])
-        }
-        x
-    }
     if (isTRUE(requireNamespace("parallel", quietly = TRUE))) {
         alert(sprintf(
             "Processing entries with {.pkg %s}::{.fun %s}.",
@@ -432,6 +431,46 @@ NULL
         "packageVersion" = .pkgVersion
     )
     df
+}
+
+
+
+#' Process lines per entry
+#'
+#' @note Updated 2023-03-08.
+#' @noRd
+.processEntry <- function(x, nestedKeys, optionalKeys) {
+    x <- stri_split_fixed(
+        str = x,
+        pattern = "   ",
+        n = 2L,
+        simplify = TRUE
+    )
+    x <- split(x[, 2L], f = x[, 1L])
+    for (key in optionalKeys) {
+        if (is.null(x[[key]])) {
+            x[[key]] <- NA_character_
+        }
+    }
+    for (key in nestedKeys) {
+        x[[key]] <- unique(x[[key]])
+    }
+    ## Filter out discontinued identifiers from DR (e.g. "CVCL_0455").
+    discontinued <- grep(
+        pattern = "Discontinued:",
+        x = x[["CC"]],
+        fixed = TRUE,
+        value = TRUE
+    )
+    if (isTRUE(length(discontinued) > 0L)) {
+        discontinued <- sub(
+            pattern = "^Discontinued: (.+);.+$",
+            replacement = "\\1",
+            x = discontinued
+        )
+        x[["DR"]] <- setdiff(x = x[["DR"]], y = discontinued)
+    }
+    x
 }
 
 
