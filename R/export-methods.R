@@ -3,7 +3,7 @@
 #' @note Updated 2023-01-24.
 #'
 #' @inheritParams AcidRoxygen::params
-#' @param ... Passthrough arguments to `DataFrame` method.
+#' @param ... Passthrough arguments to `DFrame` method.
 #'
 #' @examples
 #' data(cello)
@@ -33,7 +33,7 @@ NULL
             isString(con),
             is.null(format)
         )
-        df <- as(object, "DataFrame")
+        df <- as(object, "DFrame")
         dropCols <- c(
             "comments",
             "crossReferences",

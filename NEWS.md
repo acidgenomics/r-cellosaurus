@@ -6,6 +6,7 @@ Minor changes:
 
 - `mapCells`: Reworked our internal matching code.
 - Now using new `matchNested` function internally.
+- Consistently dispatching on `DFrame` instead of `DataFrame` virtual class.
 - Split out internal `.processEntry` function.
 
 ## Cellosaurus 0.5.2 (2023-02-10)
