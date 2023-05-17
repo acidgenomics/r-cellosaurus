@@ -22,18 +22,21 @@ test_that("Cellosaurus", {
         "comments" = list(list(
             "Derived from sampling site" = "Peripheral blood",
             "Donor information" = "Originally the patient was suffering from Hodgkin lymphoma",
-            "Doubling time" = "~24 hours (PubMed=6177045); 17.8 +- 1.8 hours (in serum-containing medium), 23.3 +- 0.8 hours (in serum-free medium) (PubMed=7538619); ~36 hours (DSMZ)",
+            "Doubling time" = "~24 hours (PubMed=6177045); 17.8 +- 1.8 hours (in serum-containing medium), 23.3 +- 0.8 hours (in serum-free medium) (PubMed=7538619); ~36 hours (DSMZ=ACC-11)",
             "Genome ancestry" = "African=2.4%; Native American=1.79%; East Asian, North=3.9%; East Asian, South=0%; South Asian=5.12%; European, North=13.33%; European, South=73.45% (PubMed=30894373)",
-            "HLA typing" = "A*03:01:01,32:01:01; B*35:08:01,35:01:01; C*04:01:01,04:01:01; DPA1*01:03:01,01:03:01; DPB1*04:01:01,02:01:02 (DSMZ)",
+            "HLA typing" = c(
+                "A*03:01,32:01; B*35:08,35:08; C*04:01,04:01; DQA1*05:01,05:01; DRB1*03:38,13:03 (PubMed=26589293)",
+                "A*03:01:01,32:01:01; B*35:08:01,35:01:01; C*04:01:01,04:01:01; DPA1*01:03:01,01:03:01; DPB1*04:01:01,02:01:02 (DSMZCellDive=ACC-11)"
+            ),
             "Microsatellite instability" = "Stable (MSS) (PubMed=10739008; PubMed=11226526; Sanger)",
             "Omics" = c(
                 "Deep antibody staining analysis",
                 "Deep exome analysis",
                 "Deep quantitative proteome analysis",
-                "Deep RNAseq analysis",
                 "DNA methylation analysis",
                 "SNP array analysis",
-                "Transcriptome analysis"
+                "Transcriptome analysis by microarray",
+                "Transcriptome analysis by RNAseq"
             ),
             "Part of" = c(
                 "Cancer Dependency Map project (DepMap) (includes Cancer Cell Line Encyclopedia - CCLE)",
@@ -43,7 +46,7 @@ test_that("Cellosaurus", {
             "Population" = "Caucasian",
             "Sequence variation" = c(
                 "Mutation; HGNC; 6192; JAK2; Simple; p.Val617Phe (c.1849G>T); ClinVar=VCV000014662; Zygosity=Homozygous (PubMed=16408098)",
-                "Mutation; HGNC; 11998; TP53; Simple; p.Met133Lys (c.398T>A); Zygosity=Homozygous (Cosmic-CLP; DepMap)"
+                "Mutation; HGNC; 11998; TP53; Simple; p.Met133Lys (c.398T>A); ClinVar=VCV002430159; Zygosity=Homozygous (Cosmic-CLP; DepMap)"
             )
         )),
         "crossReferences" = list(list(
@@ -106,8 +109,8 @@ test_that("Cellosaurus", {
         )),
         "date" = list(c(
             "Created: 04-04-12",
-            "Last updated: 15-12-22",
-            "Version: 40"
+            "Last updated: 21-03-23",
+            "Version: 41"
         )),
         "depmapId" = "ACH-000004",
         "diseases" = list(list(
@@ -121,7 +124,7 @@ test_that("Cellosaurus", {
         "ncbiTaxonomyId" = list(9606L),
         "ncitDiseaseId" = list("C7152"),
         "ncitDiseaseName" = list("Erythroleukemia"),
-        "organism" = list("Homo sapiens"),
+        "organism" = list("Homo sapiens (Human)"),
         "originateFromSameIndividual" = list(character()),
         "population" = list("Caucasian"),
         "referencesIdentifiers" = list(list(
@@ -131,9 +134,9 @@ test_that("Cellosaurus", {
                 "2985879", "3159941", "3874327", "6177045", "7538619",
                 "8558913", "9290701", "9510473", "9738977", "10739008",
                 "11021758", "11226526", "14504097", "16408098", "20164919",
-                "22460905", "23955599", "25485619", "27277069", "27397505",
-                "29533902", "30285677", "30629668", "30894373", "31068700",
-                "31160637", "31978347", "35839778"
+                "22460905", "23955599", "25485619", "26589293", "27277069",
+                "27397505", "29533902", "30285677", "30629668", "30894373",
+                "31068700", "31160637", "31978347", "35839778"
             )
         )),
         "samplingSite" = list("Peripheral blood"),
@@ -189,6 +192,7 @@ test_that("Cellosaurus", {
             "Human ErythroLeukemia"
         )),
         "webPages" = list(c(
+            "https://en.wikipedia.org/wiki/HEL_cell_line",
             "https://www.proteinatlas.org/learn/cellines",
             "https://www.thermofisher.com/ch/en/home/technical-resources/cell-lines/h/cell-lines-detail-346.html"
         ))
