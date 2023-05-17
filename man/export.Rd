@@ -21,7 +21,7 @@ Alternatively, can leave unset and use \code{ext} and \code{dir} arguments inste
 \item{format}{\code{character(1)}, \code{missing}, or \code{NULL}.
 \emph{Currently not supported.}}
 
-\item{...}{Passthrough arguments to \code{DataFrame} method.}
+\item{...}{Passthrough arguments to \code{DFrame} method.}
 }
 \value{
 Invisible \code{character}.

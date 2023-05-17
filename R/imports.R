@@ -1,6 +1,6 @@
 ## S4 classes ==================================================================
 
-#' @importClassesFrom S4Vectors DFrame DataFrame
+#' @importClassesFrom S4Vectors DFrame
 NULL
 
 
