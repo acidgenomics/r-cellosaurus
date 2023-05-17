@@ -71,7 +71,7 @@ are always moved to a \code{"rowname"} column in the CSV export.
 
 
 Note that this function currently wraps \code{readr::write_delim()} by default
-for exporting \code{DataFrame}, \code{data.frame}, and \code{matrix} class objects.
+for exporting \code{DFrame}, \code{data.frame}, and \code{matrix} class objects.
 
 }
 
