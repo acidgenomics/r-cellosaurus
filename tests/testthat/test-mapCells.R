@@ -14,6 +14,17 @@ test_that("Cell name", {
     expect_identical(cells, expected)
 })
 
+test_that("Secondary accession", {
+    object <- celloFull
+    cells <- c("CVCL_7353", "CVCL_H249")
+    cells <- mapCells(object = object, cells = cells)
+    expected <- c(
+        "CVCL_7353" = "CVCL_0014",
+        "CVCL_H249" = "CVCL_0023"
+    )
+    expect_identical(cells, expected)
+})
+
 test_that("Mixed identifier input", {
     object <- cello
     cells <- c(
