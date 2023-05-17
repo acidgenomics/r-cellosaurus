@@ -1,5 +1,21 @@
 # Release notes
 
+## Cellosaurus 0.5.3 (2023-05-17)
+
+Minor changes:
+
+- `mapCells`: Reworked our internal matching code.
+- Now using new `matchNested` function internally.
+- Split out internal `.processEntry` function.
+
+## Cellosaurus 0.5.2 (2023-02-10)
+
+Minor changes:
+
+- Reworked DataFrame rbind step using our `rbindToDataFrame` function instead of
+  data.table `rbindlist`.
+- Updated dependencies to support new Bioconductor 3.17 release.
+
 ## Cellosaurus 0.5.1 (2023-01-31)
 
 Minor changes:
