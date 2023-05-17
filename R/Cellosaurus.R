@@ -37,7 +37,7 @@ NULL
 #' @noRd
 .addIsCancer <- function(object) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         isCharacter(object[["category"]])
     )
     lgl <- object[["category"]] == "Cancer cell line"
@@ -53,7 +53,7 @@ NULL
 #' @noRd
 .addIsProblematic <- function(object) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[["comments"]], "SimpleList")
     )
     lgl <- vapply(
@@ -92,7 +92,7 @@ NULL
 #' @noRd
 .addNcitDisease <- function(object) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[["diseases"]], "SimpleList")
     )
     spl <- lapply(
@@ -182,7 +182,7 @@ NULL
 #' @noRd
 .addTaxonomy <- function(object) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[["speciesOfOrigin"]], "CharacterList")
     )
     spl <- lapply(
@@ -228,7 +228,7 @@ NULL
 #' @noRd
 .extractCrossRef <- function(object, colName, keyName) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[["crossReferences"]], "SimpleList"),
         isString(colName),
         isString(keyName)
@@ -257,7 +257,7 @@ NULL
 #' @noRd
 .extractComment <- function(object, colName, keyName) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[["comments"]], "SimpleList"),
         isString(colName),
         isString(keyName)
@@ -370,7 +370,7 @@ NULL
     )
     alert(sprintf(
         "Coercing entries {.cls %s} to {.cls %s} with {.pkg %s}::{.fun %s}.",
-        "list", "DataFrame", "AcidPlyr", "rbindToDataFrame"
+        "list", "DFrame", "AcidPlyr", "rbindToDataFrame"
     ))
     df <- rbindToDataFrame(x)
     assert(areSetEqual(
@@ -466,7 +466,7 @@ NULL
 #' @noRd
 .sanitizeAgeAtSampling <- function(object) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is.character(object[["ageAtSampling"]])
     )
     idx <- which(object[["ageAtSampling"]] == "Age unspecified")
@@ -482,7 +482,7 @@ NULL
 #' @noRd
 .sanitizeComments <- function(object) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[["comments"]], "CharacterList")
     )
     object[["comments"]] <- unique(object[["comments"]])
@@ -539,7 +539,7 @@ NULL
 #' @noRd
 .sanitizeHierarchy <- function(object) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[["hierarchy"]], "CharacterList")
     )
     lst <- CharacterList(lapply(
@@ -566,7 +566,7 @@ NULL
 #' @noRd
 .sanitizeRefIds <- function(object) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[["referencesIdentifiers"]], "CharacterList")
     )
     object[["referencesIdentifiers"]] <- sub(
@@ -609,7 +609,7 @@ NULL
 #' @noRd
 .splitCol <- function(object, colName, split = "; ") {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         isString(colName),
         isString(split)
     )
@@ -630,7 +630,7 @@ NULL
 #' @noRd
 .splitNestedCol <- function(object, colName, sep) {
     assert(
-        is(object, "DataFrame"),
+        is(object, "DFrame"),
         is(object[[colName]], "CharacterList"),
         isString(sep)
     )

@@ -76,7 +76,7 @@ NULL
             },
             USE.NAMES = FALSE
         ))
-        df <- as(object, "DataFrame")
+        df <- as(object, "DFrame")
         df[["cellLineNameNoBracket"]] <- gsub(
             pattern = "[_ ]+\\[.+$",
             replacement = "",
