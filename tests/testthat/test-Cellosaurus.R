@@ -139,7 +139,7 @@ test_that("Cellosaurus", {
                 "31068700", "31160637", "31978347", "35839778"
             )
         )),
-        "samplingSite" = list(character()),
+        "samplingSite" = list("Peripheral blood"),
         "sangerModelId" = "SIDM00594",
         "secondaryAccession" = NA_character_,
         "sexOfCell" = factor(

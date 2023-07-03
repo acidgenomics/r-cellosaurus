@@ -150,13 +150,13 @@ NULL
 #' Note that some comments have additional information on the cell type, that
 #' we don't want to include here (e.g. CVCL_0003, CVCL_0008).
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-07-03.
 #' @noRd
 .addSamplingSite <- function(object) {
     .extractComment(
         object = object,
         colName = "samplingSite",
-        keyName = "Derived from sampling site"
+        keyName = "Derived from site"
     )
 }
 
