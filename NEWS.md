@@ -9,6 +9,8 @@ New functions:
 
 Minor changes:
 
+- `Cellosaurus`: Updated key for `samplingSite` metadata column, which is
+  now defined as `Derived from site` in 46 release update.
 - Updated Acid Genomics dependencies.
 
 ## Cellosaurus 0.5.3 (2023-05-17)
