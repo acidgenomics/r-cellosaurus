@@ -1,5 +1,16 @@
 # Release notes
 
+## Cellosaurus 0.5.4 (2023-07-03)
+
+New functions:
+
+- `currentCellosaurusVersion`: Check the Cellosaurus server for current release
+  version. Currently returns as `integer`.
+
+Minor changes:
+
+- Updated Acid Genomics dependencies.
+
 ## Cellosaurus 0.5.3 (2023-05-17)
 
 Minor changes:
