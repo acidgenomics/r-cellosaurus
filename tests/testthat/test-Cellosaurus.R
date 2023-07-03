@@ -139,7 +139,12 @@ test_that("Cellosaurus", {
                 "31068700", "31160637", "31978347", "35839778"
             )
         )),
-        "samplingSite" = list("Peripheral blood"),
+        "samplingSite" = list(paste(
+            "In situ",
+            "Peripheral blood",
+            "UBERON=UBERON_0000178",
+            sep = "; "
+        )),
         "sangerModelId" = "SIDM00594",
         "secondaryAccession" = NA_character_,
         "sexOfCell" = factor(
