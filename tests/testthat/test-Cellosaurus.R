@@ -20,9 +20,9 @@ test_that("Cellosaurus", {
         "category" = "Cancer cell line",
         "cellLineName" = "HEL",
         "comments" = list(list(
-            "Derived from sampling site" = "Peripheral blood",
+            "Derived from site" = "In situ; Peripheral blood; UBERON=UBERON_0000178",
             "Donor information" = "Originally the patient was suffering from Hodgkin lymphoma",
-            "Doubling time" = "~24 hours (PubMed=6177045); 17.8 +- 1.8 hours (in serum-containing medium), 23.3 +- 0.8 hours (in serum-free medium) (PubMed=7538619); ~36 hours (DSMZ=ACC-11)",
+            "Doubling time" = "~24 hours (PubMed=6177045); 17.8 +- 1.8 hours (Note=In serum-containing medium), 23.3 +- 0.8 hours (Note=In serum-free medium) (PubMed=7538619); ~36 hours (DSMZ=ACC-11)",
             "Genome ancestry" = "African=2.4%; Native American=1.79%; East Asian, North=3.9%; East Asian, South=0%; South Asian=5.12%; European, North=13.33%; European, South=73.45% (PubMed=30894373)",
             "HLA typing" = c(
                 "A*03:01,32:01; B*35:08,35:08; C*04:01,04:01; DQA1*05:01,05:01; DRB1*03:38,13:03 (PubMed=26589293)",
@@ -109,8 +109,8 @@ test_that("Cellosaurus", {
         )),
         "date" = list(c(
             "Created: 04-04-12",
-            "Last updated: 21-03-23",
-            "Version: 41"
+            "Last updated: 29-06-23",
+            "Version: 42"
         )),
         "depmapId" = "ACH-000004",
         "diseases" = list(list(
@@ -139,7 +139,7 @@ test_that("Cellosaurus", {
                 "31068700", "31160637", "31978347", "35839778"
             )
         )),
-        "samplingSite" = list("Peripheral blood"),
+        "samplingSite" = list(character()),
         "sangerModelId" = "SIDM00594",
         "secondaryAccession" = NA_character_,
         "sexOfCell" = factor(
