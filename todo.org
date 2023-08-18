@@ -1,5 +1,7 @@
 #+TITLE: Cellosaurus
 #+STARTUP: content
 * Development
+** TODO Add support for OncoTree mapping from NCIt terms.
+    Can get this metadata from the DepMap Model.csv file.
 ** TODO Work on adding `primaryDisease` column in a future update.
     This requires parsing NCIT obo file, which is complicated.
