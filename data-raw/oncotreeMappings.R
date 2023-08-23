@@ -8,27 +8,20 @@ suppressPackageStartupMessages({
 ## nolint end
 load_all()
 
-## datasets ====================================================================
+## NCIt to OncoTree mappings ===================================================
 
-## Datasets JSON from "datasets.json".
-datasets <- import(
-    con = system.file(
-        "extdata",
-        "datasets.json",
-        package = .pkgName,
-        mustWork = TRUE
-    )
-)
+## NCI thesaurus
+##   https://ncithesaurus.nci.nih.gov/
+## OncoTree
+##   https://oncotree.mskcc.org/
 
-## ontologyMappings ============================================================
+## cBioPortal oncotree mappings file.
+url <- "https://raw.githubusercontent.com/cBioPortal/oncotree/master/scripts/ontology_to_ontology_mapping_tool/ontology_mappings.txt"
 
-## FIXME Just save this in Cellosaurus and reference in DepMapAnalysis instead.
-## Consider renaming this to oncotreeMappings instead.
 
-## OncoTree ontology mappings, which map to NCIt.
-## @seealso
-## - https://github.com/cBioPortal/oncotree/tree/master/scripts/
-##     ontology_to_ontology_mapping_tool
+## DepMap 23q2 "Model.csv" file
+## https://figshare.com/ndownloader/files/40448834
+
 
 ontologyMappings <- import(
     con = system.file(
@@ -42,11 +35,3 @@ colnames(ontologyMappings) <- camelCase(colnames(ontologyMappings))
 ## Arrange by "oncotreeCode".
 ontologyMappings <-
     ontologyMappings[order(ontologyMappings[["oncotreeCode"]]), , drop = FALSE]
-
-## Save `R/sysdata.rda` ========================================================
-use_data(
-    datasets,
-    ontologyMappings,
-    overwrite = TRUE,
-    internal = TRUE
-)
