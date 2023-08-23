@@ -23,7 +23,7 @@ Encoding: UTF-8
 LazyData: false
 Depends: R (>= 4.3)
 Imports:
-    AcidBase (>= 0.6.18),
+    AcidBase (>= 0.6.19),
     AcidCLI (>= 0.2.8),
     AcidGenerics (>= 0.6.7),
     AcidPlyr (>= 0.3.11),
@@ -43,5 +43,6 @@ Suggests:
     parallel
 Additional_repositories: https://r.acidgenomics.com
 Config/testthat/edition: 3
+Config/testthat/parallel: false
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
