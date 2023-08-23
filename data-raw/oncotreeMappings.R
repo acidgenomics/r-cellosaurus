@@ -36,8 +36,7 @@ df1 <- import(
 df1 <- df1[, c("NCIT_CODE", "ONCOTREE_CODE")]
 colnames(df1) <- c("ncit", "oncotree")
 df1 <- df1[complete.cases(df1), ]
-## FIXME Need to handle weird comma edge case here: C9168,C7967. How can we
-## split this out using base R? Argh...
+## FIXME Need to handle weird comma edge case here: C9168,C7967.
 df1 <- unique(df1)
 df1 <- df1[order(df1[["ncit"]]), ]
 ## This file has NCIt identifiers mapping to multiple OncoTree codes, which is
@@ -56,14 +55,15 @@ df1[["source"]] <- "cbioportal"
 df2 <- DepMapAnalysis:::.importBroadModelInfo()
 ## > print(nrow(df2))
 ## 1824
-xxx <- DataFrame(
+df2 <- DataFrame(
     "ncit" = df2[["cellosaurus"]][["ncitDiseaseId"]],
     "oncotree" = df2[["broad"]][["OncotreeCode"]]
 )
-xxx <- xxx[!is.na(xxx[["oncotree"]]), ]
+df2 <- df2[!is.na(df2[["oncotree"]]), ]
+df2 <- unique(df2)
 ## Some of these terms are nested: C3798,C3273.
-## How to split these out without using tidyverse?
-
+## FIXME How to unnest this without tidyverse?
+## > tidyr::unnest(tibble::as_tibble(df2), cols = "ncit")
 
 
 map <- rbind(df1, df2)
