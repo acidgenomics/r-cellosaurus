@@ -14,20 +14,20 @@ NULL
 NULL
 
 #' @export
-#' @rdname filterProblematicCells
+#' @rdname excludeProblematicCells
 setGeneric(
-    name = "filterContaminatedCells",
+    name = "excludeContaminatedCells",
     def = function(object, ...) {
-        standardGeneric("filterContaminatedCells")
+        standardGeneric("excludeContaminatedCells")
     }
 )
 
 #' @export
-#' @rdname filterProblematicCells
+#' @rdname excludeProblematicCells
 setGeneric(
-    name = "filterProblematicCells",
+    name = "excludeProblematicCells",
     def = function(object, ...) {
-        standardGeneric("filterProblematicCells")
+        standardGeneric("excludeProblematicCells")
     }
 )
 

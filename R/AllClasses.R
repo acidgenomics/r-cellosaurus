@@ -1,6 +1,6 @@
 #' Cellosaurus table of cell identifier mappings
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-08-23.
 #' @export
 #'
 #' @return `Cellosaurus`.
@@ -24,6 +24,8 @@ setValidity(
         ok <- validateClasses(
             object = object,
             expected = list(
+                ## Consider requiring in future update:
+                ## > "isContaminated" = "Rle",
                 "accession" = "Rle",
                 "ageAtSampling" = "Rle",
                 "category" = "Rle",
