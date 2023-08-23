@@ -3,6 +3,8 @@
 export(Cellosaurus)
 export(currentCellosaurusVersion)
 export(export)
+export(filterContaminatedCells)
+export(filterProblematicCells)
 export(mapCells)
 export(standardizeCells)
 export(tnbc)
