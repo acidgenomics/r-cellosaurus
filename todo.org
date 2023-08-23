@@ -1,6 +1,8 @@
 #+TITLE: Cellosaurus
 #+STARTUP: content
 * Development
+** TODO Consider adding back NCIt OBO parsing:
+    http://purl.obolibrary.org/obo/ncit.obo
 ** TODO Add support for OncoTree mapping from NCIt terms.
     Can get this metadata from the DepMap Model.csv file.
 ** TODO Work on adding `primaryDisease` column in a future update.

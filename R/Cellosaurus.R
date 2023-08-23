@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-03-08.
+#' @note Updated 2023-08-23.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -46,8 +46,32 @@ NULL
 }
 
 
-## FIXME Add a separate `isContaminated` boolean, which is stricter than this
-## check here. Then we can use that in DepMapAnalysis to remove these cells.
+
+#' Add `isContaminated` column
+#'
+#' @note Updated 2023-08-24.
+#' @noRd
+.addIsContaminated <- function(object) {
+    assert(
+        is(object, "DFrame"),
+        is(object[["comments"]], "SimpleList")
+    )
+    lgl <- vapply(
+        X = object[["comments"]],
+        FUN = function(x) {
+            if (!"Problematic cell line" %in% names(x)) {
+                return(FALSE)
+            }
+            x <- x[["Problematic cell line"]]
+            any(grepl(pattern = "^Contaminated.", x = x))
+        },
+        FUN.VALUE = logical(1L)
+    )
+    object[["isContaminated"]] <- lgl
+    object
+}
+
+
 
 #' Add `isProblematic` column
 #'
@@ -656,7 +680,7 @@ NULL
 
 
 
-## Updated 2023-01-24.
+## Updated 2023-08-23.
 
 #' @rdname Cellosaurus
 #' @export
@@ -676,6 +700,7 @@ Cellosaurus <- # nolint
         alert("Adding annotations.")
         object <- .addDepmapId(object)
         object <- .addIsCancer(object)
+        object <- .addIsContaminated(object)
         object <- .addIsProblematic(object)
         object <- .addMsiStatus(object)
         object <- .addNcitDisease(object)
@@ -683,6 +708,7 @@ Cellosaurus <- # nolint
         object <- .addSamplingSite(object)
         object <- .addSangerModelId(object)
         object <- .addTaxonomy(object)
+        alert("Encoding metadata.")
         object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
