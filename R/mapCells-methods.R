@@ -1,6 +1,13 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2023-03-03.
+#' @note Updated 2023-08-23.
+#'
+#' @details
+#' This function is designed to take input from a spreadsheet, electronic
+#' laboratory notebook entry, or cell line provider, where the cell line names
+#' may be inconsistent.
+#'
+#' If you notice any mapping errors, please file a bug report.
 #'
 #' @inherit AcidRoxygen::params
 #' @param ... Additional arguments.
@@ -12,7 +19,7 @@
 #' Identifier format to return.
 #'
 #' @return Named `character`.
-#' User input in the names and Cellosaurus accession IDs in the values.
+#' User input in the names and Cellosaurus accession identifiers in the values.
 #'
 #' @seealso
 #' - [Matching values in list](https://stackoverflow.com/questions/11002391/).
@@ -21,8 +28,12 @@
 #' data(cello)
 #'
 #' ## Cellosaurus ====
+#' ## Note that the `standardizeCells` step is not required before calling
+#' ## `mapCells`. We're just performing that step here as an example where
+#' ## the cell line names change.
 #' object <- cello
 #' cells <- standardizeCells(head(cello[["cellLineName"]]))
+#' print(cells)
 #' cells <- mapCells(object = object, cells = cells)
 #' print(cells)
 NULL

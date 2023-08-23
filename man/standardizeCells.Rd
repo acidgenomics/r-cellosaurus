@@ -25,11 +25,14 @@ Cell line names.}
 Standardize cell line names
 }
 \details{
-Strip all non-alphanumeric characters, remove information in
-parentheses/brackets, and convert to uppercase.
+Strip all non-alphanumeric characters, remove information in parentheses or
+brackets, and convert to uppercase.
+
+Note that this function doesn't attempt to perform any mapping to the
+Cellosaurus database. For that, refer to \code{mapCells} instead.
 }
 \note{
-Updated 2023-01-17.
+Updated 2023-08-23.
 }
 \examples{
 object <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
