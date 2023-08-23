@@ -46,6 +46,8 @@ NULL
 }
 
 
+## FIXME Add a separate `isContaminated` boolean, which is stricter than this
+## check here. Then we can use that in DepMapAnalysis to remove these cells.
 
 #' Add `isProblematic` column
 #'
