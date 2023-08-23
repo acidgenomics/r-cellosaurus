@@ -14,6 +14,24 @@ NULL
 NULL
 
 #' @export
+#' @rdname filterProblematicCells
+setGeneric(
+    name = "filterContaminatedCells",
+    def = function(object, ...) {
+        standardGeneric("filterContaminatedCells")
+    }
+)
+
+#' @export
+#' @rdname filterProblematicCells
+setGeneric(
+    name = "filterProblematicCells",
+    def = function(object, ...) {
+        standardGeneric("filterProblematicCells")
+    }
+)
+
+#' @export
 #' @rdname tnbc
 setGeneric(
     name = "tnbc",
