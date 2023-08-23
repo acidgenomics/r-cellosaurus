@@ -119,6 +119,7 @@ test_that("Cellosaurus", {
         )),
         "hierarchy" = list(character()),
         "isCancer" = TRUE,
+        "isContaminated" = FALSE,
         "isProblematic" = FALSE,
         "msiStatus" = list("Stable (MSS) (PubMed=10739008; PubMed=11226526; Sanger)"),
         "ncbiTaxonomyId" = list(9606L),
