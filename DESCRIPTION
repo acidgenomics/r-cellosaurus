@@ -1,8 +1,8 @@
 Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.5.4
-Date: 2023-07-03
+Version: 0.5.5.9000
+Date: 2023-08-23
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -21,24 +21,24 @@ BugReports: https://github.com/acidgenomics/r-cellosaurus/issues/
 License: AGPL-3
 Encoding: UTF-8
 LazyData: false
-Depends: R (>= 4.2)
+Depends: R (>= 4.3)
 Imports:
-    AcidBase (>= 0.6.16),
-    AcidCLI (>= 0.2.7),
+    AcidBase (>= 0.6.18),
+    AcidCLI (>= 0.2.8),
     AcidGenerics (>= 0.6.7),
-    AcidPlyr (>= 0.3.10),
-    BiocGenerics (>= 0.44.0),
-    IRanges (>= 2.32.0),
-    S4Vectors (>= 0.36.0),
-    goalie (>= 0.6.10),
-    pipette (>= 0.10.10),
+    AcidPlyr (>= 0.3.11),
+    BiocGenerics (>= 0.46.0),
+    IRanges (>= 2.34.0),
+    S4Vectors (>= 0.38.0),
+    goalie (>= 0.6.14),
+    pipette (>= 0.11.2),
     stringi (>= 1.7.12),
     syntactic (>= 0.6.6),
     methods,
     utils
 Suggests:
     data.table (>= 1.14.8),
-    testthat (>= 3.1.9),
+    testthat (>= 3.1.10),
     withr (>= 2.5.0),
     parallel
 Additional_repositories: https://r.acidgenomics.com
