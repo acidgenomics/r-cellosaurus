@@ -24,7 +24,7 @@ setValidity(
         ok <- validateClasses(
             object = object,
             expected = list(
-                ## Consider requiring in future update:
+                ## Added in v0.5.5:
                 ## > "isContaminated" = "Rle",
                 "accession" = "Rle",
                 "ageAtSampling" = "Rle",
@@ -54,7 +54,7 @@ setValidity(
                 "synonyms" = "CompressedCharacterList",
                 "webPages" = "CompressedCharacterList"
             ),
-            subset = FALSE
+            subset = TRUE
         )
         if (!isTRUE(ok)) {
             return(ok)

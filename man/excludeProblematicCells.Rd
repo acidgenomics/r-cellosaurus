@@ -4,11 +4,17 @@
 \name{excludeContaminatedCells}
 \alias{excludeContaminatedCells}
 \alias{excludeProblematicCells}
+\alias{excludeContaminatedCells,Cellosaurus-method}
+\alias{excludeProblematicCells,Cellosaurus-method}
 \title{Exclude (remove) problematic and/or contaminated cell lines}
 \usage{
 excludeContaminatedCells(object, ...)
 
 excludeProblematicCells(object, ...)
+
+\S4method{excludeContaminatedCells}{Cellosaurus}(object)
+
+\S4method{excludeProblematicCells}{Cellosaurus}(object)
 }
 \arguments{
 \item{object}{Object.}
