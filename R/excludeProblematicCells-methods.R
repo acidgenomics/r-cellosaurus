@@ -29,3 +29,47 @@
 NULL
 
 
+
+## Updated 2023-08-23.
+`excludeContaminatedCells,Cellosaurus` <-
+    function(object) {
+        assert(
+            validObject(object),
+            isSubset("isContaminated", colnames(object))
+        )
+        keep <- !object[["isContaminated"]]
+        object <- object[keep, , drop = FALSE]
+        object
+    }
+
+
+
+## Updated 2023-08-23.
+`excludeProblematicCells,Cellosaurus` <-
+    function(object) {
+        assert(
+            validObject(object),
+            isSubset("isProblematic", colnames(object))
+        )
+        keep <- !object[["isProblematic"]]
+        object <- object[keep, , drop = FALSE]
+        object
+    }
+
+
+
+#' @rdname excludeProblematicCells
+#' @export
+setMethod(
+    f = "excludeContaminatedCells",
+    signature = signature(object = "Cellosaurus"),
+    definition = `excludeContaminatedCells,Cellosaurus`
+)
+
+#' @rdname excludeProblematicCells
+#' @export
+setMethod(
+    f = "excludeProblematicCells",
+    signature = signature(object = "Cellosaurus"),
+    definition = `excludeProblematicCells,Cellosaurus`
+)
