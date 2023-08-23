@@ -12,7 +12,7 @@ NULL
     function(object) {
         showHeader(object)
         showSlotInfo(list(
-            "cells" = nrow(object),
+            "cells" = rownames(object),
             "release" = majorVersion(metadata(object)[["dataVersion"]]),
             "date" = metadata(object)[["date"]]
         ))
