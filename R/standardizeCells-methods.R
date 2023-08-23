@@ -1,10 +1,13 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2023-01-17.
+#' @note Updated 2023-08-23.
 #'
 #' @details
-#' Strip all non-alphanumeric characters, remove information in
-#' parentheses/brackets, and convert to uppercase.
+#' Strip all non-alphanumeric characters, remove information in parentheses or
+#' brackets, and convert to uppercase.
+#'
+#' Note that this function doesn't attempt to perform any mapping to the
+#' Cellosaurus database. For that, refer to `mapCells` instead.
 #'
 #' @param object `character`.
 #' Cell line names.
