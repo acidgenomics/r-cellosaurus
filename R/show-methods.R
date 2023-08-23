@@ -13,8 +13,8 @@ NULL
         showHeader(object)
         showSlotInfo(list(
             "cells" = rownames(object),
-            "release" = majorVersion(metadata(object)[["dataVersion"]]),
-            "date" = metadata(object)[["date"]]
+            "date" = metadata(object)[["date"]],
+            "release" = majorVersion(metadata(object)[["dataVersion"]])
         ))
     }
 
