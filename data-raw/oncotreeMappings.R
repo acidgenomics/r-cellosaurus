@@ -4,9 +4,10 @@
 suppressPackageStartupMessages({
     library(devtools)
     library(usethis)
+    library(S4Vectors)
     library(goalie)
     library(pipette)
-    library(S4Vectors)
+    library(AcidPlyr) # 0.4.0
     library(DepMapAnalysis) # 0.3.0.9000
 })
 ## nolint end
@@ -33,10 +34,14 @@ df1 <- import(
     ),
     format = "tsv"
 )
+df1 <- as(df1, "DFrame")
 df1 <- df1[, c("NCIT_CODE", "ONCOTREE_CODE")]
 colnames(df1) <- c("ncit", "oncotree")
 df1 <- df1[complete.cases(df1), ]
-## FIXME Need to handle weird comma edge case here: C9168,C7967.
+df1 <- unique(df1)
+## e.g. "C9168,C7967" for "SRCCR".
+df1[["ncit"]] <- strsplit(df1[["ncit"]], split = ",")
+df1 <- unnest2(df1, col = "ncit")
 df1 <- unique(df1)
 df1 <- df1[order(df1[["ncit"]]), ]
 ## This file has NCIt identifiers mapping to multiple OncoTree codes, which is
