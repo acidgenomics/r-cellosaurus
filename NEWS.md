@@ -1,5 +1,23 @@
 # Release notes
 
+## Cellosaurus 0.5.5 (2023-08-23)
+
+New functions:
+
+- `excludeProblematicCells`: Exclude (remove) cell lines from the `Cellosaurus`
+  object that are labeled as `"Problematic cell line"` in the comments. Note
+  that this function is more strict than `excludeContaminatedCells`, which
+  are a subset of problematic cells on Cellosaurus.
+- `excludeContaminatedCells`: Exclude cell lines that are labeled as
+  `"Problematic cell line: Contaminated"` in the comments.
+
+Minor changes:
+
+- `Cellosaurus` generator now returns `isContaminated` column, which is useful
+  for differentiating between `isProblematic` lines, which may simply be
+  misidentified, versus cell lines that are _really_ problematic due to
+  contamination issues.
+
 ## Cellosaurus 0.5.4 (2023-07-03)
 
 New functions:
