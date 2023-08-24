@@ -1,3 +1,6 @@
+## Prepare minimal `cello` object used in working examples.
+## Updated 2023-08-24.
+
 ## nolint start
 suppressPackageStartupMessages({
     library(devtools)
@@ -5,6 +8,7 @@ suppressPackageStartupMessages({
     library(AcidBase)
 })
 ## nolint end
+
 load_all()
 object <- Cellosaurus()
 saveRDS(object, "celloFull.rds")
@@ -26,3 +30,4 @@ shell(
         )
     )
 )
+unlink("celloFull.rds")
