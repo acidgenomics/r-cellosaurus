@@ -28,4 +28,5 @@ df <- df[
 df <- df[complete.cases(df), ]
 df <- df[order(df[["oncotreeCode"]]), ]
 df <- unique(df)
+rownames(df) <- NULL
 export(df, "oncotree.csv")
