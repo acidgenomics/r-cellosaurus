@@ -122,6 +122,7 @@ rm(df, dupes)
 ## Combine mappings ============================================================
 
 df <- do.call(what = rbind, args = map)
+df <- as(df, "DFrame")
 df <- df[!duplicated(df[["ncit"]]), ]
 assert(
     hasNoDuplicates(df[["ncit"]]),
