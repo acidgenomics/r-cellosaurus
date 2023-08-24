@@ -1,3 +1,6 @@
+## Prepare unit test checks for `mapCells` function.
+## Updated 2023-08-24.
+
 ## nolint start
 suppressPackageStartupMessages({
     library(devtools)
@@ -6,9 +9,12 @@ suppressPackageStartupMessages({
     library(pipette)
 })
 ## nolint end
+
 load_all()
 map <- list()
+
 ## DepMap 22Q2 =================================================================
+
 ## Import "sample_info.csv" file.
 df <- import(
     con = cacheURL(pasteURL(
@@ -27,7 +33,9 @@ df <- df[!duplicated(df[["cell_line_name"]]), ]
 map[["depmap_22q2_fail"]] <- df[is.na(df[["RRID"]]), "cell_line_name"]
 df <- df[!is.na(df[["RRID"]]), ]
 map[["depmap_22q2"]] <- df
+
 ## DepMap 22Q4 =================================================================
+
 ## Import "Model.csv" file
 df <- import(
     con = cacheURL(pasteURL(
@@ -45,7 +53,9 @@ df <- df[!duplicated(df[["CellLineName"]]), ]
 map[["depmap_22q4_fail"]] <- df[is.na(df[["RRID"]]), "CellLineName"]
 df <- df[!is.na(df[["RRID"]]), ]
 map[["depmap_22q4"]] <- df
+
 ## Sanger CellModelPassports ===================================================
+
 df <- import(
     con = cacheURL(pasteURL(
         "cog.sanger.ac.uk",
@@ -64,6 +74,9 @@ df <- df[!duplicated(df[["model_name"]]), ]
 map[["cmp_fail"]] <- df[is.na(df[["RRID"]]), "model_name"]
 df <- df[!is.na(df[["RRID"]]), ]
 map[["cmp"]] <- df
+
+## Save object and push to AWS =================================================
+
 saveRDS(map, "mapCells.rds")
 majMinVer <- majorMinorVersion(packageVersion("Cellosaurus"))
 shell(

@@ -24,9 +24,13 @@
 ## - This script has code that parses the cBioPortal types of cancer:
 ##   https://github.com/ashleyrchen/cancer-web-tool/blob/master/cBioPortal.ipynb
 
-library(AcidPlyr)
-library(pipette)
-library(syntactic)
+## nolint start
+suppressPackageStartupMessages({
+    library(AcidPlyr)
+    library(pipette)
+    library(syntactic)
+})
+## nolint end
 
 json <- getJSON("http://oncotree.mskcc.org/api/tumorTypes")
 df <- rbindToDataFrame(json)
