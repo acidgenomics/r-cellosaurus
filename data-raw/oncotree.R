@@ -1,6 +1,3 @@
-## NOTE Alternatively, can check cBioPortal:
-## http://www.cbioportal.org/webservice.do?cmd=getTypesOfCancer
-
 ## OncoTree tumor type metadata.
 ## Updated 2023-08-24.
 ##
@@ -27,32 +24,14 @@
 ## - This script has code that parses the cBioPortal types of cancer:
 ##   https://github.com/ashleyrchen/cancer-web-tool/blob/master/cBioPortal.ipynb
 
-library(syntactic)
+library(AcidPlyr)
 library(pipette)
+library(syntactic)
 
-## DepMap 23q2 "Model.csv" file.
-df <- import(
-    con = pasteURL(
-        "figshare.com",
-        "ndownloader",
-        "files",
-        "40448834",
-        protocol = "https"
-    ),
-    format = "csv"
-)
+json <- getJSON("http://oncotree.mskcc.org/api/tumorTypes")
+df <- rbindToDataFrame(json)
 colnames(df) <- camelCase(colnames(df))
-df <- df[
-    ,
-    c(
-        "oncotreeCode",
-        "oncotreeSubtype",
-        "oncotreePrimaryDisease",
-        "oncotreeLineage"
-    )
-]
-df <- df[complete.cases(df), ]
-df <- df[order(df[["oncotreeCode"]]), ]
-df <- unique(df)
-rownames(df) <- NULL
+df <- df[order(df[["code"]]), ]
+rownames(df) <- df[["code"]]
+saveRDS(df, "oncotree.rds")
 export(df, "oncotree.csv")
