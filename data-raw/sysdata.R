@@ -1,11 +1,12 @@
+## Save `R/sysdata.rda` file.
+## Updated 2023-08-24.
+
 ## nolint start
-suppressPackageStartupMessages({
-    library(pipette)
-    library(usethis)
-})
+library(usethis)
 ## nolint end
+
 overrides <- import("overrides.csv")
-## Save `R/sysdata.rda` ========================================================
+
 use_data(
     overrides,
     overwrite = TRUE,
