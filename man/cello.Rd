@@ -5,7 +5,7 @@
 \alias{cello}
 \title{Example Cellosaurus object}
 \format{
-An object of class \code{Cellosaurus} with 10 rows and 27 columns.
+An object of class \code{Cellosaurus} with 10 rows and 28 columns.
 }
 \usage{
 data(cello)
