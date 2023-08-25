@@ -667,7 +667,7 @@ NULL
 
 
 
-## Updated 2023-08-23.
+## Updated 2023-08-25.
 
 #' @rdname Cellosaurus
 #' @export
@@ -695,6 +695,7 @@ Cellosaurus <- # nolint
         object <- .addSamplingSite(object)
         object <- .addSangerModelId(object)
         object <- .addTaxonomy(object)
+        ## FIXME Add oncotree metadata.
         alert("Encoding metadata.")
         object <- factorize(object)
         object <- encode(object)
