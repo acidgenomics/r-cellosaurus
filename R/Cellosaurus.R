@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-08-23.
+#' @note Updated 2023-08-25.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -330,7 +330,7 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-03-08.
+#' @note Updated 2023-08-25.
 #' @noRd
 #'
 #' @seealso
@@ -345,7 +345,7 @@ NULL
         protocol = "https"
     )
     con <- cacheURL(url, pkg = .pkgName)
-    lines <- import(con, format = "lines", engine = "data.table")
+    lines <- import(con, format = "lines")
     ## Extract the Cellosaurus data version (release) from the top of the file.
     dataVersion <- strsplit(
         x = grep(
@@ -374,21 +374,8 @@ NULL
     requiredKeys <- c("AC", "CA", "DT", "ID")
     nestedKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
     optionalKeys <- c("AG", "AS", "SX", "SY")
-    if (isTRUE(requireNamespace("parallel", quietly = TRUE))) {
-        alert(sprintf(
-            "Processing entries with {.pkg %s}::{.fun %s}.",
-            "parallel", "mclapply"
-        ))
-        .mclapply <- parallel::mclapply
-    } else {
-        alert("Processing entries.")
-        alertInfo(sprintf(
-            "Install {.pkg %s} package to speed up this step.",
-            "parallel"
-        ))
-        .mclapply <- lapply
-    }
-    x <- .mclapply(
+    alert("Processing entries.")
+    x <- mclapply(
         X = x,
         FUN = .processEntry,
         nestedKeys = nestedKeys,
