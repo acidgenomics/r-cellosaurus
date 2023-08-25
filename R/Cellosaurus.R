@@ -1,3 +1,12 @@
+## FIXME Consider just picking one NCIt identifier for cell lines.
+## Makes downstream workflows easier.
+## We can do the Cellosaurus join easier.
+## What cell lines have duplicate mappings? Let's consider just manually
+## curating them with an overrides map.
+## FIXME Consider renaming overrides to cellOverrides?
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -152,6 +161,89 @@ NULL
     object[["ncitDiseaseId"]] <- id
     object[["ncitDiseaseName"]] <- name
     object
+}
+
+
+## FIXME Need to unlist ncitDiseaseId in main object, which is CharacterList.
+## FIXME Just take the first entry.
+## FIXME We need to update AcidPlyr to be able to join with NA values.
+
+#' Add OntoTree metadata columns
+#'
+#' @note Updated 2023-08-25.
+#' @noRd
+.addOntotree <- function(object) {
+    assert(
+        is(object, "DFrame"),
+        is(ncit2Oncotree, "DFrame"),
+        is(oncotree, "DFrame"),
+        isSubset(c("accession", "ncitDiseaseId"), colnames(object)),
+        is(object[["ncitDiseaseId"]], "CharacterList"),
+        identical(
+            x = colnames(ncit2Oncotree),
+            y = c("ncit", "oncotree")
+        ),
+        identical(
+            x = colnames(oncotree),
+            y = c(
+                "code",
+                "color",
+                "name",
+                "mainType",
+                "externalReferences",
+                "tissue",
+                "children",
+                "parent",
+                "history",
+                "level",
+                "revocations",
+                "precursors"
+            )
+        )
+    )
+    ## Build our data frame that we will use for the left join.
+    df1 <- object[, c("accession", "ncitDiseaseId")]
+    ## Ignore any cell lines with multi-mapped NCIt terms.
+    keep <- bapply(
+        X = df1[["ncitDiseaseId"]],
+        FUN = function(x) {
+            identical(length(x), 1L)
+        }
+    )
+    df1 <- df1[keep, , drop = FALSE]
+    df1[["ncitDiseaseId"]] <- unlist(
+        x = df1[["ncitDiseaseId"]],
+        recursive = FALSE,
+        use.names = FALSE
+    )
+    # Prepare the minimal OncoTree data frame.
+    oncotree <- oncotree[
+        ,
+        setdiff(
+            x = colnames(oncotree),
+            y = c(
+                "children",
+                "color",
+                "externalReferences",
+                "history",
+                "precursors",
+                "revocations"
+            )
+        )
+    ]
+    rownames(oncotree) <- NULL
+    colnames(oncotree) <- camelCase(paste("oncotree", colnames(oncotree)))
+    colnames(ncit2Oncotree) <- c("ncitDiseaseId", "oncotreeCode")
+    df2 <- leftJoin(x = ncit2Oncotree, y = oncotree, by = "oncotreeCode")
+    ## FIXME Our join approach here may be problematic if we encode the columns.
+    ## Need to look at AcidPlyr to see if we can improve this to not coerce
+    ## to data.frame...
+    df3 <- leftJoin(x = df1, y = df2, by = "ncitDiseaseId")
+    df3[["ncitDiseaseId"]] <- NULL
+    ## FIXME This is failing because there are NA in the left join...need
+    ## to rethink how to handle this argh.
+    xxx <- leftJoin(x = object, y = df3, by = "accession")
+    xxx
 }
 
 
@@ -691,11 +783,11 @@ Cellosaurus <- # nolint
         object <- .addIsProblematic(object)
         object <- .addMsiStatus(object)
         object <- .addNcitDisease(object)
+        ## FIXME Add oncotree metadata.
         object <- .addPopulation(object)
         object <- .addSamplingSite(object)
         object <- .addSangerModelId(object)
         object <- .addTaxonomy(object)
-        ## FIXME Add oncotree metadata.
         alert("Encoding metadata.")
         object <- factorize(object)
         object <- encode(object)
