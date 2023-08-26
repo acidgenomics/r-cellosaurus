@@ -423,15 +423,15 @@ NULL
     con <- cacheURL(url, pkg = .pkgName)
     lines <- import(con, format = "lines")
     ## Extract the Cellosaurus data version (release) from the top of the file.
-    dataVersion <- stri_split_fixed(
-        str = grep(
+    dataVersion <- strsplit(
+        x = grep(
             pattern = "^ Version:",
             x = lines[1L:10L],
             value = TRUE
         ),
-        pattern = ": ",
-        simplify = TRUE
-    )[1L, 2L]
+        split = ": ",
+        fixed = TRUE
+    )[[1L]][[2L]]
     assert(isString(dataVersion))
     dataVersion <- as.numeric_version(dataVersion)
     alert(sprintf(
