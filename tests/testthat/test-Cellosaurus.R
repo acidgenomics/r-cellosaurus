@@ -14,6 +14,12 @@ test_that("Cellosaurus", {
     x <- as.list(df["CVCL_0001", , drop = FALSE])
     x[["ageAtSampling"]] <- as.character(x[["ageAtSampling"]])
     x[["category"]] <- as.character(x[["category"]])
+    x[["oncotreeCode"]] <- as.character(x[["oncotreeCode"]])
+    x[["oncotreeLevel"]] <- as.character(x[["oncotreeLevel"]])
+    x[["oncotreeMainType"]] <- as.character(x[["oncotreeMainType"]])
+    x[["oncotreeName"]] <- as.character(x[["oncotreeName"]])
+    x[["oncotreeParent"]] <- as.character(x[["oncotreeParent"]])
+    x[["oncotreeTissue"]] <- as.character(x[["oncotreeTissue"]])
     y <- list(
         "accession" = "CVCL_0001",
         "ageAtSampling" = "30Y",
@@ -125,6 +131,12 @@ test_that("Cellosaurus", {
         "ncbiTaxonomyId" = list(9606L),
         "ncitDiseaseId" = list("C7152"),
         "ncitDiseaseName" = list("Erythroleukemia"),
+        "oncotreeCode" = "AML",
+        "oncotreeLevel" = "3",
+        "oncotreeMainType" = "Leukemia",
+        "oncotreeName" = "Acute Myeloid Leukemia",
+        "oncotreeParent" = "MNM",
+        "oncotreeTissue" = "Myeloid",
         "organism" = list("Homo sapiens (Human)"),
         "originateFromSameIndividual" = list(character()),
         "population" = list("Caucasian"),
