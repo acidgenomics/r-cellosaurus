@@ -137,11 +137,7 @@ test_that("Tricky cell lines", {
 test_that("DepMap 22Q2", {
     object <- celloFull
     df <- map[["depmap_22q2"]]
-    censor <- c(
-        "ACH_000499",
-        "ACH_001131",
-        "ACH_002185"
-    )
+    censor <- c("ACH_000499", "ACH_001131", "ACH_002185")
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["cell_line_name"]])),
@@ -150,14 +146,14 @@ test_that("DepMap 22Q2", {
     fail <- map[["depmap_22q2_fail"]]
     expect_error(
         object = mapCells(object, cells = fail),
-        regexp = "19 cells"
+        regexp = "13 cells"
     )
 })
 
 test_that("DepMap 22Q4", {
     object <- celloFull
     df <- map[["depmap_22q4"]]
-    censor <- "ACH_002185"
+    censor <- c("ACH_000499", "ACH_001131", "ACH_002185")
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["CellLineName"]])),
@@ -166,7 +162,23 @@ test_that("DepMap 22Q4", {
     fail <- map[["depmap_22q4_fail"]]
     expect_error(
         object = mapCells(object, cells = fail),
-        regexp = "12 cells"
+        regexp = "11 cells"
+    )
+})
+
+test_that("DepMap 23Q2", {
+    object <- celloFull
+    df <- map[["depmap_23q2"]]
+    censor <- c("ACH_000499", "ACH_001131", "ACH_002185")
+    df <- df[setdiff(rownames(df), censor), ]
+    expect_identical(
+        object = unname(mapCells(object, cells = df[["CellLineName"]])),
+        expected = df[["RRID"]]
+    )
+    fail <- map[["depmap_23q2_fail"]]
+    expect_error(
+        object = mapCells(object, cells = fail),
+        regexp = "35 cells"
     )
 })
 
