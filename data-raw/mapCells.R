@@ -36,7 +36,7 @@ map[["depmap_22q2"]] <- df
 
 ## DepMap 22Q4 =================================================================
 
-## Import "Model.csv" file
+## Import "Model.csv" file.
 df <- import(
     con = cacheURL(pasteURL(
         "ndownloader.figshare.com",
@@ -53,6 +53,26 @@ df <- df[!duplicated(df[["CellLineName"]]), ]
 map[["depmap_22q4_fail"]] <- df[is.na(df[["RRID"]]), "CellLineName"]
 df <- df[!is.na(df[["RRID"]]), ]
 map[["depmap_22q4"]] <- df
+
+## DepMap 23Q2 =================================================================
+
+## Import "Model.csv" file.
+df <- import(
+    con = cacheURL(pasteURL(
+        "ndownloader.figshare.com",
+        "files",
+        "40448834",
+        protocol = "https"
+    )),
+    format = "csv"
+)
+df <- df[, c("ModelID", "CellLineName", "RRID")]
+rownames(df) <- makeNames(df[["ModelID"]])
+df <- df[!is.na(df[["CellLineName"]]), ]
+df <- df[!duplicated(df[["CellLineName"]]), ]
+map[["depmap_23q2_fail"]] <- df[is.na(df[["RRID"]]), "CellLineName"]
+df <- df[!is.na(df[["RRID"]]), ]
+map[["depmap_23q2"]] <- df
 
 ## Sanger CellModelPassports ===================================================
 
