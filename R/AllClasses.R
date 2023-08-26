@@ -13,10 +13,7 @@ setValidity(
     method = function(object) {
         ok <- validate(
             hasRownames(object),
-            allAreMatchingFixed(
-                x = rownames(object),
-                pattern = "CVCL_"
-            )
+            allAreMatchingFixed(x = rownames(object), pattern = "CVCL_")
         )
         if (!isTRUE(ok)) {
             return(ok)
