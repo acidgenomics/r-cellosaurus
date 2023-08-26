@@ -313,6 +313,13 @@ NULL
             x[, 2L]
         }
     ))
+    ## Standardize organism to full Latin name. For example, this step converts
+    ## "Homo sapiens (Human)" to simply "Homo sapiens".
+    organism <- sub(
+        pattern = "\\s\\(.+\\)$",
+        replacement = "",
+        x = organism
+    )
     object[["ncbiTaxonomyId"]] <- taxId
     object[["organism"]] <- organism
     object[["speciesOfOrigin"]] <- NULL
