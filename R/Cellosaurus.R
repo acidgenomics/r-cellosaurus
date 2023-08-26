@@ -234,7 +234,7 @@ NULL
 
 #' Add `population` column
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-08-26.
 #' @noRd
 .addPopulation <- function(object) {
     .extractComment(
@@ -423,15 +423,16 @@ NULL
     con <- cacheURL(url, pkg = .pkgName)
     lines <- import(con, format = "lines")
     ## Extract the Cellosaurus data version (release) from the top of the file.
-    dataVersion <- strsplit(
-        x = grep(
+    dataVersion <- stri_split_fixed(
+        str = grep(
             pattern = "^ Version:",
             x = lines[1L:10L],
             value = TRUE
         ),
-        split = ": ",
-        fixed = TRUE
-    )[[1L]][[2L]]
+        pattern = ": ",
+        simplify = TRUE
+    )[1L, 2L]
+    assert(isString(dataVersion))
     dataVersion <- as.numeric_version(dataVersion)
     alert(sprintf(
         "Detected Cellosaurus release %s.",
