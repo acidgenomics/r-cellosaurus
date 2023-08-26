@@ -31,7 +31,7 @@ NULL
 
 
 ## Updated 2023-08-23.
-`excludeContaminatedCells,Cellosaurus` <-
+`excludeContaminatedCells,Cellosaurus` <- # nolint
     function(object) {
         assert(
             validObject(object),
@@ -45,7 +45,7 @@ NULL
 
 
 ## Updated 2023-08-23.
-`excludeProblematicCells,Cellosaurus` <-
+`excludeProblematicCells,Cellosaurus` <- # nolint
     function(object) {
         assert(
             validObject(object),
