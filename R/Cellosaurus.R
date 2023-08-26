@@ -278,9 +278,12 @@ NULL
 
 
 
+## FIXME Ensure we sanitize this:
+## "Homo sapiens (Human)" to "Homo sapiens".
+
 #' Add `ncbiTaxonomyId` and `organism` columns
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-08-26.
 #' @noRd
 .addTaxonomy <- function(object) {
     assert(
