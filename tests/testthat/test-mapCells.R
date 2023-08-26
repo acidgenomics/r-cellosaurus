@@ -143,7 +143,11 @@ test_that("DepMap 22Q2", {
         object = unname(mapCells(object, cells = df[["cell_line_name"]])),
         expected = df[["RRID"]]
     )
-    fail <- map[["depmap_22q2_fail"]]
+    fail <- sort(map[["depmap_22q2_fail"]])
+    ## Mapping failures:
+    ## A375 SKIN CJ2, A375_RPMI, A673STAG2KO16, A673STAG2KO45, A673STAG2NT14,
+    ## A673STAG2NT23, GBM001, HCC827GR, MYLA, PSS008, PSS131R, RVH421_RPMI,
+    ## SS1A.
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "13 cells"
@@ -159,7 +163,10 @@ test_that("DepMap 22Q4", {
         object = unname(mapCells(object, cells = df[["CellLineName"]])),
         expected = df[["RRID"]]
     )
-    fail <- map[["depmap_22q4_fail"]]
+    fail <- sort(map[["depmap_22q4_fail"]])
+    ## Mapping failures:
+    ## A375 SKIN CJ2, A673STAG2KO16, A673STAG2KO45, A673STAG2NT14,
+    ## A673STAG2NT23, GBM001, HCC827GR, MYLA, PSS008, PSS131R, SS1A.
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "11 cells"
@@ -175,7 +182,15 @@ test_that("DepMap 23Q2", {
         object = unname(mapCells(object, cells = df[["CellLineName"]])),
         expected = df[["RRID"]]
     )
-    fail <- map[["depmap_23q2_fail"]]
+    fail <- sort(map[["depmap_23q2_fail"]])
+    ## Mapping failures:
+    ## A375 SKIN CJ2, A673STAG2KO16, A673STAG2KO45, A673STAG2NT14,
+    ## A673STAG2NT23, CCLF_CORE_0002_T, CCLF_UPGI_0009_T, CCLF_UPGI_0011_T,
+    ## CCLF_UPGI_0012_T, CCLF_UPGI_0015_T, CCLF_UPGI_0027_T, CCLF_UPGI_0036_T,
+    ## CCLF_UPGI_0040_T, CCLF_UPGI_0041_T, CCLF_UPGI_0052_T, CCLF_UPGI_0054_T,
+    ## CCLF_UPGI_0068_T, CCLF_UPGI_0085_T, CCLF_UPGI_0101_T, GBM001, HCC827GR,
+    ## IPM-BO-053, IPM-BO-055, IPM-BO-056, MYLA, NH84T, NH93T, PANFR0069,
+    ## PANFR0233, PANFR0368, PANFR0402, PANFR0420, PSS008, PSS131R, SS1A.
     expect_error(
         object = mapCells(object, cells = fail),
         regexp = "35 cells"
