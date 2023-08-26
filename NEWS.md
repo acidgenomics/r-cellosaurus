@@ -22,6 +22,9 @@ Minor changes:
   for differentiating between `isProblematic` lines, which may simply be
   misidentified, versus cell lines that are _really_ problematic due to
   contamination issues.
+- Updated internal taxonomy parsing code to sanitize organism into full Latin
+  name (e.g. "Homo sapiens") from "Homo sapiens (Human)" without the trailing
+  nickname defined in the parentheses.
 - Resaved example `cello` object.
 
 ## Cellosaurus 0.5.4 (2023-07-03)
