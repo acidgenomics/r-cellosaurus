@@ -92,7 +92,7 @@ rm(df, dupes)
 ## Can't use the DepMap "Model.csv" file directly currently, as it doesn't
 ## contain any NCIt identifier mappings.
 
-df <- DepMapAnalysis:::.importBroadModelInfo()
+df <- DepMapAnalysis:::.importBroadModelInfo() # nolint
 df <- DataFrame(
     "ncit" = df[["cellosaurus"]][["ncitDiseaseId"]],
     "oncotree" = df[["broad"]][["OncotreeCode"]]
@@ -126,8 +126,8 @@ df <- as(df, "DFrame")
 df <- df[!duplicated(df[["ncit"]]), ]
 assert(
     hasNoDuplicates(df[["ncit"]]),
-    !any(is.na(df[["ncit"]])),
-    !any(is.na(df[["oncotree"]]))
+    !anyNA(df[["ncit"]]),
+    !anyNA(df[["oncotree"]])
 )
 df <- df[order(df[["ncit"]]), ]
 rownames(df) <- NULL
