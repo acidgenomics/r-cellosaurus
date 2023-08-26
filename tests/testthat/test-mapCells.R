@@ -1,6 +1,3 @@
-celloFull <- readRDS(file.path("cache", "celloFull.rds"))
-map <- readRDS(file.path("cache", "mapCells.rds"))
-
 test_that("Cell name", {
     object <- cello
     cells <- head(object[["cellLineName"]], n = 3L)
