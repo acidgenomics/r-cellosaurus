@@ -2,9 +2,9 @@
 ## Updated 2023-08-24.
 ##
 ## NCI thesaurus
-##   https://ncithesaurus.nci.nih.gov/
+## https://ncithesaurus.nci.nih.gov/
 ## OncoTree
-##   https://oncotree.mskcc.org/
+## https://oncotree.mskcc.org/
 
 ## nolint start
 suppressPackageStartupMessages({
@@ -39,8 +39,8 @@ df <- df[order(df[["ncit"]]), ]
 ## Drop any identifiers that multi-map.
 dupes <- df[["ncit"]][which(duplicated(df[["ncit"]]))]
 ## > print(dupes)
-##  [1] "C40090" "C40208" "C41247" "C4290"  "C4519"  "C6344"  "C7724"  "C8106"
-##  [9] "C9296"  "C9461"
+## [1] "C40090" "C40208" "C41247" "C4290"  "C4519"  "C6344"  "C7724"  "C8106"
+## [9] "C9296"  "C9461"
 df <- df[!df[["ncit"]] %in% dupes, ]
 assert(hasNoDuplicates(df[["ncit"]]))
 rownames(df) <- NULL
@@ -78,8 +78,8 @@ df <- df[order(df[["ncit"]]), ]
 ## Drop any identifiers that multi-map.
 dupes <- df[["ncit"]][which(duplicated(df[["ncit"]]))]
 ## > print(dupes)
-##  [1] "C27349" "C27893" "C3058"  "C3768"  "C40090" "C40208" "C40364" "C41247"
-##  [9] "C4221"  "C4290"  "C4519"  "C4906"  "C6344"  "C7151"  "C7724"  "C8106"
+## [1] "C27349" "C27893" "C3058"  "C3768"  "C40090" "C40208" "C40364" "C41247"
+## [9] "C4221"  "C4290"  "C4519"  "C4906"  "C6344"  "C7151"  "C7724"  "C8106"
 ## [17] "C82616" "C9245"  "C9296"  "C9461"
 df <- df[!df[["ncit"]] %in% dupes, ]
 assert(hasNoDuplicates(df[["ncit"]]))
@@ -104,8 +104,8 @@ df <- unique(df)
 df <- df[order(df[["ncit"]]), ]
 ## Drop any identifiers that multi-map.
 dupes <- df[["ncit"]][which(duplicated(df[["ncit"]]))]
-##  [1] "C105555" "C129857" "C132105" "C27677"  "C27769"  "C2923"   "C2926"
-##  [8] "C2993"   "C3163"   "C3224"   "C3224"   "C3224"   "C3247"   "C3273"
+## [1] "C105555" "C129857" "C132105" "C27677"  "C27769"  "C2923"   "C2926"
+## [8] "C2993"   "C3163"   "C3224"   "C3224"   "C3224"   "C3247"   "C3273"
 ## [15] "C34447"  "C3467"   "C3493"   "C3493"   "C3510"   "C3512"   "C3512"
 ## [22] "C36080"  "C3716"   "C4001"   "C4004"   "C4017"   "C4017"   "C4025"
 ## [29] "C4043"   "C4194"   "C4194"   "C4194"   "C4194"   "C4349"   "C4436"
