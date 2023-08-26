@@ -278,13 +278,16 @@ NULL
 
 
 
-## FIXME Ensure we sanitize this:
-## "Homo sapiens (Human)" to "Homo sapiens".
-
 #' Add `ncbiTaxonomyId` and `organism` columns
 #'
 #' @note Updated 2023-08-26.
 #' @noRd
+#'
+#' @details
+#' Note that hybrid lines contain multiple taxonomies, so we want to keep this
+#' as a list instead of attempting to coerce to a vector.
+#'
+#' Examples: CVCL_0464, CVCL_0E28, CVCL_0E29.
 .addTaxonomy <- function(object) {
     assert(
         is(object, "DFrame"),
