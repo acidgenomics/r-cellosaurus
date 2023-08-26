@@ -1,6 +1,6 @@
 #' Cellosaurus table of cell identifier mappings
 #'
-#' @note Updated 2023-08-23.
+#' @note Updated 2023-08-25.
 #' @export
 #'
 #' @return `Cellosaurus`.
@@ -26,6 +26,13 @@ setValidity(
             expected = list(
                 ## Added in v0.5.5:
                 ## > "isContaminated" = "Rle",
+                ## Added in v0.6.0:
+                ## > "oncotreeCode" = "Rle",
+                ## > "oncotreeLevel" = "Rle",
+                ## > "oncotreeMainType" = "Rle",
+                ## > "oncotreeName" = "Rle",
+                ## > "oncotreeParent" = "Rle",
+                ## > "oncotreeTissue" = "Rle",
                 "accession" = "Rle",
                 "ageAtSampling" = "Rle",
                 "category" = "Rle",
