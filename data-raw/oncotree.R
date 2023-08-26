@@ -1,3 +1,4 @@
+## nolint start
 ## OncoTree tumor type metadata.
 ## Updated 2023-08-26.
 ##
@@ -30,6 +31,7 @@
 ##
 ## This script has code that parses the cBioPortal types of cancer:
 ## https://github.com/ashleyrchen/cancer-web-tool/blob/master/cBioPortal.ipynb
+## nolint end
 
 ## nolint start
 suppressPackageStartupMessages({
