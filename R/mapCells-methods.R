@@ -72,7 +72,7 @@ NULL
             envir = asNamespace(.pkgName),
             inherits = FALSE
         )
-        assert(is.data.frame(overrides))
+        assert(is(overrides, "DFrame"))
         cells <- unlist(Map(
             cell = cells,
             cellStd = standardizeCells(cells),
