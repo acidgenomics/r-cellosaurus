@@ -137,7 +137,7 @@ test_that("Cellosaurus", {
         "oncotreeName" = "Acute Myeloid Leukemia",
         "oncotreeParent" = "MNM",
         "oncotreeTissue" = "Myeloid",
-        "organism" = list("Homo sapiens (Human)"),
+        "organism" = list("Homo sapiens"),
         "originateFromSameIndividual" = list(character()),
         "population" = list("Caucasian"),
         "referencesIdentifiers" = list(list(
