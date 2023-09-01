@@ -82,6 +82,17 @@ test_that("Match failure", {
         ),
         regexp = "CVCL_0003"
     )
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = c("CVCL_0001", "XXX"),
+            strict = FALSE
+        ),
+        expected = c(
+            "CVCL_0001" = "CVCL_0001",
+            "XXX" = NA_character_
+        )
+    )
 })
 
 test_that("Tricky cell lines", {

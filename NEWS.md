@@ -1,5 +1,13 @@
 # Release notes
 
+## Cellosaurus 0.6.1 (2023-09-01)
+
+Minor changes:
+
+- `mapCells`: Added option to return `NA` on map failure instead of error by
+  setting `strict = FALSE`. Not recommended by default but is useful in some
+  edge case scenarios.
+
 ## Cellosaurus 0.6.0 (2023-08-23)
 
 New functions:
