@@ -42,10 +42,14 @@ NULL
 #' Note that some cell lines, such as "CVCL_0041", map to multiple DepMap
 #' identifiers, which is confusing.
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-09-01.
 #' @noRd
 .addDepmapId <- function(object) {
-    .extractCrossRef(object = object, colName = "depmapId", keyName = "DepMap")
+    object[["depmapId"]] <- .extractCrossRef(
+        object = object,
+        keyName = "DepMap"
+    )
+    object
 }
 
 
@@ -119,21 +123,26 @@ NULL
 #' @note Updated 2023-09-01.
 #' @noRd
 .addMisspellings <- function(object) {
-    stop("FIXME In progress.")
+    vals <- .extractComment(object = object, keyName = "Misspelling")
+    ## FIXME Need to sub to include only before ';' here.
+    ## e.g. K-652; Cosmic=1523829
+    ## Ensure they're unique?
+    object[["misspellings"]] <- vals
+    object
 }
 
 
 
 #' Add `msiStatus` column
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-09-01.
 #' @noRd
 .addMsiStatus <- function(object) {
-    .extractComment(
+    object[["msiStatus"]] <- .extractComment(
         object = object,
-        colName = "msiStatus",
         keyName = "Microsatellite instability"
     )
+    object
 }
 
 
@@ -263,14 +272,14 @@ NULL
 
 #' Add `population` column
 #'
-#' @note Updated 2023-08-26.
+#' @note Updated 2023-09-01.
 #' @noRd
 .addPopulation <- function(object) {
-    .extractComment(
+    object[["population"]] <- .extractComment(
         object = object,
-        colName = "population",
         keyName = "Population"
     )
+    object
 }
 
 
@@ -281,28 +290,28 @@ NULL
 #' Note that some comments have additional information on the cell type, that
 #' we don't want to include here (e.g. CVCL_0003, CVCL_0008).
 #'
-#' @note Updated 2023-07-03.
+#' @note Updated 2023-09-01.
 #' @noRd
 .addSamplingSite <- function(object) {
-    .extractComment(
+    object[["samplingSite"]] <- .extractComment(
         object = object,
-        colName = "samplingSite",
         keyName = "Derived from site"
     )
+    object
 }
 
 
 
 #' Add `sangerModelId` column
 #'
-#' @note Updated 2023-01-23.
+#' @note Updated 2023-09-01.
 #' @noRd
 .addSangerModelId <- function(object) {
-    .extractCrossRef(
+    object[["sangerModelId"]] <- .extractCrossRef(
         object = object,
-        colName = "sangerModelId",
         keyName = "Cell_Model_Passport"
     )
+    object
 }
 
 
@@ -368,13 +377,12 @@ NULL
 #' This helps avoid issues with discontinued identifiers, such as CVCL_0455,
 #' which has multiple DepMap identifiers: ACH-000474 - Discontinued; ACH-001075.
 #'
-#' @note Updated 2023-03-08.
+#' @note Updated 2023-09-01.
 #' @noRd
 .extractCrossRef <- function(object, colName, keyName) {
     assert(
         is(object, "DFrame"),
         is(object[["crossReferences"]], "SimpleList"),
-        isString(colName),
         isString(keyName)
     )
     x <- vapply(
@@ -389,21 +397,21 @@ NULL
         },
         FUN.VALUE = character(1L)
     )
-    object[[colName]] <- x
-    object
+    x
 }
 
 
 
+## FIXME Return the value instead of assigning back into the object.
+
 #' Extract a key value pair from comments
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-09-01.
 #' @noRd
-.extractComment <- function(object, colName, keyName) {
+.extractComment <- function(object, keyName) {
     assert(
         is(object, "DFrame"),
         is(object[["comments"]], "SimpleList"),
-        isString(colName),
         isString(keyName)
     )
     x <- object[["comments"]]
@@ -416,8 +424,7 @@ NULL
             x[[keyName]][[1L]]
         }
     ))
-    object[[colName]] <- x
-    object
+    x
 }
 
 
