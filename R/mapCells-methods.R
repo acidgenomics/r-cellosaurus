@@ -1,3 +1,8 @@
+## FIXME Need to support mapping of ATCC identifiers.
+## CVCL_0332: Hs 578T, HTB-126, HTB126
+
+
+
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-09-01.
