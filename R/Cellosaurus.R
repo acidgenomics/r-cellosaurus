@@ -1,12 +1,3 @@
-## FIXME Add support for "misspellings" list, which is determined from
-## "Misspelling" metadata in the comments.
-
-## FIXME Add support for ATCC identifier extraction.
-## FIXME Also add support for mapping of ATCC identifiers back to Cellosaurus
-## identifier.
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -31,7 +22,11 @@ NULL
 #' @note Updated 2023-09-01.
 #' @noRd
 .addAtccId <- function(object) {
-    stop("FIXME In progress.")
+    object[["atccId"]] <- .extractCrossRef(
+        object = object,
+        keyName = "ATCC"
+    )
+    object
 }
 
 
@@ -118,15 +113,15 @@ NULL
 
 
 
+## FIXME May need to resolve duplicates here.
+
 #' Add `misspellings` column
 #'
 #' @note Updated 2023-09-01.
 #' @noRd
 .addMisspellings <- function(object) {
     vals <- .extractComment(object = object, keyName = "Misspelling")
-    ## FIXME Need to sub to include only before ';' here.
-    ## e.g. K-652; Cosmic=1523829
-    ## Ensure they're unique?
+    vals <- sub(pattern = "^([^']+);.+$", replacement = "\\1", x = vals)
     object[["misspellings"]] <- vals
     object
 }
@@ -379,7 +374,7 @@ NULL
 #'
 #' @note Updated 2023-09-01.
 #' @noRd
-.extractCrossRef <- function(object, colName, keyName) {
+.extractCrossRef <- function(object, keyName) {
     assert(
         is(object, "DFrame"),
         is(object[["crossReferences"]], "SimpleList"),
@@ -811,10 +806,12 @@ Cellosaurus <- # nolint
         object <- .sanitizeStrProfileData(object)
         object <- .sanitizeSynonyms(object)
         alert("Adding annotations.")
+        object <- .addAtccId(object)
         object <- .addDepmapId(object)
         object <- .addIsCancer(object)
         object <- .addIsContaminated(object)
         object <- .addIsProblematic(object)
+        object <- .addMisspellings(object)
         object <- .addMsiStatus(object)
         object <- .addNcitDisease(object)
         object <- .addOncotree(object)
