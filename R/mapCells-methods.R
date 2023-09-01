@@ -1,6 +1,6 @@
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2023-08-23.
+#' @note Updated 2023-09-01.
 #'
 #' @details
 #' This function is designed to take input from a spreadsheet, electronic
@@ -17,6 +17,10 @@
 #'
 #' @param keyType `character(1)`.
 #' Identifier format to return.
+#'
+#' @param strict `logical(1)`.
+#' Error on mapping failure.
+#' If `FALSE`, return `NA` for cell lines that fail to map.
 #'
 #' @return Named `character`.
 #' User input in the names and Cellosaurus accession identifiers in the values.
@@ -40,7 +44,7 @@ NULL
 
 
 
-## Updated 2023-03-03.
+## Updated 2023-09-01.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
@@ -49,10 +53,12 @@ NULL
                  "depmapId",
                  "sangerModelId",
                  "cellLineName"
-             )) {
+             ),
+             strict = TRUE) {
         assert(
             validObject(object),
-            isCharacter(cells)
+            isCharacter(cells),
+            isFlag(strict)
         )
         keyType <- match.arg(keyType)
         idCol <- switch(
@@ -133,7 +139,7 @@ NULL
             idx[naIdx] <- idx2
         }
         cells <- cellsOrig
-        if (anyNA(idx)) {
+        if (isTRUE(strict) && anyNA(idx)) {
             fail <- cells[is.na(idx)]
             abort(sprintf(
                 fmt = "Failed to map %d %s: %s.",
@@ -142,8 +148,8 @@ NULL
                 toString(fail, width = 500L)
             ))
         }
-        out <- as.character(object[[idCol]][idx])
-        if (anyNA(out)) {
+        out <- as.character(object[[idCol]])[idx]
+        if (isTRUE(strict) && anyNA(out)) {
             fail <- cells[is.na(out)]
             abort(sprintf(
                 fmt = "Failed to map %d %s: %s.",
