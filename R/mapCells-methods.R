@@ -4,6 +4,8 @@
 ## FIXME Ensure we cover these ATCC identifiers:
 ## CCL-228, CRL-3038, HTB-126
 
+## FIXME Include "atccId" and "misspellings" columns in our mapping formula.
+
 
 
 #' @name mapCells
@@ -60,6 +62,7 @@ NULL
                  "cellosaurusId",
                  "depmapId",
                  "sangerModelId",
+                 "atccId",
                  "cellLineName"
              ),
              strict = TRUE) {
