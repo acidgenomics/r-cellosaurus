@@ -113,15 +113,13 @@ NULL
 
 
 
-## FIXME May need to resolve duplicates here.
-
 #' Add `misspellings` column
 #'
 #' @note Updated 2023-09-01.
 #' @noRd
 .addMisspellings <- function(object) {
     vals <- .extractComment(object = object, keyName = "Misspelling")
-    vals <- sub(pattern = "^([^']+);.+$", replacement = "\\1", x = vals)
+    vals <- sub(pattern = "^([^;]+);.+$", replacement = "\\1", x = vals)
     object[["misspellings"]] <- vals
     object
 }
@@ -397,8 +395,6 @@ NULL
 
 
 
-## FIXME Return the value instead of assigning back into the object.
-
 #' Extract a key value pair from comments
 #'
 #' @note Updated 2023-09-01.
@@ -416,7 +412,7 @@ NULL
             if (is.null(x[[keyName]])) {
                 return(NULL)
             }
-            x[[keyName]][[1L]]
+            x[[keyName]]
         }
     ))
     x
