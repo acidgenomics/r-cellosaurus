@@ -26,6 +26,16 @@ NULL
 
 
 
+#' Add `atccId` column
+#'
+#' @note Updated 2023-09-01.
+#' @noRd
+.addAtccId <- function(object) {
+    stop("FIXME In progress.")
+}
+
+
+
 #' Add `depmapId` column
 #'
 #' @details
@@ -100,6 +110,16 @@ NULL
     )
     object[["isProblematic"]] <- lgl
     object
+}
+
+
+
+#' Add `misspellings` column
+#'
+#' @note Updated 2023-09-01.
+#' @noRd
+.addMisspellings <- function(object) {
+    stop("FIXME In progress.")
 }
 
 
