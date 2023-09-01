@@ -1,7 +1,16 @@
+## FIXME Add support for "misspellings" list, which is determined from
+## "Misspelling" metadata in the comments.
+
+## FIXME Add support for ATCC identifier extraction.
+## FIXME Also add support for mapping of ATCC identifiers back to Cellosaurus
+## identifier.
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-08-26.
+#' @note Updated 2023-09-01.
 #'
 #' @return `Cellosaurus`.
 #'
