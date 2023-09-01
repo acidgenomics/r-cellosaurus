@@ -1,6 +1,9 @@
 ## FIXME Need to support mapping of ATCC identifiers.
 ## CVCL_0332: Hs 578T, HTB-126, HTB126
 
+## FIXME Ensure we cover these ATCC identifiers:
+## CCL-228, CRL-3038, HTB-126
+
 
 
 #' @name mapCells
