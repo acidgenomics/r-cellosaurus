@@ -353,7 +353,7 @@ test_that("CellModelPassports", {
         object = withr::with_collate(
             new = "C",
             code = {
-                mapCells(object, cells = fail, strict = FALSE),
+                mapCells(object, cells = fail, strict = FALSE)
             }
         ),
         expected = c(
