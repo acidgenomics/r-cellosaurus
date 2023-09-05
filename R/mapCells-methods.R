@@ -32,11 +32,8 @@
 #' data(cello)
 #'
 #' ## Cellosaurus ====
-#' ## Note that the `standardizeCells` step is not required before calling
-#' ## `mapCells`. We're just performing that step here as an example where
-#' ## the cell line names change.
 #' object <- cello
-#' cells <- standardizeCells(head(cello[["cellLineName"]]))
+#' cells <- head(cello[["cellLineName"]])
 #' print(cells)
 #' cells <- mapCells(object = object, cells = cells)
 #' print(cells)
@@ -44,7 +41,7 @@ NULL
 
 
 
-## Updated 2023-09-01.
+## Updated 2023-09-05.
 `mapCells,Cellosaurus` <- # nolint
     function(object,
              cells,
@@ -56,6 +53,9 @@ NULL
                  "cellLineName"
              ),
              strict = FALSE) {
+        if (is(cells, "Rle")) {
+            cells <- decode(cells)
+        }
         assert(
             validObject(object),
             isCharacter(cells),
@@ -100,23 +100,19 @@ NULL
             replacement = "",
             x = df[["cellLineName"]]
         )
-        idx <- matchNested(
-            x = cells,
-            table = df[
-                ,
-                c(
-                    "accession",
-                    "secondaryAccession",
-                    "depmapId",
-                    "sangerModelId",
-                    "atccId",
-                    "cellLineName",
-                    "cellLineNameNoBracket",
-                    "synonyms",
-                    "misspellings"
-                )
-            ]
+        cols <- c(
+            "accession",
+            "secondaryAccession",
+            "depmapId",
+            "sangerModelId",
+            "atccId",
+            "cellLineName",
+            "cellLineNameNoBracket",
+            "synonyms",
+            "misspellings"
         )
+        table <- df[, intersect(cols, colnames(df))]
+        idx <- matchNested(x = cells, table = table)
         ## Fall back to matching against standardized cell name.
         if (anyNA(idx)) {
             naIdx <- which(is.na(idx))
@@ -134,12 +130,12 @@ NULL
                 FUN.VALUE = character(1L),
                 USE.NAMES = FALSE
             )
-            df2 <- DataFrame(
+            table2 <- DataFrame(
                 "standardName" = standardizeCells(df[["cellLineName"]]),
                 "synonyms" = df[["synonyms"]],
                 "misspellings" = df[["misspellings"]]
             )
-            idx2 <- matchNested(x = cells2, table = df2)
+            idx2 <- matchNested(x = cells2, table = table2)
             idx[naIdx] <- idx2
         }
         cells <- cellsOrig
