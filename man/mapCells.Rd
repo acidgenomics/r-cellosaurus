@@ -10,7 +10,8 @@ mapCells(object, ...)
 \S4method{mapCells}{Cellosaurus}(
   object,
   cells,
-  keyType = c("cellosaurusId", "depmapId", "sangerModelId", "cellLineName")
+  keyType = c("cellosaurusId", "depmapId", "sangerModelId", "atccId", "cellLineName"),
+  strict = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,12 @@ Cell identifiers.}
 
 \item{keyType}{\code{character(1)}.
 Identifier format to return.}
+
+\item{strict}{\code{logical(1)}.
+\itemize{
+\item \code{FALSE}, return \code{NA} for cell lines that fail to map.
+\item \code{TRUE}: Error on mapping failure.
+}}
 
 \item{...}{Additional arguments.}
 }
@@ -40,7 +47,7 @@ may be inconsistent.
 If you notice any mapping errors, please file a bug report.
 }
 \note{
-Updated 2023-08-23.
+Updated 2023-09-05.
 }
 \examples{
 data(cello)
