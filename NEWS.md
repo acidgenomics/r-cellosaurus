@@ -1,12 +1,19 @@
 # Release notes
 
-## Cellosaurus 0.6.1 (2023-09-01)
+## Cellosaurus 0.7.0 (2023-09-05)
+
+Major changes:
+
+- `Cellosaurus`: Reworked internal code to parse and extract ATCC identifiers,
+  which are commonly used instead of Cellosaurus identifiers to organize cell
+  lines. Also added support for `misspellings` column, which handles edge cases
+  where cell line names are misspelled.
 
 Minor changes:
 
 - `mapCells`: Added option to return `NA` on map failure instead of error by
-  setting `strict = FALSE`. Not recommended by default but is useful in some
-  edge case scenarios.
+  setting `strict = FALSE`.
+- `mapCells`: Added support for mapping by ATCC identifiers.
 
 ## Cellosaurus 0.6.0 (2023-08-23)
 
