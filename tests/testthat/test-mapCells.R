@@ -1,5 +1,3 @@
-## FIXME Instead of error, check for NA values.
-
 test_that("Cell name", {
     object <- cello
     cells <- head(object[["cellLineName"]], n = 3L)
@@ -69,21 +67,6 @@ test_that("keyType return", {
 
 test_that("Match failure", {
     object <- cello
-    expect_error(
-        object = mapCells(
-            object = object,
-            cells = c("CVCL_0001", "XXX")
-        ),
-        regexp = "XXX"
-    )
-    expect_error(
-        object = mapCells(
-            object = object,
-            cells = "CVCL_0003",
-            keyType = "depmapId"
-        ),
-        regexp = "CVCL_0003"
-    )
     expect_identical(
         object = mapCells(
             object = object,
@@ -94,6 +77,32 @@ test_that("Match failure", {
             "CVCL_0001" = "CVCL_0001",
             "XXX" = NA_character_
         )
+    )
+    expect_error(
+        object = mapCells(
+            object = object,
+            cells = c("CVCL_0001", "XXX"),
+            strict = TRUE
+        ),
+        regexp = "XXX"
+    )
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = "CVCL_0003",
+            keyType = "depmapId",
+            strict = FALSE
+        ),
+        expected = c("CVCL_0003" = NA_character_)
+    )
+    expect_error(
+        object = mapCells(
+            object = object,
+            cells = "CVCL_0003",
+            keyType = "depmapId",
+            strict = TRUE
+        ),
+        regexp = "CVCL_0003"
     )
 })
 
@@ -190,13 +199,32 @@ test_that("DepMap 22Q2", {
         expected = df[["RRID"]]
     )
     fail <- sort(map[["depmap_22q2_fail"]])
-    ## Mapping failures:
-    ## A375 SKIN CJ2, A375_RPMI, A673STAG2KO16, A673STAG2KO45, A673STAG2NT14,
-    ## A673STAG2NT23, GBM001, HCC827GR, MYLA, PSS008, PSS131R, RVH421_RPMI,
-    ## SS1A.
-    expect_error(
-        object = mapCells(object, cells = fail),
-        regexp = "13 cells"
+    expect_identical(
+        object = mapCells(object, cells = fail, strict = FALSE),
+        expected = c(
+            "170-MG-BA" = "CVCL_LM81",
+            "A375 SKIN CJ2" = NA_character_,
+            "A375_RPMI" = NA_character_,
+            "A673STAG2KO16" = NA_character_,
+            "A673STAG2KO45" = NA_character_,
+            "A673STAG2NT14" = NA_character_,
+            "A673STAG2NT23" = NA_character_,
+            "GBM001" = NA_character_,
+            "HCC827GR" = NA_character_,
+            "MYLA" = NA_character_,
+            "PSS008" = NA_character_,
+            "PSS131R" = NA_character_,
+            "RMS-YM" = "CVCL_A792",
+            "RPE1-ss111" = "CVCL_C8DM",
+            "RPE1-ss119" = "CVCL_C8DN",
+            "RPE1-ss48" = "CVCL_C8DQ",
+            "RPE1-ss51" = "CVCL_C8DR",
+            "RPE1-ss6" = "CVCL_C8DS",
+            "RPE1-ss77" = "CVCL_C8DT",
+            "RVH421_RPMI" = NA_character_,
+            "SS1A" = NA_character_,
+            "U-251 MG" = "CVCL_0021"
+        )
     )
 })
 
