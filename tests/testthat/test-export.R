@@ -1,3 +1,5 @@
+# FIXME Need to check for new columns here.
+
 test_that("export", {
     object <- cello
     tempdir <- AcidBase::tempdir2()

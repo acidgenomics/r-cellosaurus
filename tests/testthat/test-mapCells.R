@@ -1,3 +1,5 @@
+## FIXME Instead of error, check for NA values.
+
 test_that("Cell name", {
     object <- cello
     cells <- head(object[["cellLineName"]], n = 3L)
