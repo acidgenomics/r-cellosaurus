@@ -142,6 +142,42 @@ test_that("Tricky cell lines", {
     )
 })
 
+test_that("ATCC identifiers and misspellings", {
+    object <- celloFull
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = c("Hs 578T", "HTB-126", "HTB126")
+        ),
+        expected = c(
+            "Hs 578T" = "CVCL_0332",
+            "HTB-126" = "CVCL_0332",
+            "HTB126" = "CVCL_0332"
+        )
+    )
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = c("CCL-228", "CRL-3038", "HTB-126")
+        ),
+        expected = c(
+            "CCL-228" = "CVCL_0546",
+            "CRL-3038" = "CVCL_AQ42",
+            "HTB-126" = "CVCL_0332"
+        )
+    )
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = c("Duadi", "CANPAN-2")
+        ),
+        expected = c(
+            "Duadi" = "CVCL_0008",
+            "CANPAN-2" = "CVCL_0026"
+        )
+    )
+})
+
 test_that("DepMap 22Q2", {
     object <- celloFull
     df <- map[["depmap_22q2"]]
