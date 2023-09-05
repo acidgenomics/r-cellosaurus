@@ -1,16 +1,6 @@
-## FIXME Need to support mapping of ATCC identifiers.
-## CVCL_0332: Hs 578T, HTB-126, HTB126
-
-## FIXME Ensure we cover these ATCC identifiers:
-## CCL-228, CRL-3038, HTB-126
-
-## FIXME Include "atccId" and "misspellings" columns in our mapping formula.
-
-
-
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2023-09-01.
+#' @note Updated 2023-09-05.
 #'
 #' @details
 #' This function is designed to take input from a spreadsheet, electronic
@@ -29,8 +19,8 @@
 #' Identifier format to return.
 #'
 #' @param strict `logical(1)`.
-#' Error on mapping failure.
-#' If `FALSE`, return `NA` for cell lines that fail to map.
+#' - `FALSE`, return `NA` for cell lines that fail to map.
+#' - `TRUE`: Error on mapping failure.
 #'
 #' @return Named `character`.
 #' User input in the names and Cellosaurus accession identifiers in the values.
@@ -65,7 +55,7 @@ NULL
                  "atccId",
                  "cellLineName"
              ),
-             strict = TRUE) {
+             strict = FALSE) {
         assert(
             validObject(object),
             isCharacter(cells),
@@ -119,9 +109,11 @@ NULL
                     "secondaryAccession",
                     "depmapId",
                     "sangerModelId",
+                    "atccId",
                     "cellLineName",
                     "cellLineNameNoBracket",
-                    "synonyms"
+                    "synonyms",
+                    "misspellings"
                 )
             ]
         )
@@ -144,7 +136,8 @@ NULL
             )
             df2 <- DataFrame(
                 "standardName" = standardizeCells(df[["cellLineName"]]),
-                "synonyms" = df[["synonyms"]]
+                "synonyms" = df[["synonyms"]],
+                "misspellings" = df[["misspellings"]]
             )
             idx2 <- matchNested(x = cells2, table = df2)
             idx[naIdx] <- idx2
