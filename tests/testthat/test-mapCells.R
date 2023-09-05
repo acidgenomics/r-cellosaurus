@@ -350,7 +350,12 @@ test_that("CellModelPassports", {
     )
     fail <- sort(map[["cmp_fail"]])
     expect_identical(
-        object = mapCells(object, cells = fail, strict = FALSE),
+        object = withr::with_collate(
+            new = "C",
+            code = {
+                mapCells(object, cells = fail, strict = FALSE),
+            }
+        ),
         expected = c(
             "1181N1" = "CVCL_D317",
             "1321N1" = "CVCL_0110",
