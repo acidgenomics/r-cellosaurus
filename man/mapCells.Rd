@@ -53,11 +53,8 @@ Updated 2023-09-05.
 data(cello)
 
 ## Cellosaurus ====
-## Note that the `standardizeCells` step is not required before calling
-## `mapCells`. We're just performing that step here as an example where
-## the cell line names change.
 object <- cello
-cells <- standardizeCells(head(cello[["cellLineName"]]))
+cells <- head(cello[["cellLineName"]])
 print(cells)
 cells <- mapCells(object = object, cells = cells)
 print(cells)
