@@ -9,7 +9,7 @@ suppressPackageStartupMessages({
 })
 ## nolint end
 
-load_all()
+load_all(helpers = FALSE)
 object <- Cellosaurus()
 saveRDS(object, "celloFull.rds")
 object <- object[seq_len(10L), ]

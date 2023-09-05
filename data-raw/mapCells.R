@@ -10,7 +10,7 @@ suppressPackageStartupMessages({
 })
 ## nolint end
 
-load_all()
+load_all(helpers = FALSE)
 map <- list()
 
 ## DepMap 22Q2 =================================================================
