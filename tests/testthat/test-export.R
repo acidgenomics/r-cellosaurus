@@ -12,12 +12,14 @@ test_that("export", {
         expected = data.frame(
             "accession" = "CVCL_0001",
             "ageAtSampling" = "30Y",
+            "atccId" = NA_character_,
             "category" = "Cancer cell line",
             "cellLineName" = "HEL",
             "depmapId" = "ACH-000004",
             "isCancer" = TRUE,
             "isContaminated" = FALSE,
             "isProblematic" = FALSE,
+            "misspellings" = NA_character_,
             "msiStatus" = paste(
                 "Stable (MSS)",
                 "(PubMed=10739008; PubMed=11226526; Sanger)"
