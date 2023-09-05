@@ -23,6 +23,7 @@ test_that("Cellosaurus", {
     y <- list(
         "accession" = "CVCL_0001",
         "ageAtSampling" = "30Y",
+        "atccId" = NA_character_,
         "category" = "Cancer cell line",
         "cellLineName" = "HEL",
         "comments" = list(list(
@@ -127,6 +128,7 @@ test_that("Cellosaurus", {
         "isCancer" = TRUE,
         "isContaminated" = FALSE,
         "isProblematic" = FALSE,
+        "misspellings" = list(character()),
         "msiStatus" = list("Stable (MSS) (PubMed=10739008; PubMed=11226526; Sanger)"),
         "ncbiTaxonomyId" = list(9606L),
         "ncitDiseaseId" = list("C7152"),
