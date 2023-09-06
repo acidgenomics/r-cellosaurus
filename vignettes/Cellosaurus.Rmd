@@ -40,7 +40,7 @@ print(object)
 
 The object is structured as cells in rows, metadata in columns.
 
-```{r}
+```{r colnames}
 print(colnames(object))
 ```
 
@@ -50,7 +50,7 @@ memory overhead.
 This approach provides simple spreadsheet-like access to Cellosaurus
 annotations, which are more intuitive to users than nested JSON-style lists.
 
-```{r}
+```{r atomic-columns}
 i <- seq(from = 1L, to = 10L)
 j <- which(vapply(
     X = as.data.frame(object),
@@ -80,7 +80,7 @@ names and identifiers from other databases, notably DepMap and ATCC, to
 Cellosaurus identifiers. The function is designed to be as simple as possible
 and support mixed input in a single call.
 
-```{r mapping-cell-lines}
+```{r map-cells}
 cells <- c("CCL-228", "Duadi", "MV411", "U87MG", "RAW 264.7")
 i <- mapCells(object, cells = cells)
 print(i)
