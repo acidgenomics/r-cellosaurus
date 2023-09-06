@@ -1,0 +1,124 @@
+---
+title: "Cellosaurus"
+author: "Michael Steinbaugh"
+date: "`r Sys.Date()`"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{Cellosaurus}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, message=FALSE}
+## nolint start
+suppressPackageStartupMessages({
+    library(Cellosaurus)
+})
+## nolint end
+```
+
+# Introduction
+
+The package is designed to import [Cellosaurus][] annotations and serve as a
+cell line identifier mapping toolkit. The main `Cellosaurus()` generator
+function returns a `Cellosaurus` object, which extends the S4 `DFrame` class
+from [Bioconductor][]. Additional functions are defined to work with the
+`Cellosaurus` object, notably `mapCells`, which provides mapping support to
+Cellosaurus identifiers directly from cell line names, [DepMap][] identifiers,
+and [ATCC][] identifiers.
+
+# Import Cellosaurus table
+
+The primary generator functions imports annotations from the `cellosaurus.txt`
+file on the [FTP server][].
+
+```{r import}
+object <- Cellosaurus()
+print(object)
+```
+
+The object is structured as cells in rows, metadata in columns.
+
+```{r}
+print(colnames(object))
+```
+
+Data is encoded using run-length encoding (`Rle` from the S4Vectors package) to
+lower memory overhead. 
+
+```{r}
+print(lapply(X = object, FUN = class))
+```
+
+This approach provides simple spreadsheet-like access to Cellosaurus
+annotations, which are more intuitive to users than nested JSON-style lists.
+
+```{r}
+print(as.data.frame(head(object, n = 10L)))
+```
+
+# Mapping cell lines
+
+It remains a common problem in cancer research that cell line inventories are
+only maintained by cell line name, without any systematic standardization
+against a reference database, such as Cellosaurus, ATCC, or DepMap. The
+advantage of standardizing upon Cellosaurus identifiers as the primary
+[research resource identifier][rrid] is that the Cellosaurus database is
+a superset of cells that include all cells in ATCC and DepMap. The Cellosaurus
+database also provides nicely curated metadata on problematic cell lines,
+notably contamination, and common misspellings of cell line names that persist
+across a number of commercial vendor databases.
+
+The `mapCells` function in the package aims to simplify mapping of cell line
+names and identifiers from other databases, notably DepMap and ATCC, to
+Cellosaurus identifiers. The function is designed to be as simple as possible
+and support mixed input in a single call.
+
+```{r mapping-cell-lines}
+cells <- c("CCL-228", "Duadi", "MV411", "U87MG", "RAW 264.7")
+cells <- mapCells(object, cells = cells)
+print(cells)
+print(as.data.frame(object[cells, ]))
+```
+
+# Excluding problematic cell lines
+
+The Cellosaurus database nicely keeps track of known issues with cell lines,
+which can be broken down roughly into two classes: "problematic" and
+"contaminated". It can be useful for downstream analysis to exclude these
+cell lines -- in particular, we recommend generally excluding any contaminated
+cell lines but not necessarily all problematic cell lines.
+
+```{r exclude-problematic-cells}
+subset <- excludeProblematicCells(object)
+print(nrow(subset))
+print(any(subset[["isProblematic"]]))
+print(any(subset[["isContaminated"]]))
+```
+
+Note that "contaminated" cell lines are a subset of "problematic" cell lines in
+the database. These in general should be avoided in downstream workflows.
+
+```{r exclude-contaminated-cells}
+subset <- excludeContaminatedCells(object)
+print(nrow(subset))
+print(any(subset[["isContaminated"]]))
+print(any(subset[["isProblematic"]]))
+```
+
+For reference, search the website for "problematic" cell lines with
+`"Problematic cell line"` and "contaminated" cell lines with
+`"Problematic cell line: Contaminated"`.
+
+# R session information
+
+```{r session-info}
+utils::sessionInfo()
+```
+
+[atcc]: https://www.atcc.org/ "American Type Culture Collection"
+[bioconductor]: https://bioconductor.org/
+[cellosaurus]: https://www.cellosaurus.org/
+[depmap]: https://depmap.org/
+[ftp server]: https://ftp.expasy.org/databases/cellosaurus/
+[rrid]: https://www.rrids.org/ "Research Resource Identifier"

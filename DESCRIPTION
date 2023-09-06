@@ -1,8 +1,8 @@
 Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.7.0
-Date: 2023-09-05
+Version: 0.7.1.9000
+Date: 2023-09-06
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -38,6 +38,8 @@ Imports:
     parallel,
     utils
 Suggests:
+    knitr (>= 1.43),
+    rmarkdown (>= 2.24),
     testthat (>= 3.1.10),
     withr (>= 2.5.0)
 Additional_repositories: https://r.acidgenomics.com
