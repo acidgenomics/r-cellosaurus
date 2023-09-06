@@ -81,7 +81,7 @@ Cellosaurus identifiers. The function is designed to be as simple as possible
 and support mixed input in a single call.
 
 ```{r map-cells}
-cells <- c("CCL-228", "Duadi", "MV411", "U87MG", "RAW 264.7")
+cells <- c("ACH-000551", "CCL-240", "Duadi", "THP1", "RAW 264.7")
 i <- mapCells(object, cells = cells)
 print(i)
 datatable(
