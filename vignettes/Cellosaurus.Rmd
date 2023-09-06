@@ -12,6 +12,7 @@ vignette: >
 ```{r setup, message=FALSE}
 ## nolint start
 suppressPackageStartupMessages({
+    library(DT)
     library(Cellosaurus)
 })
 ## nolint end
@@ -23,7 +24,7 @@ The package is designed to import [Cellosaurus][] annotations and serve as a
 cell line identifier mapping toolkit. The main `Cellosaurus()` generator
 function returns a `Cellosaurus` object, which extends the S4 `DFrame` class
 from [Bioconductor][]. Additional functions are defined to work with the
-`Cellosaurus` object, notably `mapCells`, which provides mapping support to
+`Cellosaurus` object, notably `mapCells()`, which provides mapping support to
 Cellosaurus identifiers directly from cell line names, [DepMap][] identifiers,
 and [ATCC][] identifiers.
 
@@ -54,7 +55,7 @@ This approach provides simple spreadsheet-like access to Cellosaurus
 annotations, which are more intuitive to users than nested JSON-style lists.
 
 ```{r}
-print(as.data.frame(head(object, n = 10L)))
+datatable(as.data.frame(head(object, n = 10L)))
 ```
 
 # Mapping cell lines
@@ -69,7 +70,7 @@ database also provides nicely curated metadata on problematic cell lines,
 notably contamination, and common misspellings of cell line names that persist
 across a number of commercial vendor databases.
 
-The `mapCells` function in the package aims to simplify mapping of cell line
+The `mapCells()` function in the package aims to simplify mapping of cell line
 names and identifiers from other databases, notably DepMap and ATCC, to
 Cellosaurus identifiers. The function is designed to be as simple as possible
 and support mixed input in a single call.
@@ -78,7 +79,7 @@ and support mixed input in a single call.
 cells <- c("CCL-228", "Duadi", "MV411", "U87MG", "RAW 264.7")
 cells <- mapCells(object, cells = cells)
 print(cells)
-print(as.data.frame(object[cells, ]))
+datatable(as.data.frame(object[cells, ]))
 ```
 
 # Excluding problematic cell lines
