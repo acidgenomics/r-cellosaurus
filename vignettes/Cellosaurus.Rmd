@@ -33,7 +33,7 @@ and [ATCC][] identifiers.
 The primary generator functions imports annotations from the `cellosaurus.txt`
 file on the [FTP server][].
 
-```{r import}
+```{r import, message=FALSE}
 object <- Cellosaurus()
 print(object)
 ```
@@ -47,15 +47,20 @@ print(colnames(object))
 Data is encoded using run-length encoding (`Rle` from the S4Vectors package) to
 lower memory overhead. 
 
-```{r}
-print(lapply(X = object, FUN = class))
-```
-
 This approach provides simple spreadsheet-like access to Cellosaurus
 annotations, which are more intuitive to users than nested JSON-style lists.
 
 ```{r}
-datatable(as.data.frame(head(object, n = 10L)))
+i <- seq(from = 1L, to = 10L)
+j <- which(vapply(
+    X = as.data.frame(cello),
+    FUN = is.atomic,
+    FUN.VALUE = logical(1L)
+))
+datatable(
+    data = as.data.frame(object)[i, j],
+    options = list(scrollX = TRUE)
+)
 ```
 
 # Mapping cell lines
@@ -77,9 +82,12 @@ and support mixed input in a single call.
 
 ```{r mapping-cell-lines}
 cells <- c("CCL-228", "Duadi", "MV411", "U87MG", "RAW 264.7")
-cells <- mapCells(object, cells = cells)
-print(cells)
-datatable(as.data.frame(object[cells, ]))
+i <- mapCells(object, cells = cells)
+print(i)
+datatable(
+    data = as.data.frame(object)[i, j],
+    options = list(scrollX = TRUE)
+)
 ```
 
 # Excluding problematic cell lines
