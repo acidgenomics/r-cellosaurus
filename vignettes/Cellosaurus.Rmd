@@ -28,12 +28,12 @@ from [Bioconductor][]. Additional functions are defined to work with the
 Cellosaurus identifiers directly from cell line names, [DepMap][] identifiers,
 and [ATCC][] identifiers.
 
-# Import Cellosaurus table
+# Cellosaurus table
 
 The primary generator functions imports annotations from the `cellosaurus.txt`
 file on the [FTP server][].
 
-```{r import, message=FALSE}
+```{r import-cellosaurus-table, message=FALSE}
 object <- Cellosaurus()
 print(object)
 ```
