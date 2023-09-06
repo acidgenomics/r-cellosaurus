@@ -1,5 +1,12 @@
 # Release notes
 
+## Cellosaurus 0.7.1 (2023-09-06)
+
+Minor changes:
+
+- Added a vignette to the package, which shows how to use the primary generator
+  and `mapCells` function, in particular.
+
 ## Cellosaurus 0.7.0 (2023-09-05)
 
 Major changes:
