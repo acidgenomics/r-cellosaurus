@@ -38,6 +38,7 @@ Imports:
     parallel,
     utils
 Suggests:
+    DT (>= 0.29),
     knitr (>= 1.43),
     rmarkdown (>= 2.24),
     testthat (>= 3.1.10),
