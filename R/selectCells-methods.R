@@ -21,8 +21,7 @@
 #' - `"organism"`
 #' - `"sexOfCell"`
 #'
-#' @return Modified object, subset to only contain matching cell lines, which
-#' are defined in the rows.
+#' @return Modified object, subset to only contain matching cell lines.
 #'
 #' @examples
 #' data(cello)
