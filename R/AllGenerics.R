@@ -1,18 +1,3 @@
-#' @export
-#' @name export
-#' @usage export(object, con, format, ...)
-NULL
-
-#' @export
-#' @name mapCells
-#' @usage mapCells(object, ...)
-NULL
-
-#' @export
-#' @name standardizeCells
-#' @usage standardizeCells(object, ...)
-NULL
-
 ## FIXME Move to AcidGenerics.
 
 #' @export
@@ -35,9 +20,25 @@ setGeneric(
     }
 )
 
-## FIXME Need to include selectCells here and migrate code from DepMapAnalysis.
+#' @export
+#' @name export
+#' @usage export(object, con, format, ...)
+NULL
 
-## FIXME Move to AcidGenerics.
+#' @export
+#' @name mapCells
+#' @usage mapCells(object, ...)
+NULL
+
+#' @export
+#' @name selectCells
+#' @usage selectCells(object, ...)
+NULL
+
+#' @export
+#' @name standardizeCells
+#' @usage standardizeCells(object, ...)
+NULL
 
 #' @export
 #' @rdname tnbc

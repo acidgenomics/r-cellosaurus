@@ -8,7 +8,7 @@ NULL
 ## S4 generics and methods =====================================================
 
 #' @importFrom AcidGenerics camelCase encode factorize leftJoin mapCells
-#' matchNested rbindToDataFrame snakeCase standardizeCells
+#' matchNested rbindToDataFrame selectCells snakeCase standardizeCells
 #' @importFrom BiocGenerics Map %in% as.data.frame grep grepl lapply unique
 #' unlist
 #' @importFrom IRanges gsub sub
