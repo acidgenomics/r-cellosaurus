@@ -35,6 +35,8 @@ setGeneric(
     }
 )
 
+## FIXME Need to include selectCells here and migrate code from DepMapAnalysis.
+
 ## FIXME Move to AcidGenerics.
 
 #' @export
