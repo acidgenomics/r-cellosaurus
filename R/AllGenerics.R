@@ -41,10 +41,6 @@ NULL
 NULL
 
 #' @export
-#' @rdname tnbc
-setGeneric(
-    name = "tnbc",
-    def = function(object, ...) {
-        standardGeneric("tnbc")
-    }
-)
+#' @name tnbc
+#' @usage tnbc(object, ...)
+NULL

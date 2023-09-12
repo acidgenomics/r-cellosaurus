@@ -1,16 +1,21 @@
 #' Triple negative breast cancer (TNBC) cell lines
 #'
 #' @name tnbc
-#' @note Updated 2023-01-31.
+#' @note Updated 2023-09-12.
 #'
 #' @inheritParams AcidRoxygen::params
+#'
+#' @param ... Additional arguments.
 #'
 #' @return `character`.
 #' Cellosaurus accession identifiers.
 #'
 #' @examples
 #' data(cello)
-#' tnbc <- tnbc(cello)
+#'
+#' ## Cellosaurus ====
+#' object <- cello
+#' tnbc <- tnbc(object)
 #' print(tnbc)
 NULL
 

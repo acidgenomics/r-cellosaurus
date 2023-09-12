@@ -19,4 +19,11 @@ Show an object
 \note{
 Updated 2023-08-23.
 }
+\examples{
+data(cello)
+
+## Cellosaurus ====
+object <- cello
+show(object)
+}
 \keyword{internal}
