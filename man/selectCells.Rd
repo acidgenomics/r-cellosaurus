@@ -15,26 +15,47 @@ selectCells(object, ...)
 \item{...}{Named key value pairs that map to cell line metadata defined in \code{colData}.}
 }
 \value{
-Modified object.
+Modified object, subset to only contain matching cell lines, which
+are defined in the rows.
 }
 \description{
 Select cells
 }
+\details{
+Only exact matching is currently supported.
+}
 \note{
 Updated 2023-09-12.
 }
+\section{Supported keys}{
+
+\itemize{
+\item \code{"category"}
+\item \code{"ncbiTaxonomyId"}
+\item \code{"ncitDiseaseId"}
+\item \code{"ncitDiseaseName"}
+\item \code{"oncotreeCode"}
+\item \code{"oncotreeMainType"}
+\item \code{"oncotreeName"}
+\item \code{"oncotreeTissue"}
+\item \code{"organism"}
+\item \code{"sexOfCell"}
+}
+}
+
 \examples{
 data(cello)
 
 ## Cellosaurus ====
 object <- cello
-dim(object)
-lineage <- colData(object)[["lineage"]][[1L]]
-print(lineage)
-all(colData(object)[["lineage"]] == lineage)
-object <- selectCells(object, lineage = lineage)
-all(colData(object)[["lineage"]] == lineage)
-dim(object)
+print(dim(object))
+subset <- selectCells(
+    object = object,
+    category = "Cancer cell line",
+    organism = "Homo sapiens",
+    sexOfCell = "Female"
+)
+print(dim(subset))
 }
 \seealso{
 \itemize{
