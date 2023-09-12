@@ -13,6 +13,8 @@ NULL
 #' @usage standardizeCells(object, ...)
 NULL
 
+## FIXME Move to AcidGenerics.
+
 #' @export
 #' @rdname excludeProblematicCells
 setGeneric(
@@ -22,6 +24,8 @@ setGeneric(
     }
 )
 
+## FIXME Move to AcidGenerics.
+
 #' @export
 #' @rdname excludeProblematicCells
 setGeneric(
@@ -30,6 +34,8 @@ setGeneric(
         standardGeneric("excludeProblematicCells")
     }
 )
+
+## FIXME Move to AcidGenerics.
 
 #' @export
 #' @rdname tnbc
