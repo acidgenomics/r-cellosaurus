@@ -1,24 +1,12 @@
-## FIXME Move to AcidGenerics.
+#' @export
+#' @name excludeContaminatedCells
+#' @usage excludeContaminatedCells(object, ...)
+NULL
 
 #' @export
-#' @rdname excludeProblematicCells
-setGeneric(
-    name = "excludeContaminatedCells",
-    def = function(object, ...) {
-        standardGeneric("excludeContaminatedCells")
-    }
-)
-
-## FIXME Move to AcidGenerics.
-
-#' @export
-#' @rdname excludeProblematicCells
-setGeneric(
-    name = "excludeProblematicCells",
-    def = function(object, ...) {
-        standardGeneric("excludeProblematicCells")
-    }
-)
+#' @name excludeProblematicCells
+#' @usage excludeProblematicCells(object, ...)
+NULL
 
 #' @export
 #' @name export
