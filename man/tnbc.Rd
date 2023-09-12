@@ -22,10 +22,13 @@ Cellosaurus accession identifiers.
 Triple negative breast cancer (TNBC) cell lines
 }
 \note{
-Updated 2023-01-31.
+Updated 2023-09-12.
 }
 \examples{
 data(cello)
-tnbc <- tnbc(cello)
+
+## Cellosaurus ====
+object <- cello
+tnbc <- tnbc(object)
 print(tnbc)
 }

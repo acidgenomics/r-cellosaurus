@@ -35,6 +35,7 @@ Cellosaurus database. For that, refer to \code{mapCells} instead.
 Updated 2023-08-23.
 }
 \examples{
+## character ====
 object <- c("22Rv1", "Jurkat", "Ramos (RA-1)")
 object <- standardizeCells(object)
 print(object)

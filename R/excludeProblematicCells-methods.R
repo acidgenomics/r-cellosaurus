@@ -1,3 +1,7 @@
+## FIXME Split this out to separate documentation, inherit from AcidGenerics.
+
+
+
 #' Exclude (remove) problematic and/or contaminated cell lines
 #'
 #' @name excludeProblematicCells
