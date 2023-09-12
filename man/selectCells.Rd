@@ -15,8 +15,7 @@ selectCells(object, ...)
 \item{...}{Named key value pairs that map to cell line metadata defined in \code{colData}.}
 }
 \value{
-Modified object, subset to only contain matching cell lines, which
-are defined in the rows.
+Modified object, subset to only contain matching cell lines.
 }
 \description{
 Select cells
