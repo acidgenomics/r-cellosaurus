@@ -1,7 +1,3 @@
-## FIXME Allow user to select isCancer, isContaminated, and isProblematic.
-
-
-
 #' @name selectCells
 #' @inherit AcidGenerics::selectCells
 #' @note Updated 2023-09-12.
@@ -12,6 +8,9 @@
 #' @section Supported keys:
 #'
 #' - `"category"`
+#' - `"isCancer"`
+#' - `"isContaminated"`
+#' - `"isProblematic"`
 #' - `"ncbiTaxonomyId"`
 #' - `"ncitDiseaseId"`
 #' - `"ncitDiseaseName"`
@@ -46,30 +45,29 @@ NULL
 `selectCells,Cellosaurus` <-
     function(object, ...) {
         args <- list(...)
+        validCols <- c(
+            "category",
+            "isCancer",
+            "isContaminated",
+            "isProblematic",
+            "ncbiTaxonomyId",
+            "ncitDiseaseId",
+            "ncitDiseaseName",
+            "oncotreeCode",
+            "oncotreeMainType",
+            "oncotreeName",
+            "oncotreeTissue",
+            "organism",
+            "sexOfCell"
+        )
         assert(
             validObject(object),
-            all(vapply(
-                X = args,
-                FUN = is.atomic,
-                FUN.VALUE = logical(1L)
-            )),
-            msg = "Arguments must be atomic."
+            isSubset(validCols, colnames(object)),
+            hasLength(args),
+            hasNames(args),
+            isSubset(names(args), validCols),
+            all(bapply(X = args, FUN = is.atomic))
         )
-        assert(isSubset(
-            x = names(args),
-            y = c(
-                "category",
-                "ncbiTaxonomyId",
-                "ncitDiseaseId",
-                "ncitDiseaseName",
-                "oncotreeCode",
-                "oncotreeMainType",
-                "oncotreeName",
-                "oncotreeTissue",
-                "organism",
-                "sexOfCell"
-            )
-        ))
         df <- as(object, "DFrame")
         df <- df[, names(args), drop = FALSE]
         df <- decode(df)
@@ -90,7 +88,7 @@ NULL
         i <- sort(Reduce(f = intersect, x = list))
         assert(
             hasLength(i),
-            msg = "No cell lines to select."
+            msg = "No cell lines matched selection criteria."
         )
         out <- object[i, , drop = FALSE]
         out

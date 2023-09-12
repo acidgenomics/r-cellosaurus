@@ -31,6 +31,9 @@ Updated 2023-09-12.
 
 \itemize{
 \item \code{"category"}
+\item \code{"isCancer"}
+\item \code{"isContaminated"}
+\item \code{"isProblematic"}
 \item \code{"ncbiTaxonomyId"}
 \item \code{"ncitDiseaseId"}
 \item \code{"ncitDiseaseName"}
