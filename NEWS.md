@@ -1,5 +1,16 @@
 # Release notes
 
+## Cellosaurus 0.7.2 (2023-09-12)
+
+Major changes:
+
+- Migrated `selectCells` from DepMapAnalysis package and added code coverage
+  against expected match failures.
+
+Minor changes:
+
+- Migrated generics in use to AcidGenerics package.
+
 ## Cellosaurus 0.7.1 (2023-09-06)
 
 Minor changes:
