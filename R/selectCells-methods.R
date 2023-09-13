@@ -41,7 +41,7 @@ NULL
 
 
 ## Updated 2023-09-12.
-`selectCells,Cellosaurus` <-
+`selectCells,Cellosaurus` <- # nolint
     function(object, ...) {
         args <- list(...)
         validCols <- c(
