@@ -10,6 +10,8 @@ Major changes:
 Minor changes:
 
 - Migrated generics in use to AcidGenerics package.
+- Split out `excludeContaminatedCells` and `excludeProblematicCells` to
+  separate documentation files.
 
 ## Cellosaurus 0.7.1 (2023-09-06)
 
