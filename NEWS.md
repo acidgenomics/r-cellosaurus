@@ -1,6 +1,6 @@
 # Release notes
 
-## Cellosaurus 0.7.2 (2023-09-12)
+## Cellosaurus 0.7.2 (2023-09-13)
 
 Major changes:
 
