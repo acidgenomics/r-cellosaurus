@@ -1,4 +1,4 @@
-context("Supported keys", {
+test_that("Supported keys", {
     object <- celloFull
     subset <- selectCells(
         object = object,
@@ -11,7 +11,7 @@ context("Supported keys", {
     expect_true(hasRows(subset))
 })
 
-context("Expected failures", {
+test_that("Expected failures", {
     object <- celloFull
     expect_error(
         object = selectCells(object = object, XXX = "YYY"),
