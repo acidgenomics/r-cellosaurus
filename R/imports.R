@@ -8,8 +8,8 @@ NULL
 ## S4 generics and methods =====================================================
 
 #' @importFrom AcidGenerics camelCase encode excludeContaminatedCells
-#' excludeProblematicCells factorize leftJoin mapCells matchNested
-#' rbindToDataFrame selectCells snakeCase standardizeCells tnbc
+#' excludeProblematicCells leftJoin mapCells matchNested rbindToDataFrame
+#' selectCells snakeCase standardizeCells tnbc
 #' @importFrom BiocGenerics Map %in% as.data.frame grep grepl lapply unique
 #' unlist
 #' @importFrom IRanges gsub sub
@@ -20,7 +20,7 @@ NULL
 
 #' @importMethodsFrom AcidBase matchNested
 #' @importMethodsFrom AcidPlyr leftJoin rbindToDataFrame
-#' @importMethodsFrom pipette encode export factorize import removeNA sanitizeNA
+#' @importMethodsFrom pipette encode export import removeNA sanitizeNA
 #' @importMethodsFrom syntactic camelCase snakeCase
 NULL
 
