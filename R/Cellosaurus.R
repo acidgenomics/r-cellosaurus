@@ -816,7 +816,6 @@ Cellosaurus <- # nolint
         object <- .addSangerModelId(object)
         object <- .addTaxonomy(object)
         alert("Encoding metadata.")
-        object <- factorize(object)
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]
         new("Cellosaurus", object)
