@@ -1,6 +1,6 @@
 #' @name export
 #' @inherit pipette::export
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-09-20.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Passthrough arguments to `DFrame` method.
@@ -19,19 +19,12 @@ NULL
 
 
 
-## Updated 2023-01-24.
+## Updated 2023-09-20.
 `export,Cellosaurus` <- # nolint
-    function(object,
-             con,
-             format, # missing
-             ...) {
-        if (missing(format)) {
-            format <- NULL
-        }
+    function(object, con, ...) {
         assert(
             validObject(object),
-            isString(con),
-            is.null(format)
+            isString(con)
         )
         df <- as(object, "DFrame")
         dropCols <- c(
@@ -59,8 +52,7 @@ setMethod(
     f = "export",
     signature = signature(
         object = "Cellosaurus",
-        con = "character",
-        format = "missing"
+        con = "character"
     ),
     definition = `export,Cellosaurus`
 )
