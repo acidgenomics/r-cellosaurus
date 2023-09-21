@@ -306,7 +306,7 @@ NULL
 
 #' Add `ncbiTaxonomyId` and `organism` columns
 #'
-#' @note Updated 2023-08-26.
+#' @note Updated 2023-09-21.
 #' @noRd
 #'
 #' @details
@@ -319,7 +319,6 @@ NULL
         is(object, "DFrame"),
         is(object[["speciesOfOrigin"]], "CharacterList")
     )
-    ## FIXME Take out stringi dependency.
     spl <- lapply(
         X = object[["speciesOfOrigin"]],
         FUN = strSplit,
