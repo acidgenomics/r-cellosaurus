@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-09-01.
+#' @note Updated 2023-09-21.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -328,6 +328,7 @@ NULL
     ## FIXME Take out stringi dependency.
     spl <- lapply(
         X = object[["speciesOfOrigin"]],
+        ## FIXME Rework in base R.
         FUN = stri_split_fixed,
         pattern = "; ! ",
         n = 2L,
@@ -554,16 +555,10 @@ NULL
 
 #' Process lines per entry
 #'
-#' @note Updated 2023-03-08.
+#' @note Updated 2023-09-21.
 #' @noRd
 .processEntry <- function(x, nestedKeys, optionalKeys) {
-    ## FIXME Take out stringi dependency.
-    x <- stri_split_fixed(
-        str = x,
-        pattern = "   ",
-        n = 2L,
-        simplify = TRUE
-    )
+    x <- strSplit(x, split = "   ")
     x <- split(x[, 2L], f = x[, 1L])
     for (key in optionalKeys) {
         if (is.null(x[[key]])) {
@@ -772,6 +767,7 @@ NULL
         X = object[[colName]],
         sep = sep,
         FUN = function(x, sep) {
+            ## FIXME Rework in base R.
             x <- stri_split_fixed(
                 str = x,
                 pattern = sep,

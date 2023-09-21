@@ -32,7 +32,7 @@ Note that this function doesn't attempt to perform any mapping to the
 Cellosaurus database. For that, refer to \code{mapCells} instead.
 }
 \note{
-Updated 2023-08-23.
+Updated 2023-09-21.
 }
 \examples{
 ## character ====
