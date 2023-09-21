@@ -748,20 +748,11 @@ NULL
         is(object[[colName]], "CharacterList"),
         isString(sep)
     )
-    ## FIXME Hitting an error: Split mismatch detected: 7, 38.
-    ##
-    ## Need to only split on first incidence:
-    ## These are problematic:
-    ## "Virology: HeLa has 5 five HPV18 integration sites: three on normal chromosomes 8 at 8q24 and two on derivative chromosomes, der(5)t(5;22;8)(q11;q11q13;q24) and der(22)t(8;22)(q24;q13)"
-    ## "Anecdotal: Was flown since the 1960s on at least ten different space missions: Korabl-Sputnik-2, Vostok-1, Vostok-4, Vostok-5 and Vostok-6, Voshkod 1 and Zond-5, Discoverer XVIII, Progress M-35/Mir and Shuttle STS
-    ##
     lst <- lapply(
         X = object[[colName]],
         sep = sep,
         FUN = function(x, sep) {
-            print(x)
-            ## FIXME Need to only do this for first element.
-            x <- strSplit(x = x, split = sep)
+            x <- strSplit(x = x, split = sep, n = 2L)
             x <- split(x = x[, 2L], f = x[, 1L])
             x
         }
