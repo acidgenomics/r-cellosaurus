@@ -609,6 +609,7 @@ NULL
         replacement = "",
         x = object[["comments"]]
     )
+    ## FIXME This step is now erroring out with split update.
     .splitNestedCol(object, colName = "comments", sep = ": ")
 }
 
@@ -747,22 +748,32 @@ NULL
         is(object[[colName]], "CharacterList"),
         isString(sep)
     )
-    lst <- SimpleList(lapply(
+    ## FIXME Hitting an error: Split mismatch detected: 7, 38.
+    ##
+    ## Need to only split on first incidence:
+    ## These are problematic:
+    ## "Virology: HeLa has 5 five HPV18 integration sites: three on normal chromosomes 8 at 8q24 and two on derivative chromosomes, der(5)t(5;22;8)(q11;q11q13;q24) and der(22)t(8;22)(q24;q13)"
+    ## "Anecdotal: Was flown since the 1960s on at least ten different space missions: Korabl-Sputnik-2, Vostok-1, Vostok-4, Vostok-5 and Vostok-6, Voshkod 1 and Zond-5, Discoverer XVIII, Progress M-35/Mir and Shuttle STS
+    ##
+    lst <- lapply(
         X = object[[colName]],
         sep = sep,
         FUN = function(x, sep) {
+            print(x)
+            ## FIXME Need to only do this for first element.
             x <- strSplit(x = x, split = sep)
             x <- split(x = x[, 2L], f = x[, 1L])
             x
         }
-    ))
+    )
+    lst <- SimpleList(lst)
     object[[colName]] <- lst
     object
 }
 
 
 
-## Updated 2023-08-25.
+## Updated 2023-09-21.
 
 #' @rdname Cellosaurus
 #' @export
@@ -771,6 +782,7 @@ Cellosaurus <- # nolint
         object <- .importCelloFromTxt()
         alert("Sanitizing annotations.")
         object <- .sanitizeAgeAtSampling(object)
+        ## FIXME This step is erroring with our updated split approach.
         object <- .sanitizeComments(object)
         object <- .sanitizeCrossRefs(object)
         object <- .sanitizeDate(object)
