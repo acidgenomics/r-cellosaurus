@@ -1,6 +1,6 @@
 #' @name standardizeCells
 #' @inherit AcidGenerics::standardizeCells return title
-#' @note Updated 2023-08-23.
+#' @note Updated 2023-09-21.
 #'
 #' @details
 #' Strip all non-alphanumeric characters, remove information in parentheses or
@@ -32,7 +32,7 @@ NULL
 
 
 
-## Updated 2023-01-17.
+## Updated 2023-09-21.
 `standardizeCells,character` <- # nolint
     function(object) {
         assert(
@@ -41,23 +41,20 @@ NULL
         )
         object <- tolower(object)
         ## Handle "SUM-52PE, SUM52" to "SUM-52PE" edge case.
-        ## FIXME Take out stringi dependency.
-        object <- stri_replace_first_regex(
-            str = object,
+        object <- gsub(
             pattern = ",\\s.+$",
-            replacement = ""
+            replacement = "",
+            x = object
         )
-        ## FIXME Take out stringi dependency.
-        object <- stri_replace_first_regex(
-            str = object,
+        object <- sub(
             pattern = "\\s[\\[\\(].+$",
-            replacement = ""
+            replacement = "",
+            x = object
         )
-        ## FIXME Take out stringi dependency.
-        object <- stri_replace_all_regex(
-            str = object,
+        object <- gsub(
             pattern = "[^[:alnum:]]+",
-            replacement = ""
+            replacement = "",
+            x = object
         )
         if (any(object == "")) {
             object[object == ""] <- "invalid"
