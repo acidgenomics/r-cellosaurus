@@ -41,16 +41,19 @@ NULL
         )
         object <- tolower(object)
         ## Handle "SUM-52PE, SUM52" to "SUM-52PE" edge case.
+        ## FIXME Take out stringi dependency.
         object <- stri_replace_first_regex(
             str = object,
             pattern = ",\\s.+$",
             replacement = ""
         )
+        ## FIXME Take out stringi dependency.
         object <- stri_replace_first_regex(
             str = object,
             pattern = "\\s[\\[\\(].+$",
             replacement = ""
         )
+        ## FIXME Take out stringi dependency.
         object <- stri_replace_all_regex(
             str = object,
             pattern = "[^[:alnum:]]+",
