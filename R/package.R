@@ -37,7 +37,7 @@ NULL
 
 ## Standard functions ==========================================================
 
-#' @importFrom AcidBase majorVersion pasteURL showHeader showSlotInfo
+#' @importFrom AcidBase majorVersion pasteURL showHeader showSlotInfo strSplit
 #' @importFrom AcidCLI abort alert alertInfo
 #' @importFrom IRanges CharacterList IntegerList
 #' @importFrom S4Vectors DataFrame SimpleList
