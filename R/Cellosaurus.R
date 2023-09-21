@@ -159,6 +159,7 @@ NULL
             if (is.null(x)) {
                 return(NULL)
             }
+            ## FIXME Take out stringi dependency.
             x <- stri_split_fixed(
                 str = x,
                 pattern = "; ",
@@ -324,6 +325,7 @@ NULL
         is(object, "DFrame"),
         is(object[["speciesOfOrigin"]], "CharacterList")
     )
+    ## FIXME Take out stringi dependency.
     spl <- lapply(
         X = object[["speciesOfOrigin"]],
         FUN = stri_split_fixed,
@@ -555,6 +557,7 @@ NULL
 #' @note Updated 2023-03-08.
 #' @noRd
 .processEntry <- function(x, nestedKeys, optionalKeys) {
+    ## FIXME Take out stringi dependency.
     x <- stri_split_fixed(
         str = x,
         pattern = "   ",
@@ -675,6 +678,7 @@ NULL
     lst <- CharacterList(lapply(
         X = object[["hierarchy"]],
         FUN = function(x) {
+            ## FIXME Take out stringi dependency.
             spl <- stri_split_fixed(
                 str = x,
                 pattern = " ! ",
