@@ -1,6 +1,8 @@
 ## Regarding C locale collation during `R CMD check`:
 ## https://github.com/r-lib/devtools/issues/2121#issuecomment-534173065
 
+## FIXME Need to update unit test to reflect non of these values are factor.
+
 test_that("Cellosaurus", {
     ## nolint start
     object <- withr::with_collate(
