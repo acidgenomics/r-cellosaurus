@@ -159,7 +159,7 @@ NULL
             if (is.null(x)) {
                 return(NULL)
             }
-            x <- strSplit(x = x, pattern = "; ")
+            x <- strSplit(x = x, split = "; ")
             x
         }
     )
@@ -322,7 +322,7 @@ NULL
     spl <- lapply(
         X = object[["speciesOfOrigin"]],
         FUN = strSplit,
-        pattern = "; ! ",
+        split = "; ! ",
     )
     taxId <- IntegerList(lapply(
         X = spl,
@@ -663,7 +663,7 @@ NULL
     lst <- CharacterList(lapply(
         X = object[["hierarchy"]],
         FUN = function(x) {
-            spl <- strSplit(x, pattern = " ! ")
+            spl <- strSplit(x, split = " ! ")
             spl[, 1L]
         }
     ))
@@ -751,7 +751,7 @@ NULL
         X = object[[colName]],
         sep = sep,
         FUN = function(x, sep) {
-            x <- strSplit(x = x, pattern = sep)
+            x <- strSplit(x = x, split = sep)
             x <- split(x = x[, 2L], f = x[, 1L])
             x
         }
