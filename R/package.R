@@ -47,7 +47,5 @@ NULL
 #' @importFrom methods as is new setClass setMethod setValidity validObject
 #' @importFrom parallel mclapply
 #' @importFrom pipette cacheURL
-#' @importFrom stringi stri_replace_all_regex stri_replace_first_regex
-#' stri_split_fixed
 #' @importFrom utils packageName packageVersion
 NULL
