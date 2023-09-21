@@ -1,6 +1,6 @@
 ## nolint start
 ## OncoTree tumor type metadata.
-## Updated 2023-08-26.
+## Updated 2023-09-21.
 ##
 ## See also:
 ## OncoTree API tumor type info:
@@ -47,16 +47,16 @@ df <- rbindToDataFrame(json)
 colnames(df) <- camelCase(colnames(df))
 df <- df[df[["code"]] != "TISSUE", ]
 df[["children"]] <- NULL
-df[["code"]] <- as.factor(df[["code"]])
-df[["color"]] <- as.factor(unlist(df[["color"]]))
+df[["code"]] <- df[["code"]]
+df[["color"]] <- unlist(df[["color"]])
 df[["externalReferences"]] <- SimpleList(df[["externalReferences"]])
 df[["history"]] <- CharacterList(df[["history"]])
-df[["level"]] <- as.factor(df[["level"]])
-df[["mainType"]] <- as.factor(unlist(df[["mainType"]]))
-df[["parent"]] <- as.factor(unlist(df[["parent"]]))
+df[["level"]] <- df[["level"]]
+df[["mainType"]] <- unlist(df[["mainType"]])
+df[["parent"]] <- unlist(df[["parent"]])
 df[["precursors"]] <- CharacterList(df[["precursors"]])
 df[["revocations"]] <- CharacterList(df[["revocations"]])
-df[["tissue"]] <- as.factor(unlist(df[["tissue"]]))
+df[["tissue"]] <- unlist(df[["tissue"]])
 df <- df[order(df[["code"]]), ]
 rownames(df) <- df[["code"]]
 saveRDS(df, "oncotree.rds")
