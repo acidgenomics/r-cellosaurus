@@ -145,7 +145,7 @@ NULL
 #' @details
 #' Some cell lines rarely map to multiple identifiers, such as "CVCL_0028".
 #'
-#' @note Updated 2023-01-27.
+#' @note Updated 2023-09-21.
 #' @noRd
 .addNcitDisease <- function(object) {
     assert(
@@ -159,13 +159,7 @@ NULL
             if (is.null(x)) {
                 return(NULL)
             }
-            ## FIXME Take out stringi dependency.
-            x <- stri_split_fixed(
-                str = x,
-                pattern = "; ",
-                n = 2L,
-                simplify = TRUE
-            )
+            x <- strSplit(x = x, pattern = "; ")
             x
         }
     )
@@ -328,11 +322,8 @@ NULL
     ## FIXME Take out stringi dependency.
     spl <- lapply(
         X = object[["speciesOfOrigin"]],
-        ## FIXME Rework in base R.
-        FUN = stri_split_fixed,
+        FUN = strSplit,
         pattern = "; ! ",
-        n = 2L,
-        simplify = TRUE
     )
     taxId <- IntegerList(lapply(
         X = spl,
@@ -663,7 +654,7 @@ NULL
 #' @details
 #' Some entries have multiple elements, such as "CVCL_0464".
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-09-21.
 #' @noRd
 .sanitizeHierarchy <- function(object) {
     assert(
@@ -673,13 +664,7 @@ NULL
     lst <- CharacterList(lapply(
         X = object[["hierarchy"]],
         FUN = function(x) {
-            ## FIXME Take out stringi dependency.
-            spl <- stri_split_fixed(
-                str = x,
-                pattern = " ! ",
-                n = 2L,
-                simplify = TRUE
-            )
+            spl <- strSplit(x, pattern = " ! ")
             spl[, 1L]
         }
     ))
@@ -755,7 +740,7 @@ NULL
 
 #' Split a nested column by key
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-09-21.
 #' @noRd
 .splitNestedCol <- function(object, colName, sep) {
     assert(
@@ -767,13 +752,7 @@ NULL
         X = object[[colName]],
         sep = sep,
         FUN = function(x, sep) {
-            ## FIXME Rework in base R.
-            x <- stri_split_fixed(
-                str = x,
-                pattern = sep,
-                n = 2L,
-                simplify = TRUE
-            )
+            x <- strSplit(x = x, pattern = sep)
             x <- split(x = x[, 2L], f = x[, 1L])
             x
         }
