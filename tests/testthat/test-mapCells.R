@@ -322,6 +322,8 @@ test_that("DepMap 23Q2", {
     )
 })
 
+## FIXME This check is now failing, need to update
+
 test_that("CellModelPassports", {
     object <- celloFull
     df <- map[["cmp"]]
@@ -344,6 +346,13 @@ test_that("CellModelPassports", {
         "SIDM01500"
     )
     df <- df[setdiff(rownames(df), censor), ]
+    ## FIXME Need to address these:
+    ## [1145] NA          - "CVCL_A1VN" [1145]
+    ## [1229] "CVCL_2037" - "CVCL_7227" [1229]
+    ## [1637] NA          - "CVCL_A1VP" [1637]
+    ## [1642] NA          - "CVCL_B3PJ" [1642]
+    ## [1707] "CVCL_4511" - "CVCL_VT47" [1707]
+    ## [1714] "CVCL_7047" - "CVCL_7084" [1714]
     expect_identical(
         object = unname(mapCells(object, cells = df[["model_name"]])),
         expected = df[["RRID"]]

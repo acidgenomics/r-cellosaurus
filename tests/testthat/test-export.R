@@ -2,9 +2,9 @@ test_that("export", {
     object <- cello
     tempdir <- AcidBase::tempdir2()
     con <- file.path(tempdir, "cello.csv")
-    x <- export(object = object, con = con)
+    x <- export(object = object, con = con, quiet = TRUE)
     expect_true(file.exists(x))
-    df <- pipette::import(con)
+    df <- pipette::import(con, quiet = TRUE)
     expect_identical(
         object = df[1L, ],
         expected = data.frame(
