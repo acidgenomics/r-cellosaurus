@@ -785,6 +785,8 @@ NULL
 
 #' Split a nested column by key
 #'
+#' Don't format key names into camel case -- too CPU intensive.
+#'
 #' @note Updated 2023-09-22.
 #' @noRd
 .splitNestedCol <- function(object, colName, split) {
@@ -801,7 +803,8 @@ NULL
                 return(list())
             }
             x <- strSplit(x = x, split = split, n = 2L)
-            x[, 1L] <- camelCase(x[, 1L])
+            ## Formatting into camel case takes too long.
+            ## > x[, 1L] <- camelCase(x[, 1L])
             x <- split(x = x[, 2L], f = x[, 1L])
             x
         }
