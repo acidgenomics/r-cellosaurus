@@ -1,8 +1,6 @@
 ## Regarding C locale collation during `R CMD check`:
 ## https://github.com/r-lib/devtools/issues/2121#issuecomment-534173065
 
-## FIXME Need to update unit test to reflect non of these values are factor.
-
 test_that("Cellosaurus", {
     ## nolint start
     object <- withr::with_collate(
@@ -14,14 +12,6 @@ test_that("Cellosaurus", {
     expect_s4_class(object, "Cellosaurus")
     df <- as.data.frame(object)
     x <- as.list(df["CVCL_0001", , drop = FALSE])
-    x[["ageAtSampling"]] <- as.character(x[["ageAtSampling"]])
-    x[["category"]] <- as.character(x[["category"]])
-    x[["oncotreeCode"]] <- as.character(x[["oncotreeCode"]])
-    x[["oncotreeLevel"]] <- as.character(x[["oncotreeLevel"]])
-    x[["oncotreeMainType"]] <- as.character(x[["oncotreeMainType"]])
-    x[["oncotreeName"]] <- as.character(x[["oncotreeName"]])
-    x[["oncotreeParent"]] <- as.character(x[["oncotreeParent"]])
-    x[["oncotreeTissue"]] <- as.character(x[["oncotreeTissue"]])
     y <- list(
         "accession" = "CVCL_0001",
         "ageAtSampling" = "30Y",
