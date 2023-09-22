@@ -27,7 +27,7 @@ setValidity(
                 "cellLineName" = "Rle",
                 "comments" = "SimpleList",
                 "crossReferences" = "SimpleList",
-                "date" = "CompressedCharacterList",
+                "date" = "SimpleList",
                 "depmapId" = "Rle",
                 "diseases" = "SimpleList",
                 "hierarchy" = "CompressedCharacterList",
