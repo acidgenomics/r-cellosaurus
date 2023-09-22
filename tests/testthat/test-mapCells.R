@@ -1,3 +1,5 @@
+## FIXME "UACC-62_CJ1" isn't mapping correctly from overrides argh.
+
 test_that("Cell line name", {
     object <- cello
     expect_identical(
@@ -355,6 +357,13 @@ test_that("CellModelPassports", {
         ## CVCL_7084 --> CVCL_7047
         "SIDM01997"
     )
+
+    ## [1147] NA          - "CVCL_A1VN" [1147]
+    ## - NA
+    ## + "CVCL_A1VP"
+    ## - NA
+    ## + "CVCL_B3PJ"
+
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["model_name"]])),
