@@ -1,6 +1,6 @@
 #' @name export
 #' @inherit pipette::export
-#' @note Updated 2023-09-20.
+#' @note Updated 2023-09-22.
 #'
 #' @inheritParams AcidRoxygen::params
 #' @param ... Passthrough arguments to `DFrame` method.
