@@ -413,6 +413,189 @@ NULL
 
 
 
+#' Format the `ageAtSampling` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.formatAgeAtSampling <- function(object) {
+    assert(
+        is(object, "DFrame"),
+        is.character(object[["ageAtSampling"]])
+    )
+    idx <- which(object[["ageAtSampling"]] == "Age unspecified")
+    object[["ageAtSampling"]][idx] <- NA_character_
+    object
+}
+
+
+
+#' Format the `comments` column
+#'
+#' @note Updated 2023-09-22.
+#' @noRd
+.formatComments <- function(object) {
+    assert(
+        is(object, "DFrame"),
+        is(object[["comments"]], "CharacterList")
+    )
+    object[["comments"]] <- unique(object[["comments"]])
+    object[["comments"]] <- sub(
+        pattern = "\\.$",
+        replacement = "",
+        x = object[["comments"]]
+    )
+    .splitNestedCol(
+        object = object,
+        colName = "comments",
+        split = ": "
+    )
+}
+
+
+
+#' Format the `crossReferences` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.formatCrossRefs <- function(object) {
+    .splitNestedCol(
+        object = object,
+        colName = "crossReferences",
+        split = "; "
+    )
+}
+
+
+
+#' Format the `date` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.formatDate <- function(object) {
+    object <- .splitCol(
+        object = object,
+        colName = "date",
+        split = "; "
+    )
+    object <- .splitNestedCol(
+        object = object,
+        colName = "date",
+        split = ": "
+    )
+    object
+}
+
+
+
+#' Format the `diseases` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.formatDiseases <- function(object) {
+    .splitNestedCol(
+        object = object,
+        colName = "diseases",
+        split = "; "
+    )
+}
+
+
+
+#' Format the `hierarchy` column
+#'
+#' @details
+#' Some entries have multiple elements, such as "CVCL_0464".
+#'
+#' @note Updated 2023-09-22.
+#' @noRd
+.formatHierarchy <- function(object) {
+    assert(
+        is(object, "DFrame"),
+        is(object[["hierarchy"]], "CharacterList")
+    )
+    lst <- mclapply(
+        X = object[["hierarchy"]],
+        FUN = function(x) {
+            if (identical(x, character())) {
+                return(character())
+            }
+            spl <- strSplit(x, split = " ! ")
+            out <- spl[, 1L]
+            out
+        }
+    )
+    lst <- CharacterList(lst)
+    object[["hierarchy"]] <- lst
+    object
+}
+
+
+
+#' Format the `referencesIdentifiers` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.formatRefIds <- function(object) {
+    assert(
+        is(object, "DFrame"),
+        is(object[["referencesIdentifiers"]], "CharacterList")
+    )
+    object[["referencesIdentifiers"]] <- sub(
+        pattern = ";$",
+        replacement = "",
+        x = object[["referencesIdentifiers"]]
+    )
+    .splitNestedCol(
+        object = object,
+        colName = "referencesIdentifiers",
+        split = "="
+    )
+}
+
+
+
+#' Format the `secondaryAccession` column
+#'
+#' @note Updated 2023-09-22.
+#' @noRd
+.formatSecondaryAccession <- function(object) {
+    .splitCol(
+        object = object,
+        colName = "secondaryAccession",
+        split = "; "
+    )
+}
+
+
+
+#' Format the `strProfileData` column
+#'
+#' @note Updated 2023-01-31.
+#' @noRd
+.formatStrProfileData <- function(object) {
+    .splitNestedCol(
+        object = object,
+        colName = "strProfileData",
+        split = ": "
+    )
+}
+
+
+
+#' Format the `synonyms` column
+#'
+#' @note Updated 2023-01-24.
+#' @noRd
+.formatSynonyms <- function(object) {
+    .splitCol(
+        object = object,
+        colName = "synonyms",
+        split = "; "
+    )
+}
+
+
+
 ## ---------  ---------------------------     ----------------------
 ## Line code  Content                         Occurrence in an entry
 ## ---------  ---------------------------     ----------------------
@@ -578,185 +761,6 @@ NULL
 
 
 
-#' Sanitize the `ageAtSampling` column
-#'
-#' @note Updated 2023-01-24.
-#' @noRd
-.sanitizeAgeAtSampling <- function(object) {
-    assert(
-        is(object, "DFrame"),
-        is.character(object[["ageAtSampling"]])
-    )
-    idx <- which(object[["ageAtSampling"]] == "Age unspecified")
-    object[["ageAtSampling"]][idx] <- NA_character_
-    object
-}
-
-
-
-#' Sanitize the `comments` column
-#'
-#' @note Updated 2023-09-22.
-#' @noRd
-.sanitizeComments <- function(object) {
-    assert(
-        is(object, "DFrame"),
-        is(object[["comments"]], "CharacterList")
-    )
-    object[["comments"]] <- unique(object[["comments"]])
-    object[["comments"]] <- sub(
-        pattern = "\\.$",
-        replacement = "",
-        x = object[["comments"]]
-    )
-    .splitNestedCol(
-        object = object,
-        colName = "comments",
-        split = ": "
-    )
-}
-
-
-
-#' Sanitize the `crossReferences` column
-#'
-#' @note Updated 2023-01-24.
-#' @noRd
-.sanitizeCrossRefs <- function(object) {
-    .splitNestedCol(
-        object = object,
-        colName = "crossReferences",
-        split = "; "
-    )
-}
-
-
-
-## FIXME Actually convert this into `Date` class.
-
-#' Sanitize the `date` column
-#'
-#' @note Updated 2023-01-24.
-#' @noRd
-.sanitizeDate <- function(object) {
-    .splitCol(
-        object = object,
-        colName = "date",
-        split = "; "
-    )
-}
-
-
-
-#' Sanitize the `diseases` column
-#'
-#' @note Updated 2023-01-24.
-#' @noRd
-.sanitizeDiseases <- function(object) {
-    .splitNestedCol(
-        object = object,
-        colName = "diseases",
-        split = "; "
-    )
-}
-
-
-
-#' Sanitize the `hierarchy` column
-#'
-#' @details
-#' Some entries have multiple elements, such as "CVCL_0464".
-#'
-#' @note Updated 2023-09-22.
-#' @noRd
-.sanitizeHierarchy <- function(object) {
-    assert(
-        is(object, "DFrame"),
-        is(object[["hierarchy"]], "CharacterList")
-    )
-    lst <- mclapply(
-        X = object[["hierarchy"]],
-        FUN = function(x) {
-            if (identical(x, character())) {
-                return(character())
-            }
-            spl <- strSplit(x, split = " ! ")
-            out <- spl[, 1L]
-            out
-        }
-    )
-    lst <- CharacterList(lst)
-    object[["hierarchy"]] <- lst
-    object
-}
-
-
-
-#' Sanitize the `referencesIdentifiers` column
-#'
-#' @note Updated 2023-01-24.
-#' @noRd
-.sanitizeRefIds <- function(object) {
-    assert(
-        is(object, "DFrame"),
-        is(object[["referencesIdentifiers"]], "CharacterList")
-    )
-    object[["referencesIdentifiers"]] <- sub(
-        pattern = ";$",
-        replacement = "",
-        x = object[["referencesIdentifiers"]]
-    )
-    .splitNestedCol(
-        object = object,
-        colName = "referencesIdentifiers",
-        split = "="
-    )
-}
-
-
-
-#' Sanitize the `secondaryAccession` column
-#'
-#' @note Updated 2023-09-22.
-#' @noRd
-.sanitizeSecondaryAccession <- function(object) {
-    .splitCol(
-        object = object,
-        colName = "secondaryAccession",
-        split = "; "
-    )
-}
-
-
-
-#' Sanitize the `strProfileData` column
-#'
-#' @note Updated 2023-01-31.
-#' @noRd
-.sanitizeStrProfileData <- function(object) {
-    .splitNestedCol(
-        object = object,
-        colName = "strProfileData",
-        split = ": "
-    )
-}
-
-
-
-#' Sanitize the `synonyms` column
-#'
-#' @note Updated 2023-01-24.
-#' @noRd
-.sanitizeSynonyms <- function(object) {
-    .splitCol(
-        object = object,
-        colName = "synonyms",
-        split = "; "
-    )
-}
-
-
-
 #' Split a column into a character list
 #'
 #' @note Updated 2023-09-22.
@@ -814,24 +818,18 @@ NULL
 #' @export
 Cellosaurus <- # nolint
     function() {
-        ## Benchmark: ~1 minute, 15 seconds.
         object <- .importCelloFromTxt()
-        alert("Sanitizing annotations.")
-        object <- .sanitizeAgeAtSampling(object)
-        ## Benchmark: ~1 minute.
-        object <- .sanitizeComments(object)
-        ## Benchmark: ~1 minute, 15 seconds.
-        object <- .sanitizeCrossRefs(object)
-        object <- .sanitizeDate(object)
-        ## Benchmark: ~25 seconds.
-        object <- .sanitizeDiseases(object)
-        ## Benchmark: ~15 seconds.
-        object <- .sanitizeHierarchy(object)
-        ## Benchmark: ~30 seconds.
-        object <- .sanitizeRefIds(object)
-        object <- .sanitizeSecondaryAccession(object)
-        object <- .sanitizeStrProfileData(object)
-        object <- .sanitizeSynonyms(object)
+        alert("Formatting annotations.")
+        object <- .formatAgeAtSampling(object)
+        object <- .formatComments(object)
+        object <- .formatCrossRefs(object)
+        object <- .formatDate(object)
+        object <- .formatDiseases(object)
+        object <- .formatHierarchy(object)
+        object <- .formatRefIds(object)
+        object <- .formatSecondaryAccession(object)
+        object <- .formatStrProfileData(object)
+        object <- .formatSynonyms(object)
         alert("Adding annotations.")
         object <- .addAtccId(object)
         object <- .addDepmapId(object)
@@ -840,13 +838,11 @@ Cellosaurus <- # nolint
         object <- .addIsProblematic(object)
         object <- .addMisspellings(object)
         object <- .addMsiStatus(object)
-        ## Benchmark: ~40 seconds.
         object <- .addNcitDisease(object)
         object <- .addOncotree(object)
         object <- .addPopulation(object)
         object <- .addSamplingSite(object)
         object <- .addSangerModelId(object)
-        ## Benchmark: ~1 minute, 15 seconds.
         object <- .addTaxonomy(object)
         alert("Encoding metadata.")
         object <- encode(object)
