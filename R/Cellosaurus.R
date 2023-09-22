@@ -322,7 +322,7 @@ NULL
     spl <- mclapply(
         X = object[["speciesOfOrigin"]],
         FUN = strSplit,
-        split = "; ! ",
+        split = "; ! "
     )
     taxId <- IntegerList(lapply(
         X = spl,
@@ -648,8 +648,6 @@ NULL
 
 
 
-## FIXME Need to handle empty character here.
-
 #' Sanitize the `hierarchy` column
 #'
 #' @details
@@ -713,8 +711,6 @@ NULL
 
 
 
-## FIXME This is hitting a non-character argument.
-
 #' Sanitize the `synonyms` column
 #'
 #' @note Updated 2023-01-24.
@@ -724,7 +720,6 @@ NULL
 }
 
 
-## FIXME This step is erroring for sanitizeComments, may need to rework.
 
 #' Split a column into a character list
 #'
