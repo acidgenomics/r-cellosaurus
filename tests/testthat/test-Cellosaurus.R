@@ -1,8 +1,9 @@
+## nolint start
+
 ## Regarding C locale collation during `R CMD check`:
 ## https://github.com/r-lib/devtools/issues/2121#issuecomment-534173065
 
 test_that("Cellosaurus", {
-    ## nolint start
     with_collate(
         new = "C",
         code = {
@@ -153,7 +154,7 @@ test_that("Cellosaurus", {
             sep = "; "
         )),
         "sangerModelId" = "SIDM00594",
-        "secondaryAccession" = NA_character_,
+        "secondaryAccession" = list(NA_character_),
         "sexOfCell" = "Male",
         "strProfileData" = list(list(
             "Amelogenin" = c(
@@ -223,5 +224,6 @@ test_that("Cellosaurus", {
         object = df["CVCL_0455", "depmapId"],
         expected = "ACH-001075"
     )
-    ## nolint end
 })
+
+## nolint end
