@@ -47,7 +47,7 @@ may be inconsistent.
 If you notice any mapping errors, please file a bug report.
 }
 \note{
-Updated 2023-09-05.
+Updated 2023-09-22.
 }
 \examples{
 data(cello)

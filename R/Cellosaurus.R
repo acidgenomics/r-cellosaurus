@@ -1,3 +1,7 @@
+## FIXME We need to split secondaryAccession by "; ".
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
@@ -609,7 +613,11 @@ NULL
         replacement = "",
         x = object[["comments"]]
     )
-    .splitNestedCol(object, colName = "comments", split = ": ")
+    .splitNestedCol(
+        object = object,
+        colName = "comments",
+        split = ": "
+    )
 }
 
 
@@ -645,7 +653,11 @@ NULL
 #' @note Updated 2023-01-24.
 #' @noRd
 .sanitizeDiseases <- function(object) {
-    .splitNestedCol(object, colName = "diseases", split = "; ")
+    .splitNestedCol(
+        object = object,
+        colName = "diseases",
+        split = "; "
+    )
 }
 
 
@@ -703,12 +715,30 @@ NULL
 
 
 
+#' Sanitize the `secondaryAccession` column
+#'
+#' @note Updated 2023-09-22.
+#' @noRd
+.sanitizeSecondaryAccession <- function(object) {
+    .splitNestedCol(
+        object = object,
+        colName = "secondaryAccession",
+        split = "; "
+    )
+}
+
+
+
 #' Sanitize the `strProfileData` column
 #'
 #' @note Updated 2023-01-31.
 #' @noRd
 .sanitizeStrProfileData <- function(object) {
-    .splitNestedCol(object = object, colName = "strProfileData", split = ": ")
+    .splitNestedCol(
+        object = object,
+        colName = "strProfileData",
+        split = ": "
+    )
 }
 
 
@@ -718,7 +748,11 @@ NULL
 #' @note Updated 2023-01-24.
 #' @noRd
 .sanitizeSynonyms <- function(object) {
-    .splitCol(object = object, colName = "synonyms", split = "; ")
+    .splitCol(
+        object = object,
+        colName = "synonyms",
+        split = "; "
+    )
 }
 
 
@@ -795,6 +829,7 @@ Cellosaurus <- # nolint
         object <- .sanitizeHierarchy(object)
         ## Benchmark: ~30 seconds.
         object <- .sanitizeRefIds(object)
+        object <- .sanitizeSecondaryAccession(object)
         object <- .sanitizeStrProfileData(object)
         object <- .sanitizeSynonyms(object)
         alert("Adding annotations.")
