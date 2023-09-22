@@ -3,10 +3,10 @@
 
 test_that("Cellosaurus", {
     ## nolint start
-    object <- withr::with_collate(
+    with_collate(
         new = "C",
         code = {
-            Cellosaurus()
+            object <- Cellosaurus()
         }
     )
     expect_s4_class(object, "Cellosaurus")
