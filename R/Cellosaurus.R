@@ -639,7 +639,11 @@ NULL
 #' @note Updated 2023-01-24.
 #' @noRd
 .sanitizeDate <- function(object) {
-    .splitCol(object = object, colName = "date", split = "; ")
+    .splitCol(
+        object = object,
+        colName = "date",
+        split = "; "
+    )
 }
 
 
@@ -716,7 +720,7 @@ NULL
 #' @note Updated 2023-09-22.
 #' @noRd
 .sanitizeSecondaryAccession <- function(object) {
-    .splitNestedCol(
+    .splitCol(
         object = object,
         colName = "secondaryAccession",
         split = "; "

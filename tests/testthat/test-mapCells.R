@@ -1,5 +1,3 @@
-## FIXME CVCL_V618 should map to CVCL_1658.
-
 test_that("Cell name", {
     object <- cello
     cells <- head(object[["cellLineName"]], n = 3L)
@@ -12,6 +10,8 @@ test_that("Cell name", {
     )
     expect_identical(cells, expected)
 })
+
+## FIXME CVCL_V618 should map to CVCL_1658.
 
 test_that("Secondary accession", {
     object <- celloFull
