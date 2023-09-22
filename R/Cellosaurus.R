@@ -1,7 +1,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-09-21.
+#' @note Updated 2023-09-22.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -596,7 +596,7 @@ NULL
 
 #' Sanitize the `comments` column
 #'
-#' @note Updated 2023-01-24.
+#' @note Updated 2023-09-22.
 #' @noRd
 .sanitizeComments <- function(object) {
     assert(
@@ -609,8 +609,7 @@ NULL
         replacement = "",
         x = object[["comments"]]
     )
-    ## FIXME This step is now erroring out with split update.
-    .splitNestedCol(object, colName = "comments", sep = ": ")
+    .splitNestedCol(object, colName = "comments", split = ": ")
 }
 
 
@@ -623,7 +622,7 @@ NULL
     .splitNestedCol(
         object = object,
         colName = "crossReferences",
-        sep = "; "
+        split = "; "
     )
 }
 
@@ -644,7 +643,7 @@ NULL
 #' @note Updated 2023-01-24.
 #' @noRd
 .sanitizeDiseases <- function(object) {
-    .splitNestedCol(object, colName = "diseases", sep = "; ")
+    .splitNestedCol(object, colName = "diseases", split = "; ")
 }
 
 
@@ -691,7 +690,7 @@ NULL
     .splitNestedCol(
         object = object,
         colName = "referencesIdentifiers",
-        sep = "="
+        split = "="
     )
 }
 
@@ -702,7 +701,7 @@ NULL
 #' @note Updated 2023-01-31.
 #' @noRd
 .sanitizeStrProfileData <- function(object) {
-    .splitNestedCol(object = object, colName = "strProfileData", sep = ": ")
+    .splitNestedCol(object = object, colName = "strProfileData", split = ": ")
 }
 
 
@@ -742,17 +741,20 @@ NULL
 #'
 #' @note Updated 2023-09-21.
 #' @noRd
-.splitNestedCol <- function(object, colName, sep) {
+.splitNestedCol <- function(object, colName, split) {
     assert(
         is(object, "DFrame"),
         is(object[[colName]], "CharacterList"),
-        isString(sep)
+        isString(split)
     )
-    lst <- lapply(
+    lst <- mclapply(
         X = object[[colName]],
-        sep = sep,
-        FUN = function(x, sep) {
-            x <- strSplit(x = x, split = sep, n = 2L)
+        split = split,
+        FUN = function(x, split) {
+            if (identical(x, character())) {
+                return(list())
+            }
+            x <- strSplit(x = x, split = split, n = 2L)
             x <- split(x = x[, 2L], f = x[, 1L])
             x
         }
@@ -770,14 +772,18 @@ NULL
 #' @export
 Cellosaurus <- # nolint
     function() {
+        ## Benchmark: ~1 minute, 15 seconds.
         object <- .importCelloFromTxt()
         alert("Sanitizing annotations.")
         object <- .sanitizeAgeAtSampling(object)
-        ## FIXME This step is erroring with our updated split approach.
+        ## Benchmark: ~1 minute.
         object <- .sanitizeComments(object)
+        ## Benchmark: ~1 minute.
         object <- .sanitizeCrossRefs(object)
         object <- .sanitizeDate(object)
+        ## Benchmark: ~30 seconds.
         object <- .sanitizeDiseases(object)
+        ## FIXME Need to handle empty character here.
         object <- .sanitizeHierarchy(object)
         object <- .sanitizeRefIds(object)
         object <- .sanitizeStrProfileData(object)
