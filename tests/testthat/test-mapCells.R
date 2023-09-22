@@ -355,10 +355,6 @@ test_that("CellModelPassports", {
         ## CVCL_7084 --> CVCL_7047
         "SIDM01997"
     )
-    ## FIXME Need to add these overrides:
-    ## - SIDM01416 UACC-62_CJ1 --> CVCL_A1VN
-    ## - SIDM01935 A375_CJ1 --> CVCL_A1VP
-    ## - SIDM01936 A375_CJ3 --> CVCL_B3PJ
     df <- df[setdiff(rownames(df), censor), ]
     expect_identical(
         object = unname(mapCells(object, cells = df[["model_name"]])),
