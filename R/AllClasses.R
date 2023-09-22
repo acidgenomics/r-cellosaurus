@@ -1,6 +1,6 @@
 #' Cellosaurus table of cell identifier mappings
 #'
-#' @note Updated 2023-08-25.
+#' @note Updated 2023-09-22.
 #' @export
 #'
 #' @return `Cellosaurus`.
@@ -52,7 +52,7 @@ setValidity(
                 "referencesIdentifiers" = "SimpleList",
                 "samplingSite" = "CompressedCharacterList",
                 "sangerModelId" = "Rle",
-                "secondaryAccession" = "Rle",
+                "secondaryAccession" = "CompressedCharacterList",
                 "sexOfCell" = "Rle",
                 "strProfileData" = "SimpleList",
                 "synonyms" = "CompressedCharacterList",
