@@ -1,5 +1,5 @@
 ## Prepare unit test checks for `mapCells` function.
-## Updated 2023-08-24.
+## Updated 2023-09-22.
 
 ## nolint start
 suppressPackageStartupMessages({
@@ -23,8 +23,7 @@ df <- import(
         "35020903",
         protocol = "https"
     )),
-    format = "csv",
-    engine = "readr"
+    format = "csv"
 )
 df <- df[, c("DepMap_ID", "cell_line_name", "RRID")]
 rownames(df) <- makeNames(df[["DepMap_ID"]])
@@ -81,11 +80,10 @@ df <- import(
         "cog.sanger.ac.uk",
         "cmp",
         "download",
-        "model_list_20230110.csv",
+        "model_list_20230902.csv",
         protocol = "https"
     )),
-    format = "csv",
-    engine = "readr"
+    format = "csv"
 )
 df <- df[, c("model_id", "model_name", "RRID")]
 rownames(df) <- makeNames(df[["model_id"]])
