@@ -145,14 +145,14 @@ NULL
 #' @details
 #' Some cell lines rarely map to multiple identifiers, such as "CVCL_0028".
 #'
-#' @note Updated 2023-09-21.
+#' @note Updated 2023-09-22.
 #' @noRd
 .addNcitDisease <- function(object) {
     assert(
         is(object, "DFrame"),
         is(object[["diseases"]], "SimpleList")
     )
-    spl <- lapply(
+    spl <- mclapply(
         X = object[["diseases"]],
         FUN = function(x) {
             x <- x[["NCIt"]]
@@ -306,7 +306,7 @@ NULL
 
 #' Add `ncbiTaxonomyId` and `organism` columns
 #'
-#' @note Updated 2023-09-21.
+#' @note Updated 2023-09-22.
 #' @noRd
 #'
 #' @details
@@ -319,7 +319,7 @@ NULL
         is(object, "DFrame"),
         is(object[["speciesOfOrigin"]], "CharacterList")
     )
-    spl <- lapply(
+    spl <- mclapply(
         X = object[["speciesOfOrigin"]],
         FUN = strSplit,
         split = "; ! ",
@@ -777,7 +777,7 @@ NULL
 
 
 
-## Updated 2023-09-21.
+## Updated 2023-09-22.
 
 #' @rdname Cellosaurus
 #' @export
@@ -789,10 +789,10 @@ Cellosaurus <- # nolint
         object <- .sanitizeAgeAtSampling(object)
         ## Benchmark: ~1 minute.
         object <- .sanitizeComments(object)
-        ## Benchmark: ~1 minute.
+        ## Benchmark: ~1 minute, 15 seconds.
         object <- .sanitizeCrossRefs(object)
         object <- .sanitizeDate(object)
-        ## Benchmark: ~30 seconds.
+        ## Benchmark: ~25 seconds.
         object <- .sanitizeDiseases(object)
         ## Benchmark: ~15 seconds.
         object <- .sanitizeHierarchy(object)
@@ -808,11 +808,13 @@ Cellosaurus <- # nolint
         object <- .addIsProblematic(object)
         object <- .addMisspellings(object)
         object <- .addMsiStatus(object)
+        ## Benchmark: ~40 seconds.
         object <- .addNcitDisease(object)
         object <- .addOncotree(object)
         object <- .addPopulation(object)
         object <- .addSamplingSite(object)
         object <- .addSangerModelId(object)
+        ## Benchmark: ~1 minute, 15 seconds.
         object <- .addTaxonomy(object)
         alert("Encoding metadata.")
         object <- encode(object)
