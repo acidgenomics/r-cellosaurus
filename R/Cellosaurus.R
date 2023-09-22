@@ -628,6 +628,8 @@ NULL
 
 
 
+## FIXME Actually convert this into `Date` class.
+
 #' Sanitize the `date` column
 #'
 #' @note Updated 2023-01-24.
