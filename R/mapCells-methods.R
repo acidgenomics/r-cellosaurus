@@ -1,6 +1,10 @@
+## FIXME "CVCL_V618" needs to map to "CVCL_1658".
+
+
+
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
-#' @note Updated 2023-09-05.
+#' @note Updated 2023-09-22.
 #'
 #' @details
 #' This function is designed to take input from a spreadsheet, electronic
@@ -112,6 +116,8 @@ NULL
             "misspellings"
         )
         table <- df[, intersect(cols, colnames(df))]
+        ## FIXME This isn't matching our secondaryAccession column correctly...
+        ## need to test this.
         idx <- matchNested(x = cells, table = table)
         ## Fall back to matching against standardized cell name.
         if (anyNA(idx)) {
