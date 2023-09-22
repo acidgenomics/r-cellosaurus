@@ -1,7 +1,3 @@
-## FIXME We need to split secondaryAccession by "; ".
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
