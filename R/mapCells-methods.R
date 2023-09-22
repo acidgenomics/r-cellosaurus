@@ -1,7 +1,3 @@
-## UACC-62_CJ1 isn't mapping correctly from overrides.
-
-
-
 #' @name mapCells
 #' @inherit AcidGenerics::mapCells description title
 #' @note Updated 2023-09-22.
@@ -116,8 +112,6 @@ NULL
             "misspellings"
         )
         table <- df[, intersect(cols, colnames(df))]
-        ## FIXME This isn't matching our secondaryAccession column correctly...
-        ## need to test this.
         idx <- matchNested(x = cells, table = table)
         ## Fall back to matching against standardized cell name.
         if (anyNA(idx)) {
