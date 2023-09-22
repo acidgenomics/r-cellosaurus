@@ -648,25 +648,32 @@ NULL
 
 
 
+## FIXME Need to handle empty character here.
+
 #' Sanitize the `hierarchy` column
 #'
 #' @details
 #' Some entries have multiple elements, such as "CVCL_0464".
 #'
-#' @note Updated 2023-09-21.
+#' @note Updated 2023-09-22.
 #' @noRd
 .sanitizeHierarchy <- function(object) {
     assert(
         is(object, "DFrame"),
         is(object[["hierarchy"]], "CharacterList")
     )
-    lst <- CharacterList(lapply(
+    lst <- mclapply(
         X = object[["hierarchy"]],
         FUN = function(x) {
+            if (identical(x, character())) {
+                return(character())
+            }
             spl <- strSplit(x, split = " ! ")
-            spl[, 1L]
+            out <- spl[, 1L]
+            out
         }
-    ))
+    )
+    lst <- CharacterList(lst)
     object[["hierarchy"]] <- lst
     object
 }
@@ -706,6 +713,8 @@ NULL
 
 
 
+## FIXME This is hitting a non-character argument.
+
 #' Sanitize the `synonyms` column
 #'
 #' @note Updated 2023-01-24.
@@ -715,10 +724,11 @@ NULL
 }
 
 
+## FIXME This step is erroring for sanitizeComments, may need to rework.
 
 #' Split a column into a character list
 #'
-#' @note Updated 2023-01-23.
+#' @note Updated 2023-09-22.
 #' @noRd
 .splitCol <- function(object, colName, split = "; ") {
     assert(
@@ -726,12 +736,13 @@ NULL
         isString(colName),
         isString(split)
     )
-    object[[colName]] <-
-        CharacterList(strsplit(
-            x = object[[colName]],
-            split = split,
-            fixed = TRUE
-        ))
+    spl <- strsplit(
+        x = object[[colName]],
+        split = split,
+        fixed = TRUE
+    )
+    cl <- CharacterList(spl)
+    object[[colName]] <- cl
     object
 }
 
@@ -783,8 +794,9 @@ Cellosaurus <- # nolint
         object <- .sanitizeDate(object)
         ## Benchmark: ~30 seconds.
         object <- .sanitizeDiseases(object)
-        ## FIXME Need to handle empty character here.
+        ## Benchmark: ~15 seconds.
         object <- .sanitizeHierarchy(object)
+        ## Benchmark: ~30 seconds.
         object <- .sanitizeRefIds(object)
         object <- .sanitizeStrProfileData(object)
         object <- .sanitizeSynonyms(object)
