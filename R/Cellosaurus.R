@@ -622,7 +622,7 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-08-25.
+#' @note Updated 2023-09-22.
 #' @noRd
 #'
 #' @seealso
@@ -728,7 +728,7 @@ NULL
 
 #' Process lines per entry
 #'
-#' @note Updated 2023-09-21.
+#' @note Updated 2023-09-22.
 #' @noRd
 .processEntry <- function(x, nestedKeys, optionalKeys) {
     x <- strSplit(x, split = "   ")
@@ -785,7 +785,7 @@ NULL
 
 #' Split a nested column by key
 #'
-#' @note Updated 2023-09-21.
+#' @note Updated 2023-09-22.
 #' @noRd
 .splitNestedCol <- function(object, colName, split) {
     assert(
@@ -801,6 +801,7 @@ NULL
                 return(list())
             }
             x <- strSplit(x = x, split = split, n = 2L)
+            x[, 1L] <- camelCase(x[, 1L])
             x <- split(x = x[, 2L], f = x[, 1L])
             x
         }
