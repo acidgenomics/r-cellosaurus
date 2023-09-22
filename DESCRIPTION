@@ -2,7 +2,7 @@ Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
 Version: 0.7.3.9000
-Date: 2023-09-21
+Date: 2023-09-22
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -49,3 +49,4 @@ Config/testthat/parallel: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr, rmarkdown
+biocViews: CancerData, CellCulture
