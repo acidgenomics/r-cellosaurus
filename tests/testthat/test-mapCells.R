@@ -1,5 +1,3 @@
-## FIXME "UACC-62_CJ1" isn't mapping correctly from overrides argh.
-
 test_that("Cell line name", {
     object <- cello
     expect_identical(
