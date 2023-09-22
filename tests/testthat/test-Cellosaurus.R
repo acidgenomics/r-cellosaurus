@@ -126,7 +126,7 @@ test_that("Cellosaurus", {
         "ncitDiseaseId" = list("C7152"),
         "ncitDiseaseName" = list("Erythroleukemia"),
         "oncotreeCode" = "AML",
-        "oncotreeLevel" = "3",
+        "oncotreeLevel" = 3L,
         "oncotreeMainType" = "Leukemia",
         "oncotreeName" = "Acute Myeloid Leukemia",
         "oncotreeParent" = "MNM",
@@ -154,13 +154,7 @@ test_that("Cellosaurus", {
         )),
         "sangerModelId" = "SIDM00594",
         "secondaryAccession" = NA_character_,
-        "sexOfCell" = factor(
-            x = "Male",
-            levels = c(
-                "Female", "Male", "Mixed sex",
-                "Sex ambiguous", "Sex unspecified"
-            )
-        ),
+        "sexOfCell" = "Male",
         "strProfileData" = list(list(
             "Amelogenin" = c(
                 "X (CCRID; Cosmic-CLP JCRB)",
