@@ -1,52 +1,54 @@
-test_that("Cell name", {
+test_that("Cell line name", {
     object <- cello
-    cells <- head(object[["cellLineName"]], n = 3L)
-    cells <- standardizeCells(cells)
-    cells <- mapCells(object = object, cells = cells)
-    expected <- c(
-        "HEL" = "CVCL_0001",
-        "HL60" = "CVCL_0002",
-        "HMC1" = "CVCL_0003"
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = c("HEL", "HL60", "HMC1")
+        ),
+        expected = c(
+            "HEL" = "CVCL_0001",
+            "HL60" = "CVCL_0002",
+            "HMC1" = "CVCL_0003"
+        )
     )
-    expect_identical(cells, expected)
-})
-
-## FIXME CVCL_V618 should map to CVCL_1658.
-
-test_that("Secondary accession", {
-    object <- celloFull
-    cells <- c("CVCL_7353", "CVCL_H249")
-    cells <- mapCells(object = object, cells = cells)
-    expected <- c(
-        "CVCL_7353" = "CVCL_0014",
-        "CVCL_H249" = "CVCL_0023"
-    )
-    expect_identical(cells, expected)
 })
 
 test_that("Mixed identifier input", {
     object <- cello
-    cells <- c(
-        as.character(object[["accession"]])[[1L]],
-        as.character(object[["depmapId"]])[[1L]],
-        as.character(object[["sangerModelId"]])[[4L]]
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = c("CVCL_0001", "ACH-000004", "SIDM00791")
+        ),
+        expected = c(
+            "CVCL_0001" = "CVCL_0001",
+            "ACH-000004" = "CVCL_0001",
+            "SIDM00791" = "CVCL_0004"
+        )
     )
-    cells <- mapCells(object = object, cells = cells)
-    expected <- c(
-        "CVCL_0001" = "CVCL_0001",
-        "ACH-000004" = "CVCL_0001",
-        "SIDM00791" = "CVCL_0004"
+})
+
+test_that("Secondary accession", {
+    object <- celloFull
+    expect_identical(
+        object = mapCells(
+            object = object,
+            cells = c("CVCL_7353", "CVCL_H249", "CVCL_V618")
+        ),
+        expected = c(
+            "CVCL_7353" = "CVCL_0014",
+            "CVCL_H249" = "CVCL_0023",
+            "CVCL_V618" = "CVCL_1658"
+        )
     )
-    expect_identical(cells, expected)
 })
 
 test_that("keyType return", {
     object <- cello
-    cells <- head(as.character(object[["cellLineName"]]), n = 2L)
     expect_identical(
         object = mapCells(
             object = object,
-            cells = cells,
+            cells = c("HEL", "HL-60"),
             keyType = "depmapId"
         ),
         expected = c(
@@ -57,7 +59,7 @@ test_that("keyType return", {
     expect_identical(
         object = mapCells(
             object = object,
-            cells = cells,
+            cells = c("HEL", "HL-60"),
             keyType = "sangerModelId"
         ),
         expected = c(
@@ -340,21 +342,24 @@ test_that("CellModelPassports", {
         x = df[["RRID"]]
     )
     censor <- c(
-        "SIDM00122",
+        ## CVCL_E995 --> CVCL_1429.
         "SIDM00408",
+        ## CVCL_0436 --> CVCL_H525.
         "SIDM00440",
-        "SIDM00912",
-        "SIDM01335",
-        "SIDM01500"
+        ## CVCL_V618 --> CVCL_1658
+        "SIDM01500",
+        ## CVCL_7227 --> CVCL_2037
+        "SIDM01625",
+        ## CVCL_VT47 --> CVCL_4511
+        "SIDM01989",
+        ## CVCL_7084 --> CVCL_7047
+        "SIDM01997"
     )
+    ## FIXME Need to add these overrides:
+    ## - SIDM01416 UACC-62_CJ1 --> CVCL_A1VN
+    ## - SIDM01935 A375_CJ1 --> CVCL_A1VP
+    ## - SIDM01936 A375_CJ3 --> CVCL_B3PJ
     df <- df[setdiff(rownames(df), censor), ]
-    ## FIXME Need to address these:
-    ## [1145] NA          - "CVCL_A1VN" [1145]
-    ## [1229] "CVCL_2037" - "CVCL_7227" [1229]
-    ## [1637] NA          - "CVCL_A1VP" [1637]
-    ## [1642] NA          - "CVCL_B3PJ" [1642]
-    ## [1707] "CVCL_4511" - "CVCL_VT47" [1707]
-    ## [1714] "CVCL_7047" - "CVCL_7084" [1714]
     expect_identical(
         object = unname(mapCells(object, cells = df[["model_name"]])),
         expected = df[["RRID"]]
