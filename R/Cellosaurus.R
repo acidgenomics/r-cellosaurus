@@ -629,14 +629,14 @@ NULL
 #' - https://github.com/calipho-sib/cellosaurus/
 #' - https://ftp.expasy.org/databases/cellosaurus/
 .importCelloFromTxt <- function() {
-    url <- pasteURL(
+    url <- pasteUrl(
         "ftp.expasy.org",
         "databases",
         "cellosaurus",
         "cellosaurus.txt",
         protocol = "https"
     )
-    con <- cacheURL(url, pkg = .pkgName)
+    con <- cacheUrl(url, pkg = .pkgName)
     lines <- import(con, format = "lines")
     ## Extract the Cellosaurus data version (release) from the top of the file.
     dataVersion <- strsplit(

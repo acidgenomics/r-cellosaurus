@@ -12,7 +12,7 @@
 #' @examples
 #' currentCellosaurusVersion()
 currentCellosaurusVersion <- function() {
-    con <- pasteURL(
+    con <- pasteUrl(
         "ftp.expasy.org",
         "databases",
         "cellosaurus",

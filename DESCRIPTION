@@ -2,7 +2,7 @@ Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
 Version: 0.8.0.9000
-Date: 2023-09-22
+Date: 2023-09-27
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -27,7 +27,6 @@ Imports:
     AcidCLI (>= 0.2.8),
     AcidGenerics (>= 0.6.13),
     AcidPlyr (>= 0.4.2),
-    BiocFileCache (>= 2.8.0),
     BiocGenerics (>= 0.46.0),
     IRanges (>= 2.34.0),
     S4Vectors (>= 0.38.0),
@@ -38,6 +37,7 @@ Imports:
     parallel,
     utils
 Suggests:
+    BiocFileCache (>= 2.8.0),
     DT (>= 0.29),
     knitr (>= 1.43),
     rmarkdown (>= 2.24),
