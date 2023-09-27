@@ -29,7 +29,7 @@ NULL
 
 #' @importMethodsFrom AcidBase matchNested
 #' @importMethodsFrom AcidPlyr leftJoin rbindToDataFrame
-#' @importMethodsFrom pipette encode export import removeNA sanitizeNA
+#' @importMethodsFrom pipette encode export import removeNa sanitizeNa
 #' @importMethodsFrom syntactic camelCase snakeCase
 NULL
 
@@ -37,7 +37,7 @@ NULL
 
 ## Standard functions ==========================================================
 
-#' @importFrom AcidBase majorVersion pasteURL showHeader showSlotInfo strSplit
+#' @importFrom AcidBase majorVersion pasteUrl showHeader showSlotInfo strSplit
 #' @importFrom AcidCLI abort alert alertInfo
 #' @importFrom IRanges CharacterList IntegerList
 #' @importFrom S4Vectors DataFrame SimpleList
@@ -46,6 +46,6 @@ NULL
 #' isString isSubset validate validateClasses
 #' @importFrom methods as is new setClass setMethod setValidity validObject
 #' @importFrom parallel mclapply
-#' @importFrom pipette cacheURL
+#' @importFrom pipette cacheUrl
 #' @importFrom utils packageName packageVersion
 NULL

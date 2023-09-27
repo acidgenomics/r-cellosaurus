@@ -24,7 +24,7 @@ Invisible \code{character} or \code{list} of file paths.
 Export data from R
 }
 \note{
-Updated 2023-09-20.
+Updated 2023-09-22.
 }
 \section{Output file format extension}{
 
