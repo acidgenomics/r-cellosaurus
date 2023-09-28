@@ -5,5 +5,5 @@ hasRows <- goalie::hasRows
 with_collate <- withr::with_collate
 ## nolint end
 
-celloFull <- readRDS(file.path("cache", "celloFull.rds"))
-map <- readRDS(file.path("cache", "mapCells.rds"))
+celloFull <- readRDS(file.path(cacheDir, "celloFull.rds"))
+map <- readRDS(file.path(cacheDir, "mapCells.rds"))
