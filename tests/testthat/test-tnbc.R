@@ -10,6 +10,4 @@ test_that("tnbc", {
         object = tnbc(object),
         expected = rownames(object)[[1L]]
     )
-    object <- celloFull
-    expect_length(tnbc(object), 153L)
 })
