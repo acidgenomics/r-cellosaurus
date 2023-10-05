@@ -20,7 +20,5 @@ driverMutations <- function(object) {
     x <- x[lengths(x) > 0L]
     x <- CharacterList(x)
     x <- sub(pattern = "Mutation; ", replacement = "", x = x)
-    ## Are these organized by a consistent splitting pattern?
-    ## That may be easier to sanitize.
     x
 }
