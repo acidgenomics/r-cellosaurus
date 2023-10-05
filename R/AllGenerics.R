@@ -1,4 +1,13 @@
 #' @export
+#' @rdname driverMutations
+setGeneric(
+    name = "driverMutations",
+    def = function(object, ...) {
+        standardGeneric("driverMutations")
+    }
+)
+
+#' @export
 #' @name excludeContaminatedCells
 #' @usage excludeContaminatedCells(object, ...)
 NULL
@@ -12,6 +21,15 @@ NULL
 #' @name export
 #' @usage export(object, con, ...)
 NULL
+
+#' @export
+#' @rdname fusions
+setGeneric(
+    name = "fusions",
+    def = function(object, ...) {
+        standardGeneric("fusions")
+    }
+)
 
 #' @export
 #' @name mapCells

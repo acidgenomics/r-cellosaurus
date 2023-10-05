@@ -1,6 +1,6 @@
 #' Gene fusion pairs
 #'
-#' @export
+#' @name fusions
 #' @note Updated 2023-10-05
 #'
 #' @return `CharacterList`.
@@ -9,6 +9,12 @@
 #' data(cello)
 #' x <- fusions(cello)
 #' print(x)
-fusions <- function(object) {
-    stop("FIXME IN PROGRESS")
-}
+NULL
+
+
+
+## Updated 2023-10-05.
+`fusions,Cellosaurus` <-
+    function(object) {
+        stop("FIXME IN PROGRESS")
+    }
