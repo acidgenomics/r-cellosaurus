@@ -1,6 +1,6 @@
-#' Driver mutations
+#' Driver gene mutations
 #'
-#' @name driverMutations
+#' @name mutations
 #' @note Updated 2023-10-05.
 #'
 #' @inheritParams AcidRoxygen::params
@@ -9,17 +9,18 @@
 #'
 #' @examples
 #' data(cello)
-#' x <- driverMutations(cello, format = "geneName")
+#' x <- mutations(cello, format = "geneName")
 #' print(x)
 NULL
 
 
 
 ## Updated 2023-10-05.
-`driverMutations,Cellosaurus` <-
+`mutations,Cellosaurus` <-
     function(
         object,
         format = c("hgncId", "geneName", "both")) {
+        assert(validObject(object))
         format <- match.arg(format)
         x <- mclapply(
             X = object[["comments"]],
@@ -48,10 +49,10 @@ NULL
 
 
 
-#' @rdname driverMutations
+#' @rdname mutations
 #' @export
 setMethod(
-    f = "driverMutations",
+    f = "mutations",
     signature = signature(object = "Cellosaurus"),
-    definition = `driverMutations,Cellosaurus`
+    definition = `mutations,Cellosaurus`
 )
