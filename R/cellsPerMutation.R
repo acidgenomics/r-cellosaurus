@@ -11,6 +11,9 @@
 #'
 #' @examples
 #' data(cello)
+#'
+#' ## Cellosaurus ====
+#' object <- cello
 #' mat <- cellsPerMutation(object)
 #' print(mat[1L:5L, 1L:5L])
 cellsPerMutation <-
@@ -29,6 +32,15 @@ cellsPerMutation <-
         tbl <- table(cl)
         mat <- .as.matrix.table(tbl)
         type(mat) <- "logical"
+        switch(
+            EXPR = cellFormat,
+            "cellLineName" = {
+                j <- rownames(mat)
+                j <- decode(object[j, "cellLineName"])
+                rownames(mat) <- j
+                mat <- mat[sort(rownames(mat)), , drop = FALSE]
+            }
+        )
         mat
     }
 
