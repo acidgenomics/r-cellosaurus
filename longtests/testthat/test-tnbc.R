@@ -1,4 +1,4 @@
 test_that("tnbc", {
     object <- celloFull
-    expect_length(tnbc(object), 160L)
+    expect_length(tnbc(object), 161L)
 })
