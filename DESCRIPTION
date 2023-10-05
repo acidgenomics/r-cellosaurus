@@ -37,6 +37,7 @@ Imports:
     parallel,
     utils
 Suggests:
+    AcidDevTools (>= 0.7.0),
     BiocFileCache (>= 2.8.0),
     DT (>= 0.29),
     knitr (>= 1.43),
