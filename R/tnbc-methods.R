@@ -1,7 +1,7 @@
 #' Triple negative breast cancer (TNBC) cell lines
 #'
 #' @name tnbc
-#' @note Updated 2023-09-12.
+#' @note Updated 2023-10-05.
 #'
 #' @inheritParams AcidRoxygen::params
 #'
@@ -21,10 +21,14 @@ NULL
 
 
 
-## Updated 2023-01-31.
+## Updated 2023-10-05.
 `tnbc,Cellosaurus` <- # nolint
     function(object) {
         assert(validObject(object))
+        ## This will drop some cell lines.
+        ## > object <- excludeNonHumanCells(object)
+        object <- excludeNonCancerCells(object)
+        object <- excludeProblematicCells(object)
         lgl <- vapply(
             X = object[["comments"]],
             FUN = function(x) {
