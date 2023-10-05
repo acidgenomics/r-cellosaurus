@@ -1,5 +1,19 @@
 # Release notes
 
+## Cellosaurus 0.8.0 (2023-10-05)
+
+Major changes:
+
+- Removed stringi dependency in favor of AcidBase for string splitting.
+- `Cellosaurus`: No longer converting strings to factor. Simply encoding using
+  `Rle` instead. Removed `factorize` call in primary generator.
+
+Minor changes:
+
+- Updated Acid Genomics imports to use strict camel case.
+- `export`: Updated to use generic from AcidGenerics instead of BiocIO. This
+  variant doesn't require unused `format` argument, which is preferable.
+
 ## Cellosaurus 0.7.2 (2023-09-13)
 
 Major changes:
