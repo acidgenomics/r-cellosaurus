@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' data(cello)
-#' x <- geneFusions(cello, format = "geneName")
+#' x <- geneFusions(cello)
 #' print(x)
 NULL
 
@@ -17,30 +17,34 @@ NULL
 `geneFusions,Cellosaurus` <-
     function(
         object,
-        format = c("geneName", "hgncId", "both")) {
+        format = c("geneName", "hgncId")) {
         assert(validObject(object))
         format <- match.arg(format)
+        object <- excludeNonHumanCells(object)
+        object <- excludeNonCancerCells(object)
+        object <- excludeProblematicCells(object)
+        pattern = paste0(
+            "^Gene fusion; ",
+            "HGNC; ([0-9]+); ([^ ]+) \\+ ",
+            "HGNC; ([0-9]+); ([^ ]+); ",
+            "Name\\(s\\)=([^ ,;]+).+$"
+        )
         x <- mclapply(
             X = object[["comments"]],
-            FUN = function(x) {
+            FUN = function(x, pattern) {
                 x <- x[["Sequence variation"]]
-                x <- grep(pattern = "^Gene fusion; ", x = x, value = TRUE)
+                x <- grep(pattern = pattern, x = x, value = TRUE)
                 x
-            }
+            },
+            pattern = pattern
         )
         names(x) <- rownames(object)
         x <- x[lengths(x) > 0L]
         x <- CharacterList(x)
         x <- sub(
-            pattern = paste0(
-                "^Gene fusion; ",
-                "HGNC; ([0-9]+); ([^ ]+) \\+ ",
-                "HGNC; ([0-9]+); ([^ ]+); ",
-                "Name\\(s\\)=([^ ,;]+).+$"
-            ),
+            pattern = pattern,
             replacement = switch(
                 EXPR = format,
-                "both" = "\\2-\\4_\\1-\\3",
                 "geneName" = "\\5",
                 "hgncId" = "\\1-\\3"
             ),

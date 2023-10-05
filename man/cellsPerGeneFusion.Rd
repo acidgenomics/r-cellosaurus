@@ -4,7 +4,7 @@
 \alias{cellsPerGeneFusion}
 \title{Cells per gene fusion}
 \usage{
-cellsPerGeneFusion(object, format = c("geneName", "hgncId", "both"))
+cellsPerGeneFusion(object, fusionFormat = c("geneName", "hgncId"))
 }
 \value{
 \code{matrix}.
