@@ -4,7 +4,7 @@
 \alias{cellsPerGeneFusion}
 \title{Cells per gene fusion}
 \usage{
-cellsPerGeneFusion(object, fusionFormat = c("geneName", "hgncId"))
+cellsPerGeneFusion(object, minCells = 2L)
 }
 \value{
 \code{matrix}.
@@ -19,6 +19,9 @@ Updated 2023-10-05.
 }
 \examples{
 data(cello)
-mat <- cellsPerGeneFusion(object, format = "geneName")
+
+## Cellosaurus ====
+object <- cello
+mat <- cellsPerGeneFusion(object)
 print(mat[1L:5L, 1L:5L])
 }
