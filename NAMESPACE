@@ -2,6 +2,7 @@
 
 export(Cellosaurus)
 export(currentCellosaurusVersion)
+export(driverMutations)
 export(excludeContaminatedCells)
 export(excludeProblematicCells)
 export(export)
