@@ -2,9 +2,12 @@
 % Please edit documentation in R/AllGenerics.R, R/fusions.R
 \name{fusions}
 \alias{fusions}
+\alias{fusions,Cellosaurus-method}
 \title{Gene fusion pairs}
 \usage{
 fusions(object, ...)
+
+\S4method{fusions}{Cellosaurus}(object, format = c("hgncId", "geneName", "both"))
 }
 \value{
 \code{CharacterList}.
