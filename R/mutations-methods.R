@@ -19,7 +19,7 @@ NULL
 `mutations,Cellosaurus` <-
     function(
         object,
-        format = c("hgncId", "geneName", "both")) {
+        format = c("geneName", "hgncId", "both")) {
         assert(validObject(object))
         format <- match.arg(format)
         x <- mclapply(
