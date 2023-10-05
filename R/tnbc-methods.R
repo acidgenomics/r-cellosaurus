@@ -27,7 +27,7 @@ NULL
         assert(validObject(object))
         object <- excludeNonHumanCells(object)
         object <- excludeNonCancerCells(object)
-        object <- excludeProblematicCells(object)
+        object <- excludeContaminatedCells(object)
         lgl <- vapply(
             X = object[["comments"]],
             FUN = function(x) {
