@@ -7,7 +7,7 @@
 \usage{
 mutations(object, ...)
 
-\S4method{mutations}{Cellosaurus}(object, format = c("hgncId", "geneName", "both"))
+\S4method{mutations}{Cellosaurus}(object, format = c("geneName", "hgncId", "both"))
 }
 \arguments{
 \item{object}{Object.}
