@@ -4,7 +4,12 @@
 \alias{cellsPerMutation}
 \title{Cells per mutation}
 \usage{
-cellsPerMutation(object, format = c("geneName", "hgncId", "both"))
+cellsPerMutation(
+  object,
+  mutationFormat = c("geneName", "hgncId"),
+  cellFormat = c("cellLineName", "cellosaurusId"),
+  minCells = 3L
+)
 }
 \arguments{
 \item{object}{Object.}
@@ -22,6 +27,6 @@ Updated 2023-10-05.
 }
 \examples{
 data(cello)
-mat <- cellsPerMutation(object, format = "geneName")
+mat <- cellsPerMutation(object)
 print(mat[1L:5L, 1L:5L])
 }
