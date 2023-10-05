@@ -4,7 +4,10 @@
 \alias{driverMutations}
 \title{Driver mutations}
 \usage{
-driverMutations(object)
+driverMutations(object, format = c("geneName", "hgncId", "both"))
+}
+\value{
+\code{CharacterList}.
 }
 \description{
 Driver mutations
