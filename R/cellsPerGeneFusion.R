@@ -1,24 +1,24 @@
-#' Cells per mutation
+#' Cells per gene fusion
 #'
 #' @export
 #' @note Updated 2023-10-05.
 #'
-#' @inheritParams mutations
+#' @inheritParams geneFusions
 #'
 #' @return `matrix`.
 #' Logical matrix.
-#' Genes in columns, cells in rows.
+#' Gene fusion pairs in columns, cells in rows.
 #'
 #' @examples
 #' data(cello)
-#' mat <- cellsPerMutation(object, format = "geneName")
+#' mat <- cellsPerGeneFusion(object, format = "geneName")
 #' print(mat[1L:5L, 1L:5L])
-cellsPerMutation <-
+cellsPerGeneFusion <-
     function(object,
              format = c("geneName", "hgncId", "both")) {
         assert(validObject(object))
         format <- match.arg(format)
-        cl <- mutations(object = object, format = format)
+        cl <- geneFusions(object = object, format = format)
         assert(is(cl, "CharacterList"))
         i <- names(cl)
         j <- sort(unique(unlist(cl)))

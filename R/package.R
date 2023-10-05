@@ -20,10 +20,10 @@ NULL
 #' @importFrom AcidGenerics camelCase encode excludeContaminatedCells
 #' excludeProblematicCells export import leftJoin mapCells matchNested
 #' rbindToDataFrame selectCells snakeCase standardizeCells tnbc
-#' @importFrom BiocGenerics Map %in% as.data.frame grep grepl lapply unique
-#' unlist
+#' @importFrom BiocGenerics Map %in% as.data.frame do.call grep grepl lapply
+#' rbind unique unlist
 #' @importFrom IRanges gsub sub
-#' @importFrom S4Vectors Rle decode metadata metadata<- na.omit
+#' @importFrom S4Vectors %in% Rle decode metadata metadata<- na.omit
 #' @importFrom methods show
 NULL
 
@@ -45,7 +45,7 @@ NULL
 #' bapply hasLength hasNames hasNoDuplicates hasRownames isCharacter isFlag
 #' isString isSubset validate validateClasses
 #' @importFrom methods as is new setClass setMethod setValidity validObject
-#' @importFrom parallel mclapply
+#' @importFrom parallel mcMap mclapply
 #' @importFrom pipette cacheUrl
 #' @importFrom utils packageName packageVersion
 NULL
