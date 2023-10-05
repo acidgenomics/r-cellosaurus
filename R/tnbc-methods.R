@@ -25,8 +25,7 @@ NULL
 `tnbc,Cellosaurus` <- # nolint
     function(object) {
         assert(validObject(object))
-        ## This will drop some cell lines.
-        ## > object <- excludeNonHumanCells(object)
+        object <- excludeNonHumanCells(object)
         object <- excludeNonCancerCells(object)
         object <- excludeProblematicCells(object)
         lgl <- vapply(
