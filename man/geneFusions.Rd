@@ -16,10 +16,10 @@ geneFusions(object, ...)
 Gene fusion pairs
 }
 \note{
-Updated 2023-10-05
+Updated 2023-10-05.
 }
 \examples{
 data(cello)
-x <- geneFusions(cello)
+x <- geneFusions(cello, format = "geneName")
 print(x)
 }
