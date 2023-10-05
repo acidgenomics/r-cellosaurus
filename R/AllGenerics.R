@@ -4,6 +4,15 @@
 NULL
 
 #' @export
+#' @rdname excludeNonCancerCells
+setGeneric(
+    name = "excludeNonCancerCells",
+    def = function(object, ...) {
+        standardGeneric("excludeNonCancerCells")
+    }
+)
+
+#' @export
 #' @rdname excludeNonHumanCells
 setGeneric(
     name = "excludeNonHumanCells",
