@@ -1,7 +1,7 @@
 #' Gene fusion pairs
 #'
 #' @name geneFusions
-#' @note Updated 2023-10-05
+#' @note Updated 2023-10-05.
 #'
 #' @return `CharacterList`.
 #'
@@ -36,7 +36,7 @@ NULL
                 "^Gene fusion; ",
                 "HGNC; ([0-9]+); ([^ ]+) \\+ ",
                 "HGNC; ([0-9]+); ([^ ]+); ",
-                "Name\\(s\\)=([^ ,]+).+$"
+                "Name\\(s\\)=([^ ,;]+).+$"
             ),
             replacement = switch(
                 EXPR = format,

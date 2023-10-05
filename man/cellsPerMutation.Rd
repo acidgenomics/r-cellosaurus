@@ -25,8 +25,3 @@ data(cello)
 mat <- cellsPerMutation(object, format = "geneName")
 print(mat[1L:5L, 1L:5L])
 }
-\seealso{
-\itemize{
-\item \code{stringi::stri_list2matrix}.
-}
-}
