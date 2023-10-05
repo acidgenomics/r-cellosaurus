@@ -7,7 +7,10 @@
 #'
 #' @examples
 #' data(cello)
-#' x <- geneFusions(cello)
+#'
+#' ## Cellosaurus ====
+#' object <- cello
+#' x <- geneFusions(object)
 #' print(x)
 NULL
 
@@ -15,11 +18,8 @@ NULL
 
 ## Updated 2023-10-05.
 `geneFusions,Cellosaurus` <-
-    function(
-        object,
-        format = c("geneName", "hgncId")) {
+    function(object) {
         assert(validObject(object))
-        format <- match.arg(format)
         object <- excludeNonHumanCells(object)
         object <- excludeNonCancerCells(object)
         object <- excludeProblematicCells(object)
@@ -43,11 +43,7 @@ NULL
         x <- CharacterList(x)
         x <- sub(
             pattern = pattern,
-            replacement = switch(
-                EXPR = format,
-                "geneName" = "\\5",
-                "hgncId" = "\\1-\\3"
-            ),
+            replacement = "\\5 (\\1-\\3)",
             x = x
         )
         x <- unique(x)

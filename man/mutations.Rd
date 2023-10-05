@@ -7,7 +7,7 @@
 \usage{
 mutations(object, ...)
 
-\S4method{mutations}{Cellosaurus}(object, format = c("geneName", "hgncId"))
+\S4method{mutations}{Cellosaurus}(object)
 }
 \arguments{
 \item{object}{Object.}
@@ -25,6 +25,9 @@ Updated 2023-10-05.
 }
 \examples{
 data(cello)
-x <- mutations(cello)
+
+## Cellosaurus ====
+object <- cello
+x <- mutations(object)
 print(x)
 }

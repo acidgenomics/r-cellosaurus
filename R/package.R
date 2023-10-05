@@ -43,7 +43,7 @@ NULL
 #' @importFrom S4Vectors DataFrame SimpleList
 #' @importFrom goalie allAreMatchingFixed allAreMatchingRegex areSetEqual assert
 #' bapply hasLength hasNames hasNoDuplicates hasRownames isCharacter isFlag
-#' isString isSubset validate validateClasses
+#' isInt isString isSubset validate validateClasses
 #' @importFrom methods as is new setClass setMethod setValidity validObject
 #' @importFrom parallel mclapply
 #' @importFrom pipette cacheUrl

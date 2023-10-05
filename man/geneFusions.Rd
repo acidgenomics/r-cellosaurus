@@ -7,7 +7,7 @@
 \usage{
 geneFusions(object, ...)
 
-\S4method{geneFusions}{Cellosaurus}(object, format = c("geneName", "hgncId"))
+\S4method{geneFusions}{Cellosaurus}(object)
 }
 \value{
 \code{CharacterList}.
@@ -20,6 +20,9 @@ Updated 2023-10-05.
 }
 \examples{
 data(cello)
-x <- geneFusions(cello)
+
+## Cellosaurus ====
+object <- cello
+x <- geneFusions(object)
 print(x)
 }

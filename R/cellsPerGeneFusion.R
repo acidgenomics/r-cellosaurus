@@ -11,25 +11,24 @@
 #'
 #' @examples
 #' data(cello)
-#' mat <- cellsPerGeneFusion(object, format = "geneName")
+#'
+#' ## Cellosaurus ====
+#' object <- cello
+#' mat <- cellsPerGeneFusion(object)
 #' print(mat[1L:5L, 1L:5L])
 cellsPerGeneFusion <-
-    function(object,
-             fusionFormat = c("geneName", "hgncId")) {
+    function(object, minCells = 2L) {
         assert(validObject(object))
-        fusionFormat <- match.arg(fusionFormat)
-        cl <- geneFusions(object = object, format = fusionFormat)
+        cl <- geneFusions(object)
         assert(is(cl, "CharacterList"))
-        i <- names(cl)
-        j <- sort(unique(unlist(cl)))
-        ## FIXME Is there a more performant want to do this with CL?
-        lst <- mcMap(
-            f = `%in%`,
-            table = cl,
-            MoreArgs = list("x" = j),
-            USE.NAMES = FALSE
-        )
-        mat <- do.call(what = rbind, args = lst)
-        dimnames(mat) <- list(i, j)
+        tbl <- table(cl)
+        mat <- .tableToLogicalMatrix(tbl)
+        keep <- colSums(mat) >= minCells
+        mat <- mat[, keep, drop = FALSE]
+        keep <- rowSums(mat) > 0L
+        mat <- mat[keep, , drop = FALSE]
+        j <- rownames(mat)
+        rn <- paste0(decode(object[j, "cellLineName"]), " (", j, ")")
+        rownames(mat) <- rn
         mat
     }

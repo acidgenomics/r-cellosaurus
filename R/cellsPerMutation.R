@@ -17,40 +17,32 @@
 #' mat <- cellsPerMutation(object)
 #' print(mat[1L:5L, 1L:5L])
 cellsPerMutation <-
-    function(object,
-             mutationFormat = c("geneName", "hgncId"),
-             cellFormat = c("cellLineName", "cellosaurusId"),
-             minCells = 3L) {
+    function(object, minCells = 2L) {
         assert(
             validObject(object),
             isInt(minCells)
         )
-        mutationFormat <- match.arg(mutationFormat)
-        cellFormat <- match.arg(cellFormat)
-        cl <- mutations(object = object, format = mutationFormat)
+        cl <- mutations(object)
         assert(is(cl, "CharacterList"))
         tbl <- table(cl)
-        mat <- .as.matrix.table(tbl)
-        type(mat) <- "logical"
-        switch(
-            EXPR = cellFormat,
-            "cellLineName" = {
-                j <- rownames(mat)
-                j <- decode(object[j, "cellLineName"])
-                rownames(mat) <- j
-                mat <- mat[sort(rownames(mat)), , drop = FALSE]
-            }
-        )
+        mat <- .tableToLogicalMatrix(tbl)
+        keep <- colSums(mat) >= minCells
+        mat <- mat[, keep, drop = FALSE]
+        keep <- rowSums(mat) > 0L
+        mat <- mat[keep, , drop = FALSE]
+        j <- rownames(mat)
+        rn <- paste0(decode(object[j, "cellLineName"]), " (", j, ")")
+        rownames(mat) <- rn
         mat
     }
 
 
 
-#' Coerce a table to matrix
+#' Coerce a table to logical matrix
 #'
 #' @note Updated 2023-10-05.
 #' @noRd
-.as.matrix.table <- # nolint
+.tableToLogicalMatrix <- # nolint
     function(object) {
         assert(is(object, "table"))
         mat <- matrix(
@@ -64,5 +56,6 @@ cellsPerMutation <-
             identical(rowSums(object), rowSums(object)),
             identical(colSums(object), colSums(object))
         )
+        type(mat) <- "logical"
         mat
     }
