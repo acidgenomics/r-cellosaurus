@@ -1,23 +1,24 @@
 #' Gene fusion pairs
 #'
-#' @name fusions
+#' @name geneFusions
 #' @note Updated 2023-10-05
 #'
 #' @return `CharacterList`.
 #'
 #' @examples
 #' data(cello)
-#' x <- fusions(cello)
+#' x <- geneFusions(cello)
 #' print(x)
 NULL
 
 
 
 ## Updated 2023-10-05.
-`fusions,Cellosaurus` <-
+`geneFusions,Cellosaurus` <-
     function(
         object,
         format = c("hgncId", "geneName", "both")) {
+        assert(validObject(object))
         format <- match.arg(format)
         x <- mclapply(
             X = object[["comments"]],
@@ -46,10 +47,10 @@ NULL
 
 
 
-#' @rdname fusions
+#' @rdname geneFusions
 #' @export
 setMethod(
-    f = "fusions",
+    f = "geneFusions",
     signature = signature(object = "Cellosaurus"),
-    definition = `fusions,Cellosaurus`
+    definition = `geneFusions,Cellosaurus`
 )
