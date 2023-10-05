@@ -12,6 +12,7 @@ test_that("Cellosaurus", {
     )
     expect_s4_class(object, "Cellosaurus")
     df <- as.data.frame(object)
+    ## Last checked against release 47 on 2023-10-05.
     x <- as.list(df["CVCL_0001", , drop = FALSE])
     y <- list(
         "accession" = "CVCL_0001",
@@ -105,12 +106,14 @@ test_that("Cellosaurus", {
             "PharmacoDB" = "HEL_534_2019",
             "Progenetix" = "CVCL_0001",
             "PubChem_Cell_line" = "CVCL_0001",
-            "Wikidata" = "Q54882501"
+            "Ubigene" = "YC-C090",
+            "Wikidata" = "Q54882501",
+            "cancercelllines" = "CVCL_0001"
         )),
-        "date" = list(c(
-            "Created: 04-04-12",
-            "Last updated: 29-06-23",
-            "Version: 42"
+        "date" = list(list(
+            "Created" = "04-04-12",
+            "Last updated" = "05-10-23",
+            "Version" = "43"
         )),
         "depmapId" = "ACH-000004",
         "diseases" = list(list(
@@ -142,9 +145,9 @@ test_that("Cellosaurus", {
                 "2985879", "3159941", "3874327", "6177045", "7538619",
                 "8558913", "9290701", "9510473", "9738977", "10739008",
                 "11021758", "11226526", "14504097", "16408098", "20164919",
-                "22460905", "23955599", "25485619", "26589293", "27277069",
-                "27397505", "29533902", "30285677", "30629668", "30894373",
-                "31068700", "31160637", "31978347", "35839778"
+                "22460905", "23955599", "25485619", "25877200", "26589293",
+                "27277069", "27397505", "29533902", "30285677", "30629668",
+                "30894373", "31068700", "31160637", "31978347", "35839778"
             )
         )),
         "samplingSite" = list(paste(
