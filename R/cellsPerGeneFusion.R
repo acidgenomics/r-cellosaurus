@@ -15,10 +15,10 @@
 #' print(mat[1L:5L, 1L:5L])
 cellsPerGeneFusion <-
     function(object,
-             format = c("geneName", "hgncId", "both")) {
+             fusionFormat = c("geneName", "hgncId")) {
         assert(validObject(object))
-        format <- match.arg(format)
-        cl <- geneFusions(object = object, format = format)
+        fusionFormat <- match.arg(fusionFormat)
+        cl <- geneFusions(object = object, format = fusionFormat)
         assert(is(cl, "CharacterList"))
         i <- names(cl)
         j <- sort(unique(unlist(cl)))
