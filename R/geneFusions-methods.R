@@ -22,7 +22,7 @@ NULL
         assert(validObject(object))
         object <- excludeNonHumanCells(object)
         object <- excludeNonCancerCells(object)
-        object <- excludeProblematicCells(object)
+        object <- excludeContaminatedCells(object)
         pattern = paste0(
             "^Gene fusion; ",
             "HGNC; ([0-9]+); ([^ ]+) \\+ ",

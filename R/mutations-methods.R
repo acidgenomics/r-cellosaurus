@@ -24,7 +24,7 @@ NULL
         assert(validObject(object))
         object <- excludeNonHumanCells(object)
         object <- excludeNonCancerCells(object)
-        object <- excludeProblematicCells(object)
+        object <- excludeContaminatedCells(object)
         ## Ensure we exclude any human cell lines with weird VGNC mapping here,
         ## such as CVCL_C1GL.
         pattern <- "^Mutation; HGNC; ([0-9]+); ([^;]+);.+$"
