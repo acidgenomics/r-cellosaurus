@@ -30,5 +30,7 @@ cellsPerGeneFusion <-
         j <- rownames(mat)
         rn <- paste0(decode(object[j, "cellLineName"]), " (", j, ")")
         rownames(mat) <- rn
+        i <- order(colSums(mat), decreasing = TRUE)
+        mat <- mat[, i, drop = FALSE]
         mat
     }
