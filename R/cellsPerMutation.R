@@ -1,21 +1,24 @@
 #' Cells per mutation
 #'
 #' @export
-#' @note Updated 2023-10-05.
+#' @note Updated 2023-10-06.
 #'
-#' @inheritParams mutations
+#' @inheritParams AcidRoxygen::params
 #'
-#' @return `matrix`.
-#' Logical matrix.
+#' @param minCells `integer(1)`.
+#' Minimum number of cells per mutation.
+#'
+#' @return `DFrame`.
 #' Genes in columns, cells in rows.
+#' Includes additional cell line metadata on left side.
 #'
 #' @examples
 #' data(cello)
 #'
 #' ## Cellosaurus ====
 #' object <- cello
-#' mat <- cellsPerMutation(object)
-#' print(mat[1L:5L, 1L:5L])
+#' df <- cellsPerMutation(object)
+#' print(df[1L:5L, 1L:5L])
 cellsPerMutation <-
     function(object, minCells = 2L) {
         assert(
@@ -30,12 +33,14 @@ cellsPerMutation <-
         mat <- mat[, keep, drop = FALSE]
         keep <- rowSums(mat) > 0L
         mat <- mat[keep, , drop = FALSE]
-        j <- rownames(mat)
-        rn <- paste0(decode(object[j, "cellLineName"]), " (", j, ")")
-        rownames(mat) <- rn
         i <- order(colSums(mat), decreasing = TRUE)
         mat <- mat[, i, drop = FALSE]
-        mat
+        df1 <- as(mat, "DFrame")
+        j <- rownames(df1)
+        df2 <- as(object, "DFrame")
+        df2 <- df2[j, .minimalCols, drop = FALSE]
+        df <- cbind(df2, df1)
+        df
     }
 
 

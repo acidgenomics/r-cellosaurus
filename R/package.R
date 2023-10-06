@@ -20,8 +20,8 @@ NULL
 #' @importFrom AcidGenerics camelCase encode excludeContaminatedCells
 #' excludeProblematicCells export import leftJoin mapCells matchNested
 #' rbindToDataFrame selectCells snakeCase standardizeCells tnbc
-#' @importFrom BiocGenerics Map %in% as.data.frame do.call grep grepl lapply
-#' rbind table unique unlist
+#' @importFrom BiocGenerics Map %in% as.data.frame cbind do.call grep grepl
+#' lapply rbind table unique unlist
 #' @importFrom IRanges gsub sub
 #' @importFrom S4Vectors %in% Rle decode metadata metadata<- na.omit
 #' @importFrom methods show

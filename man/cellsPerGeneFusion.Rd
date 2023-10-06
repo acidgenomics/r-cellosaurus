@@ -6,10 +6,16 @@
 \usage{
 cellsPerGeneFusion(object, minCells = 2L)
 }
+\arguments{
+\item{object}{Object.}
+
+\item{minCells}{\code{integer(1)}.
+Minimum number of cells per gene fusion.}
+}
 \value{
-\code{matrix}.
-Logical matrix.
+\code{DFrame}.
 Gene fusion pairs in columns, cells in rows.
+Includes additional cell line metadata on left side.
 }
 \description{
 Cells per gene fusion
@@ -22,6 +28,6 @@ data(cello)
 
 ## Cellosaurus ====
 object <- cello
-mat <- cellsPerGeneFusion(object)
-print(mat[1L:5L, 1L:5L])
+df <- cellsPerGeneFusion(object)
+print(df[1L:5L, 1L:5L])
 }
