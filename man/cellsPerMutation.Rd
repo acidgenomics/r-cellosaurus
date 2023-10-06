@@ -28,6 +28,6 @@ data(cello)
 
 ## Cellosaurus ====
 object <- cello
-mat <- cellsPerMutation(object)
-print(mat[1L:5L, 1L:5L])
+df <- cellsPerMutation(object)
+print(df[1L:5L, 1L:5L])
 }

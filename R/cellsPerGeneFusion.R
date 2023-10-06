@@ -32,8 +32,8 @@ cellsPerGeneFusion <-
         mat <- mat[keep, , drop = FALSE]
         i <- order(colSums(mat), decreasing = TRUE)
         mat <- mat[, i, drop = FALSE]
-        df1 <- as(mat, "DFrame")
-        j <- rownames(df1)
+        df1 <- as.DataFrame(mat)
+        j <- rownames(mat)
         df2 <- as(object, "DFrame")
         df2 <- df2[j, .minimalCols, drop = FALSE]
         df <- cbind(df2, df1)
