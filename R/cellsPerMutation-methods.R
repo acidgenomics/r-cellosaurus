@@ -21,7 +21,7 @@ NULL
 
 
 ## Updated 2023-10-06.
-`cellsPerMutation,Cellosaurus` <-
+`cellsPerMutation,Cellosaurus` <- # nolint
     function(object, minCells = 2L) {
         assert(
             validObject(object),
