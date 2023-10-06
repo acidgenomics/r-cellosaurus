@@ -10,6 +10,10 @@ New functions:
   `geneFusions` or `mutations` internally respectively, and return a `DFrame`
   containing logical columns per gene fusion or gene mutation.
 
+Minor changes:
+
+- `tnbc`: Added cell line exclusion rules.
+
 ## Cellosaurus 0.8.0 (2023-10-05)
 
 Major changes:
