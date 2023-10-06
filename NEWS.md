@@ -1,5 +1,15 @@
 # Release notes
 
+## Cellosaurus 0.8.1 (2023-10-06)
+
+New functions:
+
+- `geneFusions`, `mutations`: New functions that extract sequence annotation
+  information about gene fusions and driver gene mutations.
+- `cellsPerGeneFusion`, `cellsPerMutation`: New functions that call
+  `geneFusions` or `mutations` internally respectively, and return a `DFrame`
+  containing logical columns per gene fusion or gene mutation.
+
 ## Cellosaurus 0.8.0 (2023-10-05)
 
 Major changes:
