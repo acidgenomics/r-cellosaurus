@@ -1,5 +1,9 @@
 test_that("DepMap 22Q2", {
     object <- celloFull
+    skip_if_not(identical(
+        x = metadata(object)[["dataVersion"]],
+        y = dataVersion
+    ))
     df <- map[["depmap_22q2"]]
     censor <- c("ACH_000499", "ACH_001131", "ACH_002185")
     df <- df[setdiff(rownames(df), censor), ]
@@ -39,6 +43,10 @@ test_that("DepMap 22Q2", {
 
 test_that("DepMap 22Q4", {
     object <- celloFull
+    skip_if_not(identical(
+        x = metadata(object)[["dataVersion"]],
+        y = dataVersion
+    ))
     df <- map[["depmap_22q4"]]
     censor <- c("ACH_000499", "ACH_001131", "ACH_002185")
     df <- df[setdiff(rownames(df), censor), ]
@@ -74,6 +82,10 @@ test_that("DepMap 22Q4", {
 
 test_that("DepMap 23Q2", {
     object <- celloFull
+    skip_if_not(identical(
+        x = metadata(object)[["dataVersion"]],
+        y = dataVersion
+    ))
     df <- map[["depmap_23q2"]]
     censor <- c("ACH_000499", "ACH_001131", "ACH_002185")
     df <- df[setdiff(rownames(df), censor), ]
@@ -133,6 +145,10 @@ test_that("DepMap 23Q2", {
 
 test_that("CellModelPassports", {
     object <- celloFull
+    skip_if_not(identical(
+        x = metadata(object)[["dataVersion"]],
+        y = dataVersion
+    ))
     df <- map[["cmp"]]
     df[["RRID"]] <- gsub(
         pattern = "CVCL_2717;CVCL_1888",
