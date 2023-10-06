@@ -20,7 +20,7 @@ NULL
         object <- excludeNonHumanCells(object)
         object <- excludeNonCancerCells(object)
         object <- excludeContaminatedCells(object)
-        pattern = paste0(
+        pattern <- paste0(
             "^Gene fusion; ",
             "HGNC; ([0-9]+); ([^ ]+) \\+ ",
             "HGNC; ([0-9]+); ([^ ]+); ",

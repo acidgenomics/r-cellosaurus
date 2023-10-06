@@ -21,7 +21,7 @@ NULL
 
 
 ## Updated 2023-10-06.
-`cellsPerGeneFusion,Cellosaurus` <-
+`cellsPerGeneFusion,Cellosaurus` <- # nolint
     function(object, minCells = 2L) {
         assert(validObject(object))
         cl <- geneFusions(object)
