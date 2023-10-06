@@ -1,5 +1,5 @@
 #' @name export
-#' @inherit pipette::export
+#' @inherit AcidGenerics::export
 #' @note Updated 2023-09-22.
 #'
 #' @inheritParams AcidRoxygen::params
