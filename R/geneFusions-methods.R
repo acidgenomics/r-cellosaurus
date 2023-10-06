@@ -14,7 +14,7 @@ NULL
 
 
 ## Updated 2023-10-05.
-`geneFusions,Cellosaurus` <-
+`geneFusions,Cellosaurus` <- # nolint
     function(object) {
         assert(validObject(object))
         object <- excludeNonHumanCells(object)
