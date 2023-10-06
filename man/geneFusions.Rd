@@ -9,6 +9,9 @@ geneFusions(object, ...)
 
 \S4method{geneFusions}{Cellosaurus}(object)
 }
+\arguments{
+\item{object}{Object.}
+}
 \value{
 \code{CharacterList}.
 }

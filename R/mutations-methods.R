@@ -1,11 +1,8 @@
-#' Driver gene mutations
-#'
 #' @name mutations
+#' @inherit AcidGenerics::mutations
 #' @note Updated 2023-10-05.
 #'
 #' @inheritParams AcidRoxygen::params
-#'
-#' @return `CharacterList`.
 #'
 #' @examples
 #' data(cello)

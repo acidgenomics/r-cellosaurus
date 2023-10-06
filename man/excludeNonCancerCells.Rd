@@ -12,11 +12,9 @@ excludeNonCancerCells(object, ...)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{...}{Additional arguments.}
 }
 \value{
-Modified object.
+Modified object, with non-cancer cells excluded (removed).
 }
 \description{
 Exclude non-cancer cell lines
