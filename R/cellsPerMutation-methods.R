@@ -49,6 +49,7 @@ NULL
         j <- rownames(df1)
         df2 <- as(object, "DFrame")
         df2 <- df2[j, .minimalCols, drop = FALSE]
+        df2 <- decode(df2)
         df <- cbind(df2, df1)
         df
     }
