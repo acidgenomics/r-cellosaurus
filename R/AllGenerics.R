@@ -3,6 +3,8 @@
 #' @usage excludeContaminatedCells(object, ...)
 NULL
 
+## FIXME Move to AcidGenerics.
+
 #' @export
 #' @rdname excludeNonCancerCells
 setGeneric(
@@ -11,6 +13,8 @@ setGeneric(
         standardGeneric("excludeNonCancerCells")
     }
 )
+
+## FIXME Move to AcidGenerics.
 
 #' @export
 #' @rdname excludeNonHumanCells
@@ -31,6 +35,8 @@ NULL
 #' @usage export(object, con, ...)
 NULL
 
+## FIXME Move to AcidGenerics.
+
 #' @export
 #' @rdname geneFusions
 setGeneric(
@@ -44,6 +50,8 @@ setGeneric(
 #' @name mapCells
 #' @usage mapCells(object, ...)
 NULL
+
+## FIXME Move to AcidGenerics.
 
 #' @export
 #' @rdname mutations
