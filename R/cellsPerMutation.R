@@ -35,7 +35,7 @@ cellsPerMutation <-
         mat <- mat[keep, , drop = FALSE]
         i <- order(colSums(mat), decreasing = TRUE)
         mat <- mat[, i, drop = FALSE]
-        df1 <- as(mat, "DFrame")
+        df1 <- as.DataFrame(mat)
         j <- rownames(df1)
         df2 <- as(object, "DFrame")
         df2 <- df2[j, .minimalCols, drop = FALSE]

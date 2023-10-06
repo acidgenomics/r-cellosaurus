@@ -21,7 +21,7 @@ Includes additional cell line metadata on left side.
 Cells per gene fusion
 }
 \note{
-Updated 2023-10-05.
+Updated 2023-10-06.
 }
 \examples{
 data(cello)

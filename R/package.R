@@ -29,7 +29,8 @@ NULL
 
 #' @importMethodsFrom AcidBase matchNested
 #' @importMethodsFrom AcidPlyr leftJoin rbindToDataFrame
-#' @importMethodsFrom pipette encode export import removeNa sanitizeNa
+#' @importMethodsFrom pipette as.DataFrame encode export import removeNa
+#' sanitizeNa
 #' @importMethodsFrom syntactic camelCase snakeCase
 NULL
 
