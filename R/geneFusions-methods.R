@@ -2,6 +2,8 @@
 #' @inherit AcidGenerics::geneFusions
 #' @note Updated 2023-10-05.
 #'
+#' @param ... Additional arguments.
+#'
 #' @examples
 #' data(cello)
 #'

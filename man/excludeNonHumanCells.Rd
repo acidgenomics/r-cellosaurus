@@ -11,6 +11,8 @@ excludeNonHumanCells(object, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 Modified object, with non-human cells excluded (removed).

@@ -11,6 +11,8 @@ geneFusions(object, ...)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{CharacterList}.

@@ -14,6 +14,8 @@ cellsPerGeneFusion(object, ...)
 
 \item{minCells}{\code{integer(1)}.
 Minimum number of cells per gene fusion.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{DFrame} or \code{NULL}.

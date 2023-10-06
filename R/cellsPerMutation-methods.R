@@ -9,6 +9,8 @@
 #' @param minCells `integer(1)`.
 #' Minimum number of cells per mutation.
 #'
+#' @param ... Additional arguments.
+#'
 #' @examples
 #' data(cello)
 #'

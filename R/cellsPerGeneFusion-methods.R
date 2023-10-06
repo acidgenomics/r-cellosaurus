@@ -9,6 +9,8 @@
 #' @param minCells `integer(1)`.
 #' Minimum number of cells per gene fusion.
 #'
+#' @param ... Additional arguments.
+#'
 #' @examples
 #' data(cello)
 #'
