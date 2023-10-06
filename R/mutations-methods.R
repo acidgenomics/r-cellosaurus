@@ -2,7 +2,7 @@
 #' @inherit AcidGenerics::mutations
 #' @note Updated 2023-10-05.
 #'
-#' @inheritParams AcidRoxygen::params
+#' @param ... Additional arguments.
 #'
 #' @examples
 #' data(cello)

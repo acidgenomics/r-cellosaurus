@@ -14,6 +14,8 @@ cellsPerMutation(object, ...)
 
 \item{minCells}{\code{integer(1)}.
 Minimum number of cells per mutation.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 \code{DFrame} or \code{NULL}.
