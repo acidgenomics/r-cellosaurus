@@ -17,9 +17,11 @@ NULL
 
 ## S4 generics and methods =====================================================
 
-#' @importFrom AcidGenerics camelCase encode excludeContaminatedCells
-#' excludeProblematicCells export import leftJoin mapCells matchNested
-#' rbindToDataFrame selectCells snakeCase standardizeCells tnbc
+#' @importFrom AcidGenerics camelCase cellsPerGeneFusion cellsPerMutation encode
+#' excludeContaminatedCells excludeNonCancerCells excludeNonHumanCells
+#' excludeProblematicCells export geneFusions import leftJoin mapCells
+#' matchNested mutations rbindToDataFrame selectCells snakeCase standardizeCells
+#' tnbc
 #' @importFrom BiocGenerics Map %in% as.data.frame cbind do.call grep grepl
 #' lapply rbind table unique unlist
 #' @importFrom IRanges gsub sub

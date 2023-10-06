@@ -1,17 +1,13 @@
 #' Cells per mutation
 #'
-#' @export
+#' @name cellsPerMutation
+#' @inherit AcidGenerics::cellsPerMutation
 #' @note Updated 2023-10-06.
 #'
 #' @inheritParams AcidRoxygen::params
 #'
 #' @param minCells `integer(1)`.
 #' Minimum number of cells per mutation.
-#'
-#' @return `DFrame` or `NULL`.
-#' Genes in columns, cells in rows.
-#' Includes additional cell line metadata on left side.
-#' Returns `NULL` if no cells match or pass `minCells` filter.
 #'
 #' @examples
 #' data(cello)
@@ -20,7 +16,12 @@
 #' object <- cello
 #' df <- cellsPerMutation(object)
 #' print(df[1L:5L, 1L:5L])
-cellsPerMutation <-
+NULL
+
+
+
+## Updated 2023-10-06.
+`cellsPerMutation,Cellosaurus` <-
     function(object, minCells = 2L) {
         assert(
             validObject(object),
@@ -73,3 +74,13 @@ cellsPerMutation <-
         mode(mat) <- "logical"
         mat
     }
+
+
+
+#' @rdname cellsPerMutation
+#' @export
+setMethod(
+    f = "cellsPerMutation",
+    signature = signature(object = "Cellosaurus"),
+    definition = `cellsPerMutation,Cellosaurus`
+)

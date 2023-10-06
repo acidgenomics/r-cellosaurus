@@ -1,29 +1,27 @@
 #' @export
+#' @name cellsPerGeneFusion
+#' @usage cellsPerGeneFusion(object, ...)
+NULL
+
+#' @export
+#' @name cellsPerMutation
+#' @usage cellsPerMutation(object, ...)
+NULL
+
+#' @export
 #' @name excludeContaminatedCells
 #' @usage excludeContaminatedCells(object, ...)
 NULL
 
-## FIXME Move to AcidGenerics.
+#' @export
+#' @name excludeNonCancerCells
+#' @usage excludeNonCancerCells(object, ...)
+NULL
 
 #' @export
-#' @rdname excludeNonCancerCells
-setGeneric(
-    name = "excludeNonCancerCells",
-    def = function(object, ...) {
-        standardGeneric("excludeNonCancerCells")
-    }
-)
-
-## FIXME Move to AcidGenerics.
-
-#' @export
-#' @rdname excludeNonHumanCells
-setGeneric(
-    name = "excludeNonHumanCells",
-    def = function(object, ...) {
-        standardGeneric("excludeNonHumanCells")
-    }
-)
+#' @name excludeNonHumanCells
+#' @usage excludeNonHumanCells(object, ...)
+NULL
 
 #' @export
 #' @name excludeProblematicCells
@@ -35,32 +33,20 @@ NULL
 #' @usage export(object, con, ...)
 NULL
 
-## FIXME Move to AcidGenerics.
-
 #' @export
-#' @rdname geneFusions
-setGeneric(
-    name = "geneFusions",
-    def = function(object, ...) {
-        standardGeneric("geneFusions")
-    }
-)
+#' @name geneFusions
+#' @usage geneFusions(object, ...)
+NULL
 
 #' @export
 #' @name mapCells
 #' @usage mapCells(object, ...)
 NULL
 
-## FIXME Move to AcidGenerics.
-
 #' @export
-#' @rdname mutations
-setGeneric(
-    name = "mutations",
-    def = function(object, ...) {
-        standardGeneric("mutations")
-    }
-)
+#' @name mutations
+#' @usage mutations(object, ...)
+NULL
 
 #' @export
 #' @name selectCells

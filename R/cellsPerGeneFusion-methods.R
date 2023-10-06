@@ -1,17 +1,13 @@
 #' Cells per gene fusion
 #'
-#' @export
+#' @name cellsPerGeneFusion
+#' @inherit AcidGenerics::cellsPerGeneFusion
 #' @note Updated 2023-10-06.
 #'
 #' @inheritParams AcidRoxygen::params
 #'
 #' @param minCells `integer(1)`.
 #' Minimum number of cells per gene fusion.
-#'
-#' @return `DFrame`.
-#' Gene fusion pairs in columns, cells in rows.
-#' Includes additional cell line metadata on left side.
-#' Returns `NULL` if no cells match or pass `minCells` filter.
 #'
 #' @examples
 #' data(cello)
@@ -20,7 +16,12 @@
 #' object <- cello
 #' df <- cellsPerGeneFusion(object)
 #' print(df[1L:5L, 1L:5L])
-cellsPerGeneFusion <-
+NULL
+
+
+
+## Updated 2023-10-06.
+`cellsPerGeneFusion,Cellosaurus` <-
     function(object, minCells = 2L) {
         assert(validObject(object))
         cl <- geneFusions(object)
@@ -46,3 +47,13 @@ cellsPerGeneFusion <-
         df <- cbind(df2, df1)
         df
     }
+
+
+
+#' @rdname cellsPerGeneFusion
+#' @export
+setMethod(
+    f = "cellsPerGeneFusion",
+    signature = signature(object = "Cellosaurus"),
+    definition = `cellsPerGeneFusion,Cellosaurus`
+)

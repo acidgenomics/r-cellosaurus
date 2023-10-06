@@ -3,7 +3,7 @@
 \name{mutations}
 \alias{mutations}
 \alias{mutations,Cellosaurus-method}
-\title{Driver gene mutations}
+\title{Mutations}
 \usage{
 mutations(object, ...)
 
@@ -11,14 +11,12 @@ mutations(object, ...)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{CharacterList}.
 }
 \description{
-Driver gene mutations
+Mutations
 }
 \note{
 Updated 2023-10-05.

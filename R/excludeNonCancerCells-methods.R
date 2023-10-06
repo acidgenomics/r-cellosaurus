@@ -1,11 +1,8 @@
-#' Exclude non-cancer cell lines
-#'
 #' @name excludeNonCancerCells
+#' @inherit AcidGenerics::excludeNonCancerCells
 #' @note Updated 2023-10-05.
 #'
 #' @inheritParams AcidRoxygen::params
-#'
-#' @return Modified object.
 #'
 #' @examples
 #' data(cello)
