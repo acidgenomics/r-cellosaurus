@@ -35,5 +35,4 @@ data(cello)
 ## Cellosaurus ====
 object <- cello
 df <- cellsPerGeneFusion(object)
-print(df[1L:5L, 1L:5L])
 }
