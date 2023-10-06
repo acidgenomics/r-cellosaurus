@@ -11,8 +11,11 @@ test_that("Cellosaurus", {
         }
     )
     expect_s4_class(object, "Cellosaurus")
+    skip_if_not(identical(
+        x = metadata(object)[["dataVersion"]],
+        y = dataVersion
+    ))
     df <- as.data.frame(object)
-    ## Last checked against release 47 on 2023-10-05.
     x <- as.list(df["CVCL_0001", , drop = FALSE])
     y <- list(
         "accession" = "CVCL_0001",
