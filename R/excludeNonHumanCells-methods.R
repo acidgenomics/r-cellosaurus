@@ -1,11 +1,8 @@
-#' Exclude non-human cell lines
-#'
 #' @name excludeNonHumanCells
-#' @note Updated 2023-10-05.
+#' @inherit AcidGenerics::excludeNonHumanCells
+#' @note Updated 2023-10-06.
 #'
 #' @inheritParams AcidRoxygen::params
-#'
-#' @return Modified object.
 #'
 #' @examples
 #' data(cello)

@@ -11,17 +11,15 @@ excludeNonHumanCells(object, ...)
 }
 \arguments{
 \item{object}{Object.}
-
-\item{...}{Additional arguments.}
 }
 \value{
-Modified object.
+Modified object, with non-human cells excluded (removed).
 }
 \description{
 Exclude non-human cell lines
 }
 \note{
-Updated 2023-10-05.
+Updated 2023-10-06.
 }
 \examples{
 data(cello)
