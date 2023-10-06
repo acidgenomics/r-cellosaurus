@@ -8,17 +8,20 @@ cellsPerMutation(object, minCells = 2L)
 }
 \arguments{
 \item{object}{Object.}
+
+\item{minCells}{\code{integer(1)}.
+Minimum number of cells per mutation.}
 }
 \value{
-\code{matrix}.
-Logical matrix.
+\code{DFrame}.
 Genes in columns, cells in rows.
+Includes additional cell line metadata on left side.
 }
 \description{
 Cells per mutation
 }
 \note{
-Updated 2023-10-05.
+Updated 2023-10-06.
 }
 \examples{
 data(cello)
