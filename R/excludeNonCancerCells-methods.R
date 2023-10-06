@@ -4,6 +4,8 @@
 #'
 #' @inheritParams AcidRoxygen::params
 #'
+#' @param ... Additional arguments.
+#'
 #' @examples
 #' data(cello)
 #'
