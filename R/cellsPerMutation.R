@@ -8,9 +8,10 @@
 #' @param minCells `integer(1)`.
 #' Minimum number of cells per mutation.
 #'
-#' @return `DFrame`.
+#' @return `DFrame` or `NULL`.
 #' Genes in columns, cells in rows.
 #' Includes additional cell line metadata on left side.
+#' Returns `NULL` if no cells match or pass `minCells` filter.
 #'
 #' @examples
 #' data(cello)
@@ -30,8 +31,14 @@ cellsPerMutation <-
         tbl <- table(cl)
         mat <- .tableToLogicalMatrix(tbl)
         keep <- colSums(mat) >= minCells
+        if (!any(keep)) {
+            return(NULL)
+        }
         mat <- mat[, keep, drop = FALSE]
         keep <- rowSums(mat) > 0L
+        if (!any(keep)) {
+            return(NULL)
+        }
         mat <- mat[keep, , drop = FALSE]
         i <- order(colSums(mat), decreasing = TRUE)
         mat <- mat[, i, drop = FALSE]
