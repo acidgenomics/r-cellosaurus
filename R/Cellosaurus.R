@@ -1,3 +1,7 @@
+## FIXME Add option to load pre-built object, which will speed this up a lot.
+
+
+
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
