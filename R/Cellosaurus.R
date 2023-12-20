@@ -5,7 +5,7 @@
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-10-05.
+#' @note Updated 2023-12-20.
 #'
 #' @return `Cellosaurus`.
 #'
