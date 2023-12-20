@@ -1,8 +1,8 @@
 Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.8.1
-Date: 2023-10-06
+Version: 0.8.2.9000
+Date: 2023-12-20
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -23,27 +23,27 @@ Encoding: UTF-8
 LazyData: false
 Depends: R (>= 4.3)
 Imports:
-    AcidBase (>= 0.7.0),
+    AcidBase (>= 0.7.3),
     AcidCLI (>= 0.3.0),
-    AcidGenerics (>= 0.7.1),
-    AcidPlyr (>= 0.5.0),
-    BiocGenerics (>= 0.46.0),
-    IRanges (>= 2.34.0),
-    S4Vectors (>= 0.38.0),
-    goalie (>= 0.7.1),
-    pipette (>= 0.14.0),
-    syntactic (>= 0.7.0),
+    AcidGenerics (>= 0.7.6),
+    AcidPlyr (>= 0.5.3),
+    BiocGenerics (>= 0.48.0),
+    IRanges (>= 2.36.0),
+    S4Vectors (>= 0.40.0),
+    goalie (>= 0.7.7),
+    pipette (>= 0.15.2),
+    syntactic (>= 0.7.1),
     methods,
     parallel,
     utils
 Suggests:
-    AcidDevTools (>= 0.7.1),
-    BiocFileCache (>= 2.8.0),
-    DT (>= 0.29),
-    knitr (>= 1.44),
+    AcidDevTools (>= 0.7.4),
+    BiocFileCache (>= 2.10.0),
+    DT (>= 0.31),
+    knitr (>= 1.45),
     rmarkdown (>= 2.25),
-    testthat (>= 3.1.10),
-    withr (>= 2.5.1)
+    testthat (>= 3.2.1),
+    withr (>= 2.5.2)
 Additional_repositories: https://r.acidgenomics.com
 Config/testthat/edition: 3
 Config/testthat/parallel: true
