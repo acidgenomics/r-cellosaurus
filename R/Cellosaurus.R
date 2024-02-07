@@ -1,4 +1,5 @@
-## FIXME Add option to load pre-built object, which will speed this up a lot.
+## FIXME BiocFileCache isn't getting newest version automatically --
+## need to check the server directly instead.
 
 
 
