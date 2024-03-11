@@ -4,7 +4,7 @@
 #' Queries the server at `ftp.expasy.org`.
 #'
 #' @export
-#' @note Updated 2023-07-03.
+#' @note Updated 2024-03-11.
 #'
 #' @return `numeric_version`.
 #' Numeric release version.
