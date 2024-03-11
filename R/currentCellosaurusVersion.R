@@ -6,8 +6,8 @@
 #' @export
 #' @note Updated 2023-07-03.
 #'
-#' @return `integer(1)`.
-#' Release version.
+#' @return `numeric_version`.
+#' Numeric release version.
 #'
 #' @examples
 #' currentCellosaurusVersion()
@@ -28,5 +28,6 @@ currentCellosaurusVersion <- function() {
     assert(isString(x))
     x <- strsplit(x, split = " ", fixed = TRUE)[[1L]][[9L]]
     x <- as.integer(x)
+    x <- numeric_version(x)
     x
 }
