@@ -1,12 +1,7 @@
-## FIXME BiocFileCache isn't getting newest version automatically --
-## need to check the server directly instead.
-
-
-
 #' Cellosaurus table
 #'
 #' @name Cellosaurus
-#' @note Updated 2023-12-20.
+#' @note Updated 2024-03-11.
 #'
 #' @return `Cellosaurus`.
 #'
@@ -627,7 +622,7 @@ NULL
 
 #' Import Cellosaurus data frame from TXT file
 #'
-#' @note Updated 2023-09-22.
+#' @note Updated 2024-03-11.
 #' @noRd
 #'
 #' @seealso
@@ -641,8 +636,8 @@ NULL
         "cellosaurus.txt",
         protocol = "https"
     )
-    con <- cacheUrl(url, pkg = .pkgName)
-    lines <- import(con, format = "lines")
+    con <- cacheUrl(url = url, pkg = .pkgName, update = TRUE)
+    lines <- import(con = con, format = "lines")
     ## Extract the Cellosaurus data version (release) from the top of the file.
     dataVersion <- strsplit(
         x = grep(

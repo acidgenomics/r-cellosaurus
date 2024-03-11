@@ -7,8 +7,8 @@
 currentCellosaurusVersion()
 }
 \value{
-\code{integer(1)}.
-Release version.
+\code{numeric_version}.
+Numeric release version.
 }
 \description{
 Current Cellosaurus release version
@@ -17,7 +17,7 @@ Current Cellosaurus release version
 Queries the server at \code{ftp.expasy.org}.
 }
 \note{
-Updated 2023-07-03.
+Updated 2024-03-11.
 }
 \examples{
 currentCellosaurusVersion()
