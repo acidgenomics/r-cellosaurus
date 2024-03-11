@@ -1,6 +1,6 @@
 test_that("currentCellosaurusVersion", {
-    expect_type(
+    expect_s3_class(
         object = currentCellosaurusVersion(),
-        type = "integer"
+        class = "numeric_version"
     )
 })
