@@ -1,5 +1,12 @@
 # Release notes
 
+## Cellosaurus 0.8.2 (2024-03-11)
+
+Minor changes:
+
+- `Cellosaurus`: internal code tweak to improve redownload of outdated cached
+  release file.
+
 ## Cellosaurus 0.8.1 (2023-10-06)
 
 New functions:
