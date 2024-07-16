@@ -1,6 +1,8 @@
 #+TITLE: Cellosaurus
 #+STARTUP: content
 * Development
+** TODO Extract Uberon identifiers to a top-level column.
+** TODO Extract Cell Line Ontology (CLO) identifiers to a top-level column.
 ** TODO Consider adding back NCIt OBO parsing:
     http://purl.obolibrary.org/obo/ncit.obo
 ** TODO Add support for OncoTree mapping from NCIt terms.
