@@ -1,6 +1,7 @@
 #+TITLE: Cellosaurus
 #+STARTUP: content
 * Development
+** TODO Extract Brenda (BTO) identifiers to a top-level column.
 ** TODO Extract Uberon identifiers to a top-level column.
 ** TODO Extract Cell Line Ontology (CLO) identifiers to a top-level column.
 ** TODO Consider adding back NCIt OBO parsing:
