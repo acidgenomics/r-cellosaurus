@@ -1,5 +1,11 @@
 # Release notes
 
+## Cellosaurus 0.8.3 (2025-03-24)
+
+Minor changes:
+
+- Decreased R dependency from 4.3 to 4.0.
+
 ## Cellosaurus 0.8.2 (2024-03-11)
 
 Minor changes:

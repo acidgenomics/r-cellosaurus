@@ -1,8 +1,8 @@
 Package: Cellosaurus
 Title: Cellosaurus
 Description: Cellosaurus identifier mapping toolkit.
-Version: 0.8.2
-Date: 2024-03-11
+Version: 0.8.3
+Date: 2025-03-24
 Authors@R: c(
     person(
         "Michael", "Steinbaugh",
@@ -21,33 +21,33 @@ BugReports: https://github.com/acidgenomics/r-cellosaurus/issues/
 License: AGPL-3
 Encoding: UTF-8
 LazyData: false
-Depends: R (>= 4.3)
+Depends: R (>= 4.0)
 Imports:
-    AcidBase (>= 0.7.3),
-    AcidCLI (>= 0.3.0),
-    AcidGenerics (>= 0.7.6),
-    AcidPlyr (>= 0.5.3),
-    BiocGenerics (>= 0.48.0),
-    IRanges (>= 2.36.0),
-    S4Vectors (>= 0.40.0),
-    goalie (>= 0.7.7),
-    pipette (>= 0.15.2),
-    syntactic (>= 0.7.1),
+    AcidBase,
+    AcidCLI,
+    AcidGenerics,
+    AcidPlyr,
+    BiocGenerics,
+    IRanges,
+    S4Vectors,
+    goalie,
     methods,
     parallel,
+    pipette,
+    syntactic,
     utils
 Suggests:
-    AcidDevTools (>= 0.7.4),
-    BiocFileCache (>= 2.10.0),
-    DT (>= 0.32),
-    knitr (>= 1.45),
-    rmarkdown (>= 2.26),
-    testthat (>= 3.2.1),
-    withr (>= 3.0.0)
+    AcidDevTools,
+    BiocFileCache,
+    DT,
+    knitr,
+    rmarkdown,
+    testthat,
+    withr
 Additional_repositories: https://r.acidgenomics.com
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr, rmarkdown
 biocViews: CancerData, CellCulture
