@@ -35,6 +35,6 @@ R
 ```
 
 [bioconda]: https://bioconda.github.io/
-[conda]: https://conda.io/
+[conda]: https://docs.conda.io/
 [cellosaurus]: https://www.cellosaurus.org/
 [r]: https://www.r-project.org/
