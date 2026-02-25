@@ -655,15 +655,12 @@ NULL
         as.character(dataVersion)
     ))
     alert(sprintf("Mapping lines into {.cls %s} of entries.", "list"))
-    x <- Map(
-        f = function(lines, i, j) {
-            lines[i:(j - 1L)]
-        },
-        i = grep(pattern = "^ID\\s+", x = lines, value = FALSE),
-        j = grep(pattern = "^//$", x = lines, value = FALSE),
-        MoreArgs = list("lines" = lines),
-        USE.NAMES = FALSE
-    )
+    idIdx <- grep(pattern = "^ID\\s+", x = lines)
+    endIdx <- grep(pattern = "^//$", x = lines)
+    lengths <- endIdx - idIdx
+    entryLineIdx <- sequence(lengths, from = idIdx)
+    groups <- rep.int(seq_along(idIdx), lengths)
+    x <- unname(split(lines[entryLineIdx], groups))
     requiredKeys <- c("AC", "CA", "DT", "ID")
     nestedKeys <- c("CC", "DI", "DR", "HI", "OI", "OX", "RX", "ST", "WW")
     optionalKeys <- c("AG", "AS", "SX", "SY")
@@ -816,7 +813,187 @@ NULL
 
 
 
-## Updated 2023-09-22.
+#' Batch format nested columns in a single parallel pass
+#'
+#' Replaces multiple sequential `.splitNestedCol` calls (each spawning its own
+#' `mclapply` fork cycle) with a single `mclapply` call that processes all
+#' nested columns per row simultaneously, reducing fork overhead.
+#'
+#' @note Updated 2026-02-25.
+#' @noRd
+.batchFormatNestedCols <- function(object) {
+    ## Pre-process columns that require modification before splitting.
+    comments <- object[["comments"]]
+    comments <- unique(comments)
+    comments <- sub(pattern = "\\.$", replacement = "", x = comments)
+    refIds <- object[["referencesIdentifiers"]]
+    refIds <- sub(pattern = ";$", replacement = "", x = refIds)
+    ## Date requires an initial split into CharacterList.
+    dateCol <- CharacterList(strsplit(
+        x = object[["date"]],
+        split = "; ",
+        fixed = TRUE
+    ))
+    crossRefs <- object[["crossReferences"]]
+    diseases <- object[["diseases"]]
+    strProfile <- object[["strProfileData"]]
+    hierarchy <- object[["hierarchy"]]
+    n <- nrow(object)
+    ## Single mclapply call processing all nested columns per row.
+    results <- mclapply(
+        X = seq_len(n),
+        FUN = function(i) {
+            list(
+                "comments" = .splitNested(comments[[i]], ": "),
+                "crossReferences" = .splitNested(crossRefs[[i]], "; "),
+                "date" = .splitNested(dateCol[[i]], ": "),
+                "diseases" = .splitNested(diseases[[i]], "; "),
+                "referencesIdentifiers" =
+                    .splitNested(refIds[[i]], "="),
+                "strProfileData" =
+                    .splitNested(strProfile[[i]], ": "),
+                "hierarchy" = .processHierarchyRow(hierarchy[[i]])
+            )
+        }
+    )
+    ## Transpose results and assign columns back.
+    nestedCols <- c(
+        "comments", "crossReferences", "date",
+        "diseases", "referencesIdentifiers", "strProfileData"
+    )
+    for (col in nestedCols) {
+        object[[col]] <- SimpleList(lapply(results, `[[`, col))
+    }
+    object[["hierarchy"]] <-
+        CharacterList(lapply(results, `[[`, "hierarchy"))
+    object
+}
+
+
+
+#' Split a nested key-value character vector
+#'
+#' Per-row helper used inside `.batchFormatNestedCols`.
+#'
+#' @note Updated 2026-02-25.
+#' @noRd
+.splitNested <- function(x, split) {
+    if (identical(x, character())) {
+        return(list())
+    }
+    x <- strSplit(x = x, split = split, n = 2L)
+    split(x = x[, 2L], f = x[, 1L])
+}
+
+
+
+#' Process a single hierarchy row
+#'
+#' Per-row helper used inside `.batchFormatNestedCols`.
+#'
+#' @note Updated 2026-02-25.
+#' @noRd
+.processHierarchyRow <- function(x) {
+    if (identical(x, character())) {
+        return(character())
+    }
+    spl <- strSplit(x, split = " ! ")
+    spl[, 1L]
+}
+
+
+
+#' Batch add independent annotations in parallel
+#'
+#' Runs all annotation extraction tasks that are independent of each other
+#' (i.e., only read from already-formatted columns) in a single `mclapply`
+#' call. Each task executes in its own forked process, achieving column-level
+#' parallelism.
+#'
+#' @note Updated 2026-02-25.
+#' @noRd
+.batchAddAnnotations <- function(object) {
+    tasks <- list(
+        "atccId" = function() {
+            .extractCrossRef(object, keyName = "ATCC")
+        },
+        "depmapId" = function() {
+            .extractCrossRef(object, keyName = "DepMap")
+        },
+        "sangerModelId" = function() {
+            .extractCrossRef(object, keyName = "Cell_Model_Passport")
+        },
+        "isCancer" = function() {
+            object[["category"]] == "Cancer cell line"
+        },
+        "isContaminated" = function() {
+            vapply(
+                X = object[["comments"]],
+                FUN = function(x) {
+                    if (!"Problematic cell line" %in% names(x)) {
+                        return(FALSE)
+                    }
+                    x <- x[["Problematic cell line"]]
+                    any(grepl(pattern = "^Contaminated.", x = x))
+                },
+                FUN.VALUE = logical(1L)
+            )
+        },
+        "isProblematic" = function() {
+            vapply(
+                X = object[["comments"]],
+                FUN = function(x) {
+                    "Problematic cell line" %in% names(x)
+                },
+                FUN.VALUE = logical(1L)
+            )
+        },
+        "misspellings" = function() {
+            vals <- .extractComment(
+                object = object,
+                keyName = "Misspelling"
+            )
+            sub(
+                pattern = "^([^;]+);.+$",
+                replacement = "\\1",
+                x = vals
+            )
+        },
+        "msiStatus" = function() {
+            .extractComment(
+                object = object,
+                keyName = "Microsatellite instability"
+            )
+        },
+        "population" = function() {
+            .extractComment(
+                object = object,
+                keyName = "Population"
+            )
+        },
+        "samplingSite" = function() {
+            .extractComment(
+                object = object,
+                keyName = "Derived from site"
+            )
+        }
+    )
+    ## Execute all tasks in parallel with dynamic scheduling for
+    ## better load balancing (tasks vary significantly in cost).
+    results <- mclapply(
+        X = tasks,
+        FUN = function(f) f(),
+        mc.preschedule = FALSE
+    )
+    for (nm in names(results)) {
+        object[[nm]] <- results[[nm]]
+    }
+    object
+}
+
+
+
+## Updated 2026-02-25.
 
 #' @rdname Cellosaurus
 #' @export
@@ -824,29 +1001,20 @@ Cellosaurus <- # nolint
     function() {
         object <- .importCelloFromTxt()
         alert("Formatting annotations.")
+        ## Simple vectorized column operations (fast, no fork needed).
         object <- .formatAgeAtSampling(object)
-        object <- .formatComments(object)
-        object <- .formatCrossRefs(object)
-        object <- .formatDate(object)
-        object <- .formatDiseases(object)
-        object <- .formatHierarchy(object)
-        object <- .formatRefIds(object)
-        object <- .formatSecondaryAccession(object)
-        object <- .formatStrProfileData(object)
         object <- .formatSynonyms(object)
+        object <- .formatSecondaryAccession(object)
+        ## Batch all nested column splits + hierarchy into single
+        ## mclapply call, replacing 7 sequential fork cycles with 1.
+        object <- .batchFormatNestedCols(object)
         alert("Adding annotations.")
-        object <- .addAtccId(object)
-        object <- .addDepmapId(object)
-        object <- .addIsCancer(object)
-        object <- .addIsContaminated(object)
-        object <- .addIsProblematic(object)
-        object <- .addMisspellings(object)
-        object <- .addMsiStatus(object)
+        ## Batch 10 independent annotation extractions in parallel.
+        object <- .batchAddAnnotations(object)
+        ## These have internal mclapply or dependency chains,
+        ## so they run sequentially.
         object <- .addNcitDisease(object)
         object <- .addOncotree(object)
-        object <- .addPopulation(object)
-        object <- .addSamplingSite(object)
-        object <- .addSangerModelId(object)
         object <- .addTaxonomy(object)
         alert("Encoding metadata.")
         object <- encode(object)
