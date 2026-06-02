@@ -42,7 +42,7 @@ NULL
 
 
 
-## Updated 2023-09-12.
+## Updated 2026-06-02.
 `selectCells,Cellosaurus` <- # nolint
     function(object, ...) {
         args <- list(...)
@@ -69,7 +69,7 @@ NULL
             hasLength(args),
             hasNames(args),
             isSubset(names(args), validCols),
-            all(bapply(X = args, FUN = is.atomic))
+            all(bapply(X = args, FUN = function(x) is.atomic(x) || is.null(x)))
         )
         df <- as(object, "DFrame")
         df <- df[, names(args), drop = FALSE]

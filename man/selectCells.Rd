@@ -29,6 +29,7 @@ Updated 2023-09-12.
 \section{Supported keys}{
 
 \itemize{
+\item \code{"btoId"}
 \item \code{"category"}
 \item \code{"isCancer"}
 \item \code{"isContaminated"}
@@ -42,6 +43,7 @@ Updated 2023-09-12.
 \item \code{"oncotreeTissue"}
 \item \code{"organism"}
 \item \code{"sexOfCell"}
+\item \code{"uberonId"}
 }
 }
 
