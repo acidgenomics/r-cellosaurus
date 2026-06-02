@@ -23,6 +23,7 @@ setValidity(
             expected = list(
                 "accession" = "Rle",
                 "ageAtSampling" = "Rle",
+                "btoId" = "CompressedCharacterList",
                 "category" = "Rle",
                 "cellLineName" = "Rle",
                 "comments" = "SimpleList",
@@ -50,6 +51,7 @@ setValidity(
                 "referencesIdentifiers" = "SimpleList",
                 "samplingSite" = "CompressedCharacterList",
                 "sangerModelId" = "Rle",
+                "uberonId" = "CompressedCharacterList",
                 "secondaryAccession" = "CompressedCharacterList",
                 "sexOfCell" = "Rle",
                 "strProfileData" = "SimpleList",

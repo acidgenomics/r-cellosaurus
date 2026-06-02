@@ -31,6 +31,35 @@ NULL
 
 
 
+#' Add `btoId` column
+#'
+#' @details
+#' BTO (BRENDA Tissue Ontology) identifiers are sourced from cross-references
+#' and are already in CURIE format (e.g. `BTO:0000565`).
+#' A cell line may map to multiple BTO terms, so this column is a list.
+#'
+#' @note Updated 2026-06-02.
+#' @noRd
+.addBtoId <- function(object) {
+    assert(
+        is(object, "DFrame"),
+        is(object[["crossReferences"]], "SimpleList")
+    )
+    object[["btoId"]] <- CharacterList(lapply(
+        X = object[["crossReferences"]],
+        FUN = function(x) {
+            ids <- x[["BTO"]]
+            if (is.null(ids)) {
+                return(character(0L))
+            }
+            ids
+        }
+    ))
+    object
+}
+
+
+
 #' Add `depmapId` column
 #'
 #' @details
@@ -285,6 +314,44 @@ NULL
         object = object,
         keyName = "Derived from site"
     )
+    object
+}
+
+
+
+#' Add `uberonId` column
+#'
+#' @details
+#' Parses UBERON ontology identifiers from the `samplingSite` column.
+#' Each entry has the form `"In situ; Peripheral blood; UBERON=UBERON_0000178"`.
+#' IDs are normalised to CURIE format (e.g. `UBERON:0000178`).
+#' A cell line may have multiple sampling sites, so this column is a list.
+#'
+#' @note Updated 2026-06-02.
+#' @noRd
+.addUberonId <- function(object) {
+    assert(
+        is(object, "DFrame"),
+        is(object[["samplingSite"]], "CompressedCharacterList")
+    )
+    object[["uberonId"]] <- CharacterList(lapply(
+        X = object[["samplingSite"]],
+        FUN = function(vals) {
+            ids <- character(0L)
+            for (v in vals) {
+                parts <- strsplit(v, "; ", fixed = TRUE)[[1L]]
+                hit <- grep("^UBERON=UBERON_", parts, value = TRUE)
+                if (length(hit) > 0L) {
+                    ids <- c(ids, sub(
+                        pattern = "^UBERON=UBERON_",
+                        replacement = "UBERON:",
+                        x = hit[[1L]]
+                    ))
+                }
+            }
+            ids
+        }
+    ))
     object
 }
 
@@ -917,6 +984,18 @@ NULL
         "atccId" = function() {
             .extractCrossRef(object, keyName = "ATCC")
         },
+        "btoId" = function() {
+            CharacterList(lapply(
+                X = object[["crossReferences"]],
+                FUN = function(x) {
+                    ids <- x[["BTO"]]
+                    if (is.null(ids)) {
+                        return(character(0L))
+                    }
+                    ids
+                }
+            ))
+        },
         "depmapId" = function() {
             .extractCrossRef(object, keyName = "DepMap")
         },
@@ -1016,6 +1095,8 @@ Cellosaurus <- # nolint
         object <- .addNcitDisease(object)
         object <- .addOncotree(object)
         object <- .addTaxonomy(object)
+        ## uberonId depends on samplingSite set in the batch above.
+        object <- .addUberonId(object)
         alert("Encoding metadata.")
         object <- encode(object)
         object <- object[, sort(colnames(object)), drop = FALSE]

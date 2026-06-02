@@ -11,6 +11,7 @@ test_that("export", {
             "accession" = "CVCL_0001",
             "ageAtSampling" = "30Y",
             "atccId" = NA_character_,
+            "btoId" = "BTO:0000565",
             "category" = "Cancer cell line",
             "cellLineName" = "HEL",
             "depmapId" = "ACH-000004",
@@ -38,6 +39,7 @@ test_that("export", {
             "secondaryAccession" = NA,
             "sexOfCell" = "Male",
             "synonyms" = "Hel, GM06141, GM06141B, Human ErythroLeukemia",
+            "uberonId" = "UBERON:0000178",
             row.names = "CVCL_0001"
         )
     )

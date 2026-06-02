@@ -7,6 +7,7 @@
 #'
 #' @section Supported keys:
 #'
+#' - `"btoId"`
 #' - `"category"`
 #' - `"isCancer"`
 #' - `"isContaminated"`
@@ -20,6 +21,7 @@
 #' - `"oncotreeTissue"`
 #' - `"organism"`
 #' - `"sexOfCell"`
+#' - `"uberonId"`
 #'
 #' @return Modified object, subset to only contain matching cell lines.
 #'
@@ -45,6 +47,7 @@ NULL
     function(object, ...) {
         args <- list(...)
         validCols <- c(
+            "btoId",
             "category",
             "isCancer",
             "isContaminated",
@@ -57,7 +60,8 @@ NULL
             "oncotreeName",
             "oncotreeTissue",
             "organism",
-            "sexOfCell"
+            "sexOfCell",
+            "uberonId"
         )
         assert(
             validObject(object),
