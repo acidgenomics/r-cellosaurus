@@ -5,9 +5,9 @@ authors:
     href: https://acidgenomics.com/
 navbar:
   components:
-     acid:
-       icon: "fas fa-vial fa-lg"
-       href: https://acidgenomics.com/
+    acid:
+      icon: "fas fa-vial fa-lg"
+      href: https://acidgenomics.com/
   structure:
     right: [acid, github]
 news:
@@ -15,3 +15,28 @@ news:
 template:
   bootstrap: 5
 url: https://r.acidgenomics.com/packages/cellosaurus
+reference:
+  - title: Data class
+    contents:
+      - Cellosaurus
+  - title: Versioning
+    contents:
+      - currentCellosaurusVersion
+  - title: Cell line identification
+    contents:
+      - mapCells
+      - selectCells
+      - standardizeCells
+  - title: Cell line filtering
+    contents:
+      - starts_with("exclude")
+  - title: Mutations and fusions
+    contents:
+      - mutations
+      - geneFusions
+      - cellsPerMutation
+      - cellsPerGeneFusion
+  - title: Specialized
+    contents:
+      - tnbc
+      - export
