@@ -21,7 +21,7 @@ BugReports: https://github.com/acidgenomics/r-cellosaurus/issues/
 License: AGPL-3
 Encoding: UTF-8
 LazyData: false
-Depends: R (>= 4.3)
+Depends: R (>= 4.0)
 Imports:
     AcidBase (>= 0.7.3),
     AcidCLI (>= 0.3.0),
