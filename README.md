@@ -38,3 +38,8 @@ R
 [conda]: https://conda.io/
 [cellosaurus]: https://www.cellosaurus.org/
 [r]: https://www.r-project.org/
+
+
+## License
+
+Apache-2.0 — Copyright 2020 Acid Genomics LLC — see [LICENSE.md](LICENSE.md).

@@ -1,5 +1,11 @@
 # Release notes
 
+## Cellosaurus 0.8.3 (2026-06-19)
+
+License changes:
+
+- Switched from AGPL-3.0 to Apache-2.0.
+
 ## Cellosaurus 0.8.2 (2024-03-11)
 
 Minor changes:
