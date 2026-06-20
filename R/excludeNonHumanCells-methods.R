@@ -17,7 +17,6 @@
 NULL
 
 
-
 ## Updated 2023-10-05.
 `excludeNonHumanCells,Cellosaurus` <- # nolint
     function(object) {
@@ -36,7 +35,6 @@ NULL
         object <- object[keep, , drop = FALSE]
         object
     }
-
 
 
 #' @rdname excludeNonHumanCells

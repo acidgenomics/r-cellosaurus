@@ -40,7 +40,8 @@ test_that("export", {
             "sexOfCell" = "Male",
             "synonyms" = "Hel, GM06141, GM06141B, Human ErythroLeukemia",
             "uberonId" = "UBERON:0000178",
-            row.names = "CVCL_0001"
+            row.names = "CVCL_0001",
+            stringsAsFactors = FALSE
         )
     )
     AcidBase::unlink2(tempdir)

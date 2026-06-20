@@ -13,7 +13,6 @@
 NULL
 
 
-
 ## Updated 2023-08-23.
 `show,Cellosaurus` <- # nolint
     function(object) {
@@ -24,7 +23,6 @@ NULL
             "release" = majorVersion(metadata(object)[["dataVersion"]])
         ))
     }
-
 
 
 #' @rdname show

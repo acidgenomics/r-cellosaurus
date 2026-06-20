@@ -18,7 +18,6 @@
 NULL
 
 
-
 ## Updated 2023-09-20.
 `export,Cellosaurus` <- # nolint
     function(object, con, ...) {
@@ -43,7 +42,6 @@ NULL
         df <- df[, cols]
         export(object = df, con = con, ...)
     }
-
 
 
 #' @rdname export
