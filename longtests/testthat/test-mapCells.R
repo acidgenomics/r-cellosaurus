@@ -179,12 +179,9 @@ test_that("CellModelPassports", {
         object = unname(mapCells(object, cells = df[["model_name"]])),
         expected = df[["RRID"]]
     )
-    with_collate(
-        new = "C",
-        code = {
-            fail <- sort(map[["cmp_fail"]])
-        }
-    )
+    with_collate(new = "C", code = {
+        fail <- sort(map[["cmp_fail"]])
+    })
     expect_identical(
         object = mapCells(object, cells = fail, strict = FALSE),
         expected = c(
