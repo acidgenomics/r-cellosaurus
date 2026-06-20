@@ -20,7 +20,6 @@
 NULL
 
 
-
 ## Updated 2023-10-05.
 `tnbc,Cellosaurus` <- # nolint
     function(object) {
@@ -34,7 +33,8 @@ NULL
                 paste(
                     "Triple negative breast cancer",
                     "(TNBC) cell line"
-                ) %in% x[["Group"]]
+                ) %in%
+                    x[["Group"]]
             },
             FUN.VALUE = logical(1L),
             USE.NAMES = FALSE
@@ -42,7 +42,6 @@ NULL
         out <- rownames(object)[lgl]
         out
     }
-
 
 
 #' @rdname tnbc

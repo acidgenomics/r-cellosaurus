@@ -23,6 +23,7 @@ currentCellosaurusVersion <- function() {
     x <- grep(
         pattern = "This is the release notes for Cellosaurus version",
         x = lines,
+        fixed = TRUE,
         value = TRUE
     )
     assert(isString(x))

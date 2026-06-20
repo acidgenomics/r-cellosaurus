@@ -16,7 +16,6 @@
 NULL
 
 
-
 #' Add `atccId` column
 #'
 #' @note Updated 2023-09-01.
@@ -28,7 +27,6 @@ NULL
     )
     object
 }
-
 
 
 #' Add `btoId` column
@@ -59,7 +57,6 @@ NULL
 }
 
 
-
 #' Add `depmapId` column
 #'
 #' @details
@@ -77,7 +74,6 @@ NULL
 }
 
 
-
 #' Add `isCancer` column
 #'
 #' @note Updated 2023-01-24.
@@ -91,7 +87,6 @@ NULL
     object[["isCancer"]] <- lgl
     object
 }
-
 
 
 #' Add `isContaminated` column
@@ -119,7 +114,6 @@ NULL
 }
 
 
-
 #' Add `isProblematic` column
 #'
 #' @note Updated 2023-01-24.
@@ -141,7 +135,6 @@ NULL
 }
 
 
-
 #' Add `misspellings` column
 #'
 #' @note Updated 2023-09-01.
@@ -152,7 +145,6 @@ NULL
     object[["misspellings"]] <- vals
     object
 }
-
 
 
 #' Add `msiStatus` column
@@ -166,7 +158,6 @@ NULL
     )
     object
 }
-
 
 
 #' Extract NCI thesaurus disease identifiers
@@ -208,7 +199,6 @@ NULL
     object[["ncitDiseaseName"]] <- name
     object
 }
-
 
 
 #' Add OntoTree metadata columns
@@ -265,8 +255,7 @@ NULL
     # Join the OncoTree metadata.
     y <- oncotree
     rownames(y) <- NULL
-    y <- y[
-        ,
+    y <- y[,
         setdiff(
             x = colnames(y),
             y = c(
@@ -286,7 +275,6 @@ NULL
 }
 
 
-
 #' Add `population` column
 #'
 #' @note Updated 2023-09-01.
@@ -298,7 +286,6 @@ NULL
     )
     object
 }
-
 
 
 #' Add `samplingSite` column
@@ -316,7 +303,6 @@ NULL
     )
     object
 }
-
 
 
 #' Add `uberonId` column
@@ -342,11 +328,14 @@ NULL
                 parts <- strsplit(v, "; ", fixed = TRUE)[[1L]]
                 hit <- grep("^UBERON=UBERON_", parts, value = TRUE)
                 if (length(hit) > 0L) {
-                    ids <- c(ids, sub(
-                        pattern = "^UBERON=UBERON_",
-                        replacement = "UBERON:",
-                        x = hit[[1L]]
-                    ))
+                    ids <- c(
+                        ids,
+                        sub(
+                            pattern = "^UBERON=UBERON_",
+                            replacement = "UBERON:",
+                            x = hit[[1L]]
+                        )
+                    )
                 }
             }
             ids
@@ -354,7 +343,6 @@ NULL
     ))
     object
 }
-
 
 
 #' Add `sangerModelId` column
@@ -368,7 +356,6 @@ NULL
     )
     object
 }
-
 
 
 #' Add `ncbiTaxonomyId` and `organism` columns
@@ -397,6 +384,7 @@ NULL
             sub(
                 pattern = "NCBI_TaxID=",
                 replacement = "",
+                fixed = TRUE,
                 x = x[, 1L]
             )
         }
@@ -419,7 +407,6 @@ NULL
     object[["speciesOfOrigin"]] <- NULL
     object
 }
-
 
 
 #' Extract and assign identifier column from `crossReferences`
@@ -454,7 +441,6 @@ NULL
 }
 
 
-
 #' Extract a key value pair from comments
 #'
 #' @note Updated 2023-09-01.
@@ -479,7 +465,6 @@ NULL
 }
 
 
-
 #' Format the `ageAtSampling` column
 #'
 #' @note Updated 2023-01-24.
@@ -493,7 +478,6 @@ NULL
     object[["ageAtSampling"]][idx] <- NA_character_
     object
 }
-
 
 
 #' Format the `comments` column
@@ -519,7 +503,6 @@ NULL
 }
 
 
-
 #' Format the `crossReferences` column
 #'
 #' @note Updated 2023-01-24.
@@ -531,7 +514,6 @@ NULL
         split = "; "
     )
 }
-
 
 
 #' Format the `date` column
@@ -553,7 +535,6 @@ NULL
 }
 
 
-
 #' Format the `diseases` column
 #'
 #' @note Updated 2023-01-24.
@@ -565,7 +546,6 @@ NULL
         split = "; "
     )
 }
-
 
 
 #' Format the `hierarchy` column
@@ -597,7 +577,6 @@ NULL
 }
 
 
-
 #' Format the `referencesIdentifiers` column
 #'
 #' @note Updated 2023-01-24.
@@ -620,7 +599,6 @@ NULL
 }
 
 
-
 #' Format the `secondaryAccession` column
 #'
 #' @note Updated 2023-09-22.
@@ -632,7 +610,6 @@ NULL
         split = "; "
     )
 }
-
 
 
 #' Format the `strProfileData` column
@@ -648,7 +625,6 @@ NULL
 }
 
 
-
 #' Format the `synonyms` column
 #'
 #' @note Updated 2023-01-24.
@@ -660,7 +636,6 @@ NULL
         split = "; "
     )
 }
-
 
 
 ## ---------  ---------------------------     ----------------------
@@ -684,8 +659,6 @@ NULL
 ## CA         Category                        Once
 ## DT         Date (entry history)            Once
 ## //         Terminator                      Once; ends an entry
-
-
 
 #' Import Cellosaurus data frame from TXT file
 #'
@@ -740,7 +713,10 @@ NULL
     )
     alert(sprintf(
         "Coercing entries {.cls %s} to {.cls %s} with {.pkg %s}::{.fun %s}.",
-        "list", "DFrame", "AcidPlyr", "rbindToDataFrame"
+        "list",
+        "DFrame",
+        "AcidPlyr",
+        "rbindToDataFrame"
     ))
     df <- rbindToDataFrame(x)
     assert(areSetEqual(
@@ -789,7 +765,6 @@ NULL
 }
 
 
-
 #' Process lines per entry
 #'
 #' @note Updated 2023-09-22.
@@ -824,7 +799,6 @@ NULL
 }
 
 
-
 #' Split a column into a character list
 #'
 #' @note Updated 2023-09-22.
@@ -844,7 +818,6 @@ NULL
     object[[colName]] <- cl
     object
 }
-
 
 
 #' Split a nested column by key
@@ -877,7 +850,6 @@ NULL
     object[[colName]] <- lst
     object
 }
-
 
 
 #' Batch format nested columns in a single parallel pass
@@ -915,18 +887,20 @@ NULL
                 "crossReferences" = .splitNested(crossRefs[[i]], "; "),
                 "date" = .splitNested(dateCol[[i]], ": "),
                 "diseases" = .splitNested(diseases[[i]], "; "),
-                "referencesIdentifiers" =
-                    .splitNested(refIds[[i]], "="),
-                "strProfileData" =
-                    .splitNested(strProfile[[i]], ": "),
+                "referencesIdentifiers" = .splitNested(refIds[[i]], "="),
+                "strProfileData" = .splitNested(strProfile[[i]], ": "),
                 "hierarchy" = .processHierarchyRow(hierarchy[[i]])
             )
         }
     )
     ## Transpose results and assign columns back.
     nestedCols <- c(
-        "comments", "crossReferences", "date",
-        "diseases", "referencesIdentifiers", "strProfileData"
+        "comments",
+        "crossReferences",
+        "date",
+        "diseases",
+        "referencesIdentifiers",
+        "strProfileData"
     )
     for (col in nestedCols) {
         object[[col]] <- SimpleList(lapply(results, `[[`, col))
@@ -935,7 +909,6 @@ NULL
         CharacterList(lapply(results, `[[`, "hierarchy"))
     object
 }
-
 
 
 #' Split a nested key-value character vector
@@ -953,7 +926,6 @@ NULL
 }
 
 
-
 #' Process a single hierarchy row
 #'
 #' Per-row helper used inside `.batchFormatNestedCols`.
@@ -967,7 +939,6 @@ NULL
     spl <- strSplit(x, split = " ! ")
     spl[, 1L]
 }
-
 
 
 #' Batch add independent annotations in parallel
@@ -1069,7 +1040,6 @@ NULL
     }
     object
 }
-
 
 
 ## Updated 2026-02-25.

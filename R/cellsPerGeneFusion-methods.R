@@ -20,7 +20,6 @@
 NULL
 
 
-
 ## Updated 2023-10-06.
 `cellsPerGeneFusion,Cellosaurus` <- # nolint
     function(object, minCells = 2L) {
@@ -49,7 +48,6 @@ NULL
         df <- cbind(df2, df1)
         df
     }
-
 
 
 #' @rdname cellsPerGeneFusion

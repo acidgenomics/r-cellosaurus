@@ -17,7 +17,6 @@
 NULL
 
 
-
 ## Updated 2023-10-05.
 `excludeNonCancerCells,Cellosaurus` <- # nolint
     function(object) {
@@ -29,7 +28,6 @@ NULL
         object <- object[keep, , drop = FALSE]
         object
     }
-
 
 
 #' @rdname excludeNonCancerCells

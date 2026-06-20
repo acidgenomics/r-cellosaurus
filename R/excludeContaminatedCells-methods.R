@@ -21,7 +21,6 @@
 NULL
 
 
-
 ## Updated 2023-08-23.
 `excludeContaminatedCells,Cellosaurus` <- # nolint
     function(object) {
@@ -33,7 +32,6 @@ NULL
         object <- object[keep, , drop = FALSE]
         object
     }
-
 
 
 #' @rdname excludeContaminatedCells

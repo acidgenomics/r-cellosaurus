@@ -40,19 +40,20 @@
 NULL
 
 
-
 ## Updated 2023-09-05.
 `mapCells,Cellosaurus` <- # nolint
-    function(object,
-             cells,
-             keyType = c(
-                 "cellosaurusId",
-                 "depmapId",
-                 "sangerModelId",
-                 "atccId",
-                 "cellLineName"
-             ),
-             strict = FALSE) {
+    function(
+        object,
+        cells,
+        keyType = c(
+            "cellosaurusId",
+            "depmapId",
+            "sangerModelId",
+            "atccId",
+            "cellLineName"
+        ),
+        strict = FALSE
+    ) {
         if (is(cells, "Rle")) {
             cells <- decode(cells)
         }
@@ -161,7 +162,6 @@ NULL
         names(out) <- cells
         out
     }
-
 
 
 #' @rdname mapCells
