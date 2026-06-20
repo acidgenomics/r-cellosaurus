@@ -41,7 +41,6 @@
 NULL
 
 
-
 ## Updated 2026-06-02.
 `selectCells,Cellosaurus` <- # nolint
     function(object, ...) {
@@ -96,7 +95,6 @@ NULL
         out <- object[i, , drop = FALSE]
         out
     }
-
 
 
 #' @rdname selectCells

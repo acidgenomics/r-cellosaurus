@@ -1,5 +1,12 @@
 # Release notes
 
+## Cellosaurus 0.8.4 (2026-06-19)
+
+Minor changes:
+
+- Modernized tooling: removed per-package `.lintr` in favour of global
+  `~/.lintr`; added `air.toml`; migrated to roxygen2 8.0.
+
 ## Cellosaurus 0.8.3 (2026-06-19)
 
 License changes:

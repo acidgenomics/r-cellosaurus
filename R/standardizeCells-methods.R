@@ -22,14 +22,12 @@
 NULL
 
 
-
 ## Updated 2022-08-24.
 `standardizeCells,Rle` <- # nolint
     function(object) {
         object <- decode(object)
         standardizeCells(object)
     }
-
 
 
 ## Updated 2023-09-21.
@@ -56,14 +54,13 @@ NULL
             replacement = "",
             x = object
         )
-        if (any(object == "")) {
-            object[object == ""] <- "invalid"
+        if (!all(nzchar(object, keepNA = TRUE))) {
+            object[!nzchar(object, keepNA = TRUE)] <- "invalid"
         }
         object <- snakeCase(object = object, prefix = FALSE, smart = FALSE)
         object <- toupper(object)
         object
     }
-
 
 
 #' @rdname standardizeCells

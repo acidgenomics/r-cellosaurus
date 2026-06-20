@@ -14,7 +14,6 @@
 NULL
 
 
-
 ## Updated 2023-10-05.
 `geneFusions,Cellosaurus` <- # nolint
     function(object) {
@@ -48,7 +47,6 @@ NULL
         x <- unique(x)
         x
     }
-
 
 
 #' @rdname geneFusions

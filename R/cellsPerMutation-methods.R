@@ -20,7 +20,6 @@
 NULL
 
 
-
 ## Updated 2023-10-06.
 `cellsPerMutation,Cellosaurus` <- # nolint
     function(object, minCells = 2L) {
@@ -54,7 +53,6 @@ NULL
     }
 
 
-
 #' Coerce a table to logical matrix
 #'
 #' @note Updated 2023-10-05.
@@ -76,7 +74,6 @@ NULL
         mode(mat) <- "logical"
         mat
     }
-
 
 
 #' @rdname cellsPerMutation
