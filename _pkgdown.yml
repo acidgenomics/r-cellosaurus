@@ -11,10 +11,10 @@ navbar:
   structure:
     right: [acid, github]
 news:
-  - one_page: false
+  one_page: false
 template:
   bootstrap: 5
-url: https://r.acidgenomics.com/packages/cellosaurus
+url: https://r.acidgenomics.com/cellosaurus
 reference:
   - title: Data class
     contents:
@@ -40,3 +40,7 @@ reference:
     contents:
       - tnbc
       - export
+  - title: Internal
+    contents:
+      - Cellosaurus-class
+      - cello

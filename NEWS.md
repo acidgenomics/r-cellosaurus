@@ -1,4 +1,33 @@
-# Release notes
+## Cellosaurus 0.8.5 (2026-07-30)
+
+Performance improvements:
+
+- `Cellosaurus`: fixed `.batchFormatNestedCols()` accessing six
+  `CompressedCharacterList`/`CharacterList` columns via `[[i]]` inside a
+  per-row loop nested inside `mclapply()`. Each `[[` call on those S4
+  classes costs roughly 1 ms (S4 dispatch + slot-based extraction), and
+  since the loop runs inside `mclapply()`, every forked worker was re-paying
+  that cost independently. Converting each column to a plain base `list`
+  with `as.list()` once, before the loop, drops per-row `[[` to O(1) with no
+  dispatch. This function alone accounted for the majority of
+  `Cellosaurus()`'s total runtime on the full ~169k-row dataset; fixing it
+  took the full constructor from ~4.5 minutes to well under a minute.
+  Requires `AcidPlyr (>= 0.5.8)` and `AcidBase (>= 0.7.8)` (see below).
+
+Bug fixes:
+
+- `currentCellosaurusVersion`: fixed a crash caused by passing an `integer`
+  to `numeric_version()`, which requires a `character` input
+  (`as.integer("56")` followed by `numeric_version()` on the integer result
+  errored with "invalid non-character version specification"). Removed the
+  unnecessary `as.integer()` coercion.
+- Bumped `AcidBase` dependency floor to `>= 0.7.8` and `AcidPlyr` to
+  `>= 0.5.8`. The prior `AcidBase` floor allowed a version whose
+  `download()` hardcoded `mode = "wb"` while also forwarding `...`, which
+  collided with `pipette`'s own `mode` argument and broke
+  `currentCellosaurusVersion()` (via `cacheUrl()` -> `download()`). The
+  prior `AcidPlyr` floor allowed a version whose `rbindToDataFrame()` did
+  not yet have the transpose performance fix this release depends on.
 
 ## Cellosaurus 0.8.4 (2026-06-19)
 
