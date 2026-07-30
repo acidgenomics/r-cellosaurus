@@ -4,7 +4,7 @@
 #' Queries the server at `ftp.expasy.org`.
 #'
 #' @export
-#' @note Updated 2024-03-11.
+#' @note Updated 2026-07-30.
 #'
 #' @return `numeric_version`.
 #' Numeric release version.
@@ -28,7 +28,6 @@ currentCellosaurusVersion <- function() {
     )
     assert(isString(x))
     x <- strsplit(x, split = " ", fixed = TRUE)[[1L]][[9L]]
-    x <- as.integer(x)
     x <- numeric_version(x)
     x
 }

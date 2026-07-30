@@ -17,7 +17,7 @@ Current Cellosaurus release version
 Queries the server at \code{ftp.expasy.org}.
 }
 \note{
-Updated 2024-03-11.
+Updated 2026-07-30.
 }
 \examples{
 currentCellosaurusVersion()
